@@ -4,17 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives | Louie</title>
+  <title>github + hexo 搭建博客 | Louie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Louie&apos;s blog |黄刘胤的博客 |asp.net |java">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Louie">
-<meta property="og:url" content="http://hlyin.space/archives/index.html">
+  <meta name="description" content="git仓库必须为账号的用户名，否则pages不会分配空间参见说明：You can only use your own account name for a User or Organization Page repository. A repository like joe/bob.github.io will not build a User Pages site.https://help.gi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="github + hexo 搭建博客">
+<meta property="og:url" content="http://hlyin.space/2016/03/30/hexo/index.html">
 <meta property="og:site_name" content="Louie">
-<meta property="og:description" content="Louie&apos;s blog |黄刘胤的博客 |asp.net |java">
+<meta property="og:description" content="git仓库必须为账号的用户名，否则pages不会分配空间参见说明：You can only use your own account name for a User or Organization Page repository. A repository like joe/bob.github.io will not build a User Pages site.https://help.gi">
+<meta property="og:updated_time" content="2016-03-30T16:33:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Louie">
-<meta name="twitter:description" content="Louie&apos;s blog |黄刘胤的博客 |asp.net |java">
+<meta name="twitter:title" content="github + hexo 搭建博客">
+<meta name="twitter:description" content="git仓库必须为账号的用户名，否则pages不会分配空间参见说明：You can only use your own account name for a User or Organization Page repository. A repository like joe/bob.github.io will not build a User Pages site.https://help.gi">
   
     <link rel="alternative" href="/atom.xml" title="Louie" type="application/atom+xml">
   
@@ -194,103 +195,117 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-hexo" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2016/03/30/hexo/" class="article-date">
+  	<time datetime="2016-03-30T15:14:49.000Z" itemprop="datePublished">2016-03-30</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      github + hexo 搭建博客
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/03/30/hexo/" class="archive-article-date">
-  	<time datetime="2016-03-30T15:14:49.000Z" itemprop="datePublished">3月 30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/30/hexo/">github + hexo 搭建博客</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>git仓库必须为账号的用户名，否则pages不会分配空间</strong><br>参见说明：You can only use your own account name for a User or Organization Page repository. A repository like joe/bob.github.io will not build a User Pages site.<br><a href="https://help.github.com/articles/user-organization-and-project-pages/" target="_blank" rel="external">https://help.github.com/articles/user-organization-and-project-pages/</a></p>
+<p>验证git连接：<br><code>ssh -T git@github.com</code><br>出现提示则输入 yes</p>
+<p>在本地新建文件夹，命名与仓库名相同，louiehuang.github.io</p>
+<p>初始化：<code>sudo hexo init</code></p>
+<p>生成静态页面：<code>sudo hexo g</code></p>
+<p>本地运行：<code>sudo hexo s</code><br>可在 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 查看效果</p>
+<p>将文件下louiehuang.github.io下的 _config.yml 最末修改如下，注意冒号后面需要一个空格，缩进为2个空格</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">     type: git</span><br><span class="line">     repository: git@github.com:louiehuang/louiehuang.github.io.git</span><br><span class="line">     branch:master</span><br></pre></td></tr></table></figure>
+<p>然后执行命令：</p>
+<p><code>npm install hexo-deployer-git --save</code></p>
+<p>然后，执行配置命令：<br><code>sudo hexo deploy</code></p>
+<p>部署步骤<br>每次部署的步骤，可按以下三步来进行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g(enerate)</span><br><span class="line">hexo d(eploy)</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/30/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/03/30/hello-world/" class="archive-article-date">
-  	<time datetime="2016-03-30T15:11:57.000Z" itemprop="datePublished">3月 30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/30/hello-world/">Hello World</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/03/19/Android笔记/" class="archive-article-date">
-  	<time datetime="2016-03-19T07:20:48.000Z" itemprop="datePublished">3月 19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/19/Android笔记/">Android笔记</a>
-    </h1>
-  
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="hexo" data-title="github + hexo 搭建博客" data-url="http://hlyin.space/2016/03/30/hexo/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -316,8 +331,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false

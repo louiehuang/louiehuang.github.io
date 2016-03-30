@@ -4,17 +4,45 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Louie</title>
+  <title>Android笔记 | Louie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Louie&apos;s blog |黄刘胤的博客 |asp.net |java">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Louie">
-<meta property="og:url" content="http://hlyin.space/index.html">
+  <meta name="description" content="一、ListView的优化1.存在问题
+
+ 在每次调用getView方法中都要执行两个很耗时的操作
+
+inflate方法 (获取布局对象)
+findViewById
+
+
+12345678910111213141516171819@Overridepublic View getView(int position, View convertView, ViewGroup parent) &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android笔记">
+<meta property="og:url" content="http://hlyin.space/2016/03/19/Android笔记/index.html">
 <meta property="og:site_name" content="Louie">
-<meta property="og:description" content="Louie&apos;s blog |黄刘胤的博客 |asp.net |java">
+<meta property="og:description" content="一、ListView的优化1.存在问题
+
+ 在每次调用getView方法中都要执行两个很耗时的操作
+
+inflate方法 (获取布局对象)
+findViewById
+
+
+12345678910111213141516171819@Overridepublic View getView(int position, View convertView, ViewGroup parent) &amp;#123;">
+<meta property="og:image" content="http://www.kgc.cn/upload/snapscreen/20160319/145837585787884.jpg">
+<meta property="og:image" content="http://www.kgc.cn/upload/snapscreen/20160319/145837621143618.jpg">
+<meta property="og:updated_time" content="2016-03-30T16:33:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Louie">
-<meta name="twitter:description" content="Louie&apos;s blog |黄刘胤的博客 |asp.net |java">
+<meta name="twitter:title" content="Android笔记">
+<meta name="twitter:description" content="一、ListView的优化1.存在问题
+
+ 在每次调用getView方法中都要执行两个很耗时的操作
+
+inflate方法 (获取布局对象)
+findViewById
+
+
+12345678910111213141516171819@Overridepublic View getView(int position, View convertView, ViewGroup parent) &amp;#123;">
+<meta name="twitter:image" content="http://www.kgc.cn/upload/snapscreen/20160319/145837585787884.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Louie" type="application/atom+xml">
   
@@ -194,135 +222,7 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
-  
-    <article id="post-hexo" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/30/hexo/" class="article-date">
-  	<time datetime="2016-03-30T15:14:49.000Z" itemprop="datePublished">2016-03-30</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/30/hexo/">github + hexo 搭建博客</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>git仓库必须为账号的用户名，否则pages不会分配空间</strong><br>参见说明：You can only use your own account name for a User or Organization Page repository. A repository like joe/bob.github.io will not build a User Pages site.<br><a href="https://help.github.com/articles/user-organization-and-project-pages/" target="_blank" rel="external">https://help.github.com/articles/user-organization-and-project-pages/</a></p>
-<p>验证git连接：<br><code>ssh -T git@github.com</code><br>出现提示则输入 yes</p>
-<p>在本地新建文件夹，命名与仓库名相同，louiehuang.github.io</p>
-<p>初始化：<code>sudo hexo init</code></p>
-<p>生成静态页面：<code>sudo hexo g</code></p>
-<p>本地运行：<code>sudo hexo s</code><br>可在 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 查看效果</p>
-<p>将文件下louiehuang.github.io下的 _config.yml 最末修改如下，注意冒号后面需要一个空格，缩进为2个空格</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">     type: git</span><br><span class="line">     repository: git@github.com:louiehuang/louiehuang.github.io.git</span><br><span class="line">     branch:master</span><br></pre></td></tr></table></figure>
-<p>然后执行命令：</p>
-<p><code>npm install hexo-deployer-git --save</code></p>
-<p>然后，执行配置命令：<br><code>sudo hexo deploy</code></p>
-<p>部署步骤<br>每次部署的步骤，可按以下三步来进行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g(enerate)</span><br><span class="line">hexo d(eploy)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/30/hello-world/" class="article-date">
-  	<time datetime="2016-03-30T15:11:57.000Z" itemprop="datePublished">2016-03-30</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/30/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android笔记" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Android笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/03/19/Android笔记/" class="article-date">
@@ -338,12 +238,19 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/19/Android笔记/">Android笔记</a>
+    <h1 class="article-title" itemprop="name">
+      Android笔记
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -378,29 +285,72 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/30/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 
 
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android笔记" data-title="Android笔记" data-url="http://hlyin.space/2016/03/19/Android笔记/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-  
-  
+
+
+
 </div>
       <footer id="footer">
   <div class="outer">
@@ -424,8 +374,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
