@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2016/4 | Louie Blog</title>
+  <title>Android_ListView优化 | Louie Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -79,7 +79,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -222,55 +222,82 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/blog/blog访问速度提升.html">blog访问速度提升</a></h4>
-                            
-                            <p><time datetime="2016-04-08T16:00:00.000Z"><a href="/blog/blog访问速度提升.html">2016-04-09</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/Animation/4月新番.html">2016年4月新番</a></h4>
-                            
-                            <p><time datetime="2016-04-04T16:00:00.000Z"><a href="/Animation/4月新番.html">2016-04-05</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/Animation/四月是你的谎言.html">《四月是你的谎言》实景</a></h4>
-                            
-                            <p><time datetime="2016-04-01T16:00:00.000Z"><a href="/Animation/四月是你的谎言.html">2016-04-02</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-03-18T16:00:00.000Z" itemprop="datePublished">
+          2016-03-19
+      </time>
+    
+</span>
+                <h1>Android_ListView优化</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<h3 id="ListView的优化"><a href="#ListView的优化" class="headerlink" title="ListView的优化"></a>ListView的优化</h3><p>1.存在问题</p>
+<blockquote>
+<p> 在每次调用getView方法中都要执行<font color="red"><strong>两个很耗时的操作</strong></font></p>
+<ol>
+<li>inflate方法 (获取布局对象)</li>
+<li>findViewById</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">    View view = inflater.inflate(R.layout.item, <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//view才有findViewById, 而this(这里是Adapter)没有, (MainActivity有)</span></span><br><span class="line">    ImageView header = (ImageView) view.findViewById(R.id.header);</span><br><span class="line">    TextView title = (TextView) view.findViewById(R.id.title);</span><br><span class="line">    TextView version = (TextView) view.findViewById(R.id.version);</span><br><span class="line">    TextView size = (TextView) view.findViewById(R.id.size);</span><br><span class="line"></span><br><span class="line">    Map map = list.get(position); <span class="comment">//Map&lt;String, Object&gt;</span></span><br><span class="line"></span><br><span class="line">    header.setImageResource((Integer) map.get(<span class="string">"header"</span>));</span><br><span class="line">    title.setText((String) map.get(<span class="string">"title"</span>));</span><br><span class="line">    version.setText((String) map.get(<span class="string">"version"</span>));</span><br><span class="line">    size.setText((String) map.get(<span class="string">"size"</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> view;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.解决方案</p>
+<blockquote>
+<p> 在getView方法中使用<font color="red"><strong>convertView和ViewHolder</strong></font></p>
+<ol>
+<li>inflate方法耗时：convertView解决 （1级优化）</li>
+<li>findViewById方法耗时：ViewHolder解决 （2级优化）</li>
+</ol>
+</blockquote>
+<p><img src="http://www.kgc.cn/upload/snapscreen/20160319/145837389990900.jpg" alt=""></p>
+<p>滑出去的item1的布局对象不销毁，而可以直接提供给下一次出现的item6，省去了填充时间 (省去反射操作)， 之后滑出去的item2则给item7 … item5给item10，到了item6以后，因为item6本来就是用的Recycler里的而不是反射的，后面的所有item都可以循环用item1~item5的反射操作生成的5个对象，也即整个操作，最多只有5次反射(item1~item5)。缓冲池，5 (4+1)个视图缓存，多的1是为了处理上半截或下半截。</p>
+<p><img src="http://www.kgc.cn/upload/snapscreen/20160319/145837474528357.jpg" alt=""></p>
+<p><strong>使用ConvertView后代码如下：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(convertView == <span class="keyword">null</span>) &#123;</span><br><span class="line">        convertView = inflater.inflate(R.layout.item, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ImageView header = (ImageView) convertView.findViewById(R.id.header);</span><br><span class="line">    TextView title = (TextView) convertView.findViewById(R.id.title);</span><br><span class="line">    TextView version = (TextView) convertView.findViewById(R.id.version);</span><br><span class="line">    TextView size = (TextView) convertView.findViewById(R.id.size);</span><br><span class="line"></span><br><span class="line">    Map map = list.get(position); <span class="comment">//Map&lt;String, Object&gt;</span></span><br><span class="line"></span><br><span class="line">    header.setImageResource((Integer) map.get(<span class="string">"header"</span>));</span><br><span class="line">    title.setText((String) map.get(<span class="string">"title"</span>));</span><br><span class="line">    version.setText((String) map.get(<span class="string">"version"</span>));</span><br><span class="line">    size.setText((String) map.get(<span class="string">"size"</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> convertView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://www.kgc.cn/upload/snapscreen/20160319/145837585787884.jpg" alt=""></p>
+<p>滑出去的item1，除了布局对象不销毁，控件对象也不销毁，因此item6则不用再调用4次findViewById</p>
+<p><img src="http://www.kgc.cn/upload/snapscreen/20160319/145837621143618.jpg" alt=""></p>
+<p>使用convertView和ViewHolder后代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span> </span>&#123;</span><br><span class="line">    ImageView header;</span><br><span class="line">    TextView title;</span><br><span class="line">    TextView version;</span><br><span class="line">    TextView size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">    ViewHolder viewHolder = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (convertView == <span class="keyword">null</span>) &#123;</span><br><span class="line">        convertView = inflater.inflate(R.layout.item, <span class="keyword">null</span>);</span><br><span class="line">        viewHolder = <span class="keyword">new</span> ViewHolder();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//view才有findViewById, 而this(这里是Adapter)没有, (MainActivity有)</span></span><br><span class="line">        viewHolder.header = (ImageView) convertView.findViewById(R.id.header);</span><br><span class="line">        viewHolder.title = (TextView) convertView.findViewById(R.id.title);</span><br><span class="line">        viewHolder.version = (TextView) convertView.findViewById(R.id.version);</span><br><span class="line">        viewHolder.size = (TextView) convertView.findViewById(R.id.size);</span><br><span class="line"></span><br><span class="line">        convertView.setTag(viewHolder); <span class="comment">//</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        viewHolder = (ViewHolder) convertView.getTag();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Map map = list.get(position); <span class="comment">//Map&lt;String, Object&gt;</span></span><br><span class="line"></span><br><span class="line">    viewHolder.header.setImageResource((Integer) map.get(<span class="string">"header"</span>));</span><br><span class="line">    viewHolder.title.setText((String) map.get(<span class="string">"title"</span>));</span><br><span class="line">    viewHolder.version.setText((String) map.get(<span class="string">"version"</span>));</span><br><span class="line">    viewHolder.size.setText((String) map.get(<span class="string">"size"</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> convertView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得底部有句话会显得比较合适.</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/Animation/四月是你的谎言.html" style="float: left;">
+        ← 《四月是你的谎言》实景
+    </a>
+    
+    
+    <a class="pull-right" href="/github/github入门.html">
+        github入门 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Android/Android_ListView优化.html" data-title="Android_ListView优化" data-url="http://hlyin.space/Android/Android_ListView优化.html"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
