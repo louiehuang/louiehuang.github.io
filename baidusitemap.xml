@@ -4,12 +4,12 @@
 
     
   <url>
-    <loc>http://hlyin.space/blog/blog%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%8F%90%E5%8D%87.html</loc>
-    <lastmod>2016-04-09T15:37:47.671Z</lastmod>
+    <loc>http://hlyin.space/blog/blog%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96(%E4%BA%8C).html</loc>
+    <lastmod>2016-04-10T13:30:43.000Z</lastmod>
     <data>
         <display>
-        <title>blog访问速度提升</title>
-        <pubTime>2016-04-08T16:00:00.000Z</pubTime>
+        <title>blog访问速度优化(二)</title>
+        <pubTime>2016-04-09T16:00:00.000Z</pubTime>
         
          
            
@@ -22,27 +22,44 @@
 
     
   <url>
-    <loc>http://hlyin.space/Animation/4%E6%9C%88%E6%96%B0%E7%95%AA.html</loc>
-    <lastmod>2016-04-09T14:14:30.439Z</lastmod>
+    <loc>http://hlyin.space/blog/%E6%B7%BB%E5%8A%A0%E7%99%BE%E5%BA%A6%E7%BB%9F%E8%AE%A1.html</loc>
+    <lastmod>2016-04-10T12:14:40.000Z</lastmod>
     <data>
         <display>
-        <title>2016年4月新番</title>
-        <pubTime>2016-04-04T16:00:00.000Z</pubTime>
+        <title>添加google统计或百度统计</title>
+        <pubTime>2016-04-07T16:00:00.000Z</pubTime>
         
          
            
              
-              <breadCrumb title="Animation" url="http://hlyin.space/categories/Animation/"/>
+              <breadCrumb title="blog" url="http://hlyin.space/categories/blog/"/>
           
         </display>
     </data>
     </url>
 
     
+  <url>
+    <loc>http://hlyin.space/OS/OS%E5%A4%8D%E4%B9%A0.html</loc>
+    <lastmod>2016-04-10T07:28:00.000Z</lastmod>
+    <data>
+        <display>
+        <title>操作系统重点</title>
+        <pubTime>2016-01-04T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="OS" url="http://hlyin.space/categories/OS/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://hlyin.space/Android/Android_ListView%E4%BC%98%E5%8C%96.html</loc>
-    <lastmod>2016-04-09T13:45:12.401Z</lastmod>
+    <lastmod>2016-04-10T07:26:04.000Z</lastmod>
     <data>
         <display>
         <title>Android_ListView优化</title>
@@ -59,8 +76,26 @@
 
     
   <url>
+    <loc>http://hlyin.space/blog/blog%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96.html</loc>
+    <lastmod>2016-04-10T06:52:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>访问速度优化：图片及谷歌字体转存COS</title>
+        <pubTime>2016-04-08T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="blog" url="http://hlyin.space/categories/blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://hlyin.space/Animation/%E5%9B%9B%E6%9C%88%E6%98%AF%E4%BD%A0%E7%9A%84%E8%B0%8E%E8%A8%80.html</loc>
-    <lastmod>2016-04-09T13:45:02.560Z</lastmod>
+    <lastmod>2016-04-09T13:45:04.000Z</lastmod>
     <data>
         <display>
         <title>《四月是你的谎言》实景</title>
@@ -78,7 +113,7 @@
     
   <url>
     <loc>http://hlyin.space/github/github%E5%85%A5%E9%97%A8.html</loc>
-    <lastmod>2016-04-09T13:38:39.824Z</lastmod>
+    <lastmod>2016-04-09T13:38:40.000Z</lastmod>
     <data>
         <display>
         <title>github入门</title>

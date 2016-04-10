@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Louie&#39;s Blog</title>
+  <title>添加google统计或百度统计 | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -251,82 +251,68 @@
         <!-- // End height spacing helper -->
 
         <!-- ============================ END Hero Image =========================== -->
-      <section id="intro">
+      
+<section id="intro">
     <div class="container">
         <div class="row col-md-offset-2">
             <div class="col-md-8">
-                <h1></h1>
+    			<span class="post-meta">
+      <time datetime="2016-04-07T16:00:00.000Z" itemprop="datePublished">
+          2016-04-08
+      </time>
+    
+</span>
+                <h1>添加google统计或百度统计</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-            <p>很懒，什么也不想写</p>
+      		<h2 id="一、google统计"><a href="#一、google统计" class="headerlink" title="一、google统计"></a>一、google统计</h2><p>&nbsp;&nbsp;&nbsp;&nbsp; 先在 <a href="https://www.google.com/analytics/" target="_blank" rel="external">google统计</a> 注册账号，在管理-&gt;跟踪信息-&gt;跟踪代码中获取跟踪ID和跟踪代码，形式如下：<br>ID：<code>UA-76175499-1</code></p>
+<p>代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    	(<span class="function"><span class="keyword">function</span>(<span class="params">i,s,o,g,r,a,m</span>)</span>&#123;</span><br><span class="line">  	i[<span class="string">'GoogleAnalyticsObject'</span>]=r;i[r]=i[r]||<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> 		 (i[r].q=i[r].q||[]).push(<span class="built_in">arguments</span>)&#125;,i[r].l=<span class="number">1</span>*<span class="keyword">new</span> <span class="built_in">Date</span>();a=s.createElement(o),</span><br><span class="line">  		m=s.getElementsByTagName(o)[<span class="number">0</span>];</span><br><span class="line">  		a.async=<span class="number">1</span>;a.src=g;m.parentNode.insertBefore(a,m)</span><br><span class="line">  	&#125;)(<span class="built_in">window</span>,<span class="built_in">document</span>,<span class="string">'script'</span>,<span class="string">'https://www.google-analytics.com/analytics.js'</span>,<span class="string">'ga'</span>);</span><br><span class="line">  	</span><br><span class="line">  	ga(<span class="string">'create'</span>, <span class="string">'UA-76175499-1'</span>, <span class="string">'auto'</span>);</span><br><span class="line">  	ga(<span class="string">'send'</span>, <span class="string">'pageview'</span>);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>因为网站中每个页面都需要加入上面的跟踪代码，所以添加在模板页中，这里是head.ejs。在配置文件config中设置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#google统计</span><br><span class="line">google_analytics:</span><br><span class="line">  enable: true</span><br><span class="line">  id: UA-76175499-1</span><br><span class="line">  site: hlyin.space</span><br></pre></td></tr></table></figure>
+<p>在head.ejs中，之前添加：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- google统计 --&gt;</span><br><span class="line">&lt;% if (theme.google_analytics) &#123; %&gt;</span><br><span class="line">&lt;script type="text/javascript"&gt;</span><br><span class="line">	(function(i,s,o,g,r,a,m)&#123;</span><br><span class="line">	i['GoogleAnalyticsObject']=r;i[r]=i[r]||function()&#123;</span><br><span class="line">	 (i[r].q=i[r].q||[]).push(arguments)&#125;,i[r].l=1*new Date();a=s.createElement(o),</span><br><span class="line">		m=s.getElementsByTagName(o)[0];</span><br><span class="line">		a.async=1;a.src=g;m.parentNode.insertBefore(a,m)</span><br><span class="line">	&#125;)(window,document,'script','https://www.google-analytics.com/analytics.js','ga');</span><br><span class="line">	ga('create', 'UA-76175499-1', 'auto');</span><br><span class="line">	ga('send', 'pageview');</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+<p>若不设置config文件，则直接将跟踪代码加入模板也可以，即去掉<code>if (theme.google_analytics)</code>的判断</p>
+<p><br></p>
+<h2 id="一、百度统计"><a href="#一、百度统计" class="headerlink" title="一、百度统计"></a>一、百度统计</h2><p>&nbsp;&nbsp;&nbsp;&nbsp; 一样的，先注册， <a href="http://tongji.baidu.com/web/welcome/login" target="_blank" rel="external">百度统计</a> 注册账号，这里没有跟踪ID，只有跟踪代码，如下形式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">var</span> _hmt = _hmt || [];</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> hm = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</span><br><span class="line">  hm.src = <span class="string">"//hm.baidu.com/hm.js?36f2872301a44655ccaff81408d46228"</span>;</span><br><span class="line">  <span class="keyword">var</span> s = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"script"</span>)[<span class="number">0</span>]; </span><br><span class="line">  s.parentNode.insertBefore(hm, s);</span><br><span class="line">&#125;)();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>同样添加的模板页即可，config中 <code>baidu_analytics: true</code>， head.ejs中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 百度统计 --&gt;</span><br><span class="line">&lt;% if (theme.baidu_analytics) &#123; %&gt;</span><br><span class="line">	&lt;script type="text/javascript"&gt;</span><br><span class="line">		var _hmt = _hmt || [];(function() &#123;</span><br><span class="line">		var hm = document.createElement("script");</span><br><span class="line">		hm.src = "//hm.baidu.com/hm.js?36f2872301a44655ccaff81408d46228";</span><br><span class="line">		var s = document.getElementsByTagName("script")[0];</span><br><span class="line">		s.parentNode.insertBefore(hm, s);&#125;)();</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
 
             <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-        
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/blog/blog访问速度优化.html" style="float: left;">
+        ← 访问速度优化：图片及谷歌字体转存COS
+    </a>
+    
+    
+    <a class="pull-right" href="/Animation/四月是你的谎言.html">
+        《四月是你的谎言》实景 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="blog/添加百度统计.html" data-title="添加google统计或百度统计" data-url="http://hlyin.space/blog/添加百度统计.html"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
-<section id="process">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-                <div class="timeline-centered">
-                    <div class="line"></div>
-                    <div class="present">Past</div>
-                    <div class="dot_tp"></div>
-                    <div class="born">Now</div>
-                    <div class="dot_bt"></div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">1</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2013/09/06-开始作为一只代码猴子</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">2</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2014/09/06-成功进化成死宅猴子</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">3</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2015/07/20-上了为期半个月的TOEFL课程</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">4</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2015-03-23-TOEFL二战103，继续GRE</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                </div>
-                <!-- timeline-centered -->
-            </div>
-        </div>
-    </div>
-</section>
+
 
       
 <!-- ============================ Footer =========================== -->

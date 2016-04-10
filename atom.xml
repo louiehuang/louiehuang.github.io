@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hlyin.space/"/>
-  <updated>2016-04-09T15:37:47.671Z</updated>
+  <updated>2016-04-10T13:30:43.000Z</updated>
   <id>http://hlyin.space/</id>
   
   <author>
@@ -16,11 +16,53 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>blog访问速度提升</title>
-    <link href="http://hlyin.space/blog/blog%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%8F%90%E5%8D%87.html"/>
-    <id>http://hlyin.space/blog/blog访问速度提升.html</id>
+    <title>blog访问速度优化(二)</title>
+    <link href="http://hlyin.space/blog/blog%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96(%E4%BA%8C).html"/>
+    <id>http://hlyin.space/blog/blog访问速度优化(二).html</id>
+    <published>2016-04-09T16:00:00.000Z</published>
+    <updated>2016-04-10T13:30:43.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 之前通过将google字体和加载耗时较长的图片存到云对象存储(COS)大幅提升了这个网站的访问速度，其中google字体因为google的原因而耗时很长，而图片则是因为这个网站代码托管在github，需要从github那边加载，而github，国外的，访问速度相比对国内主机慢不少。&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 因此将网站同时部署到github和coding，比较一下两个地方的ping值：&lt;/p&gt;
+&lt;p&gt;(1) ping github， 平均366.384ms&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/ping_github.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;(2)ping coding， 平均34.388ms，ping值低10倍&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/ping_coding.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 代码托管到coding和托管到github一样的流程，在coding注册账号后新建项目，不同于github pages的项目名必须和github用户名相同，在coding的项目名可以任意起，域名结构为：&lt;code&gt;username.coding.io/projectname&lt;/code&gt;， 但若想通过&lt;code&gt;username.coding.io&lt;/code&gt;访问，即不带项目名访问，则需要将项目名命名为用户名，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/codingproject.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 然后部署，可以同时部署到coding和github，配置中添加一条部署仓库即可，以SSH连接为例：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;deploy:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  type: git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  repo:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      github: git@github.com:louiehuang/louiehuang.github.io.git,master&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      coding: git@git.coding.net:louiehuang/louiehuang.git,master&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 然而我在mac下deploy的速度很慢，不知原因，所以手动push，先在coding的账户-&amp;gt;SSH公钥里添加公钥，直接添加github的公钥即可。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;在本地cd到放仓库的地方，然后clone下来，我的项目是&lt;code&gt;git clone git@git.coding.net:louiehuang/louiehuang.git&lt;/code&gt;，clone下来的仓库就是louiehuang.git&lt;/li&gt;
+&lt;li&gt;将generate生成的public文件夹下所有文件复制到仓库louiehuang.git&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git add *&lt;/code&gt;，添加所有新加项，因为.gitignore的设置不用&lt;code&gt;git add .&lt;/code&gt;，把这个ignore文件删掉后也可以用&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git commit -m &amp;quot;comment&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git push origin master&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 然后在coding中的项目中将Pages服务打开，将自己的域名添加进来，之后设置域名解析，将国内访问解析到coding，国外解析到github，在自己的云解析平台设置，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/domain.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 至此完成了在coding的托管。因为每次更新都需要同时更新coding和github两个地方，所以写了段命令来bash，每次同时push到coding和github的仓库。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 之前通过将google字体和加载耗时较长的图片存到云对象存储(COS)大幅提升了这个网站的访问速度，其中google字体因为google的原因而耗时很长，而图片则是因为这个网站代码托管在github，需要从github那边加
+    
+    </summary>
+    
+      <category term="blog" scheme="http://hlyin.space/categories/blog/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>访问速度优化：图片及谷歌字体转存COS</title>
+    <link href="http://hlyin.space/blog/blog%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96.html"/>
+    <id>http://hlyin.space/blog/blog访问速度优化.html</id>
     <published>2016-04-08T16:00:00.000Z</published>
-    <updated>2016-04-09T15:37:47.671Z</updated>
+    <updated>2016-04-10T06:52:26.000Z</updated>
     
     <content type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 这个blog (&lt;a href=&quot;http://hlyin.space&quot;&gt;http://hlyin.space&lt;/a&gt;) 一直是用chrome做测试和访问，刚搭建起来的时候打开速度比较正常，大概在2、3秒的样子，但这几天突然变得非常慢，需要等1、2分钟才能加载出来，想起来之前都是挂着ss，而现在没有开ss，觉得可能问题出在访问了被墙的资源，因而做些测试来查找并解决访问速度问题。&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 比较奇怪的是，用firefox和safari访问速度都比较快，只有chrome打开极慢，打开chrome的开发者工具（快捷键F12），选择network项，然后在历史记录中清除缓存以避免影响测试结果，然后访问网站 (&lt;a href=&quot;http://hlyin.space&quot;&gt;http://hlyin.space&lt;/a&gt;) ，如下图，加载时间为1.5分钟，在Time项中可以观察各项请求的耗时，找到了最耗时的项目，502网关错误，即红色项:&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_chrometest1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;放大一点：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_chrometest_detail.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
@@ -62,39 +104,34 @@
   </entry>
   
   <entry>
-    <title>2016年4月新番</title>
-    <link href="http://hlyin.space/Animation/4%E6%9C%88%E6%96%B0%E7%95%AA.html"/>
-    <id>http://hlyin.space/Animation/4月新番.html</id>
-    <published>2016-04-04T16:00:00.000Z</published>
-    <updated>2016-04-09T14:14:30.439Z</updated>
+    <title>添加google统计或百度统计</title>
+    <link href="http://hlyin.space/blog/%E6%B7%BB%E5%8A%A0%E7%99%BE%E5%BA%A6%E7%BB%9F%E8%AE%A1.html"/>
+    <id>http://hlyin.space/blog/添加百度统计.html</id>
+    <published>2016-04-07T16:00:00.000Z</published>
+    <updated>2016-04-10T12:14:40.000Z</updated>
     
-    <content type="html">&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;embed height=&quot;515&quot; width=&quot;720&quot; quality=&quot;high&quot; allowfullscreen=&quot;true&quot; type=&quot;application/x-shockwave-flash&quot; src=&quot;http://static.hdslb.com/miniloader.swf&quot; flashvars=&quot;aid=4173755&amp;page=1&quot; pluginspage=&quot;http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash&quot;&gt;&lt;br&gt;&lt;/p&gt;
-
-
-&lt;h3 id=&quot;1-我叫坂本我最屌-在下坂本，有何贵干&quot;&gt;&lt;a href=&quot;#1-我叫坂本我最屌-在下坂本，有何贵干&quot; class=&quot;headerlink&quot; title=&quot;1.我叫坂本我最屌(在下坂本，有何贵干)&quot;&gt;&lt;/a&gt;1.我叫坂本我最屌(在下坂本，有何贵干)&lt;/h3&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在追坂本漫画，真的是非常非常屌，屌是不需要理由的… 靠来回行走掀起一阵狂风、超越电车速度的进化论跑步法、靠反复横跳灭火(虽然这个是路人想象)、用暴雨天被风刮起的雨伞品雨… 大概是没谁了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://pic3.zhimg.com/b30f1a1f687e6e6c7c43ed0b761c037a_b.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;2-从零开始的异世界生活&quot;&gt;&lt;a href=&quot;#2-从零开始的异世界生活&quot; class=&quot;headerlink&quot; title=&quot;2.从零开始的异世界生活&quot;&gt;&lt;/a&gt;2.从零开始的异世界生活&lt;/h3&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 同样是穿越，有人满级，有人满级*3，而这个男主角则是0级，附带一个死后读档的能力，小说口碑极高，这个也是追的漫画，还是很有意思的&lt;/p&gt;
-&lt;h3 id=&quot;3-双星的阴阳师&quot;&gt;&lt;a href=&quot;#3-双星的阴阳师&quot; class=&quot;headerlink&quot; title=&quot;3.双星的阴阳师&quot;&gt;&lt;/a&gt;3.双星的阴阳师&lt;/h3&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 阴阳师题材一般都还可以看，何况这种中二漫，潜力、灵力寄宿什么的十分对味，同样在追漫画&lt;br&gt;看了第一集以后的我回来补充，期待：80分，实际：08分&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;还有些也可以看的&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;逆转裁判&lt;/li&gt;
-&lt;li&gt;MAGI 星巴达的冒险&lt;/li&gt;
-&lt;li&gt;学战第二季&lt;/li&gt;
-&lt;li&gt;文豪&lt;/li&gt;
-&lt;li&gt;境界之轮回&lt;/li&gt;
-&lt;li&gt;线上游戏&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
+    <content type="html">&lt;h2 id=&quot;一、google统计&quot;&gt;&lt;a href=&quot;#一、google统计&quot; class=&quot;headerlink&quot; title=&quot;一、google统计&quot;&gt;&lt;/a&gt;一、google统计&lt;/h2&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 先在 &lt;a href=&quot;https://www.google.com/analytics/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;google统计&lt;/a&gt; 注册账号，在管理-&amp;gt;跟踪信息-&amp;gt;跟踪代码中获取跟踪ID和跟踪代码，形式如下：&lt;br&gt;ID：&lt;code&gt;UA-76175499-1&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;代码：&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    	(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;i,s,o,g,r,a,m&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	i[&lt;span class=&quot;string&quot;&gt;&#39;GoogleAnalyticsObject&#39;&lt;/span&gt;]=r;i[r]=i[r]||&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; 		 (i[r].q=i[r].q||[]).push(&lt;span class=&quot;built_in&quot;&gt;arguments&lt;/span&gt;)&amp;#125;,i[r].l=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;*&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Date&lt;/span&gt;();a=s.createElement(o),&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  		m=s.getElementsByTagName(o)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  		a.async=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;a.src=g;m.parentNode.insertBefore(a,m)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	&amp;#125;)(&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;,&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;script&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;https://www.google-analytics.com/analytics.js&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;ga&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	ga(&lt;span class=&quot;string&quot;&gt;&#39;create&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;UA-76175499-1&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;auto&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	ga(&lt;span class=&quot;string&quot;&gt;&#39;send&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;pageview&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;因为网站中每个页面都需要加入上面的跟踪代码，所以添加在模板页中，这里是head.ejs。在配置文件config中设置：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#google统计&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;google_analytics:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  enable: true&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  id: UA-76175499-1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  site: hlyin.space&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;在head.ejs中，之前添加：&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;!-- google统计 --&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;% if (theme.google_analytics) &amp;#123; %&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script type=&quot;text/javascript&quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	(function(i,s,o,g,r,a,m)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	i[&#39;GoogleAnalyticsObject&#39;]=r;i[r]=i[r]||function()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 (i[r].q=i[r].q||[]).push(arguments)&amp;#125;,i[r].l=1*new Date();a=s.createElement(o),&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		m=s.getElementsByTagName(o)[0];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		a.async=1;a.src=g;m.parentNode.insertBefore(a,m)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;)(window,document,&#39;script&#39;,&#39;https://www.google-analytics.com/analytics.js&#39;,&#39;ga&#39;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	ga(&#39;create&#39;, &#39;UA-76175499-1&#39;, &#39;auto&#39;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	ga(&#39;send&#39;, &#39;pageview&#39;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;% &amp;#125; %&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;若不设置config文件，则直接将跟踪代码加入模板也可以，即去掉&lt;code&gt;if (theme.google_analytics)&lt;/code&gt;的判断&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 id=&quot;一、百度统计&quot;&gt;&lt;a href=&quot;#一、百度统计&quot; class=&quot;headerlink&quot; title=&quot;一、百度统计&quot;&gt;&lt;/a&gt;一、百度统计&lt;/h2&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 一样的，先注册， &lt;a href=&quot;http://tongji.baidu.com/web/welcome/login&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;百度统计&lt;/a&gt; 注册账号，这里没有跟踪ID，只有跟踪代码，如下形式：&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; _hmt = _hmt || [];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; hm = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.createElement(&lt;span class=&quot;string&quot;&gt;&quot;script&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  hm.src = &lt;span class=&quot;string&quot;&gt;&quot;//hm.baidu.com/hm.js?36f2872301a44655ccaff81408d46228&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; s = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementsByTagName(&lt;span class=&quot;string&quot;&gt;&quot;script&quot;&lt;/span&gt;)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  s.parentNode.insertBefore(hm, s);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;同样添加的模板页即可，config中 &lt;code&gt;baidu_analytics: true&lt;/code&gt;， head.ejs中：&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;!-- 百度统计 --&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;% if (theme.baidu_analytics) &amp;#123; %&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;script type=&quot;text/javascript&quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		var _hmt = _hmt || [];(function() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		var hm = document.createElement(&quot;script&quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		hm.src = &quot;//hm.baidu.com/hm.js?36f2872301a44655ccaff81408d46228&quot;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		var s = document.getElementsByTagName(&quot;script&quot;)[0];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		s.parentNode.insertBefore(hm, s);&amp;#125;)();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;% &amp;#125; %&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 </content>
     
     <summary type="html">
     
-      &lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;embed height=&quot;515&quot; width=&quot;720&quot; quality=&quot;high&quot; allowfullscreen=&quot;true&quot; type=&quot;application/x-shockwave-flash
+      &lt;h2 id=&quot;一、google统计&quot;&gt;&lt;a href=&quot;#一、google统计&quot; class=&quot;headerlink&quot; title=&quot;一、google统计&quot;&gt;&lt;/a&gt;一、google统计&lt;/h2&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 先在 &lt;a href=&quot;h
     
     </summary>
     
-      <category term="Animation" scheme="http://hlyin.space/categories/Animation/"/>
+      <category term="blog" scheme="http://hlyin.space/categories/blog/"/>
     
     
   </entry>
@@ -104,7 +141,7 @@
     <link href="http://hlyin.space/Animation/%E5%9B%9B%E6%9C%88%E6%98%AF%E4%BD%A0%E7%9A%84%E8%B0%8E%E8%A8%80.html"/>
     <id>http://hlyin.space/Animation/四月是你的谎言.html</id>
     <published>2016-04-01T16:00:00.000Z</published>
-    <updated>2016-04-09T13:45:02.560Z</updated>
+    <updated>2016-04-09T13:45:04.000Z</updated>
     
     <content type="html">&lt;h4 id=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;a href=&quot;#《四月是你的谎言》实景图&quot; class=&quot;headerlink&quot; title=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;/a&gt;《四月是你的谎言》实景图&lt;/h4&gt;&lt;p&gt;“灰心丧气时就用手托着下巴，你会为双手能派上用处而感到高兴的。 — 查理•布朗”&lt;/p&gt;
 &lt;audio autoplay loop&gt;&lt;source src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/%E6%A8%AA%E5%B1%B1%E5%85%8B%20-%20%E3%82%A2%E3%82%B1%E3%82%99%E3%82%A4%E3%83%B3.mp3&quot;&gt;&lt;/audio&gt;
@@ -146,7 +183,7 @@ id=&quot;table7&quot;&gt; &lt;tr&gt; &lt;td style=&quot;FILTER: alpha(opacity=10
     <link href="http://hlyin.space/Android/Android_ListView%E4%BC%98%E5%8C%96.html"/>
     <id>http://hlyin.space/Android/Android_ListView优化.html</id>
     <published>2016-03-18T16:00:00.000Z</published>
-    <updated>2016-04-09T13:45:12.401Z</updated>
+    <updated>2016-04-10T07:26:04.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;ListView的优化&quot;&gt;&lt;a href=&quot;#ListView的优化&quot; class=&quot;headerlink&quot; title=&quot;ListView的优化&quot;&gt;&lt;/a&gt;ListView的优化&lt;/h3&gt;&lt;p&gt;1.存在问题&lt;/p&gt;
 &lt;blockquote&gt;
@@ -191,11 +228,230 @@ id=&quot;table7&quot;&gt; &lt;tr&gt; &lt;td style=&quot;FILTER: alpha(opacity=10
   </entry>
   
   <entry>
+    <title>操作系统重点</title>
+    <link href="http://hlyin.space/OS/OS%E5%A4%8D%E4%B9%A0.html"/>
+    <id>http://hlyin.space/OS/OS复习.html</id>
+    <published>2016-01-04T16:00:00.000Z</published>
+    <updated>2016-04-10T07:28:00.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;第一章、操作系统概述&quot;&gt;&lt;a href=&quot;#第一章、操作系统概述&quot; class=&quot;headerlink&quot; title=&quot;第一章、操作系统概述&quot;&gt;&lt;/a&gt;&lt;strong&gt;第一章、操作系统概述&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1、    OS的概念、特性&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;操作系统：&lt;/strong&gt;是计算机系统中的一个系统软件，是一些程序模块的集合——它们能以尽量&lt;strong&gt;有效地（系统运行效率和资源利用率）&lt;/strong&gt;组织和管理计算机的软硬件资源，&lt;strong&gt;合理（公平，不发生死锁和饥饿）&lt;/strong&gt;地组织计算机的工作流程，控制程序的执行，并向用户提供各种服务功能，使得用户能够灵活、&lt;strong&gt;方便（人机界面—包括用户使用界面和程序设计接口的易用性、易维护性）&lt;/strong&gt;、有效的使用计算机，并使整个计算机系统能高效地运行；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;OS特性：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;并发性：&lt;/strong&gt;计算机系统中同时运行着多个程序；处理多个同时性活动的能力，并发多个事件在同一时间间隔发生（CPU数量少于任务数），并行是多个事件在同一时刻发生（CPU数量多于任务数）；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;共享性：&lt;/strong&gt;操作系统与多个用户的程序共同使用计算机系统中的资源；包括：并发程序对处理器资源的共享、对主存和对外存的共享、对外设的共享；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;随机性：&lt;/strong&gt;一般操作系统正处于什么样的状态中是无法确切知道的；操作系统必须随时对以不可预测次序发生的事件进行响应；由共享和并发引起&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;虚拟性：&lt;/strong&gt;一个物理实体映射为若干个对应的逻辑实体－－分时或分空间；虚拟是操作系统管理系统资源的重要手段，可提高资源利用率；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;strong&gt;2、OS的功能&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）进程管理：&lt;/strong&gt;完成处理机资源的分配调度等功能；包括：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;进程控制：&lt;/strong&gt;创建、撤销、挂起、改变运行优先级等——主动改变进程的状态&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;进程同步：&lt;/strong&gt;协调并发进程之间的推进步骤，以协调资源共享；——交换信息能力（弱）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;进程通信：&lt;/strong&gt;进程之间传送数据，以协调进程间的协作；——交换信息能力（强），也可以用来协调进程之间的推进&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;进程调度：&lt;/strong&gt;作业和进程的运行切换，以充分利用处理机资源和提高系统性能；——未必是进程控制操作所引起（可能是时间片轮转、I/O操作）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;（2）存储管理：&lt;/strong&gt;管理内存资源；功能：1、存储分配与回收；2、存储保护（保证进程间互不干扰、相互保密）；3、地址映射（变换）：进程逻辑地址到内存物理地址的映射；4、内存扩充（覆盖、交换和虚拟存储）：提高内存利用率、扩大进程的内存空间；&lt;br&gt;&lt;strong&gt;（3）文件管理：&lt;/strong&gt;目的是方便设备的使用，提高CPU与I/O设备利用率；文件存储空间管理、目录管理、文件的读写管理和存取控制；&lt;br&gt;&lt;strong&gt;（4）设备管理：&lt;/strong&gt;除了CPU和内存以外的所有输入输出设备的管理；&lt;br&gt;&lt;strong&gt;（5）作业管理和用户接口：&lt;/strong&gt; OS向用户提供使用它的手段；&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;strong&gt;3、OS的分类&lt;/strong&gt; &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[x] （1）批处理系统：成批处理、作业流程自动化较高，资源利用率较高，作业吞吐量大，但用户交互性差、调试困难；&lt;/li&gt;
+&lt;li&gt;[x] （2）分时系统：操作系统以时间片为单位，轮流为每个终端用户服务；&lt;/li&gt;
+&lt;li&gt;[x] （3）实时系统：是指使计算机能及时响应外部事件的请求，在规定的严格时间内完成对该事件的处理，并控制所有实时设备和实时任务协调一致地工作的操作系统；&lt;/li&gt;
+&lt;li&gt;[x] （4）嵌入式操作系统：运行在嵌入式系统环境中，对整个嵌入式系统以及它所操作、控制的各种部件装置等等资源进行统一协调、调度、指挥和控制的系统软件；&lt;/li&gt;
+&lt;li&gt;[ ] （5）个人计算机操作系统；&lt;/li&gt;
+&lt;li&gt;[ ] （6）网络操作系统：基于计算机网络，在各种计算机操作系统上按网络体系结构协议标准开发的软件；分布性、自治性、互连性、可见性；&lt;/li&gt;
+&lt;li&gt;[ ] （7）分布式操作系统；透明性、灵活性、可靠性、高性能、可扩充性；&lt;/li&gt;
+&lt;li&gt;[ ] （8）智能卡操作系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h3 id=&quot;第二章、操作系统的硬件环境&quot;&gt;&lt;a href=&quot;#第二章、操作系统的硬件环境&quot; class=&quot;headerlink&quot; title=&quot;第二章、操作系统的硬件环境&quot;&gt;&lt;/a&gt;&lt;strong&gt;第二章、操作系统的硬件环境&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1、特权指令、管态目态、程序状态字&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;特权指令：&lt;/strong&gt;指令系统中只能由操作系统使用的指令，不允许一般用户使用；特权指令一般引起处理器状态的切换，处理器通过特殊的机制将处理器状态切换到操作系统运行的特权状态&lt;strong&gt;（管态）&lt;/strong&gt;，然后将处理权移交给操作系统中的一段特殊代码，这一个过程称为&lt;strong&gt;陷入&lt;/strong&gt;；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;管态：&lt;/strong&gt;操作系统管理程序运行的状态，较高的特权级别，又称为特权态（特态）、核心态、系统态；&lt;strong&gt;目态→管态：&lt;/strong&gt;唯一途径是中断（广义）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;目态：&lt;/strong&gt;用户程序运行时的状态，较低的特权级别，又称普通态（普态）、用户态；&lt;strong&gt;管态→目态：&lt;/strong&gt;设置PSW(修改程序状态字) 可实现&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;PSW：&lt;/strong&gt;用一个专门的寄存器来指示处理器的状态；通常包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[x] CPU的工作状态码：指明管态还是目态，用来说明当前在CPU上执行的是操作系统还是一般用户，从而决定其是否可以使用特权指令或拥有其他的特殊权力；&lt;/li&gt;
+&lt;li&gt;[x] 条件码：反映指令执行后的结果特征；&lt;/li&gt;
+&lt;li&gt;[x] 中断屏蔽码：指出是否允许中断；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/OS_review/os_psw.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;strong&gt;2、多级存储体系&lt;/strong&gt;&lt;br&gt;存储系统设计三个问题：&lt;strong&gt;容量、速度和成本&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;多级存储体系，&lt;/strong&gt;解决存储系统设计的二律背反情况，从上往下为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;寄存器；&lt;/li&gt;
+&lt;li&gt;高度缓存；&lt;/li&gt;
+&lt;li&gt;内存；&lt;/li&gt;
+&lt;li&gt;磁盘存储器；&lt;/li&gt;
+&lt;li&gt;磁带和光盘存储器；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;设计原理：&lt;/strong&gt;程序和数据存储访问的&lt;strong&gt;局部性原理&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;存储保护：&lt;/strong&gt;界地址寄存器和存储键&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;中断：&lt;/strong&gt;CPU在正常运行程序时，由于内、外部事件引起CPU暂时中止正在运行的程序，转而去执行请求CPU暂时中止的内、外部事件的服务程序，待该服务程序处理完毕后又返回到被中止的程序的过程；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;中断系统：&lt;/strong&gt;包括&lt;strong&gt;硬件中断装置&lt;/strong&gt;和&lt;strong&gt;软件中断处理程序&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;中断分类：&lt;/strong&gt;根据中断源划分为硬中断（外中断和内中断）和软中断（也叫陷阱或异常）&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h3 id=&quot;第三章、用户接口与作业管理&quot;&gt;&lt;a href=&quot;#第三章、用户接口与作业管理&quot; class=&quot;headerlink&quot; title=&quot;第三章、用户接口与作业管理&quot;&gt;&lt;/a&gt;&lt;strong&gt;第三章、用户接口与作业管理&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1、    作业的概念，作业级接口与程序级接口&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）作业：&lt;/strong&gt;一次应用业务的处理过程中，从输入开始到输出结束，用户要求计算机所做的有关该次业务处理的全部工作；&lt;br&gt;从系统角度看，作业由&lt;strong&gt;程序，数据和作业说明书&lt;/strong&gt;组成，系统通过作业说明书控制文件形式的程序和数据，使之执行并对其进行操作。&lt;br&gt;作业的建立包括两个子过程：作业的输入、JCB的建立；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（2）作业级接口：&lt;/strong&gt;用于作业控制；对于不同作业，又分为两类：&lt;br&gt;&lt;strong&gt;a、    联机作业控制方式的接口&lt;/strong&gt;&lt;br&gt;用户敲入一条命令，控制就转入系统命令解释程序，对其进行解释，执行，完成要求的功能，之后控制又转回控制台或终端，用户又继续输入命令,如此反复直到完成；&lt;br&gt;&lt;strong&gt;b、    脱机作业控制方式的接口&lt;/strong&gt;&lt;br&gt;由一组作业控制语言组成，系统为脱机用户提供了作业控制语言；用户用此语言将事先考虑到的对作业的各种可能要求写成作业操作说明书，连同作业一起交给系统；系统运行该程序时，一边解释作业控制命令，一边执行该命令，如此反复直到完成；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（3）程序级接口：&lt;/strong&gt;系统为用户在程序一级提供有关服务设置的；由一组系统调用命令组成，负责管理和控制运行的程序，并在这些程序与系统控制的资源和提供的服务之间实现交互作用（可以是专门为程序员通过汇编程序与操作系统打交道提供的）；用汇编语言编程序的用户，可在程序中直接用这组系统调用命令；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2、JCB：&lt;/strong&gt;作业控制块是批处理作业存在的标志，其中保存有系统对作业进行管理所需要的全部信息，它们被保存于磁盘区域中；&lt;br&gt;（1）JCB的内容：作业标识、作业状态、开始处理时间、作业完成时间等；&lt;br&gt;（2）JCB的建立：当一个作业开始由输入设备向磁盘的输入井传输时，系统输入程序为其建立一个作业控制块，并对其初始化；&lt;br&gt;（3）    JCB的撤销：由系统输出程序撤销。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3、作业状态及转换&lt;/strong&gt;&lt;br&gt;（1）进入状态；&lt;br&gt;（2）后备状态；作业全部信息存在外存的某些区域中等待调度，系统为后备作业建立作业控制块，并加入后备作业队列中，标志作业建立完成；&lt;br&gt;（3）运行状态；被作业调度选中，且分配了必要资源，建立了一组相应进程后，进入运行状态；运行状态的作业根据进程活动情况又分为3种状态，就绪态，运行态，等待态；&lt;br&gt;（4）完成状态；当作业正常运行结束或因发生错误终止；将其JCB从现行作业队列中除去，并回收资源；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4、作业调度算法：FCFS/SJF/HRN&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;作业周转时间&lt;/strong&gt; = 结束时间 – 开始时间（即周转=等待+运行）；&lt;br&gt;&lt;strong&gt;响应比R&lt;/strong&gt; = 作业周转时间 / 作业运行时间 = 1 + 作业等待时间/作业运行时间；&lt;br&gt;此外还有基于优先数调度算法HPF、均衡调度算法等；&lt;br&gt;&lt;strong&gt;P81，多道环境下的作业调度&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5、系统调用：&lt;/strong&gt;系统调用就是用户在程序中调用操作系统所提供的一些子功能；是特殊的过程滴啊用，由特殊的机器指令实现；除调用子程序外，还使系统转入特权方式，即进入管态；系统调用通常只能由汇编语言直接访问。系统调用是操作系统提供给编程人员的唯一接口，编程人员通过系统调用，动态请求和释放资源；&lt;br&gt;进程控制类、文件操作类、进程通信类、设备管理类、信息维护类；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ex.课本P99页第6题&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;FCFS&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;作业&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;输入时间&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;进入内存时间&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;开始时间&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;结束时间&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;周转时间&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;JOB1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:00&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:00&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:00&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:25&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;JOB2&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:20&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:20&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:25&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:55&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;35&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;JOB3&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:30&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11:30&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11:30&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11:40&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;70&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;JOB4&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:35&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:35&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:55&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11:15&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;40&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;JOB5&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:40&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:55&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11:15&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11:30&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;50&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;平均周转时间：（25＋35＋70＋40＋50）/5=44&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SJF&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;作业&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;输入时间&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;进入内存时间&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;开始时间&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;结束时间&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;周转时间&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;JOB1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10：00&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:00&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:00&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:25&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;JOB2&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10：20&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:20&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:25&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:55&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;35&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;JOB3&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10：30&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11:30&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11:30&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11:40&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;70&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;JOB4&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10：35&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:35&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11:10&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11:30&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;55&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;JOB5&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10：40&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:55&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;10:55&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11:10&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;30&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;平均周转时间：(25+35+70+55+30)/5=43&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h3 id=&quot;第四章、进程管理&quot;&gt;&lt;a href=&quot;#第四章、进程管理&quot; class=&quot;headerlink&quot; title=&quot;第四章、进程管理&quot;&gt;&lt;/a&gt;&lt;strong&gt;第四章、进程管理&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1、    程序的顺序执行的特点；多道程序并发执行的特点&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）程序的顺序执行的特点：&lt;/strong&gt;顺序性、封闭性（程序执行结果由初始条件决定，不受外界因素影响）、程序执行结果的确定性、程序执行结果的可再现性；&lt;br&gt;&lt;strong&gt;（2）多道程序并发执行的特点：&lt;/strong&gt;并发程序在执行期间具有相互制约关系、程序与计算不再一一对应、并发程序执行结果不可再现&lt;br&gt;&lt;strong&gt;（3）多道程序环境特点：&lt;/strong&gt;独立性、随机性、资源共享性&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2、    进程的概念；进程的状态及变迁；原语&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1） 进程：&lt;/strong&gt;进程是具有一定独立功能的程序关于某个数据集上的一次运行活动，是资源分配和调度的一个基本单位；&lt;br&gt;&lt;strong&gt;进程与程序的联系：&lt;/strong&gt;程序是进程的组成部分之一，从静态角度看，进程由程序、数据和PCB组成；一个进程可以执行多个程序，一个程序可以构成多个进程；&lt;br&gt;&lt;strong&gt;进程与程序的区别：&lt;/strong&gt;程序是静态的，进程是动态的；&lt;br&gt;&lt;strong&gt;进程的特性：&lt;/strong&gt;并发、动态、独立、交往、异步；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;PCB：&lt;/strong&gt;为了便于系统控制和描述进程活动过程而在操作系统核心中为进程所定义的一个专门的数据结构，系统利用PCB来描述进程的基本情况以及进程的运行变化过程；&lt;strong&gt;PCB是进程存在的唯一标志；P&lt;/strong&gt;CB的内容可分为&lt;strong&gt;调度信息和现场信息&lt;/strong&gt;两大部分；&lt;br&gt;&lt;strong&gt;PCB组织方式：&lt;/strong&gt;线性方式、索引方式、链接方式；&lt;br&gt;&lt;strong&gt;进程队列：&lt;/strong&gt;就绪队列、等待队列、运行队列；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（2）进程的状态及变迁&lt;/strong&gt;&lt;br&gt;运行态、就绪态、等待态；P107&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（3）原语：&lt;/strong&gt;原语通常由若干条指令组成，用来实现某个特定的操作，通过一段不可分割或不可中断的程序实现其功能；原语的执行必须是连续的；原语是操作系统核心的一个组成部分，它必须在管态下执行，并且常驻内存；&lt;br&gt;创建原语、撤销原语、阻塞原语、唤醒原语&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3、    进程互斥、临界资源、临界区；进程同步、信号量、PV操作&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;相关进程：&lt;/strong&gt;逻辑上具有某种联系的进程；&lt;br&gt;&lt;strong&gt;无关进程：&lt;/strong&gt;逻辑上没有任何联系的进程；&lt;br&gt;&lt;strong&gt;进程间相互作用：&lt;/strong&gt;直接相互作用（只发生在相关进程间）、间接相互作用；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;进程互斥：&lt;/strong&gt;进程间的间接相互作用构成进程互斥，如多个进程竞争打印机；&lt;br&gt;&lt;strong&gt;临界资源：&lt;/strong&gt;系统中一些资源一次只允许一个进程使用，这类资源称为临界资源或共享变量；&lt;br&gt;&lt;strong&gt;临界区：&lt;/strong&gt;在进程中访问临界资源的那一段程序称为临界区；临界区使用原则：有空让进、无空等待、多中择一、有限等待、让权等待（等待态放弃占用CPU）；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;进程同步：&lt;/strong&gt;进程同步是指进程之间一种直接的协同工作关系，是一些进程相互合作、共同完成一项任务；进程间的&lt;strong&gt;直接相互作用&lt;/strong&gt;构成进程的同步；直接制约问题；&lt;strong&gt;与次序相关（与时间有关，执行时序上的相互制约）；&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;同步机制：&lt;/strong&gt;解决进程同步；硬件同步机制、信号量及P、V操作、管程、条件临界域、路径表达式（集中式系统）、远程过程调用（分布式系统）；&lt;br&gt;&lt;strong&gt;信号量：&lt;/strong&gt;信号量是一种特殊的变量，它的表面形式是&lt;strong&gt;一个整型变量附加一个队列，&lt;/strong&gt;而且它只能被特殊的操作（即P操作和V操作）使用；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;P、V操作：&lt;/strong&gt;一种简单、易于实现的同步机制，包括P操作和V操作两个原语，P、V操作是对信号量实施操作，用P、V操作可实现进程的同步和互斥；&lt;br&gt;&lt;strong&gt;互斥操作时，P、V处于同一进程；同步操作时，不在同一进程中出现；同步P操作和互斥P操作一起出现时，同步P应在互斥P之前；&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4、    进程同步：生产者-消费者问题&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）一个生产者，一个消费者，公用一个缓冲区&lt;br&gt;属于同步问题&lt;/strong&gt;&lt;br&gt;**&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1、    程序的顺序执行的特点；多道程序并发执行的特点&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）程序的顺序执行的特点：&lt;/strong&gt;顺序性、封闭性（程序执行结果由初始条件决定，不受外界因素影响）、程序执行结果的确定性、程序执行结果的可再现性；&lt;br&gt;&lt;strong&gt;（2）多道程序并发执行的特点：&lt;/strong&gt;并发程序在执行期间具有相互制约关系、程序与计算不再一一对应、并发程序执行结果不可再现&lt;br&gt;&lt;strong&gt;（3）多道程序环境特点：&lt;/strong&gt;独立性、随机性、资源共享性&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2、    进程的概念；进程的状态及变迁；原语&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1） 进程：&lt;/strong&gt;进程是具有一定独立功能的程序关于某个数据集上的一次运行活动，是资源分配和调度的一个基本单位；&lt;br&gt;&lt;strong&gt;进程与程序的联系：&lt;/strong&gt;程序是进程的组成部分之一，从静态角度看，进程由程序、数据和PCB组成；一个进程可以执行多个程序，一个程序可以构成多个进程；&lt;br&gt;&lt;strong&gt;进程与程序的区别：&lt;/strong&gt;程序是静态的，进程是动态的；&lt;br&gt;&lt;strong&gt;进程的特性：&lt;/strong&gt;并发、动态、独立、交往、异步；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;PCB：&lt;/strong&gt;为了便于系统控制和描述进程活动过程而在操作系统核心中为进程所定义的一个专门的数据结构，系统利用PCB来描述进程的基本情况以及进程的运行变化过程；&lt;strong&gt;PCB是进程存在的唯一标志；P&lt;/strong&gt;CB的内容可分为&lt;strong&gt;调度信息和现场信息&lt;/strong&gt;两大部分；&lt;br&gt;&lt;strong&gt;PCB组织方式：&lt;/strong&gt;线性方式、索引方式、链接方式；&lt;br&gt;&lt;strong&gt;进程队列：&lt;/strong&gt;就绪队列、等待队列、运行队列；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（2）进程的状态及变迁&lt;/strong&gt;&lt;br&gt;运行态、就绪态、等待态；P107&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（3）原语：&lt;/strong&gt;原语通常由若干条指令组成，用来实现某个特定的操作，通过一段不可分割或不可中断的程序实现其功能；原语的执行必须是连续的；原语是操作系统核心的一个组成部分，它必须在管态下执行，并且常驻内存；&lt;br&gt;创建原语、撤销原语、阻塞原语、唤醒原语&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3、    进程互斥、临界资源、临界区；进程同步、信号量、PV操作&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;相关进程：&lt;/strong&gt;逻辑上具有某种联系的进程；&lt;br&gt;&lt;strong&gt;无关进程：&lt;/strong&gt;逻辑上没有任何联系的进程；&lt;br&gt;&lt;strong&gt;进程间相互作用：&lt;/strong&gt;直接相互作用（只发生在相关进程间）、间接相互作用；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;进程互斥：&lt;/strong&gt;进程间的间接相互作用构成进程互斥，如多个进程竞争打印机；&lt;br&gt;&lt;strong&gt;临界资源：&lt;/strong&gt;系统中一些资源一次只允许一个进程使用，这类资源称为临界资源或共享变量；&lt;br&gt;&lt;strong&gt;临界区：&lt;/strong&gt;在进程中访问临界资源的那一段程序称为临界区；临界区使用原则：有空让进、无空等待、多中择一、有限等待、让权等待（等待态放弃占用CPU）；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;进程同步：&lt;/strong&gt;进程同步是指进程之间一种直接的协同工作关系，是一些进程相互合作、共同完成一项任务；进程间的&lt;strong&gt;直接相互作用&lt;/strong&gt;构成进程的同步；直接制约问题；&lt;strong&gt;与次序相关（与时间有关，执行时序上的相互制约）；&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;同步机制：&lt;/strong&gt;解决进程同步；硬件同步机制、信号量及P、V操作、管程、条件临界域、路径表达式（集中式系统）、远程过程调用（分布式系统）；&lt;br&gt;&lt;strong&gt;信号量：&lt;/strong&gt;信号量是一种特殊的变量，它的表面形式是&lt;strong&gt;一个整型变量附加一个队列，&lt;/strong&gt;而且它只能被特殊的操作（即P操作和V操作）使用；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;P、V操作：&lt;/strong&gt;一种简单、易于实现的同步机制，包括P操作和V操作两个原语，P、V操作是对信号量实施操作，用P、V操作可实现进程的同步和互斥；&lt;br&gt;&lt;strong&gt;互斥操作时，P、V处于同一进程；同步操作时，不在同一进程中出现；同步P操作和互斥P操作一起出现时，同步P应在互斥P之前；&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4、    进程同步：生产者-消费者问题&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）一个生产者，一个消费者，公用一个缓冲区&lt;br&gt;属于同步问题&lt;/strong&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;第一章、操作系统概述&quot;&gt;&lt;a href=&quot;#第一章、操作系统概述&quot; class=&quot;headerlink&quot; title=&quot;第一章、操作系统概述&quot;&gt;&lt;/a&gt;&lt;strong&gt;第一章、操作系统概述&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1、    OS的概念、特
+    
+    </summary>
+    
+      <category term="OS" scheme="http://hlyin.space/categories/OS/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>github入门</title>
     <link href="http://hlyin.space/github/github%E5%85%A5%E9%97%A8.html"/>
     <id>http://hlyin.space/github/github入门.html</id>
     <published>2015-06-14T16:00:00.000Z</published>
-    <updated>2016-04-09T13:38:39.824Z</updated>
+    <updated>2016-04-09T13:38:40.000Z</updated>
     
     <content type="html">&lt;p&gt;我的git用户名：louiehuang，邮箱：louiestudio@foxmail.com&lt;/p&gt;
 &lt;p&gt;安装完成后进行配置：&lt;/p&gt;
