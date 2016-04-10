@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Louie&#39;s Blog</title>
+  <title>访问速度优化(一)---图片及谷歌字体转存COS | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -102,7 +102,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -251,270 +251,81 @@
         <!-- // End height spacing helper -->
 
         <!-- ============================ END Hero Image =========================== -->
-      <!-- ============================ Content =========================== -->
-
+      
 <section id="intro">
     <div class="container">
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/blog/blog访问速度优化(二).html">访问速度优化(二)---国内解析到coding，国外解析到github</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-04-09T16:00:00.000Z" itemprop="datePublished">
-          2016-04-10
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        &nbsp;&nbsp;&nbsp;&nbsp; 之前通过将google字体和加载耗时较长的图片存到云对象存储(COS)大幅提升了这个网站的访问速度，其中google字体因为google的原因而耗时很长，而图片则是因为这个网站代码托管在github，需要从github那边加载，而github，国外的，访问速度相比对国内主机慢不少。&nbsp;&nbsp;&nbsp;&nbsp; 因此将网站同时部署到github和coding，比较一下两
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/blog/blog访问速度优化(二).html">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/blog/blog访问速度优化(一).html">访问速度优化(一)---图片及谷歌字体转存COS</a></h3>
-                    <span>
-                        <span class="post-meta">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
       <time datetime="2016-04-08T16:00:00.000Z" itemprop="datePublished">
           2016-04-09
       </time>
     
 </span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        &nbsp;&nbsp;&nbsp;&nbsp; 这个blog (http://hlyin.space) 一直是用chrome做测试和访问，刚搭建起来的时候打开速度比较正常，大概在2、3秒的样子，但这几天突然变得非常慢，需要等1、2分钟才能加载出来，想起来之前都是挂着ss，而现在没有开ss，觉得可能问题出在访问了被墙的资源，因而做些测试来查找并解决访问速度问题。&nbsp;&nbsp;&nbsp;&nbsp; 比较奇怪的是，用firef
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/blog/blog访问速度优化(一).html">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
+                <h1>访问速度优化(一)---图片及谷歌字体转存COS</h1>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/blog/添加百度统计.html">添加google统计或百度统计</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-04-07T16:00:00.000Z" itemprop="datePublished">
-          2016-04-08
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        一、google统计&nbsp;&nbsp;&nbsp;&nbsp; 先在 google统计 注册账号，在管理-&gt;跟踪信息-&gt;跟踪代码中获取跟踪ID和跟踪代码，形式如下：ID：UA-76175499-1
-代码：
-123456789101112&lt;script&gt;    	(function(i,s,o,g,r,a,m)&#123;  	i['GoogleAnalyticsObject']=r;i[r]=i[r]||f
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/blog/添加百度统计.html">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>&nbsp;&nbsp;&nbsp;&nbsp; 这个blog (<a href="http://hlyin.space">http://hlyin.space</a>) 一直是用chrome做测试和访问，刚搭建起来的时候打开速度比较正常，大概在2、3秒的样子，但这几天突然变得非常慢，需要等1、2分钟才能加载出来，想起来之前都是挂着ss，而现在没有开ss，觉得可能问题出在访问了被墙的资源，因而做些测试来查找并解决访问速度问题。<br>&nbsp;&nbsp;&nbsp;&nbsp; 比较奇怪的是，用firefox和safari访问速度都比较快，只有chrome打开极慢，打开chrome的开发者工具（快捷键F12），选择network项，然后在历史记录中清除缓存以避免影响测试结果，然后访问网站 (<a href="http://hlyin.space">http://hlyin.space</a>) ，如下图，加载时间为1.5分钟，在Time项中可以观察各项请求的耗时，找到了最耗时的项目，502网关错误，即红色项:<br><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_chrometest1.jpg" alt=""></p>
+<p>放大一点：<br><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_chrometest_detail.jpg" alt=""></p>
+<p><br><br>错误提示：</p>
+<blockquote>
+<ol>
+<li>Font from origin ‘<a href="http://fontstatic.useso.com" target="_blank" rel="external">http://fontstatic.useso.com</a>‘ has been blocked from loading by Cross-Origin Resource Sharing policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="http://hlyin.space">http://hlyin.space</a>‘ is therefore not allowed access. The response had HTTP status code 502.</li>
+<li>Get <a href="http://fontstatic.useso.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2" target="_blank" rel="external">http://fontstatic.useso.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2</a></li>
+</ol>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 可以看出，问题出在<code>zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2</code>这个字体文件，502网关错误，这个字体的链接在<code>http://fontstatic.useso.com</code>中，页面相关代码如下：<br><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_link.jpg" alt=""><br>&nbsp;&nbsp;&nbsp;&nbsp; 这里需要解释一下，blog使用了包括Open Sans等字体在内的谷歌字库字体，而谷歌由于被禁，字体链接不能访问而换成了360的CND，<code>fonts.useso.com</code>，像上面代码中<code>http://fonts.useso.com/css?family=Open+Sans:400,600</code> (谷歌的为<code>http://fonts.googleapis.com/css?family=Open+Sans:400,600</code>)，然而检测结果表明即使换成360CND，这种web font的加载仍十分耗时。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 在这两个link里使用了访问受阻的字体，查看链接，<code>zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2</code>(无法获取)在第一个链接中被访问，<code>cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf</code> (也无法获取)在第二个链接中被访问。<br><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_linkcontent.jpg" alt=""></p>
+<p><br><br>&nbsp;&nbsp;&nbsp;&nbsp; </p><h3>由此可以有两种解决方法：</h3><p></p>
+<blockquote>
+<ol>
+<li><del>如果不需要这个字库，则可以<strong>直接去掉这两个字体链接</strong>，即把这两条link语句去掉，</del> 虽然是省事，但字体效果没有了的话还是不太可取；</li>
+<li>将字体<strong>添加到自己的云存储中</strong>通过外链导入，或者<strong>镜像到本地</strong>，正确的处理方法，之一，当然应该是这样</li>
+</ol>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 先直接删掉上面那两个link做一下测试，清除缓存后再用chrome测加载时间，结果如下图：<br><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_after_delete_font.jpg" alt=""></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 加载时间为13.98秒，相比于1.5分钟有很大的改善，那么可以确定网页打开速度确实受选择的字体影响很大，<strong>为了继续使用选择的字体，将其下载并存放到云存储中。</strong><br>&nbsp;&nbsp;&nbsp;&nbsp; 云对象存储之前用过七牛，但各个云存储供应商，如果不实名认证，能使用的资源非常有限，因为买服务器的时候在腾讯认证过，所以转用腾讯的云存储，使用比较方便，开通对象存储服务就可以，而且50G以内不收费，放图片、字体等资源的话足够了。<br><strong>（1）</strong> 先下载所用字体，以<code>http://fonts.useso.com/css?family=Open+Sans:400,600</code>为例，打开后如下图，打开其中所有的url下载字体，<code>http://fontstatic.useso.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff</code> 和 <code>http://fontstatic.useso.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNSnhCUOGz7vYGh680lGh-uXM.woff</code><br><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_linkdetail2.jpg" alt=""></p>
+<p><strong>（2）</strong> 在腾讯云对象存储的控制台新建一个bucket，我这里是gitimage，新建文件夹存放，上传刚刚下载的两个字体文件<br><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_clodestorage1.jpg" alt=""></p>
+<p><strong>（3）</strong> 本地新建一个css文件，我直接取名叫<code>family=Open+Sans:400,600.css</code>将<code>http://fonts.useso.com/css?family=Open+Sans:400,600</code>的内容复制进来，将url改成云存储中字体的链接，将这个css也存到云存储中，这时就可以用它的地址也替换link中原来的地址： <code>&lt;link href=&#39;//gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/family%3DOpen%2BSans400%2C600.css&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;&gt;</code></p>
+<p><br><br>&nbsp;&nbsp;&nbsp;&nbsp; 这样就可以使用谷歌字库的字体了，但13.98秒的打开速度对于一个blog来说打开时间仍很长，继续…<br>&nbsp;&nbsp;&nbsp;&nbsp; 现在测试结果里最耗时的两项分别是我的图标和背景的加载，198KB的主页背景(bg.jpg)耗时10.13s，264KB的图标(firedoge.ico)耗时11.86s，讲道理的话这种大小是不会用这么多时间的，然而这两个图都是挂在github，国内访问确实会慢不少，因而也将其转存到国内的云存储中，把图片存进去后如下图：<br><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_clodestorage2.jpg" alt=""></p>
+<p><br><br>&nbsp;&nbsp;&nbsp;&nbsp; 再次清除缓存后用chrome测试，结果如下，加载时间降至1.81s，虽然现实.ico图标耗时6s多，但整个blog加载出来不到2s，图标并不影响其他部分的显示。<br><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_afterchangeroute.jpg" alt=""></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 在firefox的开发者工具中测试，加载时间为1.01秒，也有改善。<br><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_final_firefox.jpg" alt=""></p>
+<p><br><br>&nbsp;&nbsp;&nbsp;&nbsp; 至此完成对blog本身的访问速度提升，当然，这是针对国内访问的，国外访问的话实际上用时会增加一些。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/Animation/四月是你的谎言.html">《四月是你的谎言》实景</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-04-01T16:00:00.000Z" itemprop="datePublished">
-          2016-04-02
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        《四月是你的谎言》实景图“灰心丧气时就用手托着下巴，你会为双手能派上用处而感到高兴的。 — 查理•布朗”
-
-
--->
-      
-      -->
-
-
-
-
-
-
-
-
-
-
-
-
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/Animation/四月是你的谎言.html">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/Android/Android_ListView优化.html">Android_ListView优化</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-03-18T16:00:00.000Z" itemprop="datePublished">
-          2016-03-19
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        ListView的优化1.存在问题
-
- 在每次调用getView方法中都要执行两个很耗时的操作
-
-inflate方法 (获取布局对象)
-findViewById
-
-
-12345678910111213141516171819@Overridepublic View getView(int position, View convertView, ViewGroup parent) &#123;    View view = inflate
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/Android/Android_ListView优化.html">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/OS/OS复习.html">操作系统重点</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-01-04T16:00:00.000Z" itemprop="datePublished">
-          2016-01-05
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        第一章、操作系统概述1、    OS的概念、特性操作系统：是计算机系统中的一个系统软件，是一些程序模块的集合——它们能以尽量有效地（系统运行效率和资源利用率）组织和管理计算机的软硬件资源，合理（公平，不发生死锁和饥饿）地组织计算机的工作流程，控制程序的执行，并向用户提供各种服务功能，使得用户能够灵活、方便（人机界面—包括用户使用界面和程序设计接口的易用性、易维护性）、有效的使用计算机，并使整个计算机系统能高效地运行；
-OS特性：
-
-
-并
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/OS/OS复习.html">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/github/github入门.html">github入门</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2015-06-14T16:00:00.000Z" itemprop="datePublished">
-          2015-06-15
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        我的git用户名：louiehuang，邮箱：louiestudio@foxmail.com
-安装完成后进行配置：
-12$ git config --global user.name &quot;louiehuang&quot;$ git config --global user.email &quot;ouiestudio@foxmail.com&quot;
---global 参数表示本机上所有的Git仓库都会使用这个配置
-新建本地文
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/github/github入门.html">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
         <nav class="pagination" role="pagination">
-          
-          
-        </nav>
+    
+    <a class="pull-left" href="/blog/blog访问速度优化(二).html" style="float: left;">
+        ← 访问速度优化(二)---国内解析到coding，国外解析到github
+    </a>
+    
+    
+    <a class="pull-right" href="/blog/添加百度统计.html">
+        添加google统计或百度统计 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="blog/blog访问速度优化(一).html" data-title="访问速度优化(一)---图片及谷歌字体转存COS" data-url="http://hlyin.space/blog/blog访问速度优化(一).html"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得底部有句话会显得比较合适.</p>
-        </div>
-    </div>
-</section>
-<!-- ============================ END Content =========================== -->
+
 
       
 <!-- ============================ Footer =========================== -->
