@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Louie&#39;s Blog</title>
+  <subtitle>黄刘胤的博客 Louie&#39;s blog 代码猴子</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://hlyin.space/"/>
+  <updated>2016-04-09T15:37:47.671Z</updated>
+  <id>http://hlyin.space/</id>
+  
+  <author>
+    <name>Louie</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>blog访问速度提升</title>
+    <link href="http://hlyin.space/blog/blog%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%8F%90%E5%8D%87.html"/>
+    <id>http://hlyin.space/blog/blog访问速度提升.html</id>
+    <published>2016-04-08T16:00:00.000Z</published>
+    <updated>2016-04-09T15:37:47.671Z</updated>
+    
+    <content type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 这个blog (&lt;a href=&quot;http://hlyin.space&quot;&gt;http://hlyin.space&lt;/a&gt;) 一直是用chrome做测试和访问，刚搭建起来的时候打开速度比较正常，大概在2、3秒的样子，但这几天突然变得非常慢，需要等1、2分钟才能加载出来，想起来之前都是挂着ss，而现在没有开ss，觉得可能问题出在访问了被墙的资源，因而做些测试来查找并解决访问速度问题。&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 比较奇怪的是，用firefox和safari访问速度都比较快，只有chrome打开极慢，打开chrome的开发者工具（快捷键F12），选择network项，然后在历史记录中清除缓存以避免影响测试结果，然后访问网站 (&lt;a href=&quot;http://hlyin.space&quot;&gt;http://hlyin.space&lt;/a&gt;) ，如下图，加载时间为1.5分钟，在Time项中可以观察各项请求的耗时，找到了最耗时的项目，502网关错误，即红色项:&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_chrometest1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;放大一点：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_chrometest_detail.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;错误提示：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Font from origin ‘&lt;a href=&quot;http://fontstatic.useso.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://fontstatic.useso.com&lt;/a&gt;‘ has been blocked from loading by Cross-Origin Resource Sharing policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘&lt;a href=&quot;http://hlyin.space&quot;&gt;http://hlyin.space&lt;/a&gt;‘ is therefore not allowed access. The response had HTTP status code 502.&lt;/li&gt;
+&lt;li&gt;Get &lt;a href=&quot;http://fontstatic.useso.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://fontstatic.useso.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 可以看出，问题出在&lt;code&gt;zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2&lt;/code&gt;这个字体文件，502网关错误，这个字体的链接在&lt;code&gt;http://fontstatic.useso.com&lt;/code&gt;中，页面相关代码如下：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_link.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 这里需要解释一下，blog使用了包括Open Sans等字体在内的谷歌字库字体，而谷歌由于被禁，字体链接不能访问而换成了360的CND，&lt;code&gt;fonts.useso.com&lt;/code&gt;，像上面代码中&lt;code&gt;http://fonts.useso.com/css?family=Open+Sans:400,600&lt;/code&gt; (谷歌的为&lt;code&gt;http://fonts.googleapis.com/css?family=Open+Sans:400,600&lt;/code&gt;)，然而检测结果表明即使换成360CND，这种web font的加载仍十分耗时。&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在这两个link里使用了访问受阻的字体，查看链接，&lt;code&gt;zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2&lt;/code&gt;(无法获取)在第一个链接中被访问，&lt;code&gt;cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf&lt;/code&gt; (也无法获取)在第二个链接中被访问。&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_linkcontent.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/p&gt;&lt;h3&gt;由此可以有两种解决方法：&lt;/h3&gt;&lt;p&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;del&gt;如果不需要这个字库，则可以&lt;strong&gt;直接去掉这两个字体链接&lt;/strong&gt;，即把这两条link语句去掉，&lt;/del&gt; 虽然是省事，但字体效果没有了的话还是不太可取；&lt;/li&gt;
+&lt;li&gt;将字体&lt;strong&gt;添加到自己的云存储中&lt;/strong&gt;通过外链导入，或者&lt;strong&gt;镜像到本地&lt;/strong&gt;，正确的处理方法，之一，当然应该是这样&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 先直接删掉上面那两个link做一下测试，清除缓存后再用chrome测加载时间，结果如下图：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_after_delete_font.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 加载时间为13.98秒，相比于1.5分钟有很大的改善，那么可以确定网页打开速度确实受选择的字体影响很大，&lt;strong&gt;为了继续使用选择的字体，将其下载并存放到云存储中。&lt;/strong&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 云对象存储之前用过七牛，但各个云存储供应商，如果不实名认证，能使用的资源非常有限，因为买服务器的时候在腾讯认证过，所以转用腾讯的云存储，使用比较方便，开通对象存储服务就可以，而且50G以内不收费，放图片、字体等资源的话足够了。&lt;br&gt;&lt;strong&gt;（1）&lt;/strong&gt; 先下载所用字体，以&lt;code&gt;http://fonts.useso.com/css?family=Open+Sans:400,600&lt;/code&gt;为例，打开后如下图，打开其中所有的url下载字体，&lt;code&gt;http://fontstatic.useso.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff&lt;/code&gt; 和 &lt;code&gt;http://fontstatic.useso.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNSnhCUOGz7vYGh680lGh-uXM.woff&lt;/code&gt;&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_linkdetail2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（2）&lt;/strong&gt; 在腾讯云对象存储的控制台新建一个bucket，我这里是gitimage，新建文件夹存放，上传刚刚下载的两个字体文件&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_clodestorage1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（3）&lt;/strong&gt; 本地新建一个css文件，我直接取名叫&lt;code&gt;family=Open+Sans:400,600.css&lt;/code&gt;将&lt;code&gt;http://fonts.useso.com/css?family=Open+Sans:400,600&lt;/code&gt;的内容复制进来，将url改成云存储中字体的链接，将这个css也存到云存储中，这时就可以用它的地址也替换link中原来的地址： &lt;code&gt;&amp;lt;link href=&amp;#39;//gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/family%3DOpen%2BSans400%2C600.css&amp;#39; rel=&amp;#39;stylesheet&amp;#39; type=&amp;#39;text/css&amp;#39;&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 这样就可以使用谷歌字库的字体了，但13.98秒的打开速度对于一个blog来说打开时间仍很长，继续…&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 现在测试结果里最耗时的两项分别是我的图标和背景的加载，198KB的主页背景(bg.jpg)耗时10.13s，264KB的图标(firedoge.ico)耗时11.86s，讲道理的话这种大小是不会用这么多时间的，然而这两个图都是挂在github，国内访问确实会慢不少，因而也将其转存到国内的云存储中，把图片存进去后如下图：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_clodestorage2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 再次清除缓存后用chrome测试，结果如下，加载时间降至1.81s，虽然现实.ico图标耗时6s多，但整个blog加载出来不到2s，图标并不影响其他部分的显示。&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_afterchangeroute.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在firefox的开发者工具中测试，加载时间为1.01秒，也有改善。&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_final_firefox.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 至此完成对blog本身的访问速度提升，当然，这是针对国内访问的，国外访问的话实际上用时会增加一些。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 这个blog (&lt;a href=&quot;http://hlyin.space&quot;&gt;http://hlyin.space&lt;/a&gt;) 一直是用chrome做测试和访问，刚搭建起来的时候打开速度比较正常，大概在2、3秒的样子，但这几天突然
+    
+    </summary>
+    
+      <category term="blog" scheme="http://hlyin.space/categories/blog/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>2016年4月新番</title>
+    <link href="http://hlyin.space/Animation/4%E6%9C%88%E6%96%B0%E7%95%AA.html"/>
+    <id>http://hlyin.space/Animation/4月新番.html</id>
+    <published>2016-04-04T16:00:00.000Z</published>
+    <updated>2016-04-09T14:14:30.439Z</updated>
+    
+    <content type="html">&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;embed height=&quot;515&quot; width=&quot;720&quot; quality=&quot;high&quot; allowfullscreen=&quot;true&quot; type=&quot;application/x-shockwave-flash&quot; src=&quot;http://static.hdslb.com/miniloader.swf&quot; flashvars=&quot;aid=4173755&amp;page=1&quot; pluginspage=&quot;http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash&quot;&gt;&lt;br&gt;&lt;/p&gt;
+
+
+&lt;h3 id=&quot;1-我叫坂本我最屌-在下坂本，有何贵干&quot;&gt;&lt;a href=&quot;#1-我叫坂本我最屌-在下坂本，有何贵干&quot; class=&quot;headerlink&quot; title=&quot;1.我叫坂本我最屌(在下坂本，有何贵干)&quot;&gt;&lt;/a&gt;1.我叫坂本我最屌(在下坂本，有何贵干)&lt;/h3&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在追坂本漫画，真的是非常非常屌，屌是不需要理由的… 靠来回行走掀起一阵狂风、超越电车速度的进化论跑步法、靠反复横跳灭火(虽然这个是路人想象)、用暴雨天被风刮起的雨伞品雨… 大概是没谁了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://pic3.zhimg.com/b30f1a1f687e6e6c7c43ed0b761c037a_b.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;2-从零开始的异世界生活&quot;&gt;&lt;a href=&quot;#2-从零开始的异世界生活&quot; class=&quot;headerlink&quot; title=&quot;2.从零开始的异世界生活&quot;&gt;&lt;/a&gt;2.从零开始的异世界生活&lt;/h3&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 同样是穿越，有人满级，有人满级*3，而这个男主角则是0级，附带一个死后读档的能力，小说口碑极高，这个也是追的漫画，还是很有意思的&lt;/p&gt;
+&lt;h3 id=&quot;3-双星的阴阳师&quot;&gt;&lt;a href=&quot;#3-双星的阴阳师&quot; class=&quot;headerlink&quot; title=&quot;3.双星的阴阳师&quot;&gt;&lt;/a&gt;3.双星的阴阳师&lt;/h3&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 阴阳师题材一般都还可以看，何况这种中二漫，潜力、灵力寄宿什么的十分对味，同样在追漫画&lt;br&gt;看了第一集以后的我回来补充，期待：80分，实际：08分&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;还有些也可以看的&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;逆转裁判&lt;/li&gt;
+&lt;li&gt;MAGI 星巴达的冒险&lt;/li&gt;
+&lt;li&gt;学战第二季&lt;/li&gt;
+&lt;li&gt;文豪&lt;/li&gt;
+&lt;li&gt;境界之轮回&lt;/li&gt;
+&lt;li&gt;线上游戏&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;embed height=&quot;515&quot; width=&quot;720&quot; quality=&quot;high&quot; allowfullscreen=&quot;true&quot; type=&quot;application/x-shockwave-flash
+    
+    </summary>
+    
+      <category term="Animation" scheme="http://hlyin.space/categories/Animation/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>《四月是你的谎言》实景</title>
+    <link href="http://hlyin.space/Animation/%E5%9B%9B%E6%9C%88%E6%98%AF%E4%BD%A0%E7%9A%84%E8%B0%8E%E8%A8%80.html"/>
+    <id>http://hlyin.space/Animation/四月是你的谎言.html</id>
+    <published>2016-04-01T16:00:00.000Z</published>
+    <updated>2016-04-09T13:45:02.560Z</updated>
+    
+    <content type="html">&lt;h4 id=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;a href=&quot;#《四月是你的谎言》实景图&quot; class=&quot;headerlink&quot; title=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;/a&gt;《四月是你的谎言》实景图&lt;/h4&gt;&lt;p&gt;“灰心丧气时就用手托着下巴，你会为双手能派上用处而感到高兴的。 — 查理•布朗”&lt;/p&gt;
+&lt;audio autoplay loop&gt;&lt;source src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/%E6%A8%AA%E5%B1%B1%E5%85%8B%20-%20%E3%82%A2%E3%82%B1%E3%82%99%E3%82%A4%E3%83%B3.mp3&quot;&gt;&lt;/audio&gt;
+
+&lt;!--&lt;embed height=&quot;100&quot; width=&quot;100&quot; src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/%E6%A8%AA%E5%B1%B1%E5%85%8B%20-%20%E3%82%A2%E3%82%B1%E3%82%99%E3%82%A4%E3%83%B3.mp3&quot; autostart=&quot;true&quot; loop=&quot;true&quot; hidden=&quot;true&quot;&gt;&lt;/embed&gt;--&gt;
+&lt;!--&lt;section align=center&gt;&lt;table style=&quot;BORDER-RIGHT: #ff69b4 3px 
+dashed; BORDER-TOP: #ff69b4 3px dashed; BORDER-LEFT: #ff69b4 3px dashed; 
+BORDER-BOTTOM: #ff69b4 3px dashed&quot; cellSpacing=&quot;0&quot; cellPadding=&quot;0&quot; 
+bgColor=&quot;white&quot; id=&quot;table6&quot;&gt; &lt;tr&gt; &lt;td&gt; &lt;table 
+borderColor=&quot;#ff69b4&quot; align=&quot;center&quot; bgColor=&quot;#ffccf5&quot; border=&quot;2&quot; 
+id=&quot;table7&quot;&gt; &lt;tr&gt; &lt;td style=&quot;FILTER: alpha(opacity=100,style=3)&quot;&gt; 
+&lt;section align=&quot;center&quot;&gt; &lt;embed src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/%E6%A8%AA%E5%B1%B1%E5%85%8B%20-%20%E3%82%A2%E3%82%B1%E3%82%99%E3%82%A4%E3%83%B3.mp3&quot; width=&quot;300&quot; height=&quot;45&quot; type=&quot;audio/mpeg&quot; loop=&quot;-1&quot; autostart=&quot;true&quot; volume=&quot;0&quot;&gt;&lt;/td&gt; &lt;/tr&gt; &lt;/table&gt; &lt;/td&gt; &lt;/tr&gt; &lt;/table&gt;--&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_1.jpg&quot; alt=&quot;image_1&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_3.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_5.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_6.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_8.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_9.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_10.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_11.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;a href=&quot;#《四月是你的谎言》实景图&quot; class=&quot;headerlink&quot; title=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;/a&gt;《四月是你的谎言》实景图&lt;/h4&gt;&lt;p&gt;“灰心丧气时就用手托着下巴，你会为双手能派上用处而感到高兴的
+    
+    </summary>
+    
+      <category term="Animation" scheme="http://hlyin.space/categories/Animation/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android_ListView优化</title>
+    <link href="http://hlyin.space/Android/Android_ListView%E4%BC%98%E5%8C%96.html"/>
+    <id>http://hlyin.space/Android/Android_ListView优化.html</id>
+    <published>2016-03-18T16:00:00.000Z</published>
+    <updated>2016-04-09T13:45:12.401Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;ListView的优化&quot;&gt;&lt;a href=&quot;#ListView的优化&quot; class=&quot;headerlink&quot; title=&quot;ListView的优化&quot;&gt;&lt;/a&gt;ListView的优化&lt;/h3&gt;&lt;p&gt;1.存在问题&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; 在每次调用getView方法中都要执行&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;两个很耗时的操作&lt;/strong&gt;&lt;/font&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;inflate方法 (获取布局对象)&lt;/li&gt;
+&lt;li&gt;findViewById&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; View &lt;span class=&quot;title&quot;&gt;getView&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; position, View convertView, ViewGroup parent)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    View view = inflater.inflate(R.layout.item, &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//view才有findViewById, 而this(这里是Adapter)没有, (MainActivity有)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ImageView header = (ImageView) view.findViewById(R.id.header);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView title = (TextView) view.findViewById(R.id.title);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView version = (TextView) view.findViewById(R.id.version);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView size = (TextView) view.findViewById(R.id.size);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Map map = list.get(position); &lt;span class=&quot;comment&quot;&gt;//Map&amp;lt;String, Object&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    header.setImageResource((Integer) map.get(&lt;span class=&quot;string&quot;&gt;&quot;header&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    title.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;title&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    version.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;version&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    size.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;size&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; view;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;2.解决方案&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; 在getView方法中使用&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;convertView和ViewHolder&lt;/strong&gt;&lt;/font&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;inflate方法耗时：convertView解决 （1级优化）&lt;/li&gt;
+&lt;li&gt;findViewById方法耗时：ViewHolder解决 （2级优化）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.kgc.cn/upload/snapscreen/20160319/145837389990900.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;滑出去的item1的布局对象不销毁，而可以直接提供给下一次出现的item6，省去了填充时间 (省去反射操作)， 之后滑出去的item2则给item7 … item5给item10，到了item6以后，因为item6本来就是用的Recycler里的而不是反射的，后面的所有item都可以循环用item1~item5的反射操作生成的5个对象，也即整个操作，最多只有5次反射(item1~item5)。缓冲池，5 (4+1)个视图缓存，多的1是为了处理上半截或下半截。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.kgc.cn/upload/snapscreen/20160319/145837474528357.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用ConvertView后代码如下：&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; View &lt;span class=&quot;title&quot;&gt;getView&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; position, View convertView, ViewGroup parent)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(convertView == &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        convertView = inflater.inflate(R.layout.item, &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ImageView header = (ImageView) convertView.findViewById(R.id.header);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView title = (TextView) convertView.findViewById(R.id.title);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView version = (TextView) convertView.findViewById(R.id.version);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView size = (TextView) convertView.findViewById(R.id.size);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Map map = list.get(position); &lt;span class=&quot;comment&quot;&gt;//Map&amp;lt;String, Object&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    header.setImageResource((Integer) map.get(&lt;span class=&quot;string&quot;&gt;&quot;header&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    title.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;title&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    version.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;version&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    size.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;size&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; convertView;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.kgc.cn/upload/snapscreen/20160319/145837585787884.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;滑出去的item1，除了布局对象不销毁，控件对象也不销毁，因此item6则不用再调用4次findViewById&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.kgc.cn/upload/snapscreen/20160319/145837621143618.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;使用convertView和ViewHolder后代码如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ViewHolder&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ImageView header;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView title;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView version;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView size;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; View &lt;span class=&quot;title&quot;&gt;getView&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; position, View convertView, ViewGroup parent)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ViewHolder viewHolder = &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (convertView == &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        convertView = inflater.inflate(R.layout.item, &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ViewHolder();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//view才有findViewById, 而this(这里是Adapter)没有, (MainActivity有)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder.header = (ImageView) convertView.findViewById(R.id.header);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder.title = (TextView) convertView.findViewById(R.id.title);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder.version = (TextView) convertView.findViewById(R.id.version);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder.size = (TextView) convertView.findViewById(R.id.size);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        convertView.setTag(viewHolder); &lt;span class=&quot;comment&quot;&gt;//&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder = (ViewHolder) convertView.getTag();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Map map = list.get(position); &lt;span class=&quot;comment&quot;&gt;//Map&amp;lt;String, Object&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    viewHolder.header.setImageResource((Integer) map.get(&lt;span class=&quot;string&quot;&gt;&quot;header&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    viewHolder.title.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;title&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    viewHolder.version.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;version&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    viewHolder.size.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;size&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; convertView;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;ListView的优化&quot;&gt;&lt;a href=&quot;#ListView的优化&quot; class=&quot;headerlink&quot; title=&quot;ListView的优化&quot;&gt;&lt;/a&gt;ListView的优化&lt;/h3&gt;&lt;p&gt;1.存在问题&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; 在每次调用g
+    
+    </summary>
+    
+      <category term="Android" scheme="http://hlyin.space/categories/Android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>github入门</title>
+    <link href="http://hlyin.space/github/github%E5%85%A5%E9%97%A8.html"/>
+    <id>http://hlyin.space/github/github入门.html</id>
+    <published>2015-06-14T16:00:00.000Z</published>
+    <updated>2016-04-09T13:38:39.824Z</updated>
+    
+    <content type="html">&lt;p&gt;我的git用户名：louiehuang，邮箱：louiestudio@foxmail.com&lt;/p&gt;
+&lt;p&gt;安装完成后进行配置：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ git config --global user.name &amp;quot;louiehuang&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ git config --global user.email &amp;quot;ouiestudio@foxmail.com&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;--global&lt;/code&gt; 参数表示本机上所有的Git仓库都会使用这个配置&lt;/p&gt;
+&lt;p&gt;新建本地文件夹：learngit，cd到此目录下&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git init&lt;/code&gt; 初始化本地仓库，此时生成了.git隐藏文件，&lt;code&gt;ls -ah&lt;/code&gt;命令可以查看到&lt;/p&gt;
+&lt;h3 id=&quot;1-先看看怎么在本地使用git&quot;&gt;&lt;a href=&quot;#1-先看看怎么在本地使用git&quot; class=&quot;headerlink&quot; title=&quot;1. 先看看怎么在本地使用git&quot;&gt;&lt;/a&gt;&lt;font color=&quot;red&quot;&gt;1. 先看看怎么在本地使用git&lt;/font&gt;&lt;/h3&gt;&lt;p&gt;(1) 首先新建一个用于测试的文件。在learngit仓库下新建test.md，随便输入几行字，如下&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;### This is a test md file.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Linus wrote git.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;(2) 将这个文件添加到git仓库，分为两步&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;step1. &lt;code&gt;git add test.md&lt;/code&gt;&lt;br&gt;step2. &lt;code&gt;git commit -m &amp;quot;wrote a test file&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;-m&lt;/code&gt; 后面接的相当于本次提交的注释，用于对提交内容进行说明&lt;/p&gt;
+&lt;p&gt;用法和mysql类似，同样是可以add多个后一起commit&lt;/p&gt;
+&lt;p&gt;(3) 尝试对test.md进行修改，这里在末尾增加一行内容：&lt;code&gt;New content&lt;/code&gt;&lt;br&gt;可以通过&lt;code&gt;git status&lt;/code&gt; 命令查看当前git仓库的情况&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;HuangLiuyindeMacBook-Pro:learngit hlyin$ git status&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;On branch master&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Changes not staged for commit:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to update what will be committed)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  (use &amp;quot;git checkout -- &amp;lt;file&amp;gt;...&amp;quot; to discard changes in working directory)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	modified:   test.md&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Untracked files:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to include in what will be committed)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	.DS_Store&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;no changes added to commit (use &amp;quot;git add&amp;quot; and/or &amp;quot;git commit -a&amp;quot;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;上述提示即test.md已被修改过，但还未被提交修改&lt;/p&gt;
+&lt;p&gt;(4) 查看文件的修改内容&lt;br&gt;&lt;code&gt;git diff&lt;/code&gt;命令可以比较文件的不同内容，输入&lt;code&gt;git diff test.md&lt;/code&gt;，输出以下提示：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;HuangLiuyindeMacBook-Pro:learngit hlyin$ git diff test.md&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;diff --git a/test.md b/test.md&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;index 854d985..f8dd088 100644&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;--- a/test.md&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+++ b/test.md&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@@ -2,3 +2,5 @@&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; ### This is a test md file.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; Linus wrote git.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+New content&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;\ No newline at end of file&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;即提示添加了”New content”&lt;/p&gt;
+&lt;p&gt;之后命令&lt;code&gt;git add test.md&lt;/code&gt;, 输入&lt;code&gt;git status&lt;/code&gt;查看当前情况，最后&lt;code&gt;git commit -m &amp;quot;append new content&amp;quot;&lt;/code&gt;提交修改&lt;/p&gt;
+&lt;p&gt;(5) 版本回退&lt;br&gt;上一步之后，已经上git仓库里提交了两次test.md，第二次的test.md比第一次的多一行”New content”，通过&lt;code&gt;git log&lt;/code&gt;查看此时版本情况&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;HuangLiuyindeMacBook-Pro:learngit hlyin$ git log&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;commit 892f0e567c56c698515a0e543eefef91a7a14913&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Author: Louie &amp;lt;louiestudio@foxmail.com&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Date:   Thu Mar 31 17:14:54 2016 +0800&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    append new content&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;commit 990cdcef2498e304c32f2d74f43d364b36d37138&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Author: Louie &amp;lt;louiestudio@foxmail.com&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Date:   Thu Mar 31 17:02:32 2016 +0800&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    wrote a test file&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果想退回到上一个版本的test.md，可以用&lt;code&gt;git reset --hard HEAD^&lt;/code&gt;，退回上上个版本就是&lt;code&gt;HEAD^^&lt;/code&gt;，虽然这里并没有… 退回前10个版本则可以&lt;code&gt;HEAD10&lt;/code&gt;，此时再查看test.md，就是第一次编写的版本了。&lt;/p&gt;
+&lt;p&gt;那么如果没事找事又想恢复成第二版版本呢，可以通过上面那一长串的commit id来实现，这样 &lt;code&gt;git reset --hard 892f0&lt;/code&gt;，只用输入一部分的id字符即可&lt;/p&gt;
+&lt;p&gt;如果关闭了终端，即忘记了上面的commit id的话，可以用&lt;code&gt;git reflog&lt;/code&gt;查看，&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;HuangLiuyindeMacBook-Pro:learngit hlyin$ git reflog&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;892f0e5 HEAD@&amp;#123;0&amp;#125;: reset: moving to 892f0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;990cdce HEAD@&amp;#123;1&amp;#125;: reset: moving to HEAD^&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;892f0e5 HEAD@&amp;#123;2&amp;#125;: commit: append new content&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;990cdce HEAD@&amp;#123;3&amp;#125;: commit (initial): wrote a test file&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我的git用户名：louiehuang，邮箱：louiestudio@foxmail.com&lt;/p&gt;
+&lt;p&gt;安装完成后进行配置：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;
+    
+    </summary>
+    
+      <category term="github" scheme="http://hlyin.space/categories/github/"/>
+    
+    
+  </entry>
+  
+</feed>
