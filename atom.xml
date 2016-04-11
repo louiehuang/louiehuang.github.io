@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hlyin.space/"/>
-  <updated>2016-04-10T13:44:54.000Z</updated>
+  <updated>2016-04-11T15:27:24.000Z</updated>
   <id>http://hlyin.space/</id>
   
   <author>
@@ -16,17 +16,157 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>子网掩码与子网号</title>
+    <link href="http://hlyin.space/Computer-Networks/%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81%E4%B8%8E%E5%AD%90%E7%BD%91%E5%8F%B7.html"/>
+    <id>http://hlyin.space/Computer-Networks/子网掩码与子网号.html</id>
+    <published>2016-04-10T16:00:00.000Z</published>
+    <updated>2016-04-11T15:27:24.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学这一节的时候有些懵，在此整理一下。先回顾IP地址，IP地址是分层的，包括&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;网络&lt;/strong&gt;&lt;/font&gt;和&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;主机&lt;/strong&gt;&lt;/font&gt;两个部分，按网络部分和主机部分的不同长度主要分为A、B、C三类(还有多播组的D类和不再使用的E类)，但每一类的网络部分和主机部分的总长度相等，均为32位，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/subnet_mask/ip_type.png&quot; alt=&quot;Drawing&quot; width=&quot;400px&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A类：&lt;/strong&gt;最前面1位为0，7位标识网络号，24位标识主机号，则第一段取值为1~126，对于A类IP，最多有2^7 - 2 = 126个(可用)A类网络 (减2是因为要去掉全0的主机地址和全1的广播地址)，每个A类网路中，最多可有2^24 - 2 = 16777214 台(可用)主机&lt;br&gt;地址：1.0.0.0 ~ 126.0.0.0&lt;br&gt;0.0.0.0 和 127.0.0.0保留 &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B类：&lt;/strong&gt;最前面2位为10，14位标识网络号，16位标识主机号，则第一段取值为128~191，对于B类IP，有2^14 - 2 = 16382个B类网络，每个B类网路中，最多可有2^16 - 2 =65534 台主机&lt;br&gt;地址：128.1.0.0 ~ 191.254.0.0&lt;br&gt;128.0.0.0 和 191.255.0.0保留&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C类：&lt;/strong&gt;最前面3位为110，21位标识网络号，8位标识主机号，则第一段取值为192~223，对于C类IP，有2^21 - 2 = 2097150个C类网络，每个B类网路中，最多可有2^8 - 2 =254 台主机&lt;br&gt;地址：192.0.1.0 ~ 223.255.254.0&lt;br&gt;192.0.0.0 和 223.255.255.0保留 &lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 为了提高地址分配的效率和减少分配网络号总数，采取&lt;strong&gt;划分子网&lt;/strong&gt;的策略，在多个网络中共享一个网络号的机制涉及使用子网掩码，子网掩码的作用就是用来判断任意两个或多个IP地址是否属于同一个子网。&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 子网划分的实现是基于&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;网络位占用主机位&lt;/strong&gt;&lt;/font&gt;的，以21位网络位和8位主机位的C类地址为例，若将一个C类网络划分成2个子网，则网络位需要占用1位主机位，即现在是22位网络位和7位主机位，通过占用的这1位的值来区分划分成的2个子网，同理，若划分成3个或4个子网则占用2个主机位…&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 但是现在，一个外部的网络，并不知道连接的这个C类网络是否划分了子网，所以需要子网掩码，当未划分时，A类地址的缺省子网掩码为255.0.0.0，B类为255.255.0.0，C类为255.255.255.0，仍以C类网络为例，划分成2个子网(占1位主机位)后子网掩码为255.255.255.128(128个主机，126个可用主机)，划分成4个子网(占位主机位)后子网掩码为255.255.255.192，如下表：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;占用主机位位数&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;划分子网数&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;子网掩码&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;主机数&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;可用主机数&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;2&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;255.255.255.128&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;128&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;126&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;2&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;4&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;255.255.255.192&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;64&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;62&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;3&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;8&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;255.255.255.224&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;32&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;30&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;4&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;16&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;255.255.255.240&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;16&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;14&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;5&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;32&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;255.255.255.248&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;8&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;6&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;64&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;255.255.255.252&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;4&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; ifconfig(win为ipconfig) 查看当前计算机的ip地址及子网掩码，当前ip为192.168.1.105，即C类网络，子网掩码0xffffff00，即255.255.255.0，未划分。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/subnet_mask/ifconfig.png&quot; alt=&quot;Drawing&quot; width=&quot;400px&quot;&gt;&lt;/p&gt;
+&lt;!-- ![](http://gitimage-10031767.file.myqcloud.com/blog_image/subnet_mask/ifconfig.png) --&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 子网掩码是一个IPv4地址，在一个给定的子网中，所有主机都配置相同的掩码，即&lt;font color=&quot;red&quot;&gt;每个子网只有一个掩码，但需要注意，并不是子网掩码相同就是同一子网&lt;/font&gt;，看一个《计算机网络系统方法》中的例子，如下图：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/subnet_mask/book_subnet.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 假设H1向H2发数据，首先H1需要判断H2是不是和自己在同一子网中，这一过程为：将&lt;font color=&quot;red&quot;&gt;H2的IP地址&lt;/font&gt;与&lt;font color=&quot;red&quot;&gt;H1的子网掩码&lt;/font&gt;进行&lt;font color=&quot;red&quot;&gt;按位与&lt;/font&gt;运算，将结果与H1的子网号相比，若相同，则属于同一子网，否则不是。那么将H2的IP地址128.96.34.139与上H1的子网掩码255.255.255.128后，结果为128.96.34.128，不等于H1的子网号128.96.34.0，因而H1与H2并不在同一子网中，即使这两个子网的子网掩码相同，都为255.255.255.128。而之所以相同的子网掩码却可以有不同的子网号，从计算上看是由于与之相&amp;amp;的IP地址不同，但实质原因是被占用的主机位可以有不同的取值而决定的，比如一个C类IP，划分成2个子网，则主机位被占用1位，而这被占用的1位取0或取1，便形成了2个不同的子网号。&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 通过前面的计算，H1可以知道H2与其不在同一子网，因此将分组给它的默认路由器R1由R1负责转发，根据转发表确定转发路径，发送到子网号为128.96.34.128的网络中，这之后需要确定在此网络中的接收主机，因为此网络中可能不止有一台主机H2，比如还有IP地址为128.96.34.140的H4，这时将子网掩码取反后再与H2的IP地址，即用0.0.0.127 &amp;amp; 128.96.34.139，结果0.0.0.11即为主机号，根据主机号在网络中确定具体的接收主机。&lt;/p&gt;
+&lt;h3 id=&quot;结论和归纳：&quot;&gt;&lt;a href=&quot;#结论和归纳：&quot; class=&quot;headerlink&quot; title=&quot;结论和归纳：&quot;&gt;&lt;/a&gt;结论和归纳：&lt;/h3&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;font color=&quot;red&quot;&gt;每个子网只有一个掩码，但需要注意，并不是子网掩码相同就是同一子网&lt;/font&gt;&lt;/li&gt;
+&lt;li&gt;子网号 = IP &amp;amp; 子网掩码&lt;/li&gt;
+&lt;li&gt;主机号 = IP &amp;amp; 掩码取反&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h4 id=&quot;补充-来自知乎-：&quot;&gt;&lt;a href=&quot;#补充-来自知乎-：&quot; class=&quot;headerlink&quot; title=&quot;补充(来自知乎)：&quot;&gt;&lt;/a&gt;补充(来自知乎)：&lt;/h4&gt;&lt;p&gt;比较下面的两个IP地址，&lt;br&gt;A：219.218.44.123&lt;br&gt;B：219.218.45.34&lt;br&gt;在子网掩码M1：255.255.254.0下为同一子网，而在M2：255.255.255.0下为不同子网。&lt;/p&gt;
+&lt;p&gt;分析：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;主机&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;地址&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;A:&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11011011-11011010-00101100-01111011&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;B:&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11011011-11011010-00101101-00100010&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;子网掩码&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;地址&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;M1:&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11111111-11111111-11111110-00000000（254）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;M2:&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11111111-11111111-11111111-00000000（255）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;通过做and运算，可以看出来&lt;br&gt;A&amp;amp;M1:11011011-11011010-00101100-00000000&lt;br&gt;B&amp;amp;M1:11011011-11011010-00101100-00000000&lt;/p&gt;
+&lt;p&gt;A&amp;amp;M2:11011011-11011010-001011&lt;font color=&quot;red&quot;&gt;00&lt;/font&gt;-00000000&lt;br&gt;B&amp;amp;M2:11011011-11011010-001011&lt;font color=&quot;red&quot;&gt;01&lt;/font&gt;-00000000&lt;/p&gt;
+&lt;p&gt;假设还有如下IP&lt;br&gt;C：219.218.45.200&lt;br&gt;可以得出在子网M2：255.255.255.0下跟B同子网，而在子网M3：255.255.255.128下为不同子网。&lt;/p&gt;
+&lt;h4 id=&quot;参考：&quot;&gt;&lt;a href=&quot;#参考：&quot; class=&quot;headerlink&quot; title=&quot;参考：&quot;&gt;&lt;/a&gt;参考：&lt;/h4&gt;&lt;p&gt;[1] 知乎 恒思凝 &lt;a href=&quot;http://www.zhihu.com/question/36296884/answer/68366061&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.zhihu.com/question/36296884/answer/68366061&lt;/a&gt;&lt;br&gt;[2]  计算机网络地址，主机地址，子网掩码，网段，子网划分的理解 &lt;a href=&quot;http://blog.csdn.net/hzhsan/article/details/12783193&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/hzhsan/article/details/12783193&lt;/a&gt;&lt;br&gt;[3] 计算机网络子网掩码 &lt;a href=&quot;http://blog.csdn.net/oklizy/article/details/6805836&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/oklizy/article/details/6805836&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学这一节的时候有些懵，在此整理一下。先回顾IP地址，IP地址是分层的，包括&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;网络&lt;/strong&gt;&lt;/font&gt;和&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;主机&lt;/
+    
+    </summary>
+    
+      <category term="Computer Networks" scheme="http://hlyin.space/categories/Computer-Networks/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>访问速度优化(二)---国内解析到coding，国外解析到github</title>
     <link href="http://hlyin.space/blog/blog%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96(%E4%BA%8C).html"/>
     <id>http://hlyin.space/blog/blog访问速度优化(二).html</id>
     <published>2016-04-09T16:00:00.000Z</published>
-    <updated>2016-04-10T13:44:54.000Z</updated>
+    <updated>2016-04-11T15:15:52.000Z</updated>
     
     <content type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 之前通过将google字体和加载耗时较长的图片存到云对象存储(COS)大幅提升了这个网站的访问速度，其中google字体因为google的原因而耗时很长，而图片则是因为这个网站代码托管在github，需要从github那边加载，而github，国外的，访问速度相比对国内主机慢不少。&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 因此将网站同时部署到github和coding，比较一下两个地方的ping值：&lt;/p&gt;
 &lt;p&gt;(1) ping github， 平均366.384ms&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/ping_github.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/ping_github.png&quot; alt=&quot;Drawing&quot; width=&quot;400px&quot;&gt;&lt;/p&gt;
 &lt;p&gt;(2)ping coding， 平均34.388ms，ping值低10倍&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/ping_coding.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/ping_coding.png&quot; alt=&quot;Drawing&quot; width=&quot;400px&quot;&gt;&lt;/p&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 代码托管到coding和托管到github一样的流程，在coding注册账号后新建项目，不同于github pages的项目名必须和github用户名相同，在coding的项目名可以任意起，域名结构为：&lt;code&gt;username.coding.io/projectname&lt;/code&gt;， 但若想通过&lt;code&gt;username.coding.io&lt;/code&gt;访问，即不带项目名访问，则需要将项目名命名为用户名，如下图：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/codingproject.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 然后部署，可以同时部署到coding和github，配置中添加一条部署仓库即可，以SSH连接为例：&lt;/p&gt;
@@ -442,55 +582,6 @@ id=&quot;table7&quot;&gt; &lt;tr&gt; &lt;td style=&quot;FILTER: alpha(opacity=10
     </summary>
     
       <category term="OS" scheme="http://hlyin.space/categories/OS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>github入门</title>
-    <link href="http://hlyin.space/github/github%E5%85%A5%E9%97%A8.html"/>
-    <id>http://hlyin.space/github/github入门.html</id>
-    <published>2015-06-14T16:00:00.000Z</published>
-    <updated>2016-04-09T13:38:40.000Z</updated>
-    
-    <content type="html">&lt;p&gt;我的git用户名：louiehuang，邮箱：louiestudio@foxmail.com&lt;/p&gt;
-&lt;p&gt;安装完成后进行配置：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ git config --global user.name &amp;quot;louiehuang&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ git config --global user.email &amp;quot;ouiestudio@foxmail.com&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;code&gt;--global&lt;/code&gt; 参数表示本机上所有的Git仓库都会使用这个配置&lt;/p&gt;
-&lt;p&gt;新建本地文件夹：learngit，cd到此目录下&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;git init&lt;/code&gt; 初始化本地仓库，此时生成了.git隐藏文件，&lt;code&gt;ls -ah&lt;/code&gt;命令可以查看到&lt;/p&gt;
-&lt;h3 id=&quot;1-先看看怎么在本地使用git&quot;&gt;&lt;a href=&quot;#1-先看看怎么在本地使用git&quot; class=&quot;headerlink&quot; title=&quot;1. 先看看怎么在本地使用git&quot;&gt;&lt;/a&gt;&lt;font color=&quot;red&quot;&gt;1. 先看看怎么在本地使用git&lt;/font&gt;&lt;/h3&gt;&lt;p&gt;(1) 首先新建一个用于测试的文件。在learngit仓库下新建test.md，随便输入几行字，如下&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;### This is a test md file.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Linus wrote git.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;(2) 将这个文件添加到git仓库，分为两步&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;step1. &lt;code&gt;git add test.md&lt;/code&gt;&lt;br&gt;step2. &lt;code&gt;git commit -m &amp;quot;wrote a test file&amp;quot;&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;code&gt;-m&lt;/code&gt; 后面接的相当于本次提交的注释，用于对提交内容进行说明&lt;/p&gt;
-&lt;p&gt;用法和mysql类似，同样是可以add多个后一起commit&lt;/p&gt;
-&lt;p&gt;(3) 尝试对test.md进行修改，这里在末尾增加一行内容：&lt;code&gt;New content&lt;/code&gt;&lt;br&gt;可以通过&lt;code&gt;git status&lt;/code&gt; 命令查看当前git仓库的情况&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;HuangLiuyindeMacBook-Pro:learngit hlyin$ git status&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;On branch master&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Changes not staged for commit:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to update what will be committed)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  (use &amp;quot;git checkout -- &amp;lt;file&amp;gt;...&amp;quot; to discard changes in working directory)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	modified:   test.md&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Untracked files:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to include in what will be committed)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	.DS_Store&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;no changes added to commit (use &amp;quot;git add&amp;quot; and/or &amp;quot;git commit -a&amp;quot;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;上述提示即test.md已被修改过，但还未被提交修改&lt;/p&gt;
-&lt;p&gt;(4) 查看文件的修改内容&lt;br&gt;&lt;code&gt;git diff&lt;/code&gt;命令可以比较文件的不同内容，输入&lt;code&gt;git diff test.md&lt;/code&gt;，输出以下提示：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;HuangLiuyindeMacBook-Pro:learngit hlyin$ git diff test.md&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;diff --git a/test.md b/test.md&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;index 854d985..f8dd088 100644&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;--- a/test.md&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+++ b/test.md&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@@ -2,3 +2,5 @@&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; ### This is a test md file.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; Linus wrote git.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+New content&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;\ No newline at end of file&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;即提示添加了”New content”&lt;/p&gt;
-&lt;p&gt;之后命令&lt;code&gt;git add test.md&lt;/code&gt;, 输入&lt;code&gt;git status&lt;/code&gt;查看当前情况，最后&lt;code&gt;git commit -m &amp;quot;append new content&amp;quot;&lt;/code&gt;提交修改&lt;/p&gt;
-&lt;p&gt;(5) 版本回退&lt;br&gt;上一步之后，已经上git仓库里提交了两次test.md，第二次的test.md比第一次的多一行”New content”，通过&lt;code&gt;git log&lt;/code&gt;查看此时版本情况&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;HuangLiuyindeMacBook-Pro:learngit hlyin$ git log&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;commit 892f0e567c56c698515a0e543eefef91a7a14913&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Author: Louie &amp;lt;louiestudio@foxmail.com&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Date:   Thu Mar 31 17:14:54 2016 +0800&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    append new content&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;commit 990cdcef2498e304c32f2d74f43d364b36d37138&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Author: Louie &amp;lt;louiestudio@foxmail.com&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Date:   Thu Mar 31 17:02:32 2016 +0800&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    wrote a test file&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;如果想退回到上一个版本的test.md，可以用&lt;code&gt;git reset --hard HEAD^&lt;/code&gt;，退回上上个版本就是&lt;code&gt;HEAD^^&lt;/code&gt;，虽然这里并没有… 退回前10个版本则可以&lt;code&gt;HEAD10&lt;/code&gt;，此时再查看test.md，就是第一次编写的版本了。&lt;/p&gt;
-&lt;p&gt;那么如果没事找事又想恢复成第二版版本呢，可以通过上面那一长串的commit id来实现，这样 &lt;code&gt;git reset --hard 892f0&lt;/code&gt;，只用输入一部分的id字符即可&lt;/p&gt;
-&lt;p&gt;如果关闭了终端，即忘记了上面的commit id的话，可以用&lt;code&gt;git reflog&lt;/code&gt;查看，&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;HuangLiuyindeMacBook-Pro:learngit hlyin$ git reflog&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;892f0e5 HEAD@&amp;#123;0&amp;#125;: reset: moving to 892f0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;990cdce HEAD@&amp;#123;1&amp;#125;: reset: moving to HEAD^&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;892f0e5 HEAD@&amp;#123;2&amp;#125;: commit: append new content&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;990cdce HEAD@&amp;#123;3&amp;#125;: commit (initial): wrote a test file&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我的git用户名：louiehuang，邮箱：louiestudio@foxmail.com&lt;/p&gt;
-&lt;p&gt;安装完成后进行配置：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;
-    
-    </summary>
-    
-      <category term="github" scheme="http://hlyin.space/categories/github/"/>
     
     
   </entry>
