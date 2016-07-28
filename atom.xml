@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hlyin.space/"/>
-  <updated>2016-04-11T15:27:24.000Z</updated>
+  <updated>2016-07-28T17:03:06.000Z</updated>
   <id>http://hlyin.space/</id>
   
   <author>
@@ -16,17 +16,475 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>子网掩码与子网号</title>
-    <link href="http://hlyin.space/Computer-Networks/%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81%E4%B8%8E%E5%AD%90%E7%BD%91%E5%8F%B7.html"/>
-    <id>http://hlyin.space/Computer-Networks/子网掩码与子网号.html</id>
-    <published>2016-04-10T16:00:00.000Z</published>
-    <updated>2016-04-11T15:27:24.000Z</updated>
+    <title>WP字帖[效果图]</title>
+    <link href="http://hlyin.space/ProjectImages/WPCopybook/"/>
+    <id>http://hlyin.space/ProjectImages/WPCopybook/</id>
+    <published>2016-07-26T16:00:00.000Z</published>
+    <updated>2016-07-28T17:03:06.000Z</updated>
     
-    <content type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学这一节的时候有些懵，在此整理一下。先回顾IP地址，IP地址是分层的，包括&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;网络&lt;/strong&gt;&lt;/font&gt;和&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;主机&lt;/strong&gt;&lt;/font&gt;两个部分，按网络部分和主机部分的不同长度主要分为A、B、C三类(还有多播组的D类和不再使用的E类)，但每一类的网络部分和主机部分的总长度相等，均为32位，如下图：&lt;/p&gt;
+    <content type="html">&lt;p&gt;1、首页：&lt;/p&gt;
+&lt;p&gt;显示6本字帖，滑动选择&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/git_handwriting_Home_Page.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;2、练字及评分界面&lt;br&gt;支持两种模式：临摹字帖、自由创作；支持撤销之前所写笔数，评分基于网格特征和外围特征（Lehuixiao）；记录当前字的历史最高分；设置中可更改画笔颜色&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/git_handwriting_Score_Page.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;3、字帖选择界面：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/git_handwriting_BookChoose_Page.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;4、字选择界面：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/git_handwriting_BookContent_Page.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;5、个人信息：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/git_handwriting_Personal_Page.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;6、个人设置：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/git_handwriting_Personal_Setting.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、首页：&lt;/p&gt;
+&lt;p&gt;显示6本字帖，滑动选择&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/git_handwriting_Home_Page.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;2、练
+    
+    </summary>
+    
+      <category term="ProjectImages" scheme="http://hlyin.space/categories/ProjectImages/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>仿QQ聊天工具[效果图]</title>
+    <link href="http://hlyin.space/ProjectImages/CommnicationTool/"/>
+    <id>http://hlyin.space/ProjectImages/CommnicationTool/</id>
+    <published>2016-07-25T16:00:00.000Z</published>
+    <updated>2016-07-28T17:03:29.000Z</updated>
+    
+    <content type="html">&lt;p&gt;C#编写的winform程序，分服务端和客户端两个程序，采用TCP通信，以xml形式传递数据&lt;/p&gt;
+&lt;p&gt;1、登陆界面&lt;/p&gt;
+&lt;p&gt;输入6位数字账号和密码&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/communication_tool/qq_login.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;2、注册界面&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/communication_tool/qq_reg.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;3、主界面&lt;/p&gt;
+&lt;p&gt;选项卡选择好友或群组&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/communication_tool/qq_main.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;4、私聊消息&lt;br&gt;对方用户不在线时存入数据库中对方的离线消息字段，定义分隔符&lt;code&gt;&amp;lt;e&amp;gt;&lt;/code&gt;区分多条消息，上线后读取此字段的值&lt;/p&gt;
+&lt;p&gt;双开测试&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/communication_tool/qq_pchat2.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/communication_tool/qq_pchat.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;5、群组消息&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/communication_tool/qq_gchat.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;C#编写的winform程序，分服务端和客户端两个程序，采用TCP通信，以xml形式传递数据&lt;/p&gt;
+&lt;p&gt;1、登陆界面&lt;/p&gt;
+&lt;p&gt;输入6位数字账号和密码&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.co
+    
+    </summary>
+    
+      <category term="ProjectImages" scheme="http://hlyin.space/categories/ProjectImages/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>咖啡网站[效果图]</title>
+    <link href="http://hlyin.space/ProjectImages/Coffee/"/>
+    <id>http://hlyin.space/ProjectImages/Coffee/</id>
+    <published>2016-07-24T16:00:00.000Z</published>
+    <updated>2016-07-28T17:03:34.000Z</updated>
+    
+    <content type="html">&lt;p&gt;asp.net&lt;/p&gt;
+&lt;p&gt;1、首页&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/coffee/coffee_index.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;2、商品页&lt;/p&gt;
+&lt;p&gt;给出六种类别筛选：Expressos、Lattes、Tea Lattes、Hot Chocolates、Blended； 可依据给定属性（卡路里、脂肪等）进行排序&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/coffee/coffee_shop.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;选择Tea Lattes类商品&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/coffee/coffee_shop2.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;选择Blended类商品&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/coffee/coffee_shop3.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;选择排序依据（7种属性）&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/coffee/coffee_shop4.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;3、商品详情&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/coffee/coffee_detail.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;加入购物车&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/coffee/coffee_detail2.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;4、注册&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/coffee/coffee_reg.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;5、管理员界面&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/coffee/coffee_admin.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;asp.net&lt;/p&gt;
+&lt;p&gt;1、首页&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/coffee/coffee_index.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="ProjectImages" scheme="http://hlyin.space/categories/ProjectImages/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>房地产网站[效果图]</title>
+    <link href="http://hlyin.space/ProjectImages/RealEstate/"/>
+    <id>http://hlyin.space/ProjectImages/RealEstate/</id>
+    <published>2016-07-23T16:00:00.000Z</published>
+    <updated>2016-07-28T17:03:38.000Z</updated>
+    
+    <content type="html">&lt;p&gt;1、首页&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_index.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_index2.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_index3.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;2、管理员&lt;/p&gt;
+&lt;p&gt;管理员可以&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;管理房屋验证&lt;/li&gt;
+&lt;li&gt;处理用户投诉&lt;/li&gt;
+&lt;li&gt;管理用户信息&lt;/li&gt;
+&lt;li&gt;管理房屋信息&lt;/li&gt;
+&lt;li&gt;管理广告信息&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;房屋验证&lt;br&gt;可按已处理验证和未处理验证进行查询，可设置分页大小，默认为10，对查询出的结果，&lt;code&gt;处理结果&lt;/code&gt;栏可选择&lt;code&gt;未处理&lt;/code&gt;、&lt;code&gt;已通过&lt;/code&gt;、&lt;code&gt;不通过&lt;/code&gt;三种结果，如查询&lt;code&gt;未处理验证&lt;/code&gt;，将某一条记录的结果改为&lt;code&gt;已通过&lt;/code&gt;后，页面异步刷新，此记录不显示，并可在&lt;code&gt;已处理验证&lt;/code&gt;中查询到&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_admin.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_admin2.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_admin3.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;用户信息管理&lt;/p&gt;
+&lt;p&gt;增删查改用户&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_admin4.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_admin5.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;房屋信息管理&lt;br&gt;三种查询类别&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_admin6.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;3、个人中心&lt;br&gt;分为普通用户的个人中西和企业用户的企业中心&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_mine.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;用户设置&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_mine2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、首页&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_index.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;im
+    
+    </summary>
+    
+      <category term="ProjectImages" scheme="http://hlyin.space/categories/ProjectImages/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>搜索引擎[效果图]</title>
+    <link href="http://hlyin.space/ProjectImages/SearchEngine/"/>
+    <id>http://hlyin.space/ProjectImages/SearchEngine/</id>
+    <published>2016-07-22T16:00:00.000Z</published>
+    <updated>2016-07-28T17:03:41.000Z</updated>
+    
+    <content type="html">&lt;p&gt;使用：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;语言：Java&lt;/li&gt;
+&lt;li&gt;爬虫：Heritrix&lt;/li&gt;
+&lt;li&gt;分词：je-analysis&lt;/li&gt;
+&lt;li&gt;索引：Lucene&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1、首页&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/searchengine/searchengine_3.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;2、搜索结果页&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/searchengine/searchengine_4.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;语言：Java&lt;/li&gt;
+&lt;li&gt;爬虫：Heritrix&lt;/li&gt;
+&lt;li&gt;分词：je-analysis&lt;/li&gt;
+&lt;li&gt;索引：Lucene&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1、首页&lt;/p
+    
+    </summary>
+    
+      <category term="ProjectImages" scheme="http://hlyin.space/categories/ProjectImages/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>诗词学习网站[效果图]</title>
+    <link href="http://hlyin.space/ProjectImages/Poetry/"/>
+    <id>http://hlyin.space/ProjectImages/Poetry/</id>
+    <published>2016-07-21T16:00:00.000Z</published>
+    <updated>2016-07-28T17:03:44.000Z</updated>
+    
+    <content type="html">&lt;p&gt;1、首页&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/poetry/poetry_index.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;2、诗词浏览，由左边选择诗人后显示对应的作品&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/poetry/poetry_browse.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;分诗、词、曲三类进行筛选，并可在此三类中选择朝代，选择后左方的代表诗人候选进行更新&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/poetry/poetry_browse2.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;选择&lt;code&gt;诗-唐代&lt;/code&gt;后，左边的代表诗人更新&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/poetry/poetry_browse3.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;选择&lt;code&gt;词-清-纳兰性德&lt;/code&gt;后显示作品&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/poetry/poetry_browse4.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;3、诗词详情&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/poetry/poetry_browse5.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;诗词详情中可进行自测，随机生成填空题形式&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/poetry/poetry_browse6.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;4、登陆界面&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/poetry/poetry_login.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;5、注册界面&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/poetry/poetry_reg.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;6、晋级&lt;br&gt;用户完成一阶段学习后可参与晋级测验提升等级，提升后提供新一级难度的诗词&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/poetry/poetry_exam.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、首页&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/poetry/poetry_index.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;2、诗词浏览，
+    
+    </summary>
+    
+      <category term="ProjectImages" scheme="http://hlyin.space/categories/ProjectImages/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>DES算法</title>
+    <link href="http://hlyin.space/Information-Security/des/"/>
+    <id>http://hlyin.space/Information-Security/des/</id>
+    <published>2016-05-01T16:00:00.000Z</published>
+    <updated>2016-05-08T12:48:52.000Z</updated>
+    
+    <content type="html">&lt;p&gt;算法实现按照《信息安全原理与技术》(郭亚军、宋建华、李莉、董慧慧编著)给出的过程，输入输出格式按照本书56页例3.8指定，即输入16个字符的16进制明文和密钥 (输入16个16进制char后自动处理成64位的2进制进行计算，也即DES分组大小和DES的密钥大小)，输出64位2进制密文（解密时输出64位2进制明文）和对应的16位16进制密文/明文，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/InformationSecurity/des/des1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;源码丢在github上，有需要的可以下载查看，地址：&lt;a href=&quot;https://github.com/louiehuang/DES&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/louiehuang/DES&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;一、算法过程&quot;&gt;&lt;a href=&quot;#一、算法过程&quot; class=&quot;headerlink&quot; title=&quot;一、算法过程&quot;&gt;&lt;/a&gt;一、算法过程&lt;/h3&gt;&lt;p&gt;DES原理本身不难理解，只是实现起来比较麻烦，所以这里只是大概提一下算法过程，详细过程可以参考《信息安全原理与技术》或 &lt;a href=&quot;http://www.hankcs.com/security/des-algorithm-illustrated.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;DES算法实例详解&lt;/a&gt;，讲得都比较清楚。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（1）处理密钥&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;输入64位密钥，经过置换选择1（56位）得到56位的实际密钥&lt;/li&gt;
+&lt;li&gt;按28位1组分成前后C和D两个部分&lt;/li&gt;
+&lt;li&gt;进行16轮循环，每轮循环中先对C和D循环左移，再将结果合并&lt;/li&gt;
+&lt;li&gt;通过置换选择2（48位）选出当前轮的48位子密钥。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;（2）处理明文&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;输入64位明文，初始置换&lt;/li&gt;
+&lt;li&gt;按32位1组分成前后L和R两个部分&lt;/li&gt;
+&lt;li&gt;进行16轮迭代，每轮迭代中，下一轮使用的L为本轮的R，下一轮使用的R需经过如下计算得到：&lt;br&gt; 先将32位的R经过扩展置换E扩展成48位，与当前轮使用的子密钥（加密时为顺序使用子密钥，解密时为逆序使用子密钥）进行异或，将得到的48位结果按6位1组分成8组，每组使用1个S盒进行置换，每组得到4位输出，即最后得到32位的输出，将此输出结果经置换P后得到的结果与本轮的L相异或，即为下一轮的R&lt;/li&gt;
+&lt;li&gt;16轮迭代结束后，将最后得到的L和R交换，即（R，L）&lt;/li&gt;
+&lt;li&gt;逆初始置换后得到64位密文&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;二、算法实现&quot;&gt;&lt;a href=&quot;#二、算法实现&quot; class=&quot;headerlink&quot; title=&quot;二、算法实现&quot;&gt;&lt;/a&gt;二、算法实现&lt;/h3&gt;&lt;p&gt;为了清晰理解DES算法的原理，希望将算法中所有的中间结果均能输出出来查看，基于这个目的，我选取的主要数据结构为char数组，不需要输出中间结果则可以使用bool类型，运算效率比char高… 嗯没管效率只是为了理解DES而已…&lt;/p&gt;
+&lt;p&gt;我按课本56页例3.8制定输入格式，即输入的明文和密钥均为16位的16进制字符串，因此为了输出中间过程，需要将输入转换成64位的2进制字符数组，char类型数组最后一位需要放’\0’，因此所有的char数组的实际大小均为算法所需大小加1，主要的数据结构如下：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;输入：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;char HexMsg[17], char HexKey[17] //明文和密钥输入为16位的16进制字符串&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;预处理：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;char HexMsg[17] → char BiMsg[65] //64位的2进制明文&lt;/li&gt;
+&lt;li&gt;char HexKey[17] → char BiKey[65] //64位的2进制密钥&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;DES：&lt;br&gt;产生子密钥：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;char realKey[57] //经置换选择1选出56位&lt;/li&gt;
+&lt;li&gt;char C[29], D[29] //前后2部分，各28位&lt;/li&gt;
+&lt;li&gt;char CDCombine[57] //循环左移后将C、D数组结合&lt;/li&gt;
+&lt;li&gt;char subKey[16][49] //置换选择2后产生的子密钥&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;初始置换：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;char BiMsgCopy[57] //复制一份原数组，否则在期间的改变会使得替换的元素发生改变&lt;/li&gt;
+&lt;li&gt;char L[33], R[33] //前后2部分，各32位&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;16轮迭代：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;char RCopy[29] //复制R，运算期间会改变R，而最后需要将本轮开始的R赋给下一轮的L&lt;/li&gt;
+&lt;li&gt;char ExtendedR[49] //扩展48位，与子密钥的异或直接修改ExtendedR&lt;/li&gt;
+&lt;li&gt;char group[7] //将48位的ExtendedR分层6位1组的group，对每组group按S盒查找替换，替换结果直接修改R&lt;/li&gt;
+&lt;li&gt;char SR[33] //置换P时复制经S盒变化后的R&lt;/li&gt;
+&lt;li&gt;L与R异或直接修改R，此时得到本轮的最终R，即下一轮输入的R&lt;/li&gt;
+&lt;li&gt;将本轮开始时的R复制给L，即RCopy赋给L，此时得到本轮的最终L，即下一轮输入的L&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;32位互换：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;char RLChange[65] //互换L16和R16位置，即（R16，L16）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;逆初始置换：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;char Cipher[65] //逆初始置换后的密文（解密时为明文）结果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;三、部分代码解释&quot;&gt;&lt;a href=&quot;#三、部分代码解释&quot; class=&quot;headerlink&quot; title=&quot;三、部分代码解释&quot;&gt;&lt;/a&gt;三、部分代码解释&lt;/h3&gt;&lt;p&gt;预处理时将16位16进制char数组转成64位2进制数组，在S盒变换时，需要将S盒中行列对应的16进制元素（1位）转换成2进制（4位），在这两个地方使用16进制转2进制，代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/***16进制数组转2进制数组(16元素)，输入M和K时使用(64位)以及S盒变换时使用(4位)***/&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; * HexToBi(&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *hexArray)
+{
+    toUpper(hexArray); &lt;span class=&quot;comment&quot;&gt;//小写转大写&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; * biArray = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[&lt;span class=&quot;number&quot;&gt;65&lt;/span&gt;];
+    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; index = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;
+    &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *p = hexArray;
+        &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt;(*p)&lt;span class=&quot;comment&quot;&gt;//字符串不结束就循环&lt;/span&gt;
+        {
+        string temp;
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(*p&amp;gt;=&lt;span class=&quot;string&quot;&gt;&#39;0&#39;&lt;/span&gt; &amp;amp;&amp;amp; *p &amp;lt;=&lt;span class=&quot;string&quot;&gt;&#39;9&#39;&lt;/span&gt;) &lt;span class=&quot;comment&quot;&gt;//数字&lt;/span&gt;
+            {
+            temp = HexBiTable[*p - &lt;span class=&quot;number&quot;&gt;48&lt;/span&gt;];
+        }
+        &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(*p&amp;gt;=&lt;span class=&quot;string&quot;&gt;&#39;A&#39;&lt;/span&gt; &amp;amp;&amp;amp; *p &amp;lt;=&lt;span class=&quot;string&quot;&gt;&#39;F&#39;&lt;/span&gt;) &lt;span class=&quot;comment&quot;&gt;//A~F字符&lt;/span&gt;
+        {
+            temp = HexBiTable[*p - &lt;span class=&quot;number&quot;&gt;65&lt;/span&gt; + &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;];
+        }
+        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;; i++, index++)
+        {
+            biArray[index] = temp[i];
+        }
+        p++; &lt;span class=&quot;comment&quot;&gt;//指针后指，准备处理下一个字母&lt;/span&gt;
+        }
+
+    biArray[index] = &lt;span class=&quot;string&quot;&gt;&#39;\0&#39;&lt;/span&gt;;
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; biArray;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;考虑到这里的需求是16进制char数组转2进制char数组，而不是16进制整型转2进制，因此相比于类型转换后辗转相除，采用的是查表HexBiTable替换更为有效。&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;产生子密钥：&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;置换选择1：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;c++&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; * realKey = new &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[&lt;span class=&quot;number&quot;&gt;57&lt;/span&gt;]; realKey[&lt;span class=&quot;number&quot;&gt;56&lt;/span&gt;] = &lt;span class=&quot;string&quot;&gt;&#39;\0&#39;&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//56位有效密钥    &lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;/**置换选择1，64位中选择56位得到实际使用的56位密钥**/&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span class=&quot;number&quot;&gt;56&lt;/span&gt;; i++)
+{
+    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; index = PC1Table[i] - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//-1后才是在数组中的实际下标 &lt;/span&gt;
+    realKey[i] = BiKey[index];
+}
+&lt;span class=&quot;comment&quot;&gt;//cout&amp;lt;&amp;lt;realKey&amp;lt;&amp;lt;endl;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过查表PC1Table，即置换选择1，得到应替换元素的位置，需要减1得到在数组中的下标，for循环56次，得到56位的置换选择后的56位密钥，每次置换选择在原64位密钥BiKey中查找。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;循环左移：&lt;/strong&gt;&lt;br&gt;循环左移n位，通过3次逆序使时间复杂度降为O(n)，如循环左移2位10010011，则先逆序前2位得到01，再逆序后所有位得到110010，此时即为01110010，最后逆序所有位，得到01001110，即为最终结果。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;c++&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/***循环左移n位，复杂度0(n)，通过三次逆序实现***/&lt;/span&gt;
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;LeftShift&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; * arr, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt;
+&lt;/span&gt;{
+    Reverse(arr, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, n - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//逆序前n位&lt;/span&gt;
+    Reverse(arr, n, &lt;span class=&quot;number&quot;&gt;28&lt;/span&gt; - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//逆序后所有位&lt;/span&gt;
+    Reverse(arr, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;28&lt;/span&gt; - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//逆序所有位&lt;/span&gt;
+}
+
+&lt;span class=&quot;comment&quot;&gt;/***逆序排列***/&lt;/span&gt;
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Reverse&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *arr, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; begin, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; end)&lt;/span&gt;
+&lt;/span&gt;{
+    &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; temp;
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;( ; begin &amp;lt; end; begin++, end--)
+    {
+        temp = arr[end];
+        arr[end] = arr[begin];
+        arr[begin] = temp;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在对明文的处理中的置换基本类同与置换选择1的实现，得到48位的扩展R后进行S盒变换，实现为将扩展R分成8组，每组6位，进行8轮的循环，每个循环中对1个组使用S盒变换，循环中先获取当前轮进行变换的6位输入group，如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; group[&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;]; group[&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;] = &lt;span class=&quot;string&quot;&gt;&#39;\0&#39;&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//1组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;; i++)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	group[i] = ExtendedR[s * &lt;span class=&quot;number&quot;&gt;6&lt;/span&gt; + i]; &lt;span class=&quot;comment&quot;&gt;//6位1组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;得到group后需据此获取在S盒中的行和列下标用来获取S盒对应的元素值，这里以group=”010001”为例，行即为01，列为1000，需要将2进制转成10进制以得到下标，为方便计算，将行表示为0001，这样仍通过查表HexBiTable来获取，这里仅仅就只是为了方便，其实并不好… 此时line=”0001”，column=”1000”，查表值0001对应的下标为1，1000对应的下标为8，所以在S盒中行下标x=1，列下标y=8，查S[i][x][y]得到对应的元素，以S1为例，即i=0，此时元素值为10，最后需要将整型的10转成4位的2进制数组，得到1010，代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;c++&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//16进制字符串转10进制整型&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;//如一组为010001，则line=&quot;0001&quot;, colum=&quot;1000&quot;，则x=1, y=8&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; x, y; &lt;span class=&quot;comment&quot;&gt;//x为在S盒中的行下标，y为列下标&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *line = new &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;]; line[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;] = &lt;span class=&quot;string&quot;&gt;&#39;\0&#39;&lt;/span&gt;;
+&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *column = new &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;]; column[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;] = &lt;span class=&quot;string&quot;&gt;&#39;\0&#39;&lt;/span&gt;;
+line[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;] = &lt;span class=&quot;string&quot;&gt;&#39;0&#39;&lt;/span&gt;; line[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] = &lt;span class=&quot;string&quot;&gt;&#39;0&#39;&lt;/span&gt;; line[&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;] = group[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]; line[&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;] = group[&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;]; &lt;span class=&quot;comment&quot;&gt;//01即为00 01&lt;/span&gt;
+column[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;] = group[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;]; column[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] = group[&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;]; column[&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;] = group[&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;]; column[&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;] = group[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;];
+
+&lt;span class=&quot;comment&quot;&gt;//通过HexBiTable找到2进制对应的10进制（数组下标）&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;bool&lt;/span&gt; xflag = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;, yflag = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;; 
+&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span class=&quot;number&quot;&gt;16&lt;/span&gt;; i++)
+{
+    xflag = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;; yflag = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;; 
+    &lt;span class=&quot;comment&quot;&gt;//找行和列，比对HexBiTable[i]和column，若相等，则column所对应的列下标即为i（间接的2进制转10进制）&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; j = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; j &amp;lt; &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;; j++)
+    {
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(line[j] != HexBiTable[i][j]) &lt;span class=&quot;comment&quot;&gt;//不相等&lt;/span&gt;
+            xflag = &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;; 
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(column[j] != HexBiTable[i][j]) &lt;span class=&quot;comment&quot;&gt;//不相等&lt;/span&gt;
+            yflag = &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;; 
+    }
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(xflag == &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;)
+    {
+        x = i;
+    }
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(yflag == &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;)
+    {
+        y = i;
+    }
+}
+&lt;span class=&quot;comment&quot;&gt;//cout&amp;lt;&amp;lt;x&amp;lt;&amp;lt;&quot;, &quot;&amp;lt;&amp;lt;y&amp;lt;&amp;lt;endl;&lt;/span&gt;
+
+&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; target = SBox[s][x][y]; &lt;span class=&quot;comment&quot;&gt;//获取S盒对应行列的元素&lt;/span&gt;
+
+&lt;span class=&quot;comment&quot;&gt;//target换成2进制char数组&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *biTarget = new &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;];
+&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, index = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;gt;= &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i--, index++)
+{  
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(target &amp;amp; (&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;lt;&amp;lt; i))  
+        biTarget[index] =  &lt;span class=&quot;string&quot;&gt;&#39;1&#39;&lt;/span&gt;;  
+    &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;  
+        biTarget[index] =  &lt;span class=&quot;string&quot;&gt;&#39;0&#39;&lt;/span&gt;;  
+}
+biTarget[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;] = &lt;span class=&quot;string&quot;&gt;&#39;\0&#39;&lt;/span&gt;;
+&lt;span class=&quot;comment&quot;&gt;//cout&amp;lt;&amp;lt;biTarget&amp;lt;&amp;lt;endl;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;至此得到此轮的4位输出，按其修改R对应位置，8轮S盒变化后即得到32位的输出结果。&lt;/p&gt;
+&lt;h3 id=&quot;四、运行结果：&quot;&gt;&lt;a href=&quot;#四、运行结果：&quot; class=&quot;headerlink&quot; title=&quot;四、运行结果：&quot;&gt;&lt;/a&gt;四、运行结果：&lt;/h3&gt;&lt;p&gt;（1）不输出中间结果：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/InformationSecurity/des/des1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;中间结果：&lt;br&gt;（2）16个子密钥：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/InformationSecurity/des/des2.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;（3）16轮L和R&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/InformationSecurity/des/des3.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;（4）其他&lt;br&gt;其他各个步骤的结果输出语句均在代码中，去掉注释即可输出查看。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;算法实现按照《信息安全原理与技术》(郭亚军、宋建华、李莉、董慧慧编著)给出的过程，输入输出格式按照本书56页例3.8指定，即输入16个字符的16进制明文和密钥 (输入16个16进制char后自动处理成64位的2进制进行计算，也即DES分组大小和DES的密钥大小)，输出64位
+    
+    </summary>
+    
+      <category term="Information Security" scheme="http://hlyin.space/categories/Information-Security/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>子网掩码与子网号</title>
+    <link href="http://hlyin.space/Computer-Networks/subnetmask/"/>
+    <id>http://hlyin.space/Computer-Networks/subnetmask/</id>
+    <published>2016-04-10T16:00:00.000Z</published>
+    <updated>2016-04-22T13:26:57.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 先回顾IP地址，IP地址是分层的，包括&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;网络&lt;/strong&gt;&lt;/font&gt;和&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;主机&lt;/strong&gt;&lt;/font&gt;两个部分，按网络部分和主机部分的不同长度主要分为A、B、C三类(还有多播组的D类和不再使用的E类)，但每一类的网络部分和主机部分的总长度相等，均为32位，如下图：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/subnet_mask/ip_type.png&quot; alt=&quot;Drawing&quot; width=&quot;400px&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A类：&lt;/strong&gt;最前面1位为0，7位标识网络号，24位标识主机号，则第一段取值为1~126，对于A类IP，最多有2^7 - 2 = 126个(可用)A类网络 (减2是因为要去掉全0的主机地址和全1的广播地址)，每个A类网路中，最多可有2^24 - 2 = 16777214 台(可用)主机&lt;br&gt;地址：1.0.0.0 ~ 126.0.0.0&lt;br&gt;0.0.0.0 和 127.0.0.0保留 &lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;B类：&lt;/strong&gt;最前面2位为10，14位标识网络号，16位标识主机号，则第一段取值为128~191，对于B类IP，有2^14 - 2 = 16382个B类网络，每个B类网路中，最多可有2^16 - 2 =65534 台主机&lt;br&gt;地址：128.1.0.0 ~ 191.254.0.0&lt;br&gt;128.0.0.0 和 191.255.0.0保留&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;C类：&lt;/strong&gt;最前面3位为110，21位标识网络号，8位标识主机号，则第一段取值为192~223，对于C类IP，有2^21 - 2 = 2097150个C类网络，每个B类网路中，最多可有2^8 - 2 =254 台主机&lt;br&gt;地址：192.0.1.0 ~ 223.255.254.0&lt;br&gt;192.0.0.0 和 223.255.255.0保留 &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A类：&lt;/strong&gt;最前面1位为0，7位标识网络号，24位标识主机号，则第一段取值为1~126，对于A类IP，最多有2^7 - 2 = 126个(可用)A类网络 (减2是因为要去掉全0的主机地址和全1的广播地址)，每个A类网路中，最多可有2^24 - 2 = 16777214 台(可用)主机&lt;br&gt;&lt;del&gt;地址：1.0.0.0 ~ 126.0.0.0&lt;/del&gt;&lt;br&gt;&lt;del&gt;0.0.0.0 和 127.0.0.0保留&lt;/del&gt; &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B类：&lt;/strong&gt;最前面2位为10，14位标识网络号，16位标识主机号，则第一段取值为128~191，对于B类IP，有2^14 - 1 = 16383个B类网络 (B类网络不会有全0全1，减1减的是128.0.0.0这个不指派地址)，每个B类网路中，最多可有2^16 - 2 =65534 台主机&lt;br&gt;地址：128.0.0.1 ~ 191.254.255.254&lt;br&gt;128.0.0.0 不指派&lt;br&gt;&lt;del&gt;地址：128.1.0.0 ~ 191.254.0.0&lt;/del&gt;&lt;br&gt;&lt;del&gt;128.0.0.0 和 191.255.0.0保留&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;C类：&lt;/strong&gt;最前面3位为110，21位标识网络号，8位标识主机号，则第一段取值为192~223，对于C类IP，有2^21 - 1 = 2097151个C类网络，每个C类网路中，最多可有2^8 - 2 =254 台主机&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;地址：192.0.1.0 ~ 223.255.254.0&lt;/del&gt;&lt;br&gt;&lt;del&gt;192.0.0.0 和 223.255.255.0保留&lt;/del&gt;&lt;/p&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 为了提高地址分配的效率和减少分配网络号总数，采取&lt;strong&gt;划分子网&lt;/strong&gt;的策略，在多个网络中共享一个网络号的机制涉及使用子网掩码，子网掩码的作用就是用来判断任意两个或多个IP地址是否属于同一个子网。&lt;/p&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 子网划分的实现是基于&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;网络位占用主机位&lt;/strong&gt;&lt;/font&gt;的，以21位网络位和8位主机位的C类地址为例，若将一个C类网络划分成2个子网，则网络位需要占用1位主机位，即现在是22位网络位和7位主机位，通过占用的这1位的值来区分划分成的2个子网，同理，若划分成3个或4个子网则占用2个主机位…&lt;/p&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 但是现在，一个外部的网络，并不知道连接的这个C类网络是否划分了子网，所以需要子网掩码，当未划分时，A类地址的缺省子网掩码为255.0.0.0，B类为255.255.0.0，C类为255.255.255.0，仍以C类网络为例，划分成2个子网(占1位主机位)后子网掩码为255.255.255.128(128个主机，126个可用主机)，划分成4个子网(占位主机位)后子网掩码为255.255.255.192，如下表：&lt;/p&gt;
@@ -41,6 +499,13 @@
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;不划分&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;255.255.255.0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;256&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;254&lt;/td&gt;
+&lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
 &lt;td style=&quot;text-align:center&quot;&gt;2&lt;/td&gt;
@@ -141,12 +606,12 @@
 &lt;p&gt;通过做and运算，可以看出来&lt;br&gt;A&amp;amp;M1:11011011-11011010-00101100-00000000&lt;br&gt;B&amp;amp;M1:11011011-11011010-00101100-00000000&lt;/p&gt;
 &lt;p&gt;A&amp;amp;M2:11011011-11011010-001011&lt;font color=&quot;red&quot;&gt;00&lt;/font&gt;-00000000&lt;br&gt;B&amp;amp;M2:11011011-11011010-001011&lt;font color=&quot;red&quot;&gt;01&lt;/font&gt;-00000000&lt;/p&gt;
 &lt;p&gt;假设还有如下IP&lt;br&gt;C：219.218.45.200&lt;br&gt;可以得出在子网M2：255.255.255.0下跟B同子网，而在子网M3：255.255.255.128下为不同子网。&lt;/p&gt;
-&lt;h4 id=&quot;参考：&quot;&gt;&lt;a href=&quot;#参考：&quot; class=&quot;headerlink&quot; title=&quot;参考：&quot;&gt;&lt;/a&gt;参考：&lt;/h4&gt;&lt;p&gt;[1] 知乎 恒思凝 &lt;a href=&quot;http://www.zhihu.com/question/36296884/answer/68366061&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.zhihu.com/question/36296884/answer/68366061&lt;/a&gt;&lt;br&gt;[2]  计算机网络地址，主机地址，子网掩码，网段，子网划分的理解 &lt;a href=&quot;http://blog.csdn.net/hzhsan/article/details/12783193&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/hzhsan/article/details/12783193&lt;/a&gt;&lt;br&gt;[3] 计算机网络子网掩码 &lt;a href=&quot;http://blog.csdn.net/oklizy/article/details/6805836&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/oklizy/article/details/6805836&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;参考：&quot;&gt;&lt;a href=&quot;#参考：&quot; class=&quot;headerlink&quot; title=&quot;参考：&quot;&gt;&lt;/a&gt;参考：&lt;/h4&gt;&lt;p&gt;[1] Larry L.peterson, Bruce S.Davie. 计算机网络系统方法[M].四川: 机械工业出版社, 2015: 113-119&lt;br&gt;[1] 恒思凝. 子网掩码判断两个ip是否在同一子网如何保证准确. &lt;a href=&quot;http://www.zhihu.com/question/36296884/answer/68366061&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.zhihu.com/question/36296884/answer/68366061&lt;/a&gt;&lt;br&gt;[2] 计算机网络地址，主机地址，子网掩码，网段，子网划分的理解. &lt;a href=&quot;http://blog.csdn.net/hzhsan/article/details/12783193&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/hzhsan/article/details/12783193&lt;/a&gt;&lt;br&gt;[3] 计算机网络子网掩码. &lt;a href=&quot;http://blog.csdn.net/oklizy/article/details/6805836&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/oklizy/article/details/6805836&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
     
-      &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学这一节的时候有些懵，在此整理一下。先回顾IP地址，IP地址是分层的，包括&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;网络&lt;/strong&gt;&lt;/font&gt;和&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;主机&lt;/
+      &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 先回顾IP地址，IP地址是分层的，包括&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;网络&lt;/strong&gt;&lt;/font&gt;和&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;主机&lt;/strong&gt;&lt;/font&gt;两个部分
     
     </summary>
     
@@ -157,8 +622,8 @@
   
   <entry>
     <title>访问速度优化(二)---国内解析到coding，国外解析到github</title>
-    <link href="http://hlyin.space/blog/blog%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96(%E4%BA%8C).html"/>
-    <id>http://hlyin.space/blog/blog访问速度优化(二).html</id>
+    <link href="http://hlyin.space/blog/visiting_speed_opt2/"/>
+    <id>http://hlyin.space/blog/visiting_speed_opt2/</id>
     <published>2016-04-09T16:00:00.000Z</published>
     <updated>2016-04-11T15:15:52.000Z</updated>
     
@@ -199,8 +664,8 @@
   
   <entry>
     <title>访问速度优化(一)---图片及谷歌字体转存COS</title>
-    <link href="http://hlyin.space/blog/blog%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96(%E4%B8%80).html"/>
-    <id>http://hlyin.space/blog/blog访问速度优化(一).html</id>
+    <link href="http://hlyin.space/blog/visiting_speed_opt1/"/>
+    <id>http://hlyin.space/blog/visiting_speed_opt1/</id>
     <published>2016-04-08T16:00:00.000Z</published>
     <updated>2016-04-10T13:45:11.000Z</updated>
     
@@ -245,8 +710,8 @@
   
   <entry>
     <title>添加google统计或百度统计</title>
-    <link href="http://hlyin.space/blog/%E6%B7%BB%E5%8A%A0%E7%99%BE%E5%BA%A6%E7%BB%9F%E8%AE%A1.html"/>
-    <id>http://hlyin.space/blog/添加百度统计.html</id>
+    <link href="http://hlyin.space/blog/baidu_analytics/"/>
+    <id>http://hlyin.space/blog/baidu_analytics/</id>
     <published>2016-04-07T16:00:00.000Z</published>
     <updated>2016-04-10T12:14:40.000Z</updated>
     
@@ -278,8 +743,8 @@
   
   <entry>
     <title>《四月是你的谎言》实景</title>
-    <link href="http://hlyin.space/Animation/%E5%9B%9B%E6%9C%88%E6%98%AF%E4%BD%A0%E7%9A%84%E8%B0%8E%E8%A8%80.html"/>
-    <id>http://hlyin.space/Animation/四月是你的谎言.html</id>
+    <link href="http://hlyin.space/Animation/april/"/>
+    <id>http://hlyin.space/Animation/april/</id>
     <published>2016-04-01T16:00:00.000Z</published>
     <updated>2016-04-09T13:45:04.000Z</updated>
     
@@ -319,11 +784,11 @@ id=&quot;table7&quot;&gt; &lt;tr&gt; &lt;td style=&quot;FILTER: alpha(opacity=10
   </entry>
   
   <entry>
-    <title>Android_ListView优化</title>
-    <link href="http://hlyin.space/Android/Android_ListView%E4%BC%98%E5%8C%96.html"/>
-    <id>http://hlyin.space/Android/Android_ListView优化.html</id>
+    <title>Android ListView优化</title>
+    <link href="http://hlyin.space/Android/Android_ListView_opt/"/>
+    <id>http://hlyin.space/Android/Android_ListView_opt/</id>
     <published>2016-03-18T16:00:00.000Z</published>
-    <updated>2016-04-10T07:26:04.000Z</updated>
+    <updated>2016-04-12T07:12:06.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;ListView的优化&quot;&gt;&lt;a href=&quot;#ListView的优化&quot; class=&quot;headerlink&quot; title=&quot;ListView的优化&quot;&gt;&lt;/a&gt;ListView的优化&lt;/h3&gt;&lt;p&gt;1.存在问题&lt;/p&gt;
 &lt;blockquote&gt;
@@ -369,8 +834,8 @@ id=&quot;table7&quot;&gt; &lt;tr&gt; &lt;td style=&quot;FILTER: alpha(opacity=10
   
   <entry>
     <title>操作系统重点</title>
-    <link href="http://hlyin.space/OS/OS%E5%A4%8D%E4%B9%A0.html"/>
-    <id>http://hlyin.space/OS/OS复习.html</id>
+    <link href="http://hlyin.space/OS/OS_review/"/>
+    <id>http://hlyin.space/OS/OS_review/</id>
     <published>2016-01-04T16:00:00.000Z</published>
     <updated>2016-04-10T07:28:00.000Z</updated>
     
@@ -582,6 +1047,60 @@ id=&quot;table7&quot;&gt; &lt;tr&gt; &lt;td style=&quot;FILTER: alpha(opacity=10
     </summary>
     
       <category term="OS" scheme="http://hlyin.space/categories/OS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>扫雷GDI+实现</title>
+    <link href="http://hlyin.space/ProjectImages/MineSweeping/"/>
+    <id>http://hlyin.space/ProjectImages/MineSweeping/</id>
+    <published>2015-12-18T16:00:00.000Z</published>
+    <updated>2016-07-28T17:24:36.000Z</updated>
+    
+    <content type="html">&lt;p&gt;GDI+&lt;/p&gt;
+&lt;p&gt;一、程序功能&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;难度选择功能；用户可以选择游戏等级：初级，中级，高级；&lt;/li&gt;
+&lt;li&gt;基本游戏功能：用户左键点击雷区，若踩中地雷则游戏结束，否则显示所点雷块周围的地雷数目，若周围某一雷块没有地雷则自动翻开，即呈现出安全区；用户右键点击可以进行标记，标记有旗子和问号；&lt;/li&gt;
+&lt;li&gt;计时与地雷数显示：计时器显示当前游戏进行实现、地雷数显示剩余的地雷（标记后减少、取消标记后恢复）；&lt;/li&gt;
+&lt;li&gt;数据存储功能：用户在某一难度打破时间记录后更新排行榜并存储记录&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;二、效果图&lt;/p&gt;
+&lt;p&gt;初级开局时：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_easy.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;点击到地雷后，切换笑脸表情，计时器停止，切换点中的地雷图像&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_easy_lose.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;游戏胜利，停止计时器，提示用户胜利&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_easy_win.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;中级难度&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_normal_lose.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;高级难度&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_hard.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;三、关键部分实现&lt;br&gt;主要写一下雷区的实现原理和部分关键代码，雷区效果如下图所示：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_block.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;雷块（上图中的方格）的实现没有使用winform的button控件，而是使用C#的GDI+绘制出来。GDI+是GDI的后续版本，将应用程序与图形硬件相分离，通过GDI+提供的方法适当调用相应的驱动程序。&lt;/p&gt;
+&lt;p&gt;雷区的数据结构是二维数组，二维数组的一维大小代表雷区行数，二维大小代表雷区列数，每个元素相当于一个雷块。考虑雷块的类型，由于雷块有较多的操作，因而可以将雷块封装成一个类MineBlock，包括的字段有：X、Y，表示雷块的坐标（在二维数组中的下标）；Status，表示雷块的状态（翻开、未翻开、插旗、问号、插旗差错、爆炸）；IsHover，表示鼠标是否悬浮在当前的雷块上（若是，则其颜色改变以示区分）；MineNum，表示当前雷块中的地雷情况，-1表示有地雷，1~8表示当前块没有地雷但是周围8个雷块中的地雷情况，0表示当前块和周围8个块都没有地雷；Visited表示当前块是否被访问过，在广度优先搜索中使用，类视图如下图：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_classview.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;因而二维数组的类型是上面设计的雷块类，MineBlock[,] mineBlock，因为扫雷游戏最多有32行64列，因而此数组初始化为这个大小。设置三个变量分别记录当前游戏难度的行数、列数、地雷数，在选择了不同游戏难度后根据这三个参数对mineBlock数组中元素实例化，设置相应的状态。&lt;/p&gt;
+&lt;p&gt;雷区的第一步实现是将普通雷块绘制出来，为显示美观，将雷区居中，则对于程序实现即设置一个向右偏移量也即横向偏移量X_offset和向下偏移量也即竖向偏移量Y_offset，这两个偏移量通过制定的规则计算得到，对于每个雷块的绘制，则是根据偏移量和二维数组下标确定当前雷块在窗体中的位置，同样出于美观，各雷块间设置1px的间距，则得到雷块横坐标为X_offset + MineBlockLength &lt;em&gt; (i - 1) + 1，纵坐标为Y_offset + MineBlockLength &lt;/em&gt; (j - 1) + 1（这里列优先），则绘制雷块的代码为：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;在列优先遍历二维数组mineBlock中，判断当前遍历元素的状态，若状态为未翻开，判断是否鼠标悬浮在此块（通过一个Point类对象获取鼠标焦点坐标，计算出其在二维数组中下标，以此判断），若不是（即为普通雷块），设置画刷Brush brush = new SolidBrush(Color.FromArgb(192, 192, 192)); 调用方法g.FillRectangle(brush, rect);绘制出灰色的雷块，为了让雷块有立体感，在雷块的下方和右方各划一条线，画线时设置画笔Pen pen = new Pen(new SolidBrush(Color.FromArgb(128,128,128))); 调用方法DrawLine，通过当前雷块的下标计算出线的起止坐标；若是（即鼠标悬浮的雷块），则设置画刷透明度以显示不同颜色的雷块，如：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;对于雷块其他状态，如插旗、插错旗（游戏结束时显示打叉的地雷图像）、点到地雷（显示红色地雷）以及初始化布雷时地雷图像，则通过g.DrawImage方法更换图像，图像添加在资源Resources.resx中，切换时计算图像应显示的坐标并设置其大小，如：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code3.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;对于雷块标记的问号状态和点开雷块显示的数字，通过g.DrawString方法实现，先设置字符的显示大小，再依次和其数组下标来计算出字符应显示的坐标位置，如：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;雷区绘制的基本原理如上所述，其具体实现时还有一些逻辑判断。&lt;/p&gt;
+&lt;p&gt;上述绘制只是实现了一个静态的，并没有处理鼠标点击事件，因而雷区绘制的第二步是通过窗体的FormMain_MouseMove、FormMain_MouseDown、FormMain_MouseUp事件来将上一步绘制的静态雷区模拟成类似于Button控件的实现效果，即对用户的不同类型点击有不同的响应。&lt;/p&gt;
+&lt;p&gt;首先对鼠标悬浮到的雷块进行区别显示，如下图，第一行第二列：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_block2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;此功能的实现在MouseMove事件中，先判断鼠标是否在雷区内，若不是，将悬浮焦点mouseHoverBlock(Point类型)的X、Y属性置为0，表示雷区中不显示悬浮块，若在，则根据焦点坐标计算出当前悬浮的雷块在数组中的下标，并将mouseHoverBlock的X、Y属性置为对应下标，用于在重绘时进行判定，最后调用Refresh方法强制重绘窗体。&lt;/p&gt;
+&lt;p&gt;其次处理鼠标的点击事件，点击分为左击和右击，在MouseDown时切换笑脸图标，在MouseUp也即点击完成时判断点击的类型并进行相应的处理。如果是左击，也即捕获到MouseButtons.Left，若点击的不是地雷且状态为未翻开，则广度优先搜索安全区，若点到地雷则游戏结束，停止计时、切换点击雷块的图像、切换笑脸图像并调用游戏结束函数；若点击的是右键，则根据当前点击雷块的状态进行点击后的图像切换和状态修改。在函数最后调用胜利判断函数，看点击以后用户是否胜利，此外在最后调用Refresh，重绘雷区被点击后的状态。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;GDI+&lt;/p&gt;
+&lt;p&gt;一、程序功能&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;难度选择功能；用户可以选择游戏等级：初级，中级，高级；&lt;/li&gt;
+&lt;li&gt;基本游戏功能：用户左键点击雷区，若踩中地雷则游戏结束，否则显示所点雷块周围的地雷数目，若周围某一雷块没有地雷则
+    
+    </summary>
+    
+      <category term="ProjectImages" scheme="http://hlyin.space/categories/ProjectImages/"/>
     
     
   </entry>

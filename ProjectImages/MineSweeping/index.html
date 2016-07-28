@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Category: github | Louie&#39;s Blog</title>
+  <title>扫雷GDI+实现 | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -102,7 +102,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -115,7 +115,7 @@
         <!-- header -->
         <div style="text-align:center;margin-top:15px;margin-bottom:-30px;">
             <img style="height:120px;weight:120px" src="/img/header.jpg" alt="Close"/>
-            <h4 style="margin-top:10px;color:#fff;">Louie</h4>
+            <h4 style="margin-top:10px;color:#fff;">黄刘胤 | Louie</h4>
         </div>
         <!-- Lists in Slidebars -->
         <ul class="sb-menu">
@@ -132,11 +132,15 @@
 				    
 				    <li><a href="/categories/Animation/" class="animsition-link">Animation<small>(1)</small></a></li>
 				    
+				    <li><a href="/categories/Computer-Networks/" class="animsition-link">Computer Networks<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/Information-Security/" class="animsition-link">Information Security<small>(1)</small></a></li>
+				    
 				    <li><a href="/categories/OS/" class="animsition-link">OS<small>(1)</small></a></li>
 				    
-				    <li><a href="/categories/blog/" class="animsition-link">blog<small>(3)</small></a></li>
+				    <li><a href="/categories/ProjectImages/" class="animsition-link">ProjectImages<small>(7)</small></a></li>
 				    
-				    <li><a href="/categories/github/" class="animsition-link">github<small>(1)</small></a></li>
+				    <li><a href="/categories/blog/" class="animsition-link">blog<small>(3)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -226,15 +230,15 @@
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
                             <div style="color:#fff;">
                             	
-                               <!--  <p style="padding:8px;color:#fff;background-color:#000000;background-color:rgba(0,0,0,0.4);font-size:2em;font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;">This is Louie's Blog, Welcome.</p>
+                               <!--  <p style="padding:8px;color:#fff;background-color:#000000;background-color:rgba(0,0,0,0.4);font-size:2em;font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;">Welcome to Louie's Blog.</p>
                                 <br/> -->
-                               <h2 style="color:#fff;background-color:#000000;background-color:rgba(0,0,0,0.4);">This is Louie's Blog, Welcome.</h2>
+                               <h2 style="color:#fff;background-color:#000000;background-color:rgba(0,0,0,0.4);">Welcome to Louie's Blog.</h2>
                                 <p style="padding:6px;color:#fff;background-color:#000000;background-color:rgba(0,0,0,0.3);"></p>
 				    			
                                <!--  <p style="padding:8px;color:#fff;background-color:#000000;background-color:rgba(0,0,0,0.4);font-size:2em;font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;"></p>
                                 <br/> -->
                                <h2 style="color:#fff;background-color:#000000;background-color:rgba(0,0,0,0.4);"></h2>
-                                <p style="padding:6px;color:#fff;background-color:#000000;background-color:rgba(0,0,0,0.3);">并不是因为太懒了所以主页才会什么也没有放，大概吧，嗯，这是简约.</p>
+                                <p style="padding:6px;color:#fff;background-color:#000000;background-color:rgba(0,0,0,0.3);">It is the time you've wasted for your rose that makes your rose so important.</p>
 				    			
 
                             </div>
@@ -252,37 +256,80 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/github/github入门.html">github入门</a></h4>
-                            
-                            <p><time datetime="2015-06-14T16:00:00.000Z"><a href="/github/github入门.html">2015-06-15</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2015-12-18T16:00:00.000Z" itemprop="datePublished">
+          2015-12-19
+      </time>
+    
+</span>
+                <h1>扫雷GDI+实现</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<p>GDI+</p>
+<p>一、程序功能</p>
+<blockquote>
+<ol>
+<li>难度选择功能；用户可以选择游戏等级：初级，中级，高级；</li>
+<li>基本游戏功能：用户左键点击雷区，若踩中地雷则游戏结束，否则显示所点雷块周围的地雷数目，若周围某一雷块没有地雷则自动翻开，即呈现出安全区；用户右键点击可以进行标记，标记有旗子和问号；</li>
+<li>计时与地雷数显示：计时器显示当前游戏进行实现、地雷数显示剩余的地雷（标记后减少、取消标记后恢复）；</li>
+<li>数据存储功能：用户在某一难度打破时间记录后更新排行榜并存储记录</li>
+</ol>
+</blockquote>
+<p>二、效果图</p>
+<p>初级开局时：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_easy.jpg" alt=""></p>
+<p>点击到地雷后，切换笑脸表情，计时器停止，切换点中的地雷图像<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_easy_lose.jpg" alt=""></p>
+<p>游戏胜利，停止计时器，提示用户胜利<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_easy_win.jpg" alt=""></p>
+<p>中级难度<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_normal_lose.jpg" alt=""></p>
+<p>高级难度<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_hard.jpg" alt=""></p>
+<p>三、关键部分实现<br>主要写一下雷区的实现原理和部分关键代码，雷区效果如下图所示：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_block.jpg" alt=""></p>
+<p>雷块（上图中的方格）的实现没有使用winform的button控件，而是使用C#的GDI+绘制出来。GDI+是GDI的后续版本，将应用程序与图形硬件相分离，通过GDI+提供的方法适当调用相应的驱动程序。</p>
+<p>雷区的数据结构是二维数组，二维数组的一维大小代表雷区行数，二维大小代表雷区列数，每个元素相当于一个雷块。考虑雷块的类型，由于雷块有较多的操作，因而可以将雷块封装成一个类MineBlock，包括的字段有：X、Y，表示雷块的坐标（在二维数组中的下标）；Status，表示雷块的状态（翻开、未翻开、插旗、问号、插旗差错、爆炸）；IsHover，表示鼠标是否悬浮在当前的雷块上（若是，则其颜色改变以示区分）；MineNum，表示当前雷块中的地雷情况，-1表示有地雷，1~8表示当前块没有地雷但是周围8个雷块中的地雷情况，0表示当前块和周围8个块都没有地雷；Visited表示当前块是否被访问过，在广度优先搜索中使用，类视图如下图：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_classview.jpg" alt=""></p>
+<p>因而二维数组的类型是上面设计的雷块类，MineBlock[,] mineBlock，因为扫雷游戏最多有32行64列，因而此数组初始化为这个大小。设置三个变量分别记录当前游戏难度的行数、列数、地雷数，在选择了不同游戏难度后根据这三个参数对mineBlock数组中元素实例化，设置相应的状态。</p>
+<p>雷区的第一步实现是将普通雷块绘制出来，为显示美观，将雷区居中，则对于程序实现即设置一个向右偏移量也即横向偏移量X_offset和向下偏移量也即竖向偏移量Y_offset，这两个偏移量通过制定的规则计算得到，对于每个雷块的绘制，则是根据偏移量和二维数组下标确定当前雷块在窗体中的位置，同样出于美观，各雷块间设置1px的间距，则得到雷块横坐标为X_offset + MineBlockLength <em> (i - 1) + 1，纵坐标为Y_offset + MineBlockLength </em> (j - 1) + 1（这里列优先），则绘制雷块的代码为：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code1.jpg" alt=""></p>
+<p>在列优先遍历二维数组mineBlock中，判断当前遍历元素的状态，若状态为未翻开，判断是否鼠标悬浮在此块（通过一个Point类对象获取鼠标焦点坐标，计算出其在二维数组中下标，以此判断），若不是（即为普通雷块），设置画刷Brush brush = new SolidBrush(Color.FromArgb(192, 192, 192)); 调用方法g.FillRectangle(brush, rect);绘制出灰色的雷块，为了让雷块有立体感，在雷块的下方和右方各划一条线，画线时设置画笔Pen pen = new Pen(new SolidBrush(Color.FromArgb(128,128,128))); 调用方法DrawLine，通过当前雷块的下标计算出线的起止坐标；若是（即鼠标悬浮的雷块），则设置画刷透明度以显示不同颜色的雷块，如：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code2.jpg" alt=""></p>
+<p>对于雷块其他状态，如插旗、插错旗（游戏结束时显示打叉的地雷图像）、点到地雷（显示红色地雷）以及初始化布雷时地雷图像，则通过g.DrawImage方法更换图像，图像添加在资源Resources.resx中，切换时计算图像应显示的坐标并设置其大小，如：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code3.jpg" alt=""></p>
+<p>对于雷块标记的问号状态和点开雷块显示的数字，通过g.DrawString方法实现，先设置字符的显示大小，再依次和其数组下标来计算出字符应显示的坐标位置，如：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code4.jpg" alt=""></p>
+<p>雷区绘制的基本原理如上所述，其具体实现时还有一些逻辑判断。</p>
+<p>上述绘制只是实现了一个静态的，并没有处理鼠标点击事件，因而雷区绘制的第二步是通过窗体的FormMain_MouseMove、FormMain_MouseDown、FormMain_MouseUp事件来将上一步绘制的静态雷区模拟成类似于Button控件的实现效果，即对用户的不同类型点击有不同的响应。</p>
+<p>首先对鼠标悬浮到的雷块进行区别显示，如下图，第一行第二列：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_block2.jpg" alt=""></p>
+<p>此功能的实现在MouseMove事件中，先判断鼠标是否在雷区内，若不是，将悬浮焦点mouseHoverBlock(Point类型)的X、Y属性置为0，表示雷区中不显示悬浮块，若在，则根据焦点坐标计算出当前悬浮的雷块在数组中的下标，并将mouseHoverBlock的X、Y属性置为对应下标，用于在重绘时进行判定，最后调用Refresh方法强制重绘窗体。</p>
+<p>其次处理鼠标的点击事件，点击分为左击和右击，在MouseDown时切换笑脸图标，在MouseUp也即点击完成时判断点击的类型并进行相应的处理。如果是左击，也即捕获到MouseButtons.Left，若点击的不是地雷且状态为未翻开，则广度优先搜索安全区，若点到地雷则游戏结束，停止计时、切换点击雷块的图像、切换笑脸图像并调用游戏结束函数；若点击的是右键，则根据当前点击雷块的状态进行点击后的图像切换和状态修改。在函数最后调用胜利判断函数，看点击以后用户是否胜利，此外在最后调用Refresh，重绘雷区被点击后的状态。</p>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得底部有句话会显得比较合适.</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/OS/OS_review/" style="float: left;">
+        ← 操作系统重点
+    </a>
+    
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="ProjectImages/MineSweeping/" data-title="扫雷GDI+实现" data-url="http://hlyin.space/ProjectImages/MineSweeping/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

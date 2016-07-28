@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>访问速度优化(二)---国内解析到coding，国外解析到github | Louie&#39;s Blog</title>
+  <title>房地产网站[效果图] | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -134,7 +134,11 @@
 				    
 				    <li><a href="/categories/Computer-Networks/" class="animsition-link">Computer Networks<small>(1)</small></a></li>
 				    
+				    <li><a href="/categories/Information-Security/" class="animsition-link">Information Security<small>(1)</small></a></li>
+				    
 				    <li><a href="/categories/OS/" class="animsition-link">OS<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/ProjectImages/" class="animsition-link">ProjectImages<small>(7)</small></a></li>
 				    
 				    <li><a href="/categories/blog/" class="animsition-link">blog<small>(3)</small></a></li>
 				    
@@ -257,56 +261,60 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2016-04-09T16:00:00.000Z" itemprop="datePublished">
-          2016-04-10
+      <time datetime="2016-07-23T16:00:00.000Z" itemprop="datePublished">
+          2016-07-24
       </time>
     
 </span>
-                <h1>访问速度优化(二)---国内解析到coding，国外解析到github</h1>
+                <h1>房地产网站[效果图]</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<p>&nbsp;&nbsp;&nbsp;&nbsp; 之前通过将google字体和加载耗时较长的图片存到云对象存储(COS)大幅提升了这个网站的访问速度，其中google字体因为google的原因而耗时很长，而图片则是因为这个网站代码托管在github，需要从github那边加载，而github，国外的，访问速度相比对国内主机慢不少。<br>&nbsp;&nbsp;&nbsp;&nbsp; 因此将网站同时部署到github和coding，比较一下两个地方的ping值：</p>
-<p>(1) ping github， 平均366.384ms</p>
-<p><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/ping_github.png" alt="Drawing" width="400px"></p>
-<p>(2)ping coding， 平均34.388ms，ping值低10倍</p>
-<p><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/ping_coding.png" alt="Drawing" width="400px"></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 代码托管到coding和托管到github一样的流程，在coding注册账号后新建项目，不同于github pages的项目名必须和github用户名相同，在coding的项目名可以任意起，域名结构为：<code>username.coding.io/projectname</code>， 但若想通过<code>username.coding.io</code>访问，即不带项目名访问，则需要将项目名命名为用户名，如下图：</p>
-<p><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/codingproject.png" alt=""></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 然后部署，可以同时部署到coding和github，配置中添加一条部署仓库即可，以SSH连接为例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo:</span><br><span class="line">      github: git@github.com:louiehuang/louiehuang.github.io.git,master</span><br><span class="line">      coding: git@git.coding.net:louiehuang/louiehuang.git,master</span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 然而我在mac下deploy的速度很慢，不知原因，所以手动push，先在coding的账户-&gt;SSH公钥里添加公钥，直接添加github的公钥即可。</p>
+      		<p>1、首页</p>
+<p><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_index.jpg" alt=""><br><br></p>
+<p><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_index2.jpg" alt=""><br><br></p>
+<p><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_index3.jpg" alt=""><br><br><br></p>
+<p>2、管理员</p>
+<p>管理员可以</p>
 <blockquote>
-<ul>
-<li>在本地cd到放仓库的地方，然后clone下来，我的项目是<code>git clone git@git.coding.net:louiehuang/louiehuang.git</code>，clone下来的仓库就是louiehuang.git</li>
-<li>将generate生成的public文件夹下所有文件复制到仓库louiehuang.git</li>
-<li><code>git add *</code>，添加所有新加项，因为.gitignore的设置不用<code>git add .</code>，把这个ignore文件删掉后也可以用</li>
-<li><code>git commit -m &quot;comment&quot;</code></li>
-<li><code>git push origin master</code></li>
-</ul>
+<ol>
+<li>管理房屋验证</li>
+<li>处理用户投诉</li>
+<li>管理用户信息</li>
+<li>管理房屋信息</li>
+<li>管理广告信息</li>
+</ol>
 </blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 然后在coding中的项目中将Pages服务打开，将自己的域名添加进来，之后设置域名解析，将国内访问解析到coding，国外解析到github，在自己的云解析平台设置，如下图：</p>
-<p><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/domain.png" alt=""></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 至此完成了在coding的托管。因为每次更新都需要同时更新coding和github两个地方，所以写了段命令来bash，每次同时push到coding和github的仓库。</p>
+<p>房屋验证<br>可按已处理验证和未处理验证进行查询，可设置分页大小，默认为10，对查询出的结果，<code>处理结果</code>栏可选择<code>未处理</code>、<code>已通过</code>、<code>不通过</code>三种结果，如查询<code>未处理验证</code>，将某一条记录的结果改为<code>已通过</code>后，页面异步刷新，此记录不显示，并可在<code>已处理验证</code>中查询到</p>
+<p><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_admin.jpg" alt=""><br><br></p>
+<p><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_admin2.jpg" alt=""><br><br></p>
+<p><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_admin3.jpg" alt=""><br><br></p>
+<p>用户信息管理</p>
+<p>增删查改用户<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_admin4.jpg" alt=""><br><br></p>
+<p><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_admin5.jpg" alt=""><br><br></p>
+<p>房屋信息管理<br>三种查询类别<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_admin6.jpg" alt=""><br><br></p>
+<p>3、个人中心<br>分为普通用户的个人中西和企业用户的企业中心</p>
+<p><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_mine.jpg" alt=""><br><br></p>
+<p>用户设置<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/realestate/realestate_mine2.jpg" alt=""></p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/Computer-Networks/子网掩码与子网号.html" style="float: left;">
-        ← 子网掩码与子网号
+    <a class="pull-left" href="/ProjectImages/Coffee/" style="float: left;">
+        ← 咖啡网站[效果图]
     </a>
     
     
-    <a class="pull-right" href="/blog/blog访问速度优化(一).html">
-        访问速度优化(一)---图片及谷歌字体转存COS →
+    <a class="pull-right" href="/ProjectImages/SearchEngine/">
+        搜索引擎[效果图] →
     </a>
     
 </nav>
 
         <div class="duoshuo">
-<div class="ds-thread" data-thread-key="blog/blog访问速度优化(二).html" data-title="访问速度优化(二)---国内解析到coding，国外解析到github" data-url="http://hlyin.space/blog/blog访问速度优化(二).html"></div>
+<div class="ds-thread" data-thread-key="ProjectImages/RealEstate/" data-title="房地产网站[效果图]" data-url="http://hlyin.space/ProjectImages/RealEstate/"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"louiehuang"};
 (function() {
