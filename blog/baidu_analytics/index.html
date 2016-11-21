@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>添加google统计或百度统计 | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>添加google统计或百度统计 | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -98,15 +98,14 @@
   
 
   
-  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
-<!--
-<body class="post-template">
--->
+
+
 <body id="index" class="lightnav animsition">
 
-      <!-- ============================ Off-canvas navigation =========================== -->
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
@@ -134,11 +133,15 @@
 				    
 				    <li><a href="/categories/Computer-Networks/" class="animsition-link">Computer Networks<small>(1)</small></a></li>
 				    
+				    <li><a href="/categories/ImageProcessing/" class="animsition-link">ImageProcessing<small>(1)</small></a></li>
+				    
 				    <li><a href="/categories/Information-Security/" class="animsition-link">Information Security<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/OS/" class="animsition-link">OS<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/ProjectImages/" class="animsition-link">ProjectImages<small>(7)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(4)</small></a></li>
 				    
 				    <li><a href="/categories/blog/" class="animsition-link">blog<small>(3)</small></a></li>
 				    
@@ -224,7 +227,7 @@
         <!-- ============================ Hero Image =========================== -->
 
         <section id="hero" class="scrollme">
-            <div class="container-fluid element-img" style="background: url(http://gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/bg.jpg) no-repeat center center fixed;background-size: cover">
+            <div class="container-fluid element-img" style="background: url(http://gitimage-10031767.cos.myqcloud.com/blog_image/Theme_Image/b1%281192_720%29.jpg) no-repeat center center fixed;background-size: cover">
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
@@ -275,7 +278,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    	(<span class="function"><span class="keyword">function</span>(<span class="params">i,s,o,g,r,a,m</span>)</span>&#123;</span><br><span class="line">  	i[<span class="string">'GoogleAnalyticsObject'</span>]=r;i[r]=i[r]||<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> 		 (i[r].q=i[r].q||[]).push(<span class="built_in">arguments</span>)&#125;,i[r].l=<span class="number">1</span>*<span class="keyword">new</span> <span class="built_in">Date</span>();a=s.createElement(o),</span><br><span class="line">  		m=s.getElementsByTagName(o)[<span class="number">0</span>];</span><br><span class="line">  		a.async=<span class="number">1</span>;a.src=g;m.parentNode.insertBefore(a,m)</span><br><span class="line">  	&#125;)(<span class="built_in">window</span>,<span class="built_in">document</span>,<span class="string">'script'</span>,<span class="string">'https://www.google-analytics.com/analytics.js'</span>,<span class="string">'ga'</span>);</span><br><span class="line">  	</span><br><span class="line">  	ga(<span class="string">'create'</span>, <span class="string">'UA-76175499-1'</span>, <span class="string">'auto'</span>);</span><br><span class="line">  	ga(<span class="string">'send'</span>, <span class="string">'pageview'</span>);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <p>因为网站中每个页面都需要加入上面的跟踪代码，所以添加在模板页中，这里是head.ejs。在配置文件config中设置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#google统计</span><br><span class="line">google_analytics:</span><br><span class="line">  enable: true</span><br><span class="line">  id: UA-76175499-1</span><br><span class="line">  site: hlyin.space</span><br></pre></td></tr></table></figure>
-<p>在head.ejs中，之前添加：</p>
+<p>在head.ejs中，&lt;/head&gt;之前添加：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- google统计 --&gt;</span><br><span class="line">&lt;% if (theme.google_analytics) &#123; %&gt;</span><br><span class="line">&lt;script type="text/javascript"&gt;</span><br><span class="line">	(function(i,s,o,g,r,a,m)&#123;</span><br><span class="line">	i['GoogleAnalyticsObject']=r;i[r]=i[r]||function()&#123;</span><br><span class="line">	 (i[r].q=i[r].q||[]).push(arguments)&#125;,i[r].l=1*new Date();a=s.createElement(o),</span><br><span class="line">		m=s.getElementsByTagName(o)[0];</span><br><span class="line">		a.async=1;a.src=g;m.parentNode.insertBefore(a,m)</span><br><span class="line">	&#125;)(window,document,'script','https://www.google-analytics.com/analytics.js','ga');</span><br><span class="line">	ga('create', 'UA-76175499-1', 'auto');</span><br><span class="line">	ga('send', 'pageview');</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
 <p>若不设置config文件，则直接将跟踪代码加入模板也可以，即去掉<code>if (theme.google_analytics)</code>的判断</p>
 <p><br></p>
@@ -394,7 +397,24 @@ var duoshuoQuery = {short_name:"louiehuang"};
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
 })();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 </html>

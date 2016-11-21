@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Archives: 2016/5 | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>基尼系数 | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -259,37 +259,67 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/Information-Security/des/">DES算法</a></h4>
-                            
-                            <p><time datetime="2016-05-01T16:00:00.000Z"><a href="/Information-Security/des/">2016-05-02</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-09-18T16:00:00.000Z" itemprop="datePublished">
+          2016-09-19
+      </time>
+    
+</span>
+                <h1>基尼系数</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<p>基尼系数(Gini Index)是一个经济学概念，是20世纪初意大利经济学家基尼（实际应为赫希曼提出）根据洛伦茨曲线提出的判断分配平等程度的指标，用来描述收入整体差距程度。</p>
+<p>基尼系数和信息熵这两个指标可以用来定义推荐系统的覆盖率（描述一个推荐系统对物品长尾的发掘能力，覆盖率最简单的一个定义为推荐系统能够推荐出来的物品占总物品集合的比例）</p>
+<p><br></p>
+<h3 id="经济学中基尼系数的意义"><a href="#经济学中基尼系数的意义" class="headerlink" title="经济学中基尼系数的意义"></a>经济学中基尼系数的意义</h3><p><img src="http://gitimage-10031767.cos.myqcloud.com/blog_image/recommeder_system/Gini_Index_1.jpg" alt=""></p>
+<p>X轴为人口百分比，Y轴为收入百分比，其中人口按照收入从低到高排序过，即越接近原点的人口收入越低<br>如果各层次人民收入完全均等，那么对应一条 y=x 的线段，即最贫穷的人和最富的人收入相等<br>而实际的情况由洛伦兹曲线表示，贫富差距越大，最接近原点的人口(X)对应的收入(Y)增长最小，最远离原点的人口(X)对应的收入(Y)增长最小，即弯曲程度越大，收入分配越不平等。</p>
+<p>基尼系数定义为 $G = \frac{A}{A + B}$</p>
+<p>山西农业大学张建华先生提出了一个简便易用的公式：假定一定数量的人口按收入由低到高顺序排队，分为人数相等的n组，从第1组到第i组人口累计收入占全部人口总收入的比重为$W_{i}$，则说明：该公式是利用定积分的定义将对洛伦茨曲线的积分(面积B)分成n个等高梯形的面积之和得到的。</p>
+<script type="math/tex; mode=display">G = 1 - \frac{1}{n}(2\sum_{i=1}^{n-1}{W_{i}+1})</script><p><br></p>
+<h3 id="应用到推荐系统中"><a href="#应用到推荐系统中" class="headerlink" title="应用到推荐系统中"></a>应用到推荐系统中</h3><p><img src="http://gitimage-10031767.cos.myqcloud.com/blog_image/recommeder_system/Gini_Index_2.jpg" alt=""></p>
+<p>X轴人口换成物品（按照流行度从低到高排列），Y轴收入换成流行度，那么洛伦兹曲线即表示最不流行的x%物品的总流行度占推荐系统的比例y%</p>
+<p>同样，基尼系数定义为 $G = \frac{A}{A + B}$</p>
+<p>若系统中物品的流行度很平均，那么A就很小，从而基尼系数很小，若系统物品流行度分配很不平均，那么A很大，从而基尼系数很大，即可以从基尼系数判断系统物品流行度的分配，从而定义覆盖率。</p>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得底部有句话会显得比较合适.</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/Recommender-System/Information_entropy/" style="float: left;">
+        ← 信息熵与分类算法[转]
+    </a>
+    
+    
+    <a class="pull-right" href="/Recommender-System/Precision&Recall/">
+        召回率准确率 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Recommender-System/Gini_Index/" data-title="基尼系数" data-url="http://hlyin.space/Recommender-System/Gini_Index/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

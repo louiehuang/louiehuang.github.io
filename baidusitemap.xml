@@ -4,6 +4,96 @@
 
     
   <url>
+    <loc>http://hlyin.space/Recommender-System/Information_entropy/</loc>
+    <lastmod>2016-11-21T14:53:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>信息熵与分类算法[转]</title>
+        <pubTime>2016-09-19T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Recommender System" url="http://hlyin.space/categories/Recommender-System/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hlyin.space/Recommender-System/Gini_Index/</loc>
+    <lastmod>2016-11-21T14:47:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>基尼系数</title>
+        <pubTime>2016-09-18T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Recommender System" url="http://hlyin.space/categories/Recommender-System/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hlyin.space/Recommender-System/Latex_in_Markdown/</loc>
+    <lastmod>2016-11-21T14:45:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>Markdown中的基本LaTeX数学公式</title>
+        <pubTime>2016-08-09T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Recommender System" url="http://hlyin.space/categories/Recommender-System/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hlyin.space/Recommender-System/Precision&Recall/</loc>
+    <lastmod>2016-11-21T14:42:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>召回率准确率</title>
+        <pubTime>2016-09-11T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Recommender System" url="http://hlyin.space/categories/Recommender-System/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hlyin.space/ImageProcessing/PolygonCentroid/</loc>
+    <lastmod>2016-10-15T11:19:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>多边形质心计算</title>
+        <pubTime>2016-02-02T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="ImageProcessing" url="http://hlyin.space/categories/ImageProcessing/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://hlyin.space/ProjectImages/MineSweeping/</loc>
     <lastmod>2016-07-28T17:24:36.000Z</lastmod>
     <data>

@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Archives: 2016/5 | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>信息熵与分类算法[转] | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -259,37 +259,71 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/Information-Security/des/">DES算法</a></h4>
-                            
-                            <p><time datetime="2016-05-01T16:00:00.000Z"><a href="/Information-Security/des/">2016-05-02</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-09-19T16:00:00.000Z" itemprop="datePublished">
+          2016-09-20
+      </time>
+    
+</span>
+                <h1>信息熵与分类算法[转]</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<p><a href="http://gaofeihang.blog.163.com/blog/static/8450828520128139648199/" target="_blank" rel="external">转载链接</a></p>
+<p>在介绍熵之前，先从另一个概念说起：信息量</p>
+<p>世界杯决赛的两支球队中，哪支球队获得了冠军？在对球队实力没有任何了解的情况下，每支球队夺冠的概率都是1/2，<br>所以谁获得冠军这条信息的信息量是 $-log<em>{2}{\frac{1}{2}} = 1$ bit<br>如果信息是四强中的球队谁获得了冠军，它的信息量是 $-log</em>{2}{\frac{1}{4}} = 2$ bit</p>
+<p>其实这正好对应了计算机对数字的表示，如果用二进制表示，每一位出现0和1的概率都是1/2，所以每一位的信息量是1bit。如果用十六进制表示，每一位出现任意一个符号的概率是1/16，所以每一位能表示 $-log<em>{2} {\frac{1}{16}} = 4$ bit。所以1位十六进制的信息量，和4位二进制信息量是相同的。<br>（求表示2种可能性最少需要几个数，$log</em>{2}{2} = 1$，求表示4种可能性最少需要几个数，$log_{2}{4} = 2$ …）</p>
+<p>这样就比较好理解另一个经典的例子，英文有26个字母，假设每个字母出现的概率是一样的，每个字母的信息量就是 - log2 1/26 = 4.7；常用的汉字有2500个，每个汉字的信息量是 - log2 1/2500 = 11.3。所以在信息量相同的情况下，使用的汉字要比英文字母要少——这其实就是十六进制和二进制的区别，在这个例子中，apple成了5位26进制的数值，信息量4.7 <em> 5 = 23.5；而苹果成为2位2500进制的数值，信息量11.3 </em> 2 = 22.6。虽然表示的方式不同，但信息量差不多（这是一个很巧合的例子，仅用于说明信息量的含义，大多数词语都不会这么接近）。</p>
+<p>在实际的情况中，每种可能情况出现的概率并不是相同的，所以熵（entropy）就用来衡量整个系统的平均信息量，其计算公式如下：</p>
+<script type="math/tex; mode=display">H_{s} = \sum_{i=1}^{n}{p_{i} \cdot I_{e}} = - \sum_{i=1}^{n}{}p_{i} \cdot log_{2}{p_{i}}</script><p>（推荐系统中，$p_i = \frac{物品i的流行度}{所有物品流行度之和}$）</p>
+<p>熵是平均信息量，也可以理解为不确定性。例如进行决赛的巴西和南非，假设根据经验判断，巴西夺冠的几率是80%，南非夺冠的几率是20%，则谁能获得冠军的信息量就变为 - 0.8 <em> log2 0.8 - 0.2 </em> log2 0.2 = 0.257 + 0.464 = 0.721，小于1 bit了。经验减少了判断所需的信息量，消除了不确定性。</p>
+<p>而且通过计算可以发现，巴西夺冠的几率越高，计算出的熵就越小，即越是确定的情况，不确定性越小，信息量越少。如果巴西100%夺冠，那么熵是0，相当于没有任何信息。当两队几率都是50%最难判断，所熵达到最大值1。其实之前的 - log2 1/2 = 1 bit 是简化了的计算过程，其结果也是通过熵的公式来计算的 - 0.5 <em> log2 0.5 - 0.5 </em> log2 0.5 = 1 bit，计算信息量要综合考虑每种结果的可能性。</p>
+<p>另一个会迷惑的问题是熵会大于1吗？答案当然是肯定的，刚刚计算的最大值为1bit，是因为最终的结果只有两种情况。在有四支球队的时候，其最大值就是 - 0.25 <em> log2 0.25 - 0.25 </em> log2 0.25 - 0.25 <em> log2 0.25 - 0.25 </em> log2 0.25 = 2 bit，当四支球队夺冠概率不等的时候，熵会小于2 bit。</p>
+<p>数据挖掘分类问题中构建决策树的算法ID3和C4.5，就是对熵的一个典型的应用。<br>以经典的根据天气判断是否打高尔夫球的例子来说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@relation weather.symbolic</span><br><span class="line"></span><br><span class="line">@attribute outlook &#123;sunny, overcast, rainy&#125;</span><br><span class="line">@attribute temperature &#123;hot, mild, cool&#125;</span><br><span class="line">@attribute humidity &#123;high, normal&#125;</span><br><span class="line">@attribute windy &#123;TRUE, FALSE&#125;</span><br><span class="line">@attribute play &#123;yes, no&#125;</span><br><span class="line"></span><br><span class="line">@data</span><br><span class="line">sunny,hot,high,FALSE,no</span><br><span class="line">sunny,hot,high,TRUE,no</span><br><span class="line">overcast,hot,high,FALSE,yes</span><br><span class="line">rainy,mild,high,FALSE,yes</span><br><span class="line">rainy,cool,normal,FALSE,yes</span><br><span class="line">rainy,cool,normal,TRUE,no</span><br><span class="line">overcast,cool,normal,TRUE,yes</span><br><span class="line">sunny,mild,high,FALSE,no</span><br><span class="line">sunny,cool,normal,FALSE,yes</span><br><span class="line">rainy,mild,normal,FALSE,yes</span><br><span class="line">sunny,mild,normal,TRUE,yes</span><br><span class="line">overcast,mild,high,TRUE,yes</span><br><span class="line">overcast,hot,normal,FALSE,yes</span><br><span class="line">rainy,mild,high,TRUE,no</span><br></pre></td></tr></table></figure>
+<p>因为最终的结果只有yes和no两种，判断是否打高尔夫球所需的信息量（熵、不确定性）是1 bit。构建决策树的过程就是通过各种天气特征，来消除不确定性（使熵减少）。</p>
+<p>在选择分裂属性之前会计算一个初始的熵，但这个值却不是刚才提到的1。因为在只知道Class Label的情况下，是有一些经验上的信息的。如训练集中，有9个yes和5个no，这就好比我们知道在两队的交手记录中巴西获胜过几次，所以由此可以推算出现yes的概率是9/14，出现no的概率是5/14。所以初始的熵为 H-init =  - 9/14 <em> log2 9/14 - 5/14 </em> log2 5/14 = 0.94。</p>
+<p>属性是如何使熵减少的呢？假设我们选取的是outlook，则通过这个属性可以将训练集划分成3个集合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sunny,hot,high,FALSE,no</span><br><span class="line">sunny,hot,high,TRUE,no</span><br><span class="line">sunny,mild,high,FALSE,no</span><br><span class="line">sunny,cool,normal,FALSE,yes</span><br><span class="line">sunny,mild,normal,TRUE,yes</span><br><span class="line"></span><br><span class="line">overcast,hot,high,FALSE,yes</span><br><span class="line">overcast,cool,normal,TRUE,yes</span><br><span class="line">overcast,mild,high,TRUE,yes</span><br><span class="line">overcast,hot,normal,FALSE,yes</span><br><span class="line"></span><br><span class="line">rainy,mild,high,FALSE,yes</span><br><span class="line">rainy,cool,normal,FALSE,yes</span><br><span class="line">rainy,cool,normal,TRUE,no</span><br><span class="line">rainy,mild,normal,FALSE,yes</span><br><span class="line">rainy,mild,high,TRUE,no</span><br></pre></td></tr></table></figure>
+<p>某些子集在分割后变得更加纯净了，如当 outlook = overcast 的时候，全部为yes，该子集的熵为0，使得总体的熵（各个子集熵的平均值）减少。<br>H-sunny = - 0.4 <em> log2 0.4 - 0.6 </em> log2 0.6 = 0.971<br>H-overcast = - 1 <em> log2 1 - 0 = 0<br>H-rainy = - 0.6 </em> log2 0.6 - 0.4 <em> log2 0.4 = 0.971<br>H-average = 0.971 </em> 5 / 14 + 0 <em> 4 / 14 + 0.971 </em> 5 / 14 = 0.694</p>
+<p>初始熵与分割后的总体熵的差值，就是信息增益 InfoGain = H-init - H-average = 0.94 - 0.694 = 0.246<br>相当于获得了有用的信息，使判断出结果所需的信息量减少了。所以ID3算法在每次分割时，都选取信息增益最大的属性，这样使用最少的分支判断就可以得到最终的结果。</p>
+<p>熵表示不确定性，可以衡量混乱程度或纯净度，因此也用作分类或聚类结果的评价标准。类似地，在得到了所划分的n个集合后，分别计算每个集合的熵，公式中的n为集合中类别的个数，pi为第i个类别在该集合中出现的概率。如集合中有4个元素，分别属于4个类别，那么这个集合的熵就是2。之后计算各个集合熵的加权平均值，即是整个划分结果的熵。同理，熵越低表示划分得越准确。</p>
+<p><a href="http://www.cnblogs.com/leoo2sk/archive/2010/09/19/1831151.html" target="_blank" rel="external">关于决策树算法的详细介绍</a></p>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得底部有句话会显得比较合适.</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/Recommender-System/Gini_Index/">
+        基尼系数 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Recommender-System/Information_entropy/" data-title="信息熵与分类算法[转]" data-url="http://hlyin.space/Recommender-System/Information_entropy/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

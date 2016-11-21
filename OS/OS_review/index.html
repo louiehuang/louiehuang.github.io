@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>操作系统重点 | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>操作系统重点 | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -98,15 +98,14 @@
   
 
   
-  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
-<!--
-<body class="post-template">
--->
+
+
 <body id="index" class="lightnav animsition">
 
-      <!-- ============================ Off-canvas navigation =========================== -->
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
@@ -134,11 +133,15 @@
 				    
 				    <li><a href="/categories/Computer-Networks/" class="animsition-link">Computer Networks<small>(1)</small></a></li>
 				    
+				    <li><a href="/categories/ImageProcessing/" class="animsition-link">ImageProcessing<small>(1)</small></a></li>
+				    
 				    <li><a href="/categories/Information-Security/" class="animsition-link">Information Security<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/OS/" class="animsition-link">OS<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/ProjectImages/" class="animsition-link">ProjectImages<small>(7)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(4)</small></a></li>
 				    
 				    <li><a href="/categories/blog/" class="animsition-link">blog<small>(3)</small></a></li>
 				    
@@ -224,7 +227,7 @@
         <!-- ============================ Hero Image =========================== -->
 
         <section id="hero" class="scrollme">
-            <div class="container-fluid element-img" style="background: url(http://gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/bg.jpg) no-repeat center center fixed;background-size: cover">
+            <div class="container-fluid element-img" style="background: url(http://gitimage-10031767.cos.myqcloud.com/blog_image/Theme_Image/b1%281192_720%29.jpg) no-repeat center center fixed;background-size: cover">
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
@@ -270,7 +273,7 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h3 id="第一章、操作系统概述"><a href="#第一章、操作系统概述" class="headerlink" title="第一章、操作系统概述"></a><strong>第一章、操作系统概述</strong></h3><p><strong>1、    OS的概念、特性</strong><br><strong>操作系统：</strong>是计算机系统中的一个系统软件，是一些程序模块的集合——它们能以尽量<strong>有效地（系统运行效率和资源利用率）</strong>组织和管理计算机的软硬件资源，<strong>合理（公平，不发生死锁和饥饿）</strong>地组织计算机的工作流程，控制程序的执行，并向用户提供各种服务功能，使得用户能够灵活、<strong>方便（人机界面—包括用户使用界面和程序设计接口的易用性、易维护性）</strong>、有效的使用计算机，并使整个计算机系统能高效地运行；</p>
+      		<h3 id="第一章、操作系统概述"><a href="#第一章、操作系统概述" class="headerlink" title="第一章、操作系统概述"></a><strong>第一章、操作系统概述</strong></h3><p><strong>1、    OS的概念、特性</strong><br><strong>操作系统：</strong>是计算机系统中的一个系统软件，是一些程序模块的集合——它们能以尽量<strong>有效地（系统运行效率和资源利用率）</strong>组织和管理计算机的软硬件资源，<strong>合理（公平，不发生死锁和饥饿）</strong>地组织计算机的工作流程，控制程序的执行，并向用户提供各种服务功能，使得用户能够灵活、<strong>方便（人机界面—-包括用户使用界面和程序设计接口的易用性、易维护性）</strong>、有效的使用计算机，并使整个计算机系统能高效地运行；</p>
 <p><strong>OS特性：</strong></p>
 <blockquote>
 <ul>
@@ -337,6 +340,7 @@
 <p><strong>5、系统调用：</strong>系统调用就是用户在程序中调用操作系统所提供的一些子功能；是特殊的过程滴啊用，由特殊的机器指令实现；除调用子程序外，还使系统转入特权方式，即进入管态；系统调用通常只能由汇编语言直接访问。系统调用是操作系统提供给编程人员的唯一接口，编程人员通过系统调用，动态请求和释放资源；<br>进程控制类、文件操作类、进程通信类、设备管理类、信息维护类；</p>
 <p><strong>ex.课本P99页第6题</strong></p>
 <p><strong>FCFS</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -391,8 +395,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>平均周转时间：（25＋35＋70＋40＋50）/5=44</p>
 <p><strong>SJF</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -447,6 +453,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>平均周转时间：(25+35+70+55+30)/5=43</p>
 <p><br></p>
 <h3 id="第四章、进程管理"><a href="#第四章、进程管理" class="headerlink" title="第四章、进程管理"></a><strong>第四章、进程管理</strong></h3><p><strong>1、    程序的顺序执行的特点；多道程序并发执行的特点</strong><br><strong>（1）程序的顺序执行的特点：</strong>顺序性、封闭性（程序执行结果由初始条件决定，不受外界因素影响）、程序执行结果的确定性、程序执行结果的可再现性；<br><strong>（2）多道程序并发执行的特点：</strong>并发程序在执行期间具有相互制约关系、程序与计算不再一一对应、并发程序执行结果不可再现<br><strong>（3）多道程序环境特点：</strong>独立性、随机性、资源共享性</p>
@@ -458,7 +465,7 @@
 <p><strong>进程互斥：</strong>进程间的间接相互作用构成进程互斥，如多个进程竞争打印机；<br><strong>临界资源：</strong>系统中一些资源一次只允许一个进程使用，这类资源称为临界资源或共享变量；<br><strong>临界区：</strong>在进程中访问临界资源的那一段程序称为临界区；临界区使用原则：有空让进、无空等待、多中择一、有限等待、让权等待（等待态放弃占用CPU）；</p>
 <p><strong>进程同步：</strong>进程同步是指进程之间一种直接的协同工作关系，是一些进程相互合作、共同完成一项任务；进程间的<strong>直接相互作用</strong>构成进程的同步；直接制约问题；<strong>与次序相关（与时间有关，执行时序上的相互制约）；</strong><br><strong>同步机制：</strong>解决进程同步；硬件同步机制、信号量及P、V操作、管程、条件临界域、路径表达式（集中式系统）、远程过程调用（分布式系统）；<br><strong>信号量：</strong>信号量是一种特殊的变量，它的表面形式是<strong>一个整型变量附加一个队列，</strong>而且它只能被特殊的操作（即P操作和V操作）使用；</p>
 <p><strong>P、V操作：</strong>一种简单、易于实现的同步机制，包括P操作和V操作两个原语，P、V操作是对信号量实施操作，用P、V操作可实现进程的同步和互斥；<br><strong>互斥操作时，P、V处于同一进程；同步操作时，不在同一进程中出现；同步P操作和互斥P操作一起出现时，同步P应在互斥P之前；</strong></p>
-<p><strong>4、    进程同步：生产者-消费者问题</strong><br><strong>（1）一个生产者，一个消费者，公用一个缓冲区<br>属于同步问题</strong><br>**</p>
+<p><strong>4、    进程同步：生产者-消费者问题</strong><br><strong>（1）一个生产者，一个消费者，公用一个缓冲区<br>属于同步问题</strong><br>&lt;/h3&gt;**</p>
 <p><strong>1、    程序的顺序执行的特点；多道程序并发执行的特点</strong><br><strong>（1）程序的顺序执行的特点：</strong>顺序性、封闭性（程序执行结果由初始条件决定，不受外界因素影响）、程序执行结果的确定性、程序执行结果的可再现性；<br><strong>（2）多道程序并发执行的特点：</strong>并发程序在执行期间具有相互制约关系、程序与计算不再一一对应、并发程序执行结果不可再现<br><strong>（3）多道程序环境特点：</strong>独立性、随机性、资源共享性</p>
 <p><strong>2、    进程的概念；进程的状态及变迁；原语</strong><br><strong>（1） 进程：</strong>进程是具有一定独立功能的程序关于某个数据集上的一次运行活动，是资源分配和调度的一个基本单位；<br><strong>进程与程序的联系：</strong>程序是进程的组成部分之一，从静态角度看，进程由程序、数据和PCB组成；一个进程可以执行多个程序，一个程序可以构成多个进程；<br><strong>进程与程序的区别：</strong>程序是静态的，进程是动态的；<br><strong>进程的特性：</strong>并发、动态、独立、交往、异步；</p>
 <p><strong>PCB：</strong>为了便于系统控制和描述进程活动过程而在操作系统核心中为进程所定义的一个专门的数据结构，系统利用PCB来描述进程的基本情况以及进程的运行变化过程；<strong>PCB是进程存在的唯一标志；P</strong>CB的内容可分为<strong>调度信息和现场信息</strong>两大部分；<br><strong>PCB组织方式：</strong>线性方式、索引方式、链接方式；<br><strong>进程队列：</strong>就绪队列、等待队列、运行队列；</p>
@@ -475,8 +482,8 @@
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/Android/Android_ListView_opt/" style="float: left;">
-        ← Android ListView优化
+    <a class="pull-left" href="/ImageProcessing/PolygonCentroid/" style="float: left;">
+        ← 多边形质心计算
     </a>
     
     
@@ -580,7 +587,24 @@ var duoshuoQuery = {short_name:"louiehuang"};
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
 })();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 </html>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hlyin.space/"/>
-  <updated>2016-07-28T17:03:06.000Z</updated>
+  <updated>2016-11-21T14:53:35.000Z</updated>
   <id>http://hlyin.space/</id>
   
   <author>
@@ -14,6 +14,339 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>信息熵与分类算法[转]</title>
+    <link href="http://hlyin.space/Recommender-System/Information_entropy/"/>
+    <id>http://hlyin.space/Recommender-System/Information_entropy/</id>
+    <published>2016-09-19T16:00:00.000Z</published>
+    <updated>2016-11-21T14:53:35.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;a href=&quot;http://gaofeihang.blog.163.com/blog/static/8450828520128139648199/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;转载链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在介绍熵之前，先从另一个概念说起：信息量&lt;/p&gt;
+&lt;p&gt;世界杯决赛的两支球队中，哪支球队获得了冠军？在对球队实力没有任何了解的情况下，每支球队夺冠的概率都是1/2，&lt;br&gt;所以谁获得冠军这条信息的信息量是 $-log&lt;em&gt;{2}{\frac{1}{2}} = 1$ bit&lt;br&gt;如果信息是四强中的球队谁获得了冠军，它的信息量是 $-log&lt;/em&gt;{2}{\frac{1}{4}} = 2$ bit&lt;/p&gt;
+&lt;p&gt;其实这正好对应了计算机对数字的表示，如果用二进制表示，每一位出现0和1的概率都是1/2，所以每一位的信息量是1bit。如果用十六进制表示，每一位出现任意一个符号的概率是1/16，所以每一位能表示 $-log&lt;em&gt;{2} {\frac{1}{16}} = 4$ bit。所以1位十六进制的信息量，和4位二进制信息量是相同的。&lt;br&gt;（求表示2种可能性最少需要几个数，$log&lt;/em&gt;{2}{2} = 1$，求表示4种可能性最少需要几个数，$log_{2}{4} = 2$ …）&lt;/p&gt;
+&lt;p&gt;这样就比较好理解另一个经典的例子，英文有26个字母，假设每个字母出现的概率是一样的，每个字母的信息量就是 - log2 1/26 = 4.7；常用的汉字有2500个，每个汉字的信息量是 - log2 1/2500 = 11.3。所以在信息量相同的情况下，使用的汉字要比英文字母要少——这其实就是十六进制和二进制的区别，在这个例子中，apple成了5位26进制的数值，信息量4.7 &lt;em&gt; 5 = 23.5；而苹果成为2位2500进制的数值，信息量11.3 &lt;/em&gt; 2 = 22.6。虽然表示的方式不同，但信息量差不多（这是一个很巧合的例子，仅用于说明信息量的含义，大多数词语都不会这么接近）。&lt;/p&gt;
+&lt;p&gt;在实际的情况中，每种可能情况出现的概率并不是相同的，所以熵（entropy）就用来衡量整个系统的平均信息量，其计算公式如下：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;H_{s} = \sum_{i=1}^{n}{p_{i} \cdot I_{e}} = - \sum_{i=1}^{n}{}p_{i} \cdot log_{2}{p_{i}}&lt;/script&gt;&lt;p&gt;（推荐系统中，$p_i = \frac{物品i的流行度}{所有物品流行度之和}$）&lt;/p&gt;
+&lt;p&gt;熵是平均信息量，也可以理解为不确定性。例如进行决赛的巴西和南非，假设根据经验判断，巴西夺冠的几率是80%，南非夺冠的几率是20%，则谁能获得冠军的信息量就变为 - 0.8 &lt;em&gt; log2 0.8 - 0.2 &lt;/em&gt; log2 0.2 = 0.257 + 0.464 = 0.721，小于1 bit了。经验减少了判断所需的信息量，消除了不确定性。&lt;/p&gt;
+&lt;p&gt;而且通过计算可以发现，巴西夺冠的几率越高，计算出的熵就越小，即越是确定的情况，不确定性越小，信息量越少。如果巴西100%夺冠，那么熵是0，相当于没有任何信息。当两队几率都是50%最难判断，所熵达到最大值1。其实之前的 - log2 1/2 = 1 bit 是简化了的计算过程，其结果也是通过熵的公式来计算的 - 0.5 &lt;em&gt; log2 0.5 - 0.5 &lt;/em&gt; log2 0.5 = 1 bit，计算信息量要综合考虑每种结果的可能性。&lt;/p&gt;
+&lt;p&gt;另一个会迷惑的问题是熵会大于1吗？答案当然是肯定的，刚刚计算的最大值为1bit，是因为最终的结果只有两种情况。在有四支球队的时候，其最大值就是 - 0.25 &lt;em&gt; log2 0.25 - 0.25 &lt;/em&gt; log2 0.25 - 0.25 &lt;em&gt; log2 0.25 - 0.25 &lt;/em&gt; log2 0.25 = 2 bit，当四支球队夺冠概率不等的时候，熵会小于2 bit。&lt;/p&gt;
+&lt;p&gt;数据挖掘分类问题中构建决策树的算法ID3和C4.5，就是对熵的一个典型的应用。&lt;br&gt;以经典的根据天气判断是否打高尔夫球的例子来说明&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@relation weather.symbolic&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@attribute outlook &amp;#123;sunny, overcast, rainy&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@attribute temperature &amp;#123;hot, mild, cool&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@attribute humidity &amp;#123;high, normal&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@attribute windy &amp;#123;TRUE, FALSE&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@attribute play &amp;#123;yes, no&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@data&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sunny,hot,high,FALSE,no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sunny,hot,high,TRUE,no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;overcast,hot,high,FALSE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rainy,mild,high,FALSE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rainy,cool,normal,FALSE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rainy,cool,normal,TRUE,no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;overcast,cool,normal,TRUE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sunny,mild,high,FALSE,no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sunny,cool,normal,FALSE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rainy,mild,normal,FALSE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sunny,mild,normal,TRUE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;overcast,mild,high,TRUE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;overcast,hot,normal,FALSE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rainy,mild,high,TRUE,no&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;因为最终的结果只有yes和no两种，判断是否打高尔夫球所需的信息量（熵、不确定性）是1 bit。构建决策树的过程就是通过各种天气特征，来消除不确定性（使熵减少）。&lt;/p&gt;
+&lt;p&gt;在选择分裂属性之前会计算一个初始的熵，但这个值却不是刚才提到的1。因为在只知道Class Label的情况下，是有一些经验上的信息的。如训练集中，有9个yes和5个no，这就好比我们知道在两队的交手记录中巴西获胜过几次，所以由此可以推算出现yes的概率是9/14，出现no的概率是5/14。所以初始的熵为 H-init =  - 9/14 &lt;em&gt; log2 9/14 - 5/14 &lt;/em&gt; log2 5/14 = 0.94。&lt;/p&gt;
+&lt;p&gt;属性是如何使熵减少的呢？假设我们选取的是outlook，则通过这个属性可以将训练集划分成3个集合&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sunny,hot,high,FALSE,no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sunny,hot,high,TRUE,no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sunny,mild,high,FALSE,no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sunny,cool,normal,FALSE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sunny,mild,normal,TRUE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;overcast,hot,high,FALSE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;overcast,cool,normal,TRUE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;overcast,mild,high,TRUE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;overcast,hot,normal,FALSE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rainy,mild,high,FALSE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rainy,cool,normal,FALSE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rainy,cool,normal,TRUE,no&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rainy,mild,normal,FALSE,yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rainy,mild,high,TRUE,no&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;某些子集在分割后变得更加纯净了，如当 outlook = overcast 的时候，全部为yes，该子集的熵为0，使得总体的熵（各个子集熵的平均值）减少。&lt;br&gt;H-sunny = - 0.4 &lt;em&gt; log2 0.4 - 0.6 &lt;/em&gt; log2 0.6 = 0.971&lt;br&gt;H-overcast = - 1 &lt;em&gt; log2 1 - 0 = 0&lt;br&gt;H-rainy = - 0.6 &lt;/em&gt; log2 0.6 - 0.4 &lt;em&gt; log2 0.4 = 0.971&lt;br&gt;H-average = 0.971 &lt;/em&gt; 5 / 14 + 0 &lt;em&gt; 4 / 14 + 0.971 &lt;/em&gt; 5 / 14 = 0.694&lt;/p&gt;
+&lt;p&gt;初始熵与分割后的总体熵的差值，就是信息增益 InfoGain = H-init - H-average = 0.94 - 0.694 = 0.246&lt;br&gt;相当于获得了有用的信息，使判断出结果所需的信息量减少了。所以ID3算法在每次分割时，都选取信息增益最大的属性，这样使用最少的分支判断就可以得到最终的结果。&lt;/p&gt;
+&lt;p&gt;熵表示不确定性，可以衡量混乱程度或纯净度，因此也用作分类或聚类结果的评价标准。类似地，在得到了所划分的n个集合后，分别计算每个集合的熵，公式中的n为集合中类别的个数，pi为第i个类别在该集合中出现的概率。如集合中有4个元素，分别属于4个类别，那么这个集合的熵就是2。之后计算各个集合熵的加权平均值，即是整个划分结果的熵。同理，熵越低表示划分得越准确。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/leoo2sk/archive/2010/09/19/1831151.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;关于决策树算法的详细介绍&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://gaofeihang.blog.163.com/blog/static/8450828520128139648199/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;转载链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在介绍熵之前，先从另一个概
+    
+    </summary>
+    
+      <category term="Recommender System" scheme="http://hlyin.space/categories/Recommender-System/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>基尼系数</title>
+    <link href="http://hlyin.space/Recommender-System/Gini_Index/"/>
+    <id>http://hlyin.space/Recommender-System/Gini_Index/</id>
+    <published>2016-09-18T16:00:00.000Z</published>
+    <updated>2016-11-21T14:47:54.000Z</updated>
+    
+    <content type="html">&lt;p&gt;基尼系数(Gini Index)是一个经济学概念，是20世纪初意大利经济学家基尼（实际应为赫希曼提出）根据洛伦茨曲线提出的判断分配平等程度的指标，用来描述收入整体差距程度。&lt;/p&gt;
+&lt;p&gt;基尼系数和信息熵这两个指标可以用来定义推荐系统的覆盖率（描述一个推荐系统对物品长尾的发掘能力，覆盖率最简单的一个定义为推荐系统能够推荐出来的物品占总物品集合的比例）&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h3 id=&quot;经济学中基尼系数的意义&quot;&gt;&lt;a href=&quot;#经济学中基尼系数的意义&quot; class=&quot;headerlink&quot; title=&quot;经济学中基尼系数的意义&quot;&gt;&lt;/a&gt;经济学中基尼系数的意义&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/blog_image/recommeder_system/Gini_Index_1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;X轴为人口百分比，Y轴为收入百分比，其中人口按照收入从低到高排序过，即越接近原点的人口收入越低&lt;br&gt;如果各层次人民收入完全均等，那么对应一条 y=x 的线段，即最贫穷的人和最富的人收入相等&lt;br&gt;而实际的情况由洛伦兹曲线表示，贫富差距越大，最接近原点的人口(X)对应的收入(Y)增长最小，最远离原点的人口(X)对应的收入(Y)增长最小，即弯曲程度越大，收入分配越不平等。&lt;/p&gt;
+&lt;p&gt;基尼系数定义为 $G = \frac{A}{A + B}$&lt;/p&gt;
+&lt;p&gt;山西农业大学张建华先生提出了一个简便易用的公式：假定一定数量的人口按收入由低到高顺序排队，分为人数相等的n组，从第1组到第i组人口累计收入占全部人口总收入的比重为$W_{i}$，则说明：该公式是利用定积分的定义将对洛伦茨曲线的积分(面积B)分成n个等高梯形的面积之和得到的。&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;G = 1 - \frac{1}{n}(2\sum_{i=1}^{n-1}{W_{i}+1})&lt;/script&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h3 id=&quot;应用到推荐系统中&quot;&gt;&lt;a href=&quot;#应用到推荐系统中&quot; class=&quot;headerlink&quot; title=&quot;应用到推荐系统中&quot;&gt;&lt;/a&gt;应用到推荐系统中&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/blog_image/recommeder_system/Gini_Index_2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;X轴人口换成物品（按照流行度从低到高排列），Y轴收入换成流行度，那么洛伦兹曲线即表示最不流行的x%物品的总流行度占推荐系统的比例y%&lt;/p&gt;
+&lt;p&gt;同样，基尼系数定义为 $G = \frac{A}{A + B}$&lt;/p&gt;
+&lt;p&gt;若系统中物品的流行度很平均，那么A就很小，从而基尼系数很小，若系统物品流行度分配很不平均，那么A很大，从而基尼系数很大，即可以从基尼系数判断系统物品流行度的分配，从而定义覆盖率。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;基尼系数(Gini Index)是一个经济学概念，是20世纪初意大利经济学家基尼（实际应为赫希曼提出）根据洛伦茨曲线提出的判断分配平等程度的指标，用来描述收入整体差距程度。&lt;/p&gt;
+&lt;p&gt;基尼系数和信息熵这两个指标可以用来定义推荐系统的覆盖率（描述一个推荐系统对物品长尾的发
+    
+    </summary>
+    
+      <category term="Recommender System" scheme="http://hlyin.space/categories/Recommender-System/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>召回率准确率</title>
+    <link href="http://hlyin.space/Recommender-System/Precision&Recall/"/>
+    <id>http://hlyin.space/Recommender-System/Precision&Recall/</id>
+    <published>2016-09-11T16:00:00.000Z</published>
+    <updated>2016-11-21T14:42:43.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;一、信息检索中：&quot;&gt;&lt;a href=&quot;#一、信息检索中：&quot; class=&quot;headerlink&quot; title=&quot;一、信息检索中：&quot;&gt;&lt;/a&gt;一、信息检索中：&lt;/h3&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;召回率又叫查全率，是针对原来的&lt;strong&gt;样本&lt;/strong&gt;而言的，表示相关的文档中有多少被检索了出来；&lt;/li&gt;
+&lt;li&gt;准确率又叫查准率，是针对&lt;strong&gt;预测结果&lt;/strong&gt;而言，表示检索出的文档中有多少是相关(准确)的；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/blog_image/recommeder_system/precision%26recall_1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;A = 检索到且相关文件； &lt;/li&gt;
+&lt;li&gt;B = 检索到且不相关文件； &lt;/li&gt;
+&lt;li&gt;C = 未检索到且相关文件； &lt;/li&gt;
+&lt;li&gt;D = 未检索到且不相关文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;召回率(Recall) = \frac{系统检索到的\textbf{相关文件}}{系统\textbf{所有相关的}文件总数} = \frac{A}{A + C}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;准确率(Precision) =  \frac{系统检索到的\textbf{相关文件}A}{系统\textbf{所有检索到的}文件总数B} = \frac{A}{A + B}&lt;/script&gt;&lt;p&gt;&lt;strong&gt;举例：&lt;/strong&gt;&lt;br&gt;假设一共有10篇文章，其中4篇是我需要的。&lt;br&gt;某个算法计算认为10篇文章中有5篇是我需要的，但是实际上，在这5篇里面，只有3篇才是我真正需要的。&lt;/p&gt;
+&lt;p&gt;那么，这个算法&lt;br&gt;Recall=3/4=75%，也就是说，一共有用的这4篇里面，到了其中3篇。&lt;br&gt;Precision=3/5=60%，也就是说，算法找的这5篇，有3篇是准确的。&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;准确率和召回率是互相影响的，理想情况下期望两者都高，但是一般准确率高时召回率低，召回率低时准确率高&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;阈值不同时，可以得到不同的准确率与召回率&lt;/p&gt;
+&lt;p&gt;如果在以召回率为X轴，准确率为Y轴，画出不同阈值下的准确率与召回率，一般它会程下图形状：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/blog_image/recommeder_system/precision%26recall_2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;表示意义：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;左上方，召回率低准确率高：返回最相关的文本但漏掉了很多其他相关文本&lt;/li&gt;
+&lt;li&gt;右下方，召回率高准确率低：返回了大量相关文本但包含了很多垃圾（相关但无用）&lt;/li&gt;
+&lt;li&gt;理想情况是能够到达右上方&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h3 id=&quot;二、推荐系统中：&quot;&gt;&lt;a href=&quot;#二、推荐系统中：&quot; class=&quot;headerlink&quot; title=&quot;二、推荐系统中：&quot;&gt;&lt;/a&gt;二、推荐系统中：&lt;/h3&gt;&lt;p&gt;TopN推荐的预测准确率一般通过准确率(precision) / 召回率(recall)度量。&lt;/p&gt;
+&lt;p&gt;令R(u)是根据用户在&lt;strong&gt;训练集&lt;/strong&gt;上的行为给用户做出的推荐列表，&lt;br&gt;令T(u)是用户在&lt;strong&gt;测试集&lt;/strong&gt;上的行为列表，那么&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Recall = \frac{\sum_{u∈U}^{}|R(u)\bigcap{T(u)}|}{\sum_{u∈U}^{}|T(u)|}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Precision = \frac{\sum_{u∈U}^{}|R(u)\bigcap{T(u)}|}{\sum_{u∈U}^{}|R(u)|}&lt;/script&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;召回率表示的是用户感兴趣的有多少被正确预测出来&lt;/li&gt;
+&lt;li&gt;准确率表示的是推荐的结果中有多少是用户感兴趣的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;参考链接:&lt;br&gt;[1] &lt;a href=&quot;http://charleshm.github.io/2016/03/Model-Performance/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;机器学习性能评估指标&lt;/a&gt;&lt;br&gt;[2] &lt;a href=&quot;http://blog.csdn.net/wangzhiqing3/article/details/9058523&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;准确率与召回率&lt;/a&gt;&lt;br&gt;[3] 项亮，推荐系统实践&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;一、信息检索中：&quot;&gt;&lt;a href=&quot;#一、信息检索中：&quot; class=&quot;headerlink&quot; title=&quot;一、信息检索中：&quot;&gt;&lt;/a&gt;一、信息检索中：&lt;/h3&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;召回率又叫查全率，是针对原来的&lt;strong&gt;样本&lt;/
+    
+    </summary>
+    
+      <category term="Recommender System" scheme="http://hlyin.space/categories/Recommender-System/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Markdown中的基本LaTeX数学公式</title>
+    <link href="http://hlyin.space/Recommender-System/Latex_in_Markdown/"/>
+    <id>http://hlyin.space/Recommender-System/Latex_in_Markdown/</id>
+    <published>2016-08-09T16:00:00.000Z</published>
+    <updated>2016-11-21T14:45:06.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;strong&gt;1. 和号和积分号&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;显示&lt;/th&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;显示&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;\sum_{i=1}^{N}&lt;/td&gt;
+&lt;td&gt;$\sum_{i=1}^{N}$&lt;/td&gt;
+&lt;td&gt;\int_{a}^{b}&lt;/td&gt;
+&lt;td&gt;$\int_{a}^{b}$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\prod&lt;/td&gt;
+&lt;td&gt;$\prod$&lt;/td&gt;
+&lt;td&gt;\iint&lt;/td&gt;
+&lt;td&gt;$\iint$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\prod_{i=1}^{N}&lt;/td&gt;
+&lt;td&gt;$\prod_{i=1}^{N}$&lt;/td&gt;
+&lt;td&gt;\iint_{a}^{b}&lt;/td&gt;
+&lt;td&gt;$\iint_{a}^{b}$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\bigcup&lt;/td&gt;
+&lt;td&gt;$\bigcup$&lt;/td&gt;
+&lt;td&gt;\bigcap&lt;/td&gt;
+&lt;td&gt;$\bigcap$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\bigcup_{i=1}^{N}&lt;/td&gt;
+&lt;td&gt;$\bigcup_{i=1}^{N}$&lt;/td&gt;
+&lt;td&gt;\bigcap_{i=1}^{N}&lt;/td&gt;
+&lt;td&gt;$\bigcap_{i=1}^{N}$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. 其它常用命令&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;显示&lt;/th&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;显示&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;\sqrt[3]{2}&lt;/td&gt;
+&lt;td&gt;$\sqrt[3]{2}$&lt;/td&gt;
+&lt;td&gt;\sqrt{2}&lt;/td&gt;
+&lt;td&gt;$\sqrt{2}$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;x^{3}&lt;/td&gt;
+&lt;td&gt;$x^{3}$&lt;/td&gt;
+&lt;td&gt;x_{3}&lt;/td&gt;
+&lt;td&gt;$x_{3}$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\lim_{x \to 0}&lt;/td&gt;
+&lt;td&gt;$\lim_{x \to 0}$&lt;/td&gt;
+&lt;td&gt;\frac{x}{y}&lt;/td&gt;
+&lt;td&gt;$\frac{x}{y}$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. 希腊字母&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;显示&lt;/th&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;显示&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;\alpha&lt;/td&gt;
+&lt;td&gt;$\alpha$&lt;/td&gt;
+&lt;td&gt;\xi&lt;/td&gt;
+&lt;td&gt;$\xi$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\beta&lt;/td&gt;
+&lt;td&gt;$\beta$&lt;/td&gt;
+&lt;td&gt;\nu&lt;/td&gt;
+&lt;td&gt;$\nu$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\gamma&lt;/td&gt;
+&lt;td&gt;$\gamma$&lt;/td&gt;
+&lt;td&gt;\pi&lt;/td&gt;
+&lt;td&gt;$\pi$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\delta&lt;/td&gt;
+&lt;td&gt;$\delta$&lt;/td&gt;
+&lt;td&gt;\rho&lt;/td&gt;
+&lt;td&gt;$\rho$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\epsilon&lt;/td&gt;
+&lt;td&gt;$\epsilon$&lt;/td&gt;
+&lt;td&gt;\sigma&lt;/td&gt;
+&lt;td&gt;$\sigma$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\zeta&lt;/td&gt;
+&lt;td&gt;$\zeta$&lt;/td&gt;
+&lt;td&gt;\tau&lt;/td&gt;
+&lt;td&gt;$\tau$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\eta&lt;/td&gt;
+&lt;td&gt;$\eta$&lt;/td&gt;
+&lt;td&gt;\upsilon&lt;/td&gt;
+&lt;td&gt;$\upsilon$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\theta&lt;/td&gt;
+&lt;td&gt;$\theta$&lt;/td&gt;
+&lt;td&gt;\phi&lt;/td&gt;
+&lt;td&gt;$\phi$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\iota&lt;/td&gt;
+&lt;td&gt;$\iota$&lt;/td&gt;
+&lt;td&gt;\chi&lt;/td&gt;
+&lt;td&gt;$\chi$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\kappa&lt;/td&gt;
+&lt;td&gt;$\kappa$&lt;/td&gt;
+&lt;td&gt;\psi&lt;/td&gt;
+&lt;td&gt;$\psi$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\lambda&lt;/td&gt;
+&lt;td&gt;$\lambda$&lt;/td&gt;
+&lt;td&gt;\omega&lt;/td&gt;
+&lt;td&gt;$\omega$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\mu&lt;/td&gt;
+&lt;td&gt;$\mu$&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;1. 和号和积分号&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;显示&lt;/th&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;显示&lt;/th&gt;
+&lt;/tr&gt;
+&lt;
+    
+    </summary>
+    
+      <category term="Recommender System" scheme="http://hlyin.space/categories/Recommender-System/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>WP字帖[效果图]</title>
@@ -339,62 +672,62 @@
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&quot;三、部分代码解释&quot;&gt;&lt;a href=&quot;#三、部分代码解释&quot; class=&quot;headerlink&quot; title=&quot;三、部分代码解释&quot;&gt;&lt;/a&gt;三、部分代码解释&lt;/h3&gt;&lt;p&gt;预处理时将16位16进制char数组转成64位2进制数组，在S盒变换时，需要将S盒中行列对应的16进制元素（1位）转换成2进制（4位），在这两个地方使用16进制转2进制，代码如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/***16进制数组转2进制数组(16元素)，输入M和K时使用(64位)以及S盒变换时使用(4位)***/&lt;/span&gt;
-&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; * HexToBi(&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *hexArray)
+&lt;pre&gt;&lt;code class=&quot;lang-java&quot;&gt;/***16进制数组转2进制数组(16元素)，输入M和K时使用(64位)以及S盒变换时使用(4位)***/
+char * HexToBi(char *hexArray)
 {
-    toUpper(hexArray); &lt;span class=&quot;comment&quot;&gt;//小写转大写&lt;/span&gt;
-    &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; * biArray = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[&lt;span class=&quot;number&quot;&gt;65&lt;/span&gt;];
-    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; index = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;
-    &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *p = hexArray;
-        &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt;(*p)&lt;span class=&quot;comment&quot;&gt;//字符串不结束就循环&lt;/span&gt;
+    toUpper(hexArray); //小写转大写
+    char * biArray = new char[65];
+    int index = 0;
+    char *p = hexArray;
+        while(*p)//字符串不结束就循环
         {
         string temp;
-        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(*p&amp;gt;=&lt;span class=&quot;string&quot;&gt;&#39;0&#39;&lt;/span&gt; &amp;amp;&amp;amp; *p &amp;lt;=&lt;span class=&quot;string&quot;&gt;&#39;9&#39;&lt;/span&gt;) &lt;span class=&quot;comment&quot;&gt;//数字&lt;/span&gt;
+        if(*p&amp;gt;=&amp;#39;0&amp;#39; &amp;amp;&amp;amp; *p &amp;lt;=&amp;#39;9&amp;#39;) //数字
             {
-            temp = HexBiTable[*p - &lt;span class=&quot;number&quot;&gt;48&lt;/span&gt;];
+            temp = HexBiTable[*p - 48];
         }
-        &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(*p&amp;gt;=&lt;span class=&quot;string&quot;&gt;&#39;A&#39;&lt;/span&gt; &amp;amp;&amp;amp; *p &amp;lt;=&lt;span class=&quot;string&quot;&gt;&#39;F&#39;&lt;/span&gt;) &lt;span class=&quot;comment&quot;&gt;//A~F字符&lt;/span&gt;
+        else if(*p&amp;gt;=&amp;#39;A&amp;#39; &amp;amp;&amp;amp; *p &amp;lt;=&amp;#39;F&amp;#39;) //A~F字符
         {
-            temp = HexBiTable[*p - &lt;span class=&quot;number&quot;&gt;65&lt;/span&gt; + &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;];
+            temp = HexBiTable[*p - 65 + 10];
         }
-        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;; i++, index++)
+        for(int i = 0; i &amp;lt; 4; i++, index++)
         {
             biArray[index] = temp[i];
         }
-        p++; &lt;span class=&quot;comment&quot;&gt;//指针后指，准备处理下一个字母&lt;/span&gt;
+        p++; //指针后指，准备处理下一个字母
         }
 
-    biArray[index] = &lt;span class=&quot;string&quot;&gt;&#39;\0&#39;&lt;/span&gt;;
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; biArray;
+    biArray[index] = &amp;#39;\0&amp;#39;;
+    return biArray;
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;考虑到这里的需求是16进制char数组转2进制char数组，而不是16进制整型转2进制，因此相比于类型转换后辗转相除，采用的是查表HexBiTable替换更为有效。&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;产生子密钥：&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;置换选择1：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;c++&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; * realKey = new &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[&lt;span class=&quot;number&quot;&gt;57&lt;/span&gt;]; realKey[&lt;span class=&quot;number&quot;&gt;56&lt;/span&gt;] = &lt;span class=&quot;string&quot;&gt;&#39;\0&#39;&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//56位有效密钥    &lt;/span&gt;
-&lt;span class=&quot;comment&quot;&gt;/**置换选择1，64位中选择56位得到实际使用的56位密钥**/&lt;/span&gt;
-&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span class=&quot;number&quot;&gt;56&lt;/span&gt;; i++)
-{
-    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; index = PC1Table[i] - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//-1后才是在数组中的实际下标 &lt;/span&gt;
-    realKey[i] = BiKey[index];
-}
-&lt;span class=&quot;comment&quot;&gt;//cout&amp;lt;&amp;lt;realKey&amp;lt;&amp;lt;endl;&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-c++&quot;&gt;    char * realKey = new char[57]; realKey[56] = &amp;#39;\0&amp;#39;; //56位有效密钥    
+    /**置换选择1，64位中选择56位得到实际使用的56位密钥**/
+    for(int i = 0; i &amp;lt; 56; i++)
+    {
+        int index = PC1Table[i] - 1; //-1后才是在数组中的实际下标 
+        realKey[i] = BiKey[index];
+    }
+    //cout&amp;lt;&amp;lt;realKey&amp;lt;&amp;lt;endl;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;通过查表PC1Table，即置换选择1，得到应替换元素的位置，需要减1得到在数组中的下标，for循环56次，得到56位的置换选择后的56位密钥，每次置换选择在原64位密钥BiKey中查找。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;循环左移：&lt;/strong&gt;&lt;br&gt;循环左移n位，通过3次逆序使时间复杂度降为O(n)，如循环左移2位10010011，则先逆序前2位得到01，再逆序后所有位得到110010，此时即为01110010，最后逆序所有位，得到01001110，即为最终结果。&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;c++&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/***循环左移n位，复杂度0(n)，通过三次逆序实现***/&lt;/span&gt;
-&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;LeftShift&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; * arr, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt;
-&lt;/span&gt;{
-    Reverse(arr, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, n - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//逆序前n位&lt;/span&gt;
-    Reverse(arr, n, &lt;span class=&quot;number&quot;&gt;28&lt;/span&gt; - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//逆序后所有位&lt;/span&gt;
-    Reverse(arr, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;28&lt;/span&gt; - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//逆序所有位&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-c++&quot;&gt;/***循环左移n位，复杂度0(n)，通过三次逆序实现***/
+void LeftShift(char * arr, int n)
+{
+    Reverse(arr, 0, n - 1); //逆序前n位
+    Reverse(arr, n, 28 - 1); //逆序后所有位
+    Reverse(arr, 0, 28 - 1); //逆序所有位
 }
 
-&lt;span class=&quot;comment&quot;&gt;/***逆序排列***/&lt;/span&gt;
-&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Reverse&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *arr, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; begin, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; end)&lt;/span&gt;
-&lt;/span&gt;{
-    &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; temp;
-    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;( ; begin &amp;lt; end; begin++, end--)
+/***逆序排列***/
+void Reverse(char *arr, int begin, int end)
+{
+    char temp;
+    for( ; begin &amp;lt; end; begin++, end--)
     {
         temp = arr[end];
         arr[end] = arr[begin];
@@ -405,51 +738,51 @@
 &lt;p&gt;在对明文的处理中的置换基本类同与置换选择1的实现，得到48位的扩展R后进行S盒变换，实现为将扩展R分成8组，每组6位，进行8轮的循环，每个循环中对1个组使用S盒变换，循环中先获取当前轮进行变换的6位输入group，如下：&lt;/p&gt;
 &lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; group[&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;]; group[&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;] = &lt;span class=&quot;string&quot;&gt;&#39;\0&#39;&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//1组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;; i++)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	group[i] = ExtendedR[s * &lt;span class=&quot;number&quot;&gt;6&lt;/span&gt; + i]; &lt;span class=&quot;comment&quot;&gt;//6位1组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;得到group后需据此获取在S盒中的行和列下标用来获取S盒对应的元素值，这里以group=”010001”为例，行即为01，列为1000，需要将2进制转成10进制以得到下标，为方便计算，将行表示为0001，这样仍通过查表HexBiTable来获取，这里仅仅就只是为了方便，其实并不好… 此时line=”0001”，column=”1000”，查表值0001对应的下标为1，1000对应的下标为8，所以在S盒中行下标x=1，列下标y=8，查S[i][x][y]得到对应的元素，以S1为例，即i=0，此时元素值为10，最后需要将整型的10转成4位的2进制数组，得到1010，代码如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;c++&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//16进制字符串转10进制整型&lt;/span&gt;
-&lt;span class=&quot;comment&quot;&gt;//如一组为010001，则line=&quot;0001&quot;, colum=&quot;1000&quot;，则x=1, y=8&lt;/span&gt;
-&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; x, y; &lt;span class=&quot;comment&quot;&gt;//x为在S盒中的行下标，y为列下标&lt;/span&gt;
-&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *line = new &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;]; line[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;] = &lt;span class=&quot;string&quot;&gt;&#39;\0&#39;&lt;/span&gt;;
-&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *column = new &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;]; column[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;] = &lt;span class=&quot;string&quot;&gt;&#39;\0&#39;&lt;/span&gt;;
-line[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;] = &lt;span class=&quot;string&quot;&gt;&#39;0&#39;&lt;/span&gt;; line[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] = &lt;span class=&quot;string&quot;&gt;&#39;0&#39;&lt;/span&gt;; line[&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;] = group[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]; line[&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;] = group[&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;]; &lt;span class=&quot;comment&quot;&gt;//01即为00 01&lt;/span&gt;
-column[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;] = group[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;]; column[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] = group[&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;]; column[&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;] = group[&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;]; column[&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;] = group[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;];
+&lt;pre&gt;&lt;code class=&quot;lang-c++&quot;&gt;//16进制字符串转10进制整型
+//如一组为010001，则line=&amp;quot;0001&amp;quot;, colum=&amp;quot;1000&amp;quot;，则x=1, y=8
+int x, y; //x为在S盒中的行下标，y为列下标
+char *line = new char[5]; line[4] = &amp;#39;\0&amp;#39;;
+char *column = new char[5]; column[4] = &amp;#39;\0&amp;#39;;
+line[0] = &amp;#39;0&amp;#39;; line[1] = &amp;#39;0&amp;#39;; line[2] = group[0]; line[3] = group[5]; //01即为00 01
+column[0] = group[1]; column[1] = group[2]; column[2] = group[3]; column[3] = group[4];
 
-&lt;span class=&quot;comment&quot;&gt;//通过HexBiTable找到2进制对应的10进制（数组下标）&lt;/span&gt;
-&lt;span class=&quot;keyword&quot;&gt;bool&lt;/span&gt; xflag = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;, yflag = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;; 
-&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span class=&quot;number&quot;&gt;16&lt;/span&gt;; i++)
+//通过HexBiTable找到2进制对应的10进制（数组下标）
+bool xflag = true, yflag = true; 
+for(int i = 0; i &amp;lt; 16; i++)
 {
-    xflag = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;; yflag = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;; 
-    &lt;span class=&quot;comment&quot;&gt;//找行和列，比对HexBiTable[i]和column，若相等，则column所对应的列下标即为i（间接的2进制转10进制）&lt;/span&gt;
-    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; j = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; j &amp;lt; &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;; j++)
+    xflag = true; yflag = true; 
+    //找行和列，比对HexBiTable[i]和column，若相等，则column所对应的列下标即为i（间接的2进制转10进制）
+    for(int j = 0; j &amp;lt; 4; j++)
     {
-        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(line[j] != HexBiTable[i][j]) &lt;span class=&quot;comment&quot;&gt;//不相等&lt;/span&gt;
-            xflag = &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;; 
-        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(column[j] != HexBiTable[i][j]) &lt;span class=&quot;comment&quot;&gt;//不相等&lt;/span&gt;
-            yflag = &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;; 
+        if(line[j] != HexBiTable[i][j]) //不相等
+            xflag = false; 
+        if(column[j] != HexBiTable[i][j]) //不相等
+            yflag = false; 
     }
-    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(xflag == &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;)
+    if(xflag == true)
     {
         x = i;
     }
-    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(yflag == &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;)
+    if(yflag == true)
     {
         y = i;
     }
 }
-&lt;span class=&quot;comment&quot;&gt;//cout&amp;lt;&amp;lt;x&amp;lt;&amp;lt;&quot;, &quot;&amp;lt;&amp;lt;y&amp;lt;&amp;lt;endl;&lt;/span&gt;
+//cout&amp;lt;&amp;lt;x&amp;lt;&amp;lt;&amp;quot;, &amp;quot;&amp;lt;&amp;lt;y&amp;lt;&amp;lt;endl;
 
-&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; target = SBox[s][x][y]; &lt;span class=&quot;comment&quot;&gt;//获取S盒对应行列的元素&lt;/span&gt;
+int target = SBox[s][x][y]; //获取S盒对应行列的元素
 
-&lt;span class=&quot;comment&quot;&gt;//target换成2进制char数组&lt;/span&gt;
-&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *biTarget = new &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;];
-&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, index = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;gt;= &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i--, index++)
+//target换成2进制char数组
+char *biTarget = new char[5];
+for(int i = 3, index = 0; i &amp;gt;= 0; i--, index++)
 {  
-    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(target &amp;amp; (&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;lt;&amp;lt; i))  
-        biTarget[index] =  &lt;span class=&quot;string&quot;&gt;&#39;1&#39;&lt;/span&gt;;  
-    &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;  
-        biTarget[index] =  &lt;span class=&quot;string&quot;&gt;&#39;0&#39;&lt;/span&gt;;  
+    if(target &amp;amp; (1 &amp;lt;&amp;lt; i))  
+        biTarget[index] =  &amp;#39;1&amp;#39;;  
+    else  
+        biTarget[index] =  &amp;#39;0&amp;#39;;  
 }
-biTarget[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;] = &lt;span class=&quot;string&quot;&gt;&#39;\0&#39;&lt;/span&gt;;
-&lt;span class=&quot;comment&quot;&gt;//cout&amp;lt;&amp;lt;biTarget&amp;lt;&amp;lt;endl;&lt;/span&gt;
+biTarget[4] = &amp;#39;\0&amp;#39;;
+//cout&amp;lt;&amp;lt;biTarget&amp;lt;&amp;lt;endl;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;至此得到此轮的4位输出，按其修改R对应位置，8轮S盒变化后即得到32位的输出结果。&lt;/p&gt;
 &lt;h3 id=&quot;四、运行结果：&quot;&gt;&lt;a href=&quot;#四、运行结果：&quot; class=&quot;headerlink&quot; title=&quot;四、运行结果：&quot;&gt;&lt;/a&gt;四、运行结果：&lt;/h3&gt;&lt;p&gt;（1）不输出中间结果：&lt;/p&gt;
@@ -488,6 +821,7 @@ biTarget[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;] = &lt;span class=&
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 为了提高地址分配的效率和减少分配网络号总数，采取&lt;strong&gt;划分子网&lt;/strong&gt;的策略，在多个网络中共享一个网络号的机制涉及使用子网掩码，子网掩码的作用就是用来判断任意两个或多个IP地址是否属于同一个子网。&lt;/p&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 子网划分的实现是基于&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;网络位占用主机位&lt;/strong&gt;&lt;/font&gt;的，以21位网络位和8位主机位的C类地址为例，若将一个C类网络划分成2个子网，则网络位需要占用1位主机位，即现在是22位网络位和7位主机位，通过占用的这1位的值来区分划分成的2个子网，同理，若划分成3个或4个子网则占用2个主机位…&lt;/p&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 但是现在，一个外部的网络，并不知道连接的这个C类网络是否划分了子网，所以需要子网掩码，当未划分时，A类地址的缺省子网掩码为255.0.0.0，B类为255.255.0.0，C类为255.255.255.0，仍以C类网络为例，划分成2个子网(占1位主机位)后子网掩码为255.255.255.128(128个主机，126个可用主机)，划分成4个子网(占位主机位)后子网掩码为255.255.255.192，如下表：&lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -550,6 +884,7 @@ biTarget[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;] = &lt;span class=&
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/div&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; ifconfig(win为ipconfig) 查看当前计算机的ip地址及子网掩码，当前ip为192.168.1.105，即C类网络，子网掩码0xffffff00，即255.255.255.0，未划分。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/subnet_mask/ifconfig.png&quot; alt=&quot;Drawing&quot; width=&quot;400px&quot;&gt;&lt;/p&gt;
 &lt;!-- ![](http://gitimage-10031767.file.myqcloud.com/blog_image/subnet_mask/ifconfig.png) --&gt;
@@ -567,6 +902,7 @@ biTarget[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;] = &lt;span class=&
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;h4 id=&quot;补充-来自知乎-：&quot;&gt;&lt;a href=&quot;#补充-来自知乎-：&quot; class=&quot;headerlink&quot; title=&quot;补充(来自知乎)：&quot;&gt;&lt;/a&gt;补充(来自知乎)：&lt;/h4&gt;&lt;p&gt;比较下面的两个IP地址，&lt;br&gt;A：219.218.44.123&lt;br&gt;B：219.218.45.34&lt;br&gt;在子网掩码M1：255.255.254.0下为同一子网，而在M2：255.255.255.0下为不同子网。&lt;/p&gt;
 &lt;p&gt;分析：&lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -585,6 +921,8 @@ biTarget[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;] = &lt;span class=&
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;table-container&quot;&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -603,6 +941,7 @@ biTarget[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;] = &lt;span class=&
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/div&gt;
 &lt;p&gt;通过做and运算，可以看出来&lt;br&gt;A&amp;amp;M1:11011011-11011010-00101100-00000000&lt;br&gt;B&amp;amp;M1:11011011-11011010-00101100-00000000&lt;/p&gt;
 &lt;p&gt;A&amp;amp;M2:11011011-11011010-001011&lt;font color=&quot;red&quot;&gt;00&lt;/font&gt;-00000000&lt;br&gt;B&amp;amp;M2:11011011-11011010-001011&lt;font color=&quot;red&quot;&gt;01&lt;/font&gt;-00000000&lt;/p&gt;
 &lt;p&gt;假设还有如下IP&lt;br&gt;C：219.218.45.200&lt;br&gt;可以得出在子网M2：255.255.255.0下跟B同子网，而在子网M3：255.255.255.128下为不同子网。&lt;/p&gt;
@@ -720,7 +1059,7 @@ biTarget[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;] = &lt;span class=&
 &lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    	(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;i,s,o,g,r,a,m&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	i[&lt;span class=&quot;string&quot;&gt;&#39;GoogleAnalyticsObject&#39;&lt;/span&gt;]=r;i[r]=i[r]||&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; 		 (i[r].q=i[r].q||[]).push(&lt;span class=&quot;built_in&quot;&gt;arguments&lt;/span&gt;)&amp;#125;,i[r].l=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;*&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Date&lt;/span&gt;();a=s.createElement(o),&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  		m=s.getElementsByTagName(o)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  		a.async=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;a.src=g;m.parentNode.insertBefore(a,m)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	&amp;#125;)(&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;,&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;script&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;https://www.google-analytics.com/analytics.js&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;ga&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	ga(&lt;span class=&quot;string&quot;&gt;&#39;create&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;UA-76175499-1&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;auto&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	ga(&lt;span class=&quot;string&quot;&gt;&#39;send&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;pageview&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;因为网站中每个页面都需要加入上面的跟踪代码，所以添加在模板页中，这里是head.ejs。在配置文件config中设置：&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#google统计&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;google_analytics:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  enable: true&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  id: UA-76175499-1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  site: hlyin.space&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;在head.ejs中，之前添加：&lt;/p&gt;
+&lt;p&gt;在head.ejs中，&amp;lt;/head&amp;gt;之前添加：&lt;/p&gt;
 &lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;!-- google统计 --&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;% if (theme.google_analytics) &amp;#123; %&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script type=&quot;text/javascript&quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	(function(i,s,o,g,r,a,m)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	i[&#39;GoogleAnalyticsObject&#39;]=r;i[r]=i[r]||function()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 (i[r].q=i[r].q||[]).push(arguments)&amp;#125;,i[r].l=1*new Date();a=s.createElement(o),&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		m=s.getElementsByTagName(o)[0];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		a.async=1;a.src=g;m.parentNode.insertBefore(a,m)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;)(window,document,&#39;script&#39;,&#39;https://www.google-analytics.com/analytics.js&#39;,&#39;ga&#39;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	ga(&#39;create&#39;, &#39;UA-76175499-1&#39;, &#39;auto&#39;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	ga(&#39;send&#39;, &#39;pageview&#39;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;% &amp;#125; %&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;若不设置config文件，则直接将跟踪代码加入模板也可以，即去掉&lt;code&gt;if (theme.google_analytics)&lt;/code&gt;的判断&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
@@ -748,7 +1087,7 @@ biTarget[&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;] = &lt;span class=&
     <published>2016-04-01T16:00:00.000Z</published>
     <updated>2016-04-09T13:45:04.000Z</updated>
     
-    <content type="html">&lt;h4 id=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;a href=&quot;#《四月是你的谎言》实景图&quot; class=&quot;headerlink&quot; title=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;/a&gt;《四月是你的谎言》实景图&lt;/h4&gt;&lt;p&gt;“灰心丧气时就用手托着下巴，你会为双手能派上用处而感到高兴的。 — 查理•布朗”&lt;/p&gt;
+    <content type="html">&lt;h4 id=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;a href=&quot;#《四月是你的谎言》实景图&quot; class=&quot;headerlink&quot; title=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;/a&gt;《四月是你的谎言》实景图&lt;/h4&gt;&lt;p&gt;“灰心丧气时就用手托着下巴，你会为双手能派上用处而感到高兴的。 —- 查理•布朗”&lt;/p&gt;
 &lt;audio autoplay loop&gt;&lt;source src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/%E6%A8%AA%E5%B1%B1%E5%85%8B%20-%20%E3%82%A2%E3%82%B1%E3%82%99%E3%82%A4%E3%83%B3.mp3&quot;&gt;&lt;/audio&gt;
 
 &lt;!--&lt;embed height=&quot;100&quot; width=&quot;100&quot; src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/%E6%A8%AA%E5%B1%B1%E5%85%8B%20-%20%E3%82%A2%E3%82%B1%E3%82%99%E3%82%A4%E3%83%B3.mp3&quot; autostart=&quot;true&quot; loop=&quot;true&quot; hidden=&quot;true&quot;&gt;&lt;/embed&gt;--&gt;
@@ -833,13 +1172,66 @@ id=&quot;table7&quot;&gt; &lt;tr&gt; &lt;td style=&quot;FILTER: alpha(opacity=10
   </entry>
   
   <entry>
+    <title>多边形质心计算</title>
+    <link href="http://hlyin.space/ImageProcessing/PolygonCentroid/"/>
+    <id>http://hlyin.space/ImageProcessing/PolygonCentroid/</id>
+    <published>2016-02-02T16:00:00.000Z</published>
+    <updated>2016-10-15T11:19:07.000Z</updated>
+    
+    <content type="html">&lt;p&gt;先需要知道几个公式：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一、对于n个离散的有质量数据点&lt;/strong&gt;（或者假设一个多边形的质量集中在其顶点上）&lt;br&gt;假定顶点的坐标为(x&lt;sub&gt;i&lt;/sub&gt;, y&lt;sub&gt;i&lt;/sub&gt;)，质量为m&lt;sub&gt;i&lt;/sub&gt;，则质心为：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;X = \frac{\sum_{i=1}^n ( x_i \cdot m_i )} {\sum_{i=1}^n m_i}，Y = \frac{\sum_{i=1}^n ( y_i \cdot m_i )} {\sum_{i=1}^n m_i}...(1)&lt;/script&gt;&lt;p&gt;&lt;strong&gt;二、对于质量均匀分布的三角形 $△P_0P_1P_2$&lt;/strong&gt;&lt;br&gt;质心为：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;X = \frac{x_0 + x_1 + x_2} {3}，Y = \frac{y_0 + y_1 + y_2} {3} ...(2)&lt;/script&gt;&lt;p&gt;面积为（叉积求解）：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;S = \frac{(x_1 - x_0) \cdot (y_2 - y_0) - (x_2 - x_0) \cdot (y_1 - y_0)} {2} ...(3)&lt;/script&gt;&lt;p&gt;其中$(x_0, y_0), (x_1, y_1), (x_2, y_2)$为三角形顶点坐标&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;对于$△P_0P_1P_2$面积，边界构成逆时针回路时取正, 顺时针时取负&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;有了以上公式后，对于求质量均匀分布的多边形质心（包括凹多边形）步骤可以如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;将多边形分为多个三角形，&lt;/li&gt;
+&lt;li&gt;根据式(2)求解每个三角形的质心，根据式(3)求解质心，此时即得到了满足式(1)的情况，即多个离散的有质量(用三角形面积表示，有正负，权值)的数据点&lt;/li&gt;
+&lt;li&gt;根据式(1)求得的解即为多边形的质心&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;对于将多边形分解为多个三角形，可以有两种分法：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;确定多边形(n个顶点)的一个顶点，以这个点为基点，依次与其他顶点连线，得到n-2个三角形&lt;/li&gt;
+&lt;li&gt;以直角坐标系原点为基点，依次与多边形的n个顶点连线，得到n个三角形&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;第一种分法，以五边形为例，如下图：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/paper/%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%88%86%E6%B3%951.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;选择顶点$P_0$为基点，依次得到$△P_0P_1P_2$、$△P_0P_2P_3$、$△P_0P_3P_4$，质心分别为$C_1$、$C_2$、$C_3$&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;第二种分法，以四边形为例，如下图：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/paper/%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%88%86%E6%B3%952.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;选择原点O为基点，依次得到$△OP_0P_1$、$△OP_1P_2$、$△OP_2P_3$、$OP_3P_0$&lt;/p&gt;
+&lt;p&gt;对于第二种分法，分成的三角形为 $△OP&lt;em&gt;iP&lt;/em&gt;{i+1}$，其中$O(0,0)$，$P&lt;em&gt;i (x_i, y_i)$，$P&lt;/em&gt;{i+1} (x&lt;em&gt;{i+1}, y&lt;/em&gt;{i+1})$，代入式(2)和式(3)，得到&lt;br&gt;$△OP&lt;em&gt;iP&lt;/em&gt;{i+1}$ 质心为：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;X_i = \frac{x_i + x_{i+1}} {3}，Y_i = \frac{y_i + y_{i+1}} {3} ...(4)&lt;/script&gt;&lt;p&gt;$△OP&lt;em&gt;iP&lt;/em&gt;{i+1}$面积为（叉积求解）：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;S_i = \frac{x_i \cdot y_{i+1} - x_{i+1} \cdot y_i} {2} ...(5)&lt;/script&gt;&lt;p&gt;将式(4)和式(5)代入式(1)，得到&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;X = \frac{\sum_{i=1}^n(x_i + x_{i+1})(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)} {3\sum_{i=1}^n(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Y = \frac{\sum_{i=1}^n(y_i + y_{i+1})(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)} {3\sum_{i=1}^n(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}&lt;/script&gt;&lt;p&gt;将多边形面积记为S，因为多边形面积是其分成的多个三角形面积之和（以多边形的某一个顶点为基点的分法显然如此，以原点为基点的分法，将各三角形正负面积相抵后也是多边形的面积），得到&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;S = \frac{1}{2} \cdot {\sum_{i=1}^n(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}&lt;/script&gt;&lt;p&gt;最后可以得到多边形的质心为：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;X = \frac {1}{6S} {\sum_{i=1}^n(x_i + x_{i+1})(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Y = \frac {1}{6S} {\sum_{i=1}^n(y_i + y_{i+1})(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}&lt;/script&gt;&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;附C++代码：&lt;br&gt;输入：多边形边数n及n个顶点的坐标&lt;br&gt;输出：质心坐标&lt;/p&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;meta-string&quot;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;meta-string&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;meta-string&quot;&gt;&amp;lt;cmath&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;std&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;struct&lt;/span&gt; Point &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt; x, y;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;p[&lt;span class=&quot;number&quot;&gt;10000&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;calArea&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Point p1, Point p2)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;//p0为原点，所以简化计算，只用其他两个顶点&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; (p1.x*p2.y - p2.x*p1.y) / &lt;span class=&quot;number&quot;&gt;2.0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n; &lt;span class=&quot;comment&quot;&gt;//n边形&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	scanf_s(&lt;span class=&quot;string&quot;&gt;&quot;%d&quot;&lt;/span&gt;, &amp;amp;n);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	Point centroid; &lt;span class=&quot;comment&quot;&gt;//质心&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	centroid.x = centroid.y = &lt;span class=&quot;number&quot;&gt;0.0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt; totalArea = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, eachArea = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//多边形总面积和各三角形面积&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; n; ++i)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		scanf_s(&lt;span class=&quot;string&quot;&gt;&quot;%lf%lf&quot;&lt;/span&gt;, &amp;amp;p[i].x, &amp;amp;p[i].y);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; n; i++) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		eachArea = calArea(p[i], p[(i + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) % n]);&lt;span class=&quot;comment&quot;&gt;//两个顶点与原点构成的三角形&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		centroid.x += (p[i].x + p[(i + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) % n].x)*eachArea; &lt;span class=&quot;comment&quot;&gt;//每一步质心的除以3放在最后处理&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		centroid.y += (p[i].y + p[(i + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) % n].y)*eachArea;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		totalArea += eachArea; &lt;span class=&quot;comment&quot;&gt;//总面积&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	centroid.x = centroid.x / (totalArea * &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;);&lt;span class=&quot;comment&quot;&gt;//求的多边形重心&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	centroid.y = centroid.y / (totalArea * &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;built_in&quot;&gt;printf&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;%.2lf %.2lf\n&quot;&lt;/span&gt;, centroid.x, centroid.y);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;先需要知道几个公式：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一、对于n个离散的有质量数据点&lt;/strong&gt;（或者假设一个多边形的质量集中在其顶点上）&lt;br&gt;假定顶点的坐标为(x&lt;sub&gt;i&lt;/sub&gt;, y&lt;sub&gt;i&lt;/sub&gt;)，质量为m&lt;sub&gt;i&lt;/sub&gt;，则质心为：&lt;
+    
+    </summary>
+    
+      <category term="ImageProcessing" scheme="http://hlyin.space/categories/ImageProcessing/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>操作系统重点</title>
     <link href="http://hlyin.space/OS/OS_review/"/>
     <id>http://hlyin.space/OS/OS_review/</id>
     <published>2016-01-04T16:00:00.000Z</published>
     <updated>2016-04-10T07:28:00.000Z</updated>
     
-    <content type="html">&lt;h3 id=&quot;第一章、操作系统概述&quot;&gt;&lt;a href=&quot;#第一章、操作系统概述&quot; class=&quot;headerlink&quot; title=&quot;第一章、操作系统概述&quot;&gt;&lt;/a&gt;&lt;strong&gt;第一章、操作系统概述&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1、    OS的概念、特性&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;操作系统：&lt;/strong&gt;是计算机系统中的一个系统软件，是一些程序模块的集合——它们能以尽量&lt;strong&gt;有效地（系统运行效率和资源利用率）&lt;/strong&gt;组织和管理计算机的软硬件资源，&lt;strong&gt;合理（公平，不发生死锁和饥饿）&lt;/strong&gt;地组织计算机的工作流程，控制程序的执行，并向用户提供各种服务功能，使得用户能够灵活、&lt;strong&gt;方便（人机界面—包括用户使用界面和程序设计接口的易用性、易维护性）&lt;/strong&gt;、有效的使用计算机，并使整个计算机系统能高效地运行；&lt;/p&gt;
+    <content type="html">&lt;h3 id=&quot;第一章、操作系统概述&quot;&gt;&lt;a href=&quot;#第一章、操作系统概述&quot; class=&quot;headerlink&quot; title=&quot;第一章、操作系统概述&quot;&gt;&lt;/a&gt;&lt;strong&gt;第一章、操作系统概述&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1、    OS的概念、特性&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;操作系统：&lt;/strong&gt;是计算机系统中的一个系统软件，是一些程序模块的集合——它们能以尽量&lt;strong&gt;有效地（系统运行效率和资源利用率）&lt;/strong&gt;组织和管理计算机的软硬件资源，&lt;strong&gt;合理（公平，不发生死锁和饥饿）&lt;/strong&gt;地组织计算机的工作流程，控制程序的执行，并向用户提供各种服务功能，使得用户能够灵活、&lt;strong&gt;方便（人机界面—-包括用户使用界面和程序设计接口的易用性、易维护性）&lt;/strong&gt;、有效的使用计算机，并使整个计算机系统能高效地运行；&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;OS特性：&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ul&gt;
@@ -906,6 +1298,7 @@ id=&quot;table7&quot;&gt; &lt;tr&gt; &lt;td style=&quot;FILTER: alpha(opacity=10
 &lt;p&gt;&lt;strong&gt;5、系统调用：&lt;/strong&gt;系统调用就是用户在程序中调用操作系统所提供的一些子功能；是特殊的过程滴啊用，由特殊的机器指令实现；除调用子程序外，还使系统转入特权方式，即进入管态；系统调用通常只能由汇编语言直接访问。系统调用是操作系统提供给编程人员的唯一接口，编程人员通过系统调用，动态请求和释放资源；&lt;br&gt;进程控制类、文件操作类、进程通信类、设备管理类、信息维护类；&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;ex.课本P99页第6题&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;FCFS&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -960,8 +1353,10 @@ id=&quot;table7&quot;&gt; &lt;tr&gt; &lt;td style=&quot;FILTER: alpha(opacity=10
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/div&gt;
 &lt;p&gt;平均周转时间：（25＋35＋70＋40＋50）/5=44&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;SJF&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1016,6 +1411,7 @@ id=&quot;table7&quot;&gt; &lt;tr&gt; &lt;td style=&quot;FILTER: alpha(opacity=10
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/div&gt;
 &lt;p&gt;平均周转时间：(25+35+70+55+30)/5=43&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;h3 id=&quot;第四章、进程管理&quot;&gt;&lt;a href=&quot;#第四章、进程管理&quot; class=&quot;headerlink&quot; title=&quot;第四章、进程管理&quot;&gt;&lt;/a&gt;&lt;strong&gt;第四章、进程管理&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1、    程序的顺序执行的特点；多道程序并发执行的特点&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）程序的顺序执行的特点：&lt;/strong&gt;顺序性、封闭性（程序执行结果由初始条件决定，不受外界因素影响）、程序执行结果的确定性、程序执行结果的可再现性；&lt;br&gt;&lt;strong&gt;（2）多道程序并发执行的特点：&lt;/strong&gt;并发程序在执行期间具有相互制约关系、程序与计算不再一一对应、并发程序执行结果不可再现&lt;br&gt;&lt;strong&gt;（3）多道程序环境特点：&lt;/strong&gt;独立性、随机性、资源共享性&lt;/p&gt;
@@ -1027,7 +1423,7 @@ id=&quot;table7&quot;&gt; &lt;tr&gt; &lt;td style=&quot;FILTER: alpha(opacity=10
 &lt;p&gt;&lt;strong&gt;进程互斥：&lt;/strong&gt;进程间的间接相互作用构成进程互斥，如多个进程竞争打印机；&lt;br&gt;&lt;strong&gt;临界资源：&lt;/strong&gt;系统中一些资源一次只允许一个进程使用，这类资源称为临界资源或共享变量；&lt;br&gt;&lt;strong&gt;临界区：&lt;/strong&gt;在进程中访问临界资源的那一段程序称为临界区；临界区使用原则：有空让进、无空等待、多中择一、有限等待、让权等待（等待态放弃占用CPU）；&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;进程同步：&lt;/strong&gt;进程同步是指进程之间一种直接的协同工作关系，是一些进程相互合作、共同完成一项任务；进程间的&lt;strong&gt;直接相互作用&lt;/strong&gt;构成进程的同步；直接制约问题；&lt;strong&gt;与次序相关（与时间有关，执行时序上的相互制约）；&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;同步机制：&lt;/strong&gt;解决进程同步；硬件同步机制、信号量及P、V操作、管程、条件临界域、路径表达式（集中式系统）、远程过程调用（分布式系统）；&lt;br&gt;&lt;strong&gt;信号量：&lt;/strong&gt;信号量是一种特殊的变量，它的表面形式是&lt;strong&gt;一个整型变量附加一个队列，&lt;/strong&gt;而且它只能被特殊的操作（即P操作和V操作）使用；&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;P、V操作：&lt;/strong&gt;一种简单、易于实现的同步机制，包括P操作和V操作两个原语，P、V操作是对信号量实施操作，用P、V操作可实现进程的同步和互斥；&lt;br&gt;&lt;strong&gt;互斥操作时，P、V处于同一进程；同步操作时，不在同一进程中出现；同步P操作和互斥P操作一起出现时，同步P应在互斥P之前；&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;4、    进程同步：生产者-消费者问题&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）一个生产者，一个消费者，公用一个缓冲区&lt;br&gt;属于同步问题&lt;/strong&gt;&lt;br&gt;**&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4、    进程同步：生产者-消费者问题&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）一个生产者，一个消费者，公用一个缓冲区&lt;br&gt;属于同步问题&lt;/strong&gt;&lt;br&gt;&amp;lt;/h3&amp;gt;**&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;1、    程序的顺序执行的特点；多道程序并发执行的特点&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）程序的顺序执行的特点：&lt;/strong&gt;顺序性、封闭性（程序执行结果由初始条件决定，不受外界因素影响）、程序执行结果的确定性、程序执行结果的可再现性；&lt;br&gt;&lt;strong&gt;（2）多道程序并发执行的特点：&lt;/strong&gt;并发程序在执行期间具有相互制约关系、程序与计算不再一一对应、并发程序执行结果不可再现&lt;br&gt;&lt;strong&gt;（3）多道程序环境特点：&lt;/strong&gt;独立性、随机性、资源共享性&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;2、    进程的概念；进程的状态及变迁；原语&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1） 进程：&lt;/strong&gt;进程是具有一定独立功能的程序关于某个数据集上的一次运行活动，是资源分配和调度的一个基本单位；&lt;br&gt;&lt;strong&gt;进程与程序的联系：&lt;/strong&gt;程序是进程的组成部分之一，从静态角度看，进程由程序、数据和PCB组成；一个进程可以执行多个程序，一个程序可以构成多个进程；&lt;br&gt;&lt;strong&gt;进程与程序的区别：&lt;/strong&gt;程序是静态的，进程是动态的；&lt;br&gt;&lt;strong&gt;进程的特性：&lt;/strong&gt;并发、动态、独立、交往、异步；&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;PCB：&lt;/strong&gt;为了便于系统控制和描述进程活动过程而在操作系统核心中为进程所定义的一个专门的数据结构，系统利用PCB来描述进程的基本情况以及进程的运行变化过程；&lt;strong&gt;PCB是进程存在的唯一标志；P&lt;/strong&gt;CB的内容可分为&lt;strong&gt;调度信息和现场信息&lt;/strong&gt;两大部分；&lt;br&gt;&lt;strong&gt;PCB组织方式：&lt;/strong&gt;线性方式、索引方式、链接方式；&lt;br&gt;&lt;strong&gt;进程队列：&lt;/strong&gt;就绪队列、等待队列、运行队列；&lt;/p&gt;

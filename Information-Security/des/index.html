@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>DES算法 | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>DES算法 | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -98,15 +98,14 @@
   
 
   
-  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
-<!--
-<body class="post-template">
--->
+
+
 <body id="index" class="lightnav animsition">
 
-      <!-- ============================ Off-canvas navigation =========================== -->
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
@@ -134,11 +133,15 @@
 				    
 				    <li><a href="/categories/Computer-Networks/" class="animsition-link">Computer Networks<small>(1)</small></a></li>
 				    
+				    <li><a href="/categories/ImageProcessing/" class="animsition-link">ImageProcessing<small>(1)</small></a></li>
+				    
 				    <li><a href="/categories/Information-Security/" class="animsition-link">Information Security<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/OS/" class="animsition-link">OS<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/ProjectImages/" class="animsition-link">ProjectImages<small>(7)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(4)</small></a></li>
 				    
 				    <li><a href="/categories/blog/" class="animsition-link">blog<small>(3)</small></a></li>
 				    
@@ -224,7 +227,7 @@
         <!-- ============================ Hero Image =========================== -->
 
         <section id="hero" class="scrollme">
-            <div class="container-fluid element-img" style="background: url(http://gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/bg.jpg) no-repeat center center fixed;background-size: cover">
+            <div class="container-fluid element-img" style="background: url(http://gitimage-10031767.cos.myqcloud.com/blog_image/Theme_Image/b1%281192_720%29.jpg) no-repeat center center fixed;background-size: cover">
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
@@ -348,62 +351,62 @@
 </ul>
 </blockquote>
 <h3 id="三、部分代码解释"><a href="#三、部分代码解释" class="headerlink" title="三、部分代码解释"></a>三、部分代码解释</h3><p>预处理时将16位16进制char数组转成64位2进制数组，在S盒变换时，需要将S盒中行列对应的16进制元素（1位）转换成2进制（4位），在这两个地方使用16进制转2进制，代码如下：</p>
-<pre><code class="java"><span class="comment">/***16进制数组转2进制数组(16元素)，输入M和K时使用(64位)以及S盒变换时使用(4位)***/</span>
-<span class="keyword">char</span> * HexToBi(<span class="keyword">char</span> *hexArray)
+<pre><code class="lang-java">/***16进制数组转2进制数组(16元素)，输入M和K时使用(64位)以及S盒变换时使用(4位)***/
+char * HexToBi(char *hexArray)
 {
-    toUpper(hexArray); <span class="comment">//小写转大写</span>
-    <span class="keyword">char</span> * biArray = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">65</span>];
-    <span class="keyword">int</span> index = <span class="number">0</span>;
-    <span class="keyword">char</span> *p = hexArray;
-        <span class="keyword">while</span>(*p)<span class="comment">//字符串不结束就循环</span>
+    toUpper(hexArray); //小写转大写
+    char * biArray = new char[65];
+    int index = 0;
+    char *p = hexArray;
+        while(*p)//字符串不结束就循环
         {
         string temp;
-        <span class="keyword">if</span>(*p&gt;=<span class="string">'0'</span> &amp;&amp; *p &lt;=<span class="string">'9'</span>) <span class="comment">//数字</span>
+        if(*p&gt;=&#39;0&#39; &amp;&amp; *p &lt;=&#39;9&#39;) //数字
             {
-            temp = HexBiTable[*p - <span class="number">48</span>];
+            temp = HexBiTable[*p - 48];
         }
-        <span class="keyword">else</span> <span class="keyword">if</span>(*p&gt;=<span class="string">'A'</span> &amp;&amp; *p &lt;=<span class="string">'F'</span>) <span class="comment">//A~F字符</span>
+        else if(*p&gt;=&#39;A&#39; &amp;&amp; *p &lt;=&#39;F&#39;) //A~F字符
         {
-            temp = HexBiTable[*p - <span class="number">65</span> + <span class="number">10</span>];
+            temp = HexBiTable[*p - 65 + 10];
         }
-        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++, index++)
+        for(int i = 0; i &lt; 4; i++, index++)
         {
             biArray[index] = temp[i];
         }
-        p++; <span class="comment">//指针后指，准备处理下一个字母</span>
+        p++; //指针后指，准备处理下一个字母
         }
 
-    biArray[index] = <span class="string">'\0'</span>;
-    <span class="keyword">return</span> biArray;
+    biArray[index] = &#39;\0&#39;;
+    return biArray;
 }
 </code></pre>
 <p>考虑到这里的需求是16进制char数组转2进制char数组，而不是16进制整型转2进制，因此相比于类型转换后辗转相除，采用的是查表HexBiTable替换更为有效。</p>
 <p><br></p>
 <p><strong>产生子密钥：</strong><br><strong>置换选择1：</strong></p>
-<pre><code class="c++"><span class="keyword">char</span> * realKey = new <span class="keyword">char</span>[<span class="number">57</span>]; realKey[<span class="number">56</span>] = <span class="string">'\0'</span>; <span class="comment">//56位有效密钥    </span>
-<span class="comment">/**置换选择1，64位中选择56位得到实际使用的56位密钥**/</span>
-<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">56</span>; i++)
-{
-    <span class="keyword">int</span> index = PC1Table[i] - <span class="number">1</span>; <span class="comment">//-1后才是在数组中的实际下标 </span>
-    realKey[i] = BiKey[index];
-}
-<span class="comment">//cout&lt;&lt;realKey&lt;&lt;endl;</span>
+<pre><code class="lang-c++">    char * realKey = new char[57]; realKey[56] = &#39;\0&#39;; //56位有效密钥    
+    /**置换选择1，64位中选择56位得到实际使用的56位密钥**/
+    for(int i = 0; i &lt; 56; i++)
+    {
+        int index = PC1Table[i] - 1; //-1后才是在数组中的实际下标 
+        realKey[i] = BiKey[index];
+    }
+    //cout&lt;&lt;realKey&lt;&lt;endl;
 </code></pre>
 <p>通过查表PC1Table，即置换选择1，得到应替换元素的位置，需要减1得到在数组中的下标，for循环56次，得到56位的置换选择后的56位密钥，每次置换选择在原64位密钥BiKey中查找。</p>
 <p><strong>循环左移：</strong><br>循环左移n位，通过3次逆序使时间复杂度降为O(n)，如循环左移2位10010011，则先逆序前2位得到01，再逆序后所有位得到110010，此时即为01110010，最后逆序所有位，得到01001110，即为最终结果。</p>
-<pre><code class="c++"><span class="comment">/***循环左移n位，复杂度0(n)，通过三次逆序实现***/</span>
-<span class="function"><span class="keyword">void</span> <span class="title">LeftShift</span><span class="params">(<span class="keyword">char</span> * arr, <span class="keyword">int</span> n)</span>
-</span>{
-    Reverse(arr, <span class="number">0</span>, n - <span class="number">1</span>); <span class="comment">//逆序前n位</span>
-    Reverse(arr, n, <span class="number">28</span> - <span class="number">1</span>); <span class="comment">//逆序后所有位</span>
-    Reverse(arr, <span class="number">0</span>, <span class="number">28</span> - <span class="number">1</span>); <span class="comment">//逆序所有位</span>
+<pre><code class="lang-c++">/***循环左移n位，复杂度0(n)，通过三次逆序实现***/
+void LeftShift(char * arr, int n)
+{
+    Reverse(arr, 0, n - 1); //逆序前n位
+    Reverse(arr, n, 28 - 1); //逆序后所有位
+    Reverse(arr, 0, 28 - 1); //逆序所有位
 }
 
-<span class="comment">/***逆序排列***/</span>
-<span class="function"><span class="keyword">void</span> <span class="title">Reverse</span><span class="params">(<span class="keyword">char</span> *arr, <span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span>
-</span>{
-    <span class="keyword">char</span> temp;
-    <span class="keyword">for</span>( ; begin &lt; end; begin++, end--)
+/***逆序排列***/
+void Reverse(char *arr, int begin, int end)
+{
+    char temp;
+    for( ; begin &lt; end; begin++, end--)
     {
         temp = arr[end];
         arr[end] = arr[begin];
@@ -414,51 +417,51 @@
 <p>在对明文的处理中的置换基本类同与置换选择1的实现，得到48位的扩展R后进行S盒变换，实现为将扩展R分成8组，每组6位，进行8轮的循环，每个循环中对1个组使用S盒变换，循环中先获取当前轮进行变换的6位输入group，如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> group[<span class="number">7</span>]; group[<span class="number">6</span>] = <span class="string">'\0'</span>; <span class="comment">//1组</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">	group[i] = ExtendedR[s * <span class="number">6</span> + i]; <span class="comment">//6位1组</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>得到group后需据此获取在S盒中的行和列下标用来获取S盒对应的元素值，这里以group=”010001”为例，行即为01，列为1000，需要将2进制转成10进制以得到下标，为方便计算，将行表示为0001，这样仍通过查表HexBiTable来获取，这里仅仅就只是为了方便，其实并不好… 此时line=”0001”，column=”1000”，查表值0001对应的下标为1，1000对应的下标为8，所以在S盒中行下标x=1，列下标y=8，查S[i][x][y]得到对应的元素，以S1为例，即i=0，此时元素值为10，最后需要将整型的10转成4位的2进制数组，得到1010，代码如下：</p>
-<pre><code class="c++"><span class="comment">//16进制字符串转10进制整型</span>
-<span class="comment">//如一组为010001，则line="0001", colum="1000"，则x=1, y=8</span>
-<span class="keyword">int</span> x, y; <span class="comment">//x为在S盒中的行下标，y为列下标</span>
-<span class="keyword">char</span> *line = new <span class="keyword">char</span>[<span class="number">5</span>]; line[<span class="number">4</span>] = <span class="string">'\0'</span>;
-<span class="keyword">char</span> *column = new <span class="keyword">char</span>[<span class="number">5</span>]; column[<span class="number">4</span>] = <span class="string">'\0'</span>;
-line[<span class="number">0</span>] = <span class="string">'0'</span>; line[<span class="number">1</span>] = <span class="string">'0'</span>; line[<span class="number">2</span>] = group[<span class="number">0</span>]; line[<span class="number">3</span>] = group[<span class="number">5</span>]; <span class="comment">//01即为00 01</span>
-column[<span class="number">0</span>] = group[<span class="number">1</span>]; column[<span class="number">1</span>] = group[<span class="number">2</span>]; column[<span class="number">2</span>] = group[<span class="number">3</span>]; column[<span class="number">3</span>] = group[<span class="number">4</span>];
+<pre><code class="lang-c++">//16进制字符串转10进制整型
+//如一组为010001，则line=&quot;0001&quot;, colum=&quot;1000&quot;，则x=1, y=8
+int x, y; //x为在S盒中的行下标，y为列下标
+char *line = new char[5]; line[4] = &#39;\0&#39;;
+char *column = new char[5]; column[4] = &#39;\0&#39;;
+line[0] = &#39;0&#39;; line[1] = &#39;0&#39;; line[2] = group[0]; line[3] = group[5]; //01即为00 01
+column[0] = group[1]; column[1] = group[2]; column[2] = group[3]; column[3] = group[4];
 
-<span class="comment">//通过HexBiTable找到2进制对应的10进制（数组下标）</span>
-<span class="keyword">bool</span> xflag = <span class="literal">true</span>, yflag = <span class="literal">true</span>; 
-<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">16</span>; i++)
+//通过HexBiTable找到2进制对应的10进制（数组下标）
+bool xflag = true, yflag = true; 
+for(int i = 0; i &lt; 16; i++)
 {
-    xflag = <span class="literal">true</span>; yflag = <span class="literal">true</span>; 
-    <span class="comment">//找行和列，比对HexBiTable[i]和column，若相等，则column所对应的列下标即为i（间接的2进制转10进制）</span>
-    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++)
+    xflag = true; yflag = true; 
+    //找行和列，比对HexBiTable[i]和column，若相等，则column所对应的列下标即为i（间接的2进制转10进制）
+    for(int j = 0; j &lt; 4; j++)
     {
-        <span class="keyword">if</span>(line[j] != HexBiTable[i][j]) <span class="comment">//不相等</span>
-            xflag = <span class="literal">false</span>; 
-        <span class="keyword">if</span>(column[j] != HexBiTable[i][j]) <span class="comment">//不相等</span>
-            yflag = <span class="literal">false</span>; 
+        if(line[j] != HexBiTable[i][j]) //不相等
+            xflag = false; 
+        if(column[j] != HexBiTable[i][j]) //不相等
+            yflag = false; 
     }
-    <span class="keyword">if</span>(xflag == <span class="literal">true</span>)
+    if(xflag == true)
     {
         x = i;
     }
-    <span class="keyword">if</span>(yflag == <span class="literal">true</span>)
+    if(yflag == true)
     {
         y = i;
     }
 }
-<span class="comment">//cout&lt;&lt;x&lt;&lt;", "&lt;&lt;y&lt;&lt;endl;</span>
+//cout&lt;&lt;x&lt;&lt;&quot;, &quot;&lt;&lt;y&lt;&lt;endl;
 
-<span class="keyword">int</span> target = SBox[s][x][y]; <span class="comment">//获取S盒对应行列的元素</span>
+int target = SBox[s][x][y]; //获取S盒对应行列的元素
 
-<span class="comment">//target换成2进制char数组</span>
-<span class="keyword">char</span> *biTarget = new <span class="keyword">char</span>[<span class="number">5</span>];
-<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>, index = <span class="number">0</span>; i &gt;= <span class="number">0</span>; i--, index++)
+//target换成2进制char数组
+char *biTarget = new char[5];
+for(int i = 3, index = 0; i &gt;= 0; i--, index++)
 {  
-    <span class="keyword">if</span>(target &amp; (<span class="number">1</span> &lt;&lt; i))  
-        biTarget[index] =  <span class="string">'1'</span>;  
-    <span class="keyword">else</span>  
-        biTarget[index] =  <span class="string">'0'</span>;  
+    if(target &amp; (1 &lt;&lt; i))  
+        biTarget[index] =  &#39;1&#39;;  
+    else  
+        biTarget[index] =  &#39;0&#39;;  
 }
-biTarget[<span class="number">4</span>] = <span class="string">'\0'</span>;
-<span class="comment">//cout&lt;&lt;biTarget&lt;&lt;endl;</span>
+biTarget[4] = &#39;\0&#39;;
+//cout&lt;&lt;biTarget&lt;&lt;endl;
 </code></pre>
 <p>至此得到此轮的4位输出，按其修改R对应位置，8轮S盒变化后即得到32位的输出结果。</p>
 <h3 id="四、运行结果："><a href="#四、运行结果：" class="headerlink" title="四、运行结果："></a>四、运行结果：</h3><p>（1）不输出中间结果：</p>
@@ -579,7 +582,24 @@ var duoshuoQuery = {short_name:"louiehuang"};
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
 })();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 </html>

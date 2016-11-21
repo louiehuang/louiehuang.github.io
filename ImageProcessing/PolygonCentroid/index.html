@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Archives: 2016/5 | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>多边形质心计算 | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -259,37 +259,87 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/Information-Security/des/">DES算法</a></h4>
-                            
-                            <p><time datetime="2016-05-01T16:00:00.000Z"><a href="/Information-Security/des/">2016-05-02</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-02-02T16:00:00.000Z" itemprop="datePublished">
+          2016-02-03
+      </time>
+    
+</span>
+                <h1>多边形质心计算</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<p>先需要知道几个公式：</p>
+<p><strong>一、对于n个离散的有质量数据点</strong>（或者假设一个多边形的质量集中在其顶点上）<br>假定顶点的坐标为(x<sub>i</sub>, y<sub>i</sub>)，质量为m<sub>i</sub>，则质心为：</p>
+<script type="math/tex; mode=display">X = \frac{\sum_{i=1}^n ( x_i \cdot m_i )} {\sum_{i=1}^n m_i}，Y = \frac{\sum_{i=1}^n ( y_i \cdot m_i )} {\sum_{i=1}^n m_i}...(1)</script><p><strong>二、对于质量均匀分布的三角形 $△P_0P_1P_2$</strong><br>质心为：</p>
+<script type="math/tex; mode=display">X = \frac{x_0 + x_1 + x_2} {3}，Y = \frac{y_0 + y_1 + y_2} {3} ...(2)</script><p>面积为（叉积求解）：</p>
+<script type="math/tex; mode=display">S = \frac{(x_1 - x_0) \cdot (y_2 - y_0) - (x_2 - x_0) \cdot (y_1 - y_0)} {2} ...(3)</script><p>其中$(x_0, y_0), (x_1, y_1), (x_2, y_2)$为三角形顶点坐标</p>
+<p><strong>对于$△P_0P_1P_2$面积，边界构成逆时针回路时取正, 顺时针时取负</strong></p>
+<p><br></p>
+<p>有了以上公式后，对于求质量均匀分布的多边形质心（包括凹多边形）步骤可以如下：</p>
+<blockquote>
+<ol>
+<li>将多边形分为多个三角形，</li>
+<li>根据式(2)求解每个三角形的质心，根据式(3)求解质心，此时即得到了满足式(1)的情况，即多个离散的有质量(用三角形面积表示，有正负，权值)的数据点</li>
+<li>根据式(1)求得的解即为多边形的质心</li>
+</ol>
+</blockquote>
+<p>对于将多边形分解为多个三角形，可以有两种分法：</p>
+<blockquote>
+<ol>
+<li>确定多边形(n个顶点)的一个顶点，以这个点为基点，依次与其他顶点连线，得到n-2个三角形</li>
+<li>以直角坐标系原点为基点，依次与多边形的n个顶点连线，得到n个三角形</li>
+</ol>
+</blockquote>
+<p><br></p>
+<p>第一种分法，以五边形为例，如下图：<br><img src="http://gitimage-10031767.cos.myqcloud.com/paper/%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%88%86%E6%B3%951.jpg" alt=""><br>选择顶点$P_0$为基点，依次得到$△P_0P_1P_2$、$△P_0P_2P_3$、$△P_0P_3P_4$，质心分别为$C_1$、$C_2$、$C_3$</p>
+<p><br></p>
+<p>第二种分法，以四边形为例，如下图：<br><img src="http://gitimage-10031767.cos.myqcloud.com/paper/%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%88%86%E6%B3%952.jpg" alt=""><br>选择原点O为基点，依次得到$△OP_0P_1$、$△OP_1P_2$、$△OP_2P_3$、$OP_3P_0$</p>
+<p>对于第二种分法，分成的三角形为 $△OP<em>iP</em>{i+1}$，其中$O(0,0)$，$P<em>i (x_i, y_i)$，$P</em>{i+1} (x<em>{i+1}, y</em>{i+1})$，代入式(2)和式(3)，得到<br>$△OP<em>iP</em>{i+1}$ 质心为：</p>
+<script type="math/tex; mode=display">X_i = \frac{x_i + x_{i+1}} {3}，Y_i = \frac{y_i + y_{i+1}} {3} ...(4)</script><p>$△OP<em>iP</em>{i+1}$面积为（叉积求解）：</p>
+<script type="math/tex; mode=display">S_i = \frac{x_i \cdot y_{i+1} - x_{i+1} \cdot y_i} {2} ...(5)</script><p>将式(4)和式(5)代入式(1)，得到</p>
+<script type="math/tex; mode=display">X = \frac{\sum_{i=1}^n(x_i + x_{i+1})(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)} {3\sum_{i=1}^n(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}</script><script type="math/tex; mode=display">Y = \frac{\sum_{i=1}^n(y_i + y_{i+1})(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)} {3\sum_{i=1}^n(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}</script><p>将多边形面积记为S，因为多边形面积是其分成的多个三角形面积之和（以多边形的某一个顶点为基点的分法显然如此，以原点为基点的分法，将各三角形正负面积相抵后也是多边形的面积），得到</p>
+<script type="math/tex; mode=display">S = \frac{1}{2} \cdot {\sum_{i=1}^n(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}</script><p>最后可以得到多边形的质心为：</p>
+<script type="math/tex; mode=display">X = \frac {1}{6S} {\sum_{i=1}^n(x_i + x_{i+1})(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}</script><script type="math/tex; mode=display">Y = \frac {1}{6S} {\sum_{i=1}^n(y_i + y_{i+1})(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}</script><p><br><br><br>附C++代码：<br>输入：多边形边数n及n个顶点的坐标<br>输出：质心坐标</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> Point &#123;</span><br><span class="line">	<span class="keyword">double</span> x, y;</span><br><span class="line">&#125;p[<span class="number">10000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">calArea</span><span class="params">(Point p1, Point p2)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//p0为原点，所以简化计算，只用其他两个顶点</span></span><br><span class="line">	<span class="keyword">return</span> (p1.x*p2.y - p2.x*p1.y) / <span class="number">2.0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n; <span class="comment">//n边形</span></span><br><span class="line">	scanf_s(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line"></span><br><span class="line">	Point centroid; <span class="comment">//质心</span></span><br><span class="line">	centroid.x = centroid.y = <span class="number">0.0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> totalArea = <span class="number">0</span>, eachArea = <span class="number">0</span>; <span class="comment">//多边形总面积和各三角形面积</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">		scanf_s(<span class="string">"%lf%lf"</span>, &amp;p[i].x, &amp;p[i].y);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		eachArea = calArea(p[i], p[(i + <span class="number">1</span>) % n]);<span class="comment">//两个顶点与原点构成的三角形</span></span><br><span class="line">		centroid.x += (p[i].x + p[(i + <span class="number">1</span>) % n].x)*eachArea; <span class="comment">//每一步质心的除以3放在最后处理</span></span><br><span class="line">		centroid.y += (p[i].y + p[(i + <span class="number">1</span>) % n].y)*eachArea;</span><br><span class="line">		totalArea += eachArea; <span class="comment">//总面积</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	centroid.x = centroid.x / (totalArea * <span class="number">3</span>);<span class="comment">//求的多边形重心</span></span><br><span class="line">	centroid.y = centroid.y / (totalArea * <span class="number">3</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%.2lf %.2lf\n"</span>, centroid.x, centroid.y);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/Android/Android_ListView_opt/" style="float: left;">
+        ← Android ListView优化
+    </a>
+    
+    
+    <a class="pull-right" href="/OS/OS_review/">
+        操作系统重点 →
+    </a>
+    
+</nav>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得底部有句话会显得比较合适.</p>
-        </div>
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="ImageProcessing/PolygonCentroid/" data-title="多边形质心计算" data-url="http://hlyin.space/ImageProcessing/PolygonCentroid/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

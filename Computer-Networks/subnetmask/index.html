@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>子网掩码与子网号 | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>子网掩码与子网号 | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -98,15 +98,14 @@
   
 
   
-  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
-<!--
-<body class="post-template">
--->
+
+
 <body id="index" class="lightnav animsition">
 
-      <!-- ============================ Off-canvas navigation =========================== -->
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
@@ -134,11 +133,15 @@
 				    
 				    <li><a href="/categories/Computer-Networks/" class="animsition-link">Computer Networks<small>(1)</small></a></li>
 				    
+				    <li><a href="/categories/ImageProcessing/" class="animsition-link">ImageProcessing<small>(1)</small></a></li>
+				    
 				    <li><a href="/categories/Information-Security/" class="animsition-link">Information Security<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/OS/" class="animsition-link">OS<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/ProjectImages/" class="animsition-link">ProjectImages<small>(7)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(4)</small></a></li>
 				    
 				    <li><a href="/categories/blog/" class="animsition-link">blog<small>(3)</small></a></li>
 				    
@@ -224,7 +227,7 @@
         <!-- ============================ Hero Image =========================== -->
 
         <section id="hero" class="scrollme">
-            <div class="container-fluid element-img" style="background: url(http://gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/bg.jpg) no-repeat center center fixed;background-size: cover">
+            <div class="container-fluid element-img" style="background: url(http://gitimage-10031767.cos.myqcloud.com/blog_image/Theme_Image/b1%281192_720%29.jpg) no-repeat center center fixed;background-size: cover">
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
@@ -279,6 +282,7 @@
 <p>&nbsp;&nbsp;&nbsp;&nbsp; 为了提高地址分配的效率和减少分配网络号总数，采取<strong>划分子网</strong>的策略，在多个网络中共享一个网络号的机制涉及使用子网掩码，子网掩码的作用就是用来判断任意两个或多个IP地址是否属于同一个子网。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp; 子网划分的实现是基于<font color="red"><strong>网络位占用主机位</strong></font>的，以21位网络位和8位主机位的C类地址为例，若将一个C类网络划分成2个子网，则网络位需要占用1位主机位，即现在是22位网络位和7位主机位，通过占用的这1位的值来区分划分成的2个子网，同理，若划分成3个或4个子网则占用2个主机位…</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp; 但是现在，一个外部的网络，并不知道连接的这个C类网络是否划分了子网，所以需要子网掩码，当未划分时，A类地址的缺省子网掩码为255.0.0.0，B类为255.255.0.0，C类为255.255.255.0，仍以C类网络为例，划分成2个子网(占1位主机位)后子网掩码为255.255.255.128(128个主机，126个可用主机)，划分成4个子网(占位主机位)后子网掩码为255.255.255.192，如下表：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -341,6 +345,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>&nbsp;&nbsp;&nbsp;&nbsp; ifconfig(win为ipconfig) 查看当前计算机的ip地址及子网掩码，当前ip为192.168.1.105，即C类网络，子网掩码0xffffff00，即255.255.255.0，未划分。</p>
 <p><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/subnet_mask/ifconfig.png" alt="Drawing" width="400px"></p>
 <!-- ![](http://gitimage-10031767.file.myqcloud.com/blog_image/subnet_mask/ifconfig.png) -->
@@ -358,6 +363,7 @@
 <p><br></p>
 <h4 id="补充-来自知乎-："><a href="#补充-来自知乎-：" class="headerlink" title="补充(来自知乎)："></a>补充(来自知乎)：</h4><p>比较下面的两个IP地址，<br>A：219.218.44.123<br>B：219.218.45.34<br>在子网掩码M1：255.255.254.0下为同一子网，而在M2：255.255.255.0下为不同子网。</p>
 <p>分析：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -376,6 +382,8 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -394,6 +402,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>通过做and运算，可以看出来<br>A&amp;M1:11011011-11011010-00101100-00000000<br>B&amp;M1:11011011-11011010-00101100-00000000</p>
 <p>A&amp;M2:11011011-11011010-001011<font color="red">00</font>-00000000<br>B&amp;M2:11011011-11011010-001011<font color="red">01</font>-00000000</p>
 <p>假设还有如下IP<br>C：219.218.45.200<br>可以得出在子网M2：255.255.255.0下跟B同子网，而在子网M3：255.255.255.128下为不同子网。</p>
@@ -509,7 +518,24 @@ var duoshuoQuery = {short_name:"louiehuang"};
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
 })();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 </html>
