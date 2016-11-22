@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://hlyin.space/about.html</loc>
+    
+    <lastmod>2016-11-22T15:28:28.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://hlyin.space/Blog/visiting_speed_opt1/</loc>
+    
+    <lastmod>2016-11-22T14:46:47.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://hlyin.space/Blog/visiting_speed_opt2/</loc>
+    
+    <lastmod>2016-11-22T14:46:41.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://hlyin.space/Blog/baidu_analytics/</loc>
+    
+    <lastmod>2016-11-22T14:46:24.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://hlyin.space/Recommender-System/Information_entropy/</loc>
     
     <lastmod>2016-11-21T14:53:35.000Z</lastmod>
@@ -107,27 +135,6 @@
   </url>
   
   <url>
-    <loc>http://hlyin.space/blog/visiting_speed_opt2/</loc>
-    
-    <lastmod>2016-04-11T15:15:52.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://hlyin.space/blog/visiting_speed_opt1/</loc>
-    
-    <lastmod>2016-04-10T13:45:11.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://hlyin.space/blog/baidu_analytics/</loc>
-    
-    <lastmod>2016-04-10T12:14:40.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://hlyin.space/OS/OS_review/</loc>
     
     <lastmod>2016-04-10T07:28:00.000Z</lastmod>
@@ -138,13 +145,6 @@
     <loc>http://hlyin.space/Animation/april/</loc>
     
     <lastmod>2016-04-09T13:45:04.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://hlyin.space/about.html</loc>
-    
-    <lastmod>2016-04-07T17:32:54.000Z</lastmod>
     
   </url>
   

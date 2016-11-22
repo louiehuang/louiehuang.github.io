@@ -3,6 +3,61 @@
 
 
     
+    
+  <url>
+    <loc>http://hlyin.space/Blog/visiting_speed_opt1/</loc>
+    <lastmod>2016-11-22T14:46:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>访问速度优化(一)---图片及谷歌字体转存COS</title>
+        <pubTime>2016-04-08T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Blog" url="http://hlyin.space/categories/Blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hlyin.space/Blog/visiting_speed_opt2/</loc>
+    <lastmod>2016-11-22T14:46:41.000Z</lastmod>
+    <data>
+        <display>
+        <title>访问速度优化(二)---国内解析到coding，国外解析到github</title>
+        <pubTime>2016-04-09T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Blog" url="http://hlyin.space/categories/Blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://hlyin.space/Blog/baidu_analytics/</loc>
+    <lastmod>2016-11-22T14:46:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>添加google统计或百度统计</title>
+        <pubTime>2016-04-07T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Blog" url="http://hlyin.space/categories/Blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>http://hlyin.space/Recommender-System/Information_entropy/</loc>
     <lastmod>2016-11-21T14:53:35.000Z</lastmod>
@@ -274,60 +329,6 @@
 
     
   <url>
-    <loc>http://hlyin.space/blog/visiting_speed_opt2/</loc>
-    <lastmod>2016-04-11T15:15:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>访问速度优化(二)---国内解析到coding，国外解析到github</title>
-        <pubTime>2016-04-09T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="blog" url="http://hlyin.space/categories/blog/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://hlyin.space/blog/visiting_speed_opt1/</loc>
-    <lastmod>2016-04-10T13:45:11.000Z</lastmod>
-    <data>
-        <display>
-        <title>访问速度优化(一)---图片及谷歌字体转存COS</title>
-        <pubTime>2016-04-08T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="blog" url="http://hlyin.space/categories/blog/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://hlyin.space/blog/baidu_analytics/</loc>
-    <lastmod>2016-04-10T12:14:40.000Z</lastmod>
-    <data>
-        <display>
-        <title>添加google统计或百度统计</title>
-        <pubTime>2016-04-07T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="blog" url="http://hlyin.space/categories/blog/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://hlyin.space/OS/OS_review/</loc>
     <lastmod>2016-04-10T07:28:00.000Z</lastmod>
     <data>
@@ -362,6 +363,5 @@
     </data>
     </url>
 
-    
     
 </urlset>
