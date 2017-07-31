@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Louie&#39;s Blog</title>
-  <subtitle>黄刘胤的博客 Louie&#39;s blog 代码猴子</subtitle>
+  <subtitle>黄刘胤的博客 Louie&#39;s blog</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hlyin.space/"/>
-  <updated>2016-11-21T14:53:35.000Z</updated>
+  <updated>2016-12-25T07:36:01.000Z</updated>
   <id>http://hlyin.space/</id>
   
   <author>
@@ -14,6 +14,226 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Logistic回归与梯度下降算法</title>
+    <link href="http://hlyin.space/Recommender-System/Logistic_GradientDescent/"/>
+    <id>http://hlyin.space/Recommender-System/Logistic_GradientDescent/</id>
+    <published>2016-12-09T16:00:00.000Z</published>
+    <updated>2016-12-25T07:36:01.000Z</updated>
+    
+    <content type="html">&lt;p&gt;假设数据集有m行(1…m)，每个样本n个特征(1…n): &lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;x = (x_{1}, x_{2}, ..., x_{n})&lt;/script&gt;&lt;p&gt;1.定义估计函数:&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h(x) = h_{\theta}(x) = g(\theta_{1} + \theta_{2}x_{2} + ... + \theta_{n}x_{n})&lt;/script&gt;&lt;p&gt;令$x_{1} = 1.0$，则有&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h(x) = h_{\theta}(x) = g(\theta_{1}x_{1} + \theta_{2}x_{2} + ... + \theta_{n}x_{n}) = g(\theta^{T}x)&lt;/script&gt;&lt;p&gt;g函数使用Sigmoid函数 $\sigma(z) = \frac{1}{1+e^{-z}}$&lt;/p&gt;
+&lt;p&gt;参数$θ$，表示各特征的权重&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;2.定义&lt;strong&gt;损失函数&lt;/strong&gt;(loss function) / 错误函数(error function)，描述h函数不好的程度，用J函数表示&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;J(\theta) = \frac{1}{2} \sum_{i=1}^{m}(h_{\theta}(x^{(i)}) - y^{(i)})^2&lt;/script&gt;&lt;p&gt;其中y为分类类别，Logistic回归中一般为2类，用0和1表示，概率分别为&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\left\{
+\begin{aligned}
+P(y=1|x;\theta) &amp; =  h_{\theta}(x) \\
+P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x) 
+\end{aligned}
+\right.&lt;/script&gt;&lt;p&gt;分号用于区别参数，当$\theta = \theta$时，样本x分类为1的概率&lt;/p&gt;
+&lt;p&gt;使用梯度下降法找到使$J(\theta)$最小的$θ$&lt;/p&gt;
+&lt;p&gt;下面就是计算梯度下降的方法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;随机初始化θ，可以让θ是一个全零的向量&lt;/li&gt;
+&lt;li&gt;迭代，如果新的θ能够获得使得J(θ)更小&lt;/li&gt;
+&lt;li&gt;如果J(θ)能够继续减小，那么回到2，继续执行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;梯度是函数增长最快的方向（随机上升加上梯度，越接近局部最大值梯度越小，局部最大值点的梯度为0），梯度的负方向是函数下降最快的方向（随机下降减去梯度，越接近局部最小值梯度越小，局部极小值点的梯度为0），对于线性函数，梯度是其斜率。&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;对$J(\theta)$求偏导，以对第j个分量求偏导为例：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;J(\theta) = \frac{1}{2} \sum_{i=1}^{m}(h_{\theta}(x^{(i)}) - y^{(i)})^2&lt;/script&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/blog_image/logistic/p1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;其中 i=1…m，表示样本，j=1…n，表示特征，$x_{j}^{(i)}$表示第i个样本的第j个特征&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;所以&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\theta_{j} := \theta_{j} - \alpha \frac{\partial}{\partial\theta_{j}}J(\theta) = \theta_{j} - \alpha\sum_{i=1}^{m}(h_{\theta}(x^{(i)}) - y^{(i)})x_{j}^{(i)} = \theta_{j} - \alpha \left ( h_{\theta}(x) - y \right ) x_{j}&lt;/script&gt;&lt;p&gt;若用梯度上升（梯度下降最小化损失函数，而梯度上升最大化似然函数），则&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\theta_{j} := \theta_{j} + \alpha \frac{\partial}{\partial\theta_{j}}J(\theta) = \theta_{j} + \alpha\sum_{i=1}^{m}(y^{(i)} - h_{\theta}(x^{(i)}))x_{j}^{(i)} = \theta_{j} + \alpha \left (y - h_{\theta}(x)\right ) x_{j}&lt;/script&gt;&lt;p&gt;对于输入的训练集x，m个样本，每个样本n个特征值&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;x 
+= \begin{bmatrix} x^{(1)} \\ x^{(2)} \\ ... \\ x^{(m)} \end{bmatrix} 
+= \begin{bmatrix} x_{1}^{(1)} &amp; x_{2}^{(1)} &amp; ... &amp; x_{n}^{(1)} \\ x_{1}^{(2)} &amp; x_{2}^{(2)} &amp; ... &amp; x_{n}^{(2)} \\ ... \\ x_{1}^{(m)} &amp; x_{2}^{(m)} &amp; ... &amp; x_{n}^{(m)} \end{bmatrix}&lt;/script&gt;&lt;p&gt;y为实际值&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;y = \begin{bmatrix} y^{(1)} \\ y^{(2)} \\ ... \\ y^{(m)} \end{bmatrix}&lt;/script&gt;&lt;p&gt;带求参数$\theta$为&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\theta = \begin{bmatrix} \theta_{1} \\ \theta_{2} \\ ... \\ \theta_{n} \end{bmatrix}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;h_{\theta}(x) 
+= \begin{bmatrix} h_{\theta}(x^{(1)}) \\ h_{\theta}(x^{(2)}) \\ ... \\ h_{\theta}(x^{(m)}) \end{bmatrix}
+= \begin{bmatrix} g(\theta_{1}x_{1}^{(1)} + \theta_{2}x_{2}^{(1)} + ... + \theta_{n}x_{n}^{(1)}) \\  g(\theta_{1}x_{1}^{(2)} + \theta_{2}x_{2}^{(2)} + ... + \theta_{n}x_{n}^{(2)}) \\ ... \\ g(\theta_{1}x_{1}^{(m)} + \theta_{2}x_{2}^{(m)} + ... + \theta_{n}x_{n}^{(m)})\end{bmatrix}
+= g(x\cdot\theta)&lt;/script&gt;&lt;p&gt;记$E = h_{\theta}(x) - y$&lt;/p&gt;
+&lt;p&gt;则&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;E = h_{\theta}(x) - y = g(x\cdot\theta) - y&lt;/script&gt;&lt;p&gt;所以&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/blog_image/logistic/p2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;可得&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{bmatrix} \theta_{1} \\ \theta_{2} \\ ... \\ \theta_{n} \end{bmatrix}
+:= \begin{bmatrix} \theta_{1} \\ \theta_{2} \\ ... \\ \theta_{n} \end{bmatrix} - \alpha \cdot \begin{bmatrix} x_{1}^{(1)} + x_{1}^{(2)} + ... + x_{1}^{(m)} \\  x_{2}^{(1)} + x_{2}^{(2)} + ... + x_{2}^{(m)} \\ ... \\ x_{n}^{(1)} + x_{n}^{(2)} + ... + x_{n}^{(m)} \end{bmatrix} \cdot E&lt;/script&gt;&lt;p&gt;也即&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\theta := \theta - \alpha \cdot x^{T} \cdot E = \theta - \alpha \cdot x^{T} \cdot (g(x\cdot\theta) - y)&lt;/script&gt;&lt;p&gt;若用梯度上升算法（Machine Learning in Action中所使用的），则为:&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\theta := \theta + \alpha \cdot x^{T} \cdot (y - g(x\cdot\theta))&lt;/script&gt;&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;参考资料：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blog.chinaunix.net/uid-25267728-id-4678802.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;机器学习算法之梯度下降法 &lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/woxincd/article/details/7040944&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;梯度下降法&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blog.chinaunix.net/xmlrpc.php?r=blog/article&amp;amp;uid=9162199&amp;amp;id=4223505&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;【机器学习笔记1】Logistic回归总结 &lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;假设数据集有m行(1…m)，每个样本n个特征(1…n): &lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;x = (x_{1}, x_{2}, ..., x_{n})&lt;/script&gt;&lt;p&gt;1.定义估计函数:&lt;/p&gt;
+&lt;script t
+    
+    </summary>
+    
+      <category term="Recommender System" scheme="http://hlyin.space/categories/Recommender-System/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>修正余弦和Pearson相关系数在CF中的应用</title>
+    <link href="http://hlyin.space/Recommender-System/AdjustedCosineSimandPearsoninCF/"/>
+    <id>http://hlyin.space/Recommender-System/AdjustedCosineSimandPearsoninCF/</id>
+    <published>2016-11-24T16:00:00.000Z</published>
+    <updated>2016-12-25T07:18:37.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;1-Item-based&quot;&gt;&lt;a href=&quot;#1-Item-based&quot; class=&quot;headerlink&quot; title=&quot;1. Item-based&quot;&gt;&lt;/a&gt;1. Item-based&lt;/h2&gt;&lt;h3 id=&quot;1-1-余弦相似度-cosine-similarity&quot;&gt;&lt;a href=&quot;#1-1-余弦相似度-cosine-similarity&quot; class=&quot;headerlink&quot; title=&quot;1.1 余弦相似度(cosine similarity)&quot;&gt;&lt;/a&gt;1.1 余弦相似度(cosine similarity)&lt;/h3&gt;&lt;p&gt;对于item-based，计算物品相似度，参与计算的是两个物品评分向量（即用户-评分矩阵的列），假设用户-评分矩阵是m*n规模。&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\vec{item_i} = \begin{bmatrix} r_{1i} \\ r_{2i} \\ ... \\ r_{mi} \end{bmatrix}, \quad\quad \vec{item_j} = \begin{bmatrix} r_{1j} \\ r_{2j} \\ ... \\ r_{mj} \end{bmatrix}&lt;/script&gt;&lt;p&gt;rui表示用户u对物品i的评分&lt;/p&gt;
+&lt;p&gt;余弦定理计算这两个向量的相似度（$cos\theta$），有：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;w_{ij} = \frac{\sum_{u \in U}r_{ui} \cdot r_{uj}}{\sqrt{\sum_{u \in U}r_{ui}^2 \sum_{u \in U}r_{uj}^2}}&lt;/script&gt;&lt;p&gt;U是同时评价过物品i和物品j的用户的交集（用户交集）&lt;/p&gt;
+&lt;h3 id=&quot;1-2-修正的余弦相似度-adjusted-cosine-similarity&quot;&gt;&lt;a href=&quot;#1-2-修正的余弦相似度-adjusted-cosine-similarity&quot; class=&quot;headerlink&quot; title=&quot;1.2 修正的余弦相似度(adjusted cosine similarity)&quot;&gt;&lt;/a&gt;1.2 修正的余弦相似度(adjusted cosine similarity)&lt;/h3&gt;&lt;p&gt;物品评分向量的各个分量由不同的用户给出的评分构成，而不同用户的评分尺度可能不同，比如用户u倾向于给高分，用户v倾向于给低分，所以去中心化后可以得到更好的效果，不直接比较$r&lt;em&gt;{ui}$和$r&lt;/em&gt;{vj}$，而是比较$r&lt;em&gt;{ui} - \bar{r_u}$和$r&lt;/em&gt;{vj} - \bar{r_v}$。&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\vec i = \begin{bmatrix} r_{1i} - \bar{r_1} \\ r_{2i} - \bar{r_2} \\ ... \\ r_{mi} - \bar{r_m} \end{bmatrix}, \quad\quad \vec j = \begin{bmatrix} r_{1j} - \bar{r_1} \\ r_{2j} - \bar{r_2} \\ ... \\ r_{mj} - \bar{r_m} \end{bmatrix}&lt;/script&gt;&lt;p&gt;修正的余弦相似度：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;w_{ij} = \frac{\sum_{u \in U}(r_{ui} - \bar{r_u}) \cdot ( r_{uj} - \bar{r_u})}{\sqrt{\sum_{u \in U}(r_{ui} - \bar {r_{u}})^2 \sum_{u \in U}(r_{uj} - \bar {r_{u}})^2}}&lt;/script&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;去中心化考虑的是&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;用户u&lt;/strong&gt;&lt;/font&gt;打分的平均值，减去的是$\bar {r_u}$&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h3 id=&quot;1-3-Pearson相关系数-Pearson-correlation-coefficient&quot;&gt;&lt;a href=&quot;#1-3-Pearson相关系数-Pearson-correlation-coefficient&quot; class=&quot;headerlink&quot; title=&quot;1.3 Pearson相关系数(Pearson correlation coefficient)&quot;&gt;&lt;/a&gt;1.3 Pearson相关系数(Pearson correlation coefficient)&lt;/h3&gt;&lt;p&gt;两向量的协方差除以它们标准差的积：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\rho_{XY} = \frac{cov(X, Y)}{\sqrt{D(X)}\sqrt{D(Y)}} = \frac{\frac{1}{N - 1}\sum_{i=1}^{N}(X_i - \bar X)(Y_i - \bar Y)}{\sqrt{\frac{1}{N-1}\sum_{i=1}^{n}(x_i - \bar x)^2}\sqrt{\frac{1}{N-1}\sum_{i=1}^{n}(y_i - \bar y)^2}} = \frac{\sum_{i=1}^{N}(X_i - \bar X)(Y_i - \bar Y)}{\sqrt{\sum_{i=1}^{n}(x_i - \bar x)^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar y)^2}}&lt;/script&gt;&lt;p&gt;在item-based里，公式为：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;w_{ij} = \frac{\sum_{u \in U}(r_{ui} - \bar{r_i}) \cdot ( r_{uj} - \bar{r_j})}{\sqrt{\sum_{u \in U}(r_{ui} - \bar {r_{i}})^2 \sum_{u \in U}(r_{uj} - \bar {r_{j}})^2}}&lt;/script&gt;&lt;p&gt;&lt;br&gt;&lt;br&gt;去中心化考虑的是&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;物品i&lt;/strong&gt;&lt;/font&gt;被打分的平均值（参与计算的是两个物品向量），减去的是$\bar {r_i}$ &lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h2 id=&quot;2-User-based&quot;&gt;&lt;a href=&quot;#2-User-based&quot; class=&quot;headerlink&quot; title=&quot;2. User-based&quot;&gt;&lt;/a&gt;2. User-based&lt;/h2&gt;&lt;h3 id=&quot;2-1-修正的余弦相似度&quot;&gt;&lt;a href=&quot;#2-1-修正的余弦相似度&quot; class=&quot;headerlink&quot; title=&quot;2.1 修正的余弦相似度&quot;&gt;&lt;/a&gt;2.1 修正的余弦相似度&lt;/h3&gt;&lt;p&gt;对于user-based，计算用户相似度，参与计算的是两个用户评分向量（即用户-评分矩阵的行），&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\vec{user_u} = \begin{bmatrix} r_{u1}, r_{u2}, ... , r_{un} \end{bmatrix}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;\vec{user_v} = \begin{bmatrix} r_{v1}, r_{v2}, ... , r_{vn} \end{bmatrix}&lt;/script&gt;&lt;p&gt;因为比较的两个用户u、v可能存在评分尺度不同（这里是参与计算相似度的两个用户，item-based里是共同评价过某一对物品的多个用户），需要去中心化。&lt;/p&gt;
+&lt;p&gt;修正的余弦相似度：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;w_{uv} = \frac{\sum_{p \in P}(r_{up} - \bar{r_u}) \cdot ( r_{vp} - \bar{r_v})}{\sqrt{\sum_{p \in P}(r_{up} - \bar {r_{u}})^2 \sum_{p \in P}(r_{vp} - \bar {r_{v}})^2}}&lt;/script&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;去中心化考虑的是仍然是&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;用户u&lt;/strong&gt;&lt;/font&gt;打分的平均值，减去的是$\bar {r_u}$ &lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h3 id=&quot;2-2-Pearson相关系数&quot;&gt;&lt;a href=&quot;#2-2-Pearson相关系数&quot; class=&quot;headerlink&quot; title=&quot;2.2 Pearson相关系数&quot;&gt;&lt;/a&gt;2.2 Pearson相关系数&lt;/h3&gt;&lt;p&gt;P是用户u和用户v都评价过的物品的交集（物品交集）&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;w_{uv} = \frac{\sum_{p \in P}(r_{up} - \bar{r_u}) \cdot ( r_{vp} - \bar{r_v})}{\sqrt{\sum_{p \in P}(r_{up} - \bar {r_{u}})^2 \sum_{p \in P}(r_{vp} - \bar {r_{v}})^2}}&lt;/script&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;去中心化考虑的是&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;用户u&lt;/strong&gt;&lt;/font&gt;打分的平均值（参与计算的是两个用户向量），减去的是$\bar {r_u}$ &lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-Item-based&quot;&gt;&lt;a href=&quot;#1-Item-based&quot; class=&quot;headerlink&quot; title=&quot;1. Item-based&quot;&gt;&lt;/a&gt;1. Item-based&lt;/h2&gt;&lt;h3 id=&quot;1-1-余弦相似度-cosine-simila
+    
+    </summary>
+    
+      <category term="Recommender System" scheme="http://hlyin.space/categories/Recommender-System/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CF代码实现</title>
+    <link href="http://hlyin.space/Recommender-System/CFcode/"/>
+    <id>http://hlyin.space/Recommender-System/CFcode/</id>
+    <published>2016-11-21T16:00:00.000Z</published>
+    <updated>2016-12-25T07:24:57.000Z</updated>
+    
+    <content type="html">&lt;p&gt;基于物品的协同过滤&lt;/p&gt;
+&lt;h3 id=&quot;1-推荐系统实战-项亮-：&quot;&gt;&lt;a href=&quot;#1-推荐系统实战-项亮-：&quot; class=&quot;headerlink&quot; title=&quot;1. 推荐系统实战(项亮)：&quot;&gt;&lt;/a&gt;1. 推荐系统实战(项亮)：&lt;/h3&gt;&lt;h4 id=&quot;1-1-加载数据集&quot;&gt;&lt;a href=&quot;#1-1-加载数据集&quot; class=&quot;headerlink&quot; title=&quot;1.1 加载数据集&quot;&gt;&lt;/a&gt;1.1 加载数据集&lt;/h4&gt;&lt;p&gt;构造训练集train，加载u3.base，是一个嵌套字典&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;userId1 ： &amp;#123;itemId1 : rating11, itemId2: rating12, ...&amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;userId2 ： &amp;#123;itemId1 : rating21, itemId2: rating22, ...&amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;... &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;构造测试集test，加载u3.test，同样，是一个嵌套字典&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;userId1 ： &amp;#123;itemId1 : rating11, itemId2: rating12, ...&amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;userId2 ： &amp;#123;itemId1 : rating21, itemId2: rating22, ...&amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h4 id=&quot;1-2-计算物品相似度矩阵&quot;&gt;&lt;a href=&quot;#1-2-计算物品相似度矩阵&quot; class=&quot;headerlink&quot; title=&quot;1.2 计算物品相似度矩阵&quot;&gt;&lt;/a&gt;1.2 计算物品相似度矩阵&lt;/h4&gt;&lt;h5 id=&quot;1-2-1-计算共现矩阵C&quot;&gt;&lt;a href=&quot;#1-2-1-计算共现矩阵C&quot; class=&quot;headerlink&quot; title=&quot;1.2.1 计算共现矩阵C&quot;&gt;&lt;/a&gt;1.2.1 计算共现矩阵C&lt;/h5&gt;&lt;p&gt;即找出被2个或多个用户同时有过行为(此处为评过分)的物品，计算出共现矩阵可以避免后面在计算相似度的时候求两个物品的交集（很多物品可能没有交集，因而会浪费时间）&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#共现矩阵&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;C = dict()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;N = dict()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; user, items &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; train.items():&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; items.keys():&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        C.setdefault(i,&amp;#123;&amp;#125;)  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        N[i] = N.get(i, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;) + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; j &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; items.keys():&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; i == j:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;keyword&quot;&gt;continue&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            C[i][j] = C.get(i, &amp;#123;&amp;#125;).get(j, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;) + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;#不存在时默认值为0(不存在i时默认C[i]=&amp;#123;&amp;#125;, 不存在j时默认C[i][j]=0)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h5 id=&quot;1-2-2-计算相似度矩阵&quot;&gt;&lt;a href=&quot;#1-2-2-计算相似度矩阵&quot; class=&quot;headerlink&quot; title=&quot;1.2.2 计算相似度矩阵&quot;&gt;&lt;/a&gt;1.2.2 计算相似度矩阵&lt;/h5&gt;&lt;p&gt;没有使用评分数据，相似度的计算按照 $W_{ij} = \frac{|N(i)\bigcap N(j)|}{\sqrt(|N(i)||N(j)|}$，|N(i)|是喜欢物品i的用户数，公式代表：喜欢物品i的用户中有多少比例的用户也喜欢物品j&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#计算相似度矩阵&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;W = dict()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; i, related_items &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; C.items():&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; j, cij &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; related_items.items():&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        W.setdefault(i,&amp;#123;&amp;#125;)  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        W[i].setdefault(j,&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        W[i][j] = cij / sqrt(N[i] * N[j])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#W相似度矩阵中，每个物品保留最相似的50个&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; i, related_items &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; W.items():&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    tmp = sorted(W[i].items(), key = operator.itemgetter(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;), reverse = &lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; : &lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    W[i] = dict(tmp) &lt;span class=&quot;comment&quot;&gt;#dict排序后的tmp为list，需要重新转成dict&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h5 id=&quot;1-2-3-获取推荐&quot;&gt;&lt;a href=&quot;#1-2-3-获取推荐&quot; class=&quot;headerlink&quot; title=&quot;1.2.3 获取推荐&quot;&gt;&lt;/a&gt;1.2.3 获取推荐&lt;/h5&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;getRecommendation&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(train, user_id, W, K, N)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;string&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    计算和物品j最相似的K个&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&quot;&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    rank = &amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    userRated = train[user_id]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;#对user_id有过行为的物品i，找出与i相似度最高的K个物品&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; i, rui &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; userRated.items(): &lt;span class=&quot;comment&quot;&gt;#物品id和用户u对i的兴趣程度rui，隐返回数据集单一行为，可置1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        sortedWi = sorted(W[i].items(), key = operator.itemgetter(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;), reverse = &lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; : K]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; j, wj &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; sortedWi:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; j &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; userRated: &lt;span class=&quot;comment&quot;&gt;#已经评价过&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;keyword&quot;&gt;continue&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            rank.setdefault(j, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            rank[j] += &lt;span class=&quot;number&quot;&gt;1.0&lt;/span&gt; * wj &lt;span class=&quot;comment&quot;&gt;#rui * wj，隐反馈数据集，如果用户u对i有过行为(假定只有单一行为)，则用户u对i的兴趣度定为1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;#排序后返回&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; sorted(rank.items(), key = operator.itemgetter(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;), reverse = &lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;)[: N]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h3 id=&quot;2-集体智慧编程-Toby-Segaran&quot;&gt;&lt;a href=&quot;#2-集体智慧编程-Toby-Segaran&quot; class=&quot;headerlink&quot; title=&quot;2. 集体智慧编程(Toby Segaran)&quot;&gt;&lt;/a&gt;2. 集体智慧编程(Toby Segaran)&lt;/h3&gt;&lt;h4 id=&quot;2-1-加载数据集&quot;&gt;&lt;a href=&quot;#2-1-加载数据集&quot; class=&quot;headerlink&quot; title=&quot;2.1 加载数据集&quot;&gt;&lt;/a&gt;2.1 加载数据集&lt;/h4&gt;&lt;p&gt;构造用户-物品数据集user_items，加载u.data，是一个嵌套字典&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;userId1 ： &amp;#123;itemId1 : rating11, itemId2: rating12, ...&amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;userId2 ： &amp;#123;itemId1 : rating21, itemId2: rating22, ...&amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;构造物品表items，是一个字典&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;itemId1 : title1, &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;itemId2 : title2, &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h4 id=&quot;2-2-计算物品相似度矩阵&quot;&gt;&lt;a href=&quot;#2-2-计算物品相似度矩阵&quot; class=&quot;headerlink&quot; title=&quot;2.2 计算物品相似度矩阵&quot;&gt;&lt;/a&gt;2.2 计算物品相似度矩阵&lt;/h4&gt;&lt;h5 id=&quot;2-2-1-构建物品-用户倒排表&quot;&gt;&lt;a href=&quot;#2-2-1-构建物品-用户倒排表&quot; class=&quot;headerlink&quot; title=&quot;2.2.1 构建物品-用户倒排表&quot;&gt;&lt;/a&gt;2.2.1 构建物品-用户倒排表&lt;/h5&gt;&lt;p&gt;&lt;code&gt;item_users = buildReverseTable(user_items)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h5 id=&quot;2-2-2-计算相似度&quot;&gt;&lt;a href=&quot;#2-2-2-计算相似度&quot; class=&quot;headerlink&quot; title=&quot;2.2.2 计算相似度&quot;&gt;&lt;/a&gt;2.2.2 计算相似度&lt;/h5&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;calcItemSimlarity&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(user_items, n = &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;string&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    计算物品相似度矩阵, 保存每个物品最相似的n个物品&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    实现中，两物品的评分交集在topNmatches-sim_pearson中计算&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    而实际上很多物品可能没有交集，因而浪费时间&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    可以在这里先计算物品的共现矩阵C，再遍历C计算相似度，此时sim_pearson中不再求评分交集&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&quot;&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    itemSim = &amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;#构建物品-用户倒排表&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    item_users = buildReverseTable(user_items)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    count = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;#计数变量&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; item &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; item_users:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        count += &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; count % &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt; == &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;%d / %d&quot;&lt;/span&gt; % (count, len(item_users))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        sim = topNMatches(item_users, item, n = n) &lt;span class=&quot;comment&quot;&gt;#默认pearson相关系数&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        itemSim[item] = sim&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    storeItemSimlarity(itemSim, &lt;span class=&quot;string&quot;&gt;&#39;itemSimilarity.txt&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; itemSim&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;topNMatches遍历物品-用户倒排表，返回与物品item最相似的n个物品，相似度使用pearson相关系数计算（def sim_pearson(dataSet, v1, v2)，在此函数中需要先求v1、v2的交集）&lt;/p&gt;
+&lt;p&gt;最后pickle存储计算的结果&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;storeItemSimlarity&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(itemSim, filename)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; pickle&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    fw = open(filename, &lt;span class=&quot;string&quot;&gt;&#39;w&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    pickle.dump(itemSim, fw)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    fw.close&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h4 id=&quot;2-3-获取推荐&quot;&gt;&lt;a href=&quot;#2-3-获取推荐&quot; class=&quot;headerlink&quot; title=&quot;2.3 获取推荐&quot;&gt;&lt;/a&gt;2.3 获取推荐&lt;/h4&gt;&lt;p&gt;&lt;code&gt;def getRecommendedItems(user_items, itemSim, user):&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;为user（id）获取推荐物品&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;先从user_items中获取user用户评价过的物品&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;遍历这些物品：&lt;br&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;对每个物品，从相似度矩阵itemSim中找到与其相似的物品，对用户没有评价过的那些物品，计算其评分与相似度乘积之和score以及相似度之和totalSim&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;相除得到预测评分&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;降序排序后返回&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;getRecommendedItems&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(user_items, itemSim, user)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    userRatings = user_items[user]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    scores = &amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    totalSim = &amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (item, rating) &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; userRatings.items():&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(other, similarity) &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; itemSim[item]:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; other &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; userRatings:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;keyword&quot;&gt;continue&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            scores.setdefault(other, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            scores[other] += similarity * rating&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            totalSim.setdefault(other, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            totalSim[other] += similarity&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    rank = []&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; item, score &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; scores.items():&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; totalSim[item] == &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;: &lt;span class=&quot;comment&quot;&gt;#可能有除0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;pass&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            rank.append((score / totalSim[item], item)) &lt;span class=&quot;comment&quot;&gt;#返回的是(预测评分, 物品id)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;# rank = [(score / totalSim[item], items[item]) for item, score in scores.items()]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; sorted(rank, reverse = &lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;基于物品的协同过滤&lt;/p&gt;
+&lt;h3 id=&quot;1-推荐系统实战-项亮-：&quot;&gt;&lt;a href=&quot;#1-推荐系统实战-项亮-：&quot; class=&quot;headerlink&quot; title=&quot;1. 推荐系统实战(项亮)：&quot;&gt;&lt;/a&gt;1. 推荐系统实战(项亮)：&lt;/h3&gt;&lt;h4 id=&quot;1-
+    
+    </summary>
+    
+      <category term="Recommender System" scheme="http://hlyin.space/categories/Recommender-System/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Pearson相关系数</title>
+    <link href="http://hlyin.space/Recommender-System/PearsonCorrCoef/"/>
+    <id>http://hlyin.space/Recommender-System/PearsonCorrCoef/</id>
+    <published>2016-11-19T16:00:00.000Z</published>
+    <updated>2016-12-21T07:38:29.000Z</updated>
+    
+    <content type="html">&lt;p&gt;协方差&lt;br&gt;numpy.cov&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;cov(X, Y) = E\left ( (X - E(X))(Y - E(Y)) \right) = E(XY) - E(X)E(Y)&lt;/script&gt;&lt;p&gt;样本协方差&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;cov(X, Y) = \frac{1}{N - 1}\sum_{i=1}^{N}(X_i - \bar X)(Y_i - \bar Y)&lt;/script&gt;&lt;p&gt;除以N-1是为了保证无偏性&lt;/p&gt;
+&lt;p&gt;pearson相关系数&lt;br&gt;numpy.corrcoef&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\rho_{XY} = \frac{cov(X, Y)}{\sqrt{D(X)}\sqrt{D(Y)}}&lt;/script&gt;&lt;p&gt;即&lt;br&gt;np.corrcoef(x, y) = np.cov(x, y, &lt;font color=&quot;red&quot;&gt;bias = True&lt;/font&gt;) / (std(x) * std(y))&lt;/p&gt;
+&lt;p&gt;std(x)求标准差, var(x)求方差&lt;/p&gt;
+&lt;p&gt;np.cov中不指定bias时(bias = False, 无偏)是除以N-1，指定bias为True或1时是除以N&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; numpy &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; np&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;x = [&lt;span class=&quot;number&quot;&gt;-2.1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;-1&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;4.3&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;y = [&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;0.12&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;np.cov(x,y)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;array([[ &lt;span class=&quot;number&quot;&gt;11.71&lt;/span&gt;      ,  &lt;span class=&quot;number&quot;&gt;-4.286&lt;/span&gt;     ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       [ &lt;span class=&quot;number&quot;&gt;-4.286&lt;/span&gt;     ,   &lt;span class=&quot;number&quot;&gt;2.14413333&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;np.cov(x,y,bias=&lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;array([[ &lt;span class=&quot;number&quot;&gt;7.80666667&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;-2.85733333&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       [&lt;span class=&quot;number&quot;&gt;-2.85733333&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;1.42942222&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;np.cov(x,y,bias=&lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;) / (std(x) * std(y))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;array([[ &lt;span class=&quot;number&quot;&gt;2.33696686&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;-0.85535781&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       [&lt;span class=&quot;number&quot;&gt;-0.85535781&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;0.42790508&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;np.corrcoef(x,y)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;array([[ &lt;span class=&quot;number&quot;&gt;1.&lt;/span&gt;        , &lt;span class=&quot;number&quot;&gt;-0.85535781&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       [&lt;span class=&quot;number&quot;&gt;-0.85535781&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;1.&lt;/span&gt;        ]])&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;矩阵的第i行j列数据表示第i组数与第j组数的相关系数，对角线为1(自己和自己的相关为1，第0行0列除以 (std(x) * std(x))，第1行1列除以 (std(y) * std(y)) )&lt;/p&gt;
+&lt;p&gt;pearson相关系数也可以以下列公式计算&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\rho_{XY} = \frac{cov(X, Y)}{\sqrt{D(X)}\sqrt{D(Y)}} = \frac{\frac{1}{N - 1}\sum_{i=1}^{N}(X_i - \bar X)(Y_i - \bar Y)}{\sqrt{\frac{1}{N-1}\sum_{i=1}^{n}(x_i - \bar x)^2}\sqrt{\frac{1}{N-1}\sum_{i=1}^{n}(y_i - \bar y)^2}} = \frac{\sum_{i=1}^{N}(X_i - \bar X)(Y_i - \bar Y)}{\sqrt{\sum_{i=1}^{n}(x_i - \bar x)^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar y)^2}}&lt;/script&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;num = sum((x-mean(x))*(y-mean(y)))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;dex = sum((x - mean(x))**&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)**&lt;span class=&quot;number&quot;&gt;0.5&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;dey = sum((y - mean(y))**&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)**&lt;span class=&quot;number&quot;&gt;0.5&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;denom = dex * dey&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;num / denom &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;-0.85535780952279472&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;np.corrcoef有一个参数rowvar，帮助文档对其的解释为:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;rowvar&lt;/strong&gt; : int, optional&lt;br&gt;If rowvar is non-zero (default), then each row represents a variable, with observations in the columns. Otherwise, the relationship is transposed: each column represents a variable, while the rows contain observations.&lt;/p&gt;
+&lt;p&gt;也就是说，默认的np.corrcoef(x, y)是计算&lt;strong&gt;行向量&lt;/strong&gt;的相似度，x、y都是行向量，如x = [-2.1, -1,  4.3]&lt;br&gt;如果计算&lt;strong&gt;列向量&lt;/strong&gt;的相似度，可以将rowvar的值置为0&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;x = [&lt;span class=&quot;number&quot;&gt;-2.1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;-1&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;4.3&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;y = [&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;0.12&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;Mx = mat(x)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;Mx&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;matrix([[&lt;span class=&quot;number&quot;&gt;-2.1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;-1.&lt;/span&gt; ,  &lt;span class=&quot;number&quot;&gt;4.3&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;MxT = Mx.T&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;MxT&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;matrix([[&lt;span class=&quot;number&quot;&gt;-2.1&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [&lt;span class=&quot;number&quot;&gt;-1.&lt;/span&gt; ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [ &lt;span class=&quot;number&quot;&gt;4.3&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;My = mat(y)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;My&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;matrix([[ &lt;span class=&quot;number&quot;&gt;3.&lt;/span&gt;  ,  &lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt; ,  &lt;span class=&quot;number&quot;&gt;0.12&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;MyT = My.T&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;MyT&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;matrix([[ &lt;span class=&quot;number&quot;&gt;3.&lt;/span&gt;  ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [ &lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt; ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [ &lt;span class=&quot;number&quot;&gt;0.12&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;np.corrcoef(MxT, MyT, rowvar=&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;array([[ &lt;span class=&quot;number&quot;&gt;1.&lt;/span&gt;        , &lt;span class=&quot;number&quot;&gt;-0.85535781&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       [&lt;span class=&quot;number&quot;&gt;-0.85535781&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;1.&lt;/span&gt;        ]])&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;协方差&lt;br&gt;numpy.cov&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;cov(X, Y) = E\left ( (X - E(X))(Y - E(Y)) \right) = E(XY) - E(X)E(Y)&lt;/script&gt;&lt;
+    
+    </summary>
+    
+      <category term="Recommender System" scheme="http://hlyin.space/categories/Recommender-System/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>信息熵与分类算法[转]</title>
@@ -90,9 +310,61 @@
   </entry>
   
   <entry>
+    <title>Python的类实例属性访问规则探讨[转]</title>
+    <link href="http://hlyin.space/Recommender-System/python_instance_access_rule/"/>
+    <id>http://hlyin.space/Recommender-System/python_instance_access_rule/</id>
+    <published>2016-09-14T16:00:00.000Z</published>
+    <updated>2016-12-21T07:43:31.000Z</updated>
+    
+    <content type="html">&lt;p&gt;一般来说，在Python中，类实例属性的访问规则算是比较直观的。&lt;br&gt;但是，仍然存在一些不是很直观的地方，特别是对C++和Java程序员来说，更是如此。&lt;/p&gt;
+&lt;p&gt;在这里，我们需要明白以下几个地方：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Python是一门动态语言，任何实体都可以动态地添加或删除属性。&lt;/li&gt;
+&lt;li&gt;一个类定义了一个作用域。&lt;/li&gt;
+&lt;li&gt;类实例也引入了一个作用域，这与相应类定义的作用域不同。&lt;/li&gt;
+&lt;li&gt;在类实例中查找属性的时候，首先在实例自己的作用域中查找，如果没有找到，则再在类定义的作用域中查找。&lt;/li&gt;
+&lt;li&gt;在对类实例属性进行赋值的时候，实际上会在类实例定义的作用域中添加一个属性（如果还不存在的话），并不会影响到相应类中定义的同名属性。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;下面看一个例子，加深对上述几点的理解：&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;A&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      cls_i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      cls_j = &amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.instance_i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.instance_j = &amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;在这里，我们先定义类A的一个实例a，然后再看看类A的作用域和实例a的作用域中分别有什么：&lt;/p&gt;
+&lt;p&gt;代码如下:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a = A()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a.__dict__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;apos;instance_j&amp;apos;: &amp;#123;&amp;#125;, &amp;apos;instance_i&amp;apos;: 0&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; A.__dict__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;apos;__init__&amp;apos;: , &amp;apos;__module__&amp;apos;: &amp;apos;__main__&amp;apos;, &amp;apos;cls_i&amp;apos;: 0, &amp;apos;cls_j&amp;apos;: &amp;#123;&amp;#125;, &amp;apos;__doc__&amp;apos;: None&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;我们看到，a的作用域中有instance_i和instance_j，A的作用域中有cls_i和cls_j。&lt;br&gt;我们再来看看名字查找是如何发生的：&lt;/p&gt;
+&lt;p&gt;代码如下:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a.cls_i&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a.instance_i&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;在查找cls_i的时候，实例a的作用域中是没有它的，却在A的作用域中找到了它；在查找instance_i的时候，直接可在a的作用域中找到它。&lt;br&gt;如果我们企图通过实例a来修改cls_i的值，那会怎样呢：&lt;/p&gt;
+&lt;p&gt;代码如下:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a.cls_i = 1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a.__dict__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;apos;instance_j&amp;apos;: &amp;#123;&amp;#125;, &amp;apos;cls_i&amp;apos;: 1, &amp;apos;instance_i&amp;apos;: 0&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; A.__dict__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;apos;__init__&amp;apos;: , &amp;apos;__module__&amp;apos;: &amp;apos;__main__&amp;apos;, &amp;apos;cls_i&amp;apos;: 0, &amp;apos;cls_j&amp;apos;: &amp;#123;&amp;#125;, &amp;apos;__doc__&amp;apos;: None&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;我们可以看到，a的作用域中多了一个cls_i属性，其值为1；同时，我们也注意到A作用域中的cls_i属性的值仍然为0；在这里，我们其实是增加了一个实例属性，并没有修改到类属性。&lt;br&gt;如果我们通过实例a操纵cls_j中的数据（注意不是cls_j本身），又会怎么样呢：&lt;/p&gt;
+&lt;p&gt;代码如下:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a.cls_j[&amp;apos;a&amp;apos;] = &amp;apos;a&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a.__dict__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;apos;instance_j&amp;apos;: &amp;#123;&amp;#125;, &amp;apos;cls_i&amp;apos;: 1, &amp;apos;instance_i&amp;apos;: 0&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; A.__dict__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;apos;__init__&amp;apos;: , &amp;apos;__module__&amp;apos;: &amp;apos;__main__&amp;apos;, &amp;apos;cls_i&amp;apos;: 0, &amp;apos;cls_j&amp;apos;: &amp;#123;&amp;apos;a&amp;apos;: &amp;apos;a&amp;apos;&amp;#125;, &amp;apos;__doc__&amp;apos;: None&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;我们可以看到a的作用域没有发生什么变化，但是A的作用域发生了一些变化，cls_j中的数据发生了变化。&lt;br&gt;实例的作用域发生变化，并不会影响到该类的其它实例，但是类的作用域发生变化，则会影响到该类的所有实例，包括在这之前创建的实例：&lt;/p&gt;
+&lt;p&gt;代码如下:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; A.cls_k = 0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; i.cls_k&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一般来说，在Python中，类实例属性的访问规则算是比较直观的。&lt;br&gt;但是，仍然存在一些不是很直观的地方，特别是对C++和Java程序员来说，更是如此。&lt;/p&gt;
+&lt;p&gt;在这里，我们需要明白以下几个地方：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Python是一
+    
+    </summary>
+    
+      <category term="Recommender System" scheme="http://hlyin.space/categories/Recommender-System/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>召回率准确率</title>
-    <link href="http://hlyin.space/Recommender-System/Precision&Recall/"/>
-    <id>http://hlyin.space/Recommender-System/Precision&Recall/</id>
+    <link href="http://hlyin.space/Recommender-System/Precision_Recall/"/>
+    <id>http://hlyin.space/Recommender-System/Precision_Recall/</id>
     <published>2016-09-11T16:00:00.000Z</published>
     <updated>2016-11-21T14:42:43.000Z</updated>
     
@@ -1076,427 +1348,6 @@ biTarget[4] = &amp;#39;\0&amp;#39;;
     </summary>
     
       <category term="Blog" scheme="http://hlyin.space/categories/Blog/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>《四月是你的谎言》实景</title>
-    <link href="http://hlyin.space/Animation/april/"/>
-    <id>http://hlyin.space/Animation/april/</id>
-    <published>2016-04-01T16:00:00.000Z</published>
-    <updated>2016-04-09T13:45:04.000Z</updated>
-    
-    <content type="html">&lt;h4 id=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;a href=&quot;#《四月是你的谎言》实景图&quot; class=&quot;headerlink&quot; title=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;/a&gt;《四月是你的谎言》实景图&lt;/h4&gt;&lt;p&gt;“灰心丧气时就用手托着下巴，你会为双手能派上用处而感到高兴的。 —- 查理•布朗”&lt;/p&gt;
-&lt;audio autoplay loop&gt;&lt;source src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/%E6%A8%AA%E5%B1%B1%E5%85%8B%20-%20%E3%82%A2%E3%82%B1%E3%82%99%E3%82%A4%E3%83%B3.mp3&quot;&gt;&lt;/audio&gt;
-
-&lt;!--&lt;embed height=&quot;100&quot; width=&quot;100&quot; src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/%E6%A8%AA%E5%B1%B1%E5%85%8B%20-%20%E3%82%A2%E3%82%B1%E3%82%99%E3%82%A4%E3%83%B3.mp3&quot; autostart=&quot;true&quot; loop=&quot;true&quot; hidden=&quot;true&quot;&gt;&lt;/embed&gt;--&gt;
-&lt;!--&lt;section align=center&gt;&lt;table style=&quot;BORDER-RIGHT: #ff69b4 3px 
-dashed; BORDER-TOP: #ff69b4 3px dashed; BORDER-LEFT: #ff69b4 3px dashed; 
-BORDER-BOTTOM: #ff69b4 3px dashed&quot; cellSpacing=&quot;0&quot; cellPadding=&quot;0&quot; 
-bgColor=&quot;white&quot; id=&quot;table6&quot;&gt; &lt;tr&gt; &lt;td&gt; &lt;table 
-borderColor=&quot;#ff69b4&quot; align=&quot;center&quot; bgColor=&quot;#ffccf5&quot; border=&quot;2&quot; 
-id=&quot;table7&quot;&gt; &lt;tr&gt; &lt;td style=&quot;FILTER: alpha(opacity=100,style=3)&quot;&gt; 
-&lt;section align=&quot;center&quot;&gt; &lt;embed src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/%E6%A8%AA%E5%B1%B1%E5%85%8B%20-%20%E3%82%A2%E3%82%B1%E3%82%99%E3%82%A4%E3%83%B3.mp3&quot; width=&quot;300&quot; height=&quot;45&quot; type=&quot;audio/mpeg&quot; loop=&quot;-1&quot; autostart=&quot;true&quot; volume=&quot;0&quot;&gt;&lt;/td&gt; &lt;/tr&gt; &lt;/table&gt; &lt;/td&gt; &lt;/tr&gt; &lt;/table&gt;--&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_1.jpg&quot; alt=&quot;image_1&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_3.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_5.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_6.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_8.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_9.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_10.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_11.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;a href=&quot;#《四月是你的谎言》实景图&quot; class=&quot;headerlink&quot; title=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;/a&gt;《四月是你的谎言》实景图&lt;/h4&gt;&lt;p&gt;“灰心丧气时就用手托着下巴，你会为双手能派上用处而感到高兴的
-    
-    </summary>
-    
-      <category term="Animation" scheme="http://hlyin.space/categories/Animation/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Android ListView优化</title>
-    <link href="http://hlyin.space/Android/Android_ListView_opt/"/>
-    <id>http://hlyin.space/Android/Android_ListView_opt/</id>
-    <published>2016-03-18T16:00:00.000Z</published>
-    <updated>2016-04-12T07:12:06.000Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;ListView的优化&quot;&gt;&lt;a href=&quot;#ListView的优化&quot; class=&quot;headerlink&quot; title=&quot;ListView的优化&quot;&gt;&lt;/a&gt;ListView的优化&lt;/h3&gt;&lt;p&gt;1.存在问题&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt; 在每次调用getView方法中都要执行&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;两个很耗时的操作&lt;/strong&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;inflate方法 (获取布局对象)&lt;/li&gt;
-&lt;li&gt;findViewById&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; View &lt;span class=&quot;title&quot;&gt;getView&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; position, View convertView, ViewGroup parent)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    View view = inflater.inflate(R.layout.item, &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//view才有findViewById, 而this(这里是Adapter)没有, (MainActivity有)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ImageView header = (ImageView) view.findViewById(R.id.header);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView title = (TextView) view.findViewById(R.id.title);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView version = (TextView) view.findViewById(R.id.version);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView size = (TextView) view.findViewById(R.id.size);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Map map = list.get(position); &lt;span class=&quot;comment&quot;&gt;//Map&amp;lt;String, Object&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    header.setImageResource((Integer) map.get(&lt;span class=&quot;string&quot;&gt;&quot;header&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    title.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;title&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    version.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;version&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    size.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;size&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; view;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;2.解决方案&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt; 在getView方法中使用&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;convertView和ViewHolder&lt;/strong&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;inflate方法耗时：convertView解决 （1级优化）&lt;/li&gt;
-&lt;li&gt;findViewById方法耗时：ViewHolder解决 （2级优化）&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.kgc.cn/upload/snapscreen/20160319/145837389990900.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;滑出去的item1的布局对象不销毁，而可以直接提供给下一次出现的item6，省去了填充时间 (省去反射操作)， 之后滑出去的item2则给item7 … item5给item10，到了item6以后，因为item6本来就是用的Recycler里的而不是反射的，后面的所有item都可以循环用item1~item5的反射操作生成的5个对象，也即整个操作，最多只有5次反射(item1~item5)。缓冲池，5 (4+1)个视图缓存，多的1是为了处理上半截或下半截。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.kgc.cn/upload/snapscreen/20160319/145837474528357.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;使用ConvertView后代码如下：&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; View &lt;span class=&quot;title&quot;&gt;getView&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; position, View convertView, ViewGroup parent)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(convertView == &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        convertView = inflater.inflate(R.layout.item, &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ImageView header = (ImageView) convertView.findViewById(R.id.header);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView title = (TextView) convertView.findViewById(R.id.title);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView version = (TextView) convertView.findViewById(R.id.version);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView size = (TextView) convertView.findViewById(R.id.size);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Map map = list.get(position); &lt;span class=&quot;comment&quot;&gt;//Map&amp;lt;String, Object&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    header.setImageResource((Integer) map.get(&lt;span class=&quot;string&quot;&gt;&quot;header&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    title.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;title&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    version.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;version&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    size.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;size&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; convertView;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.kgc.cn/upload/snapscreen/20160319/145837585787884.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;滑出去的item1，除了布局对象不销毁，控件对象也不销毁，因此item6则不用再调用4次findViewById&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.kgc.cn/upload/snapscreen/20160319/145837621143618.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;使用convertView和ViewHolder后代码如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ViewHolder&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ImageView header;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView title;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView version;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView size;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; View &lt;span class=&quot;title&quot;&gt;getView&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; position, View convertView, ViewGroup parent)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ViewHolder viewHolder = &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (convertView == &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        convertView = inflater.inflate(R.layout.item, &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ViewHolder();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//view才有findViewById, 而this(这里是Adapter)没有, (MainActivity有)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder.header = (ImageView) convertView.findViewById(R.id.header);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder.title = (TextView) convertView.findViewById(R.id.title);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder.version = (TextView) convertView.findViewById(R.id.version);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder.size = (TextView) convertView.findViewById(R.id.size);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        convertView.setTag(viewHolder); &lt;span class=&quot;comment&quot;&gt;//&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder = (ViewHolder) convertView.getTag();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Map map = list.get(position); &lt;span class=&quot;comment&quot;&gt;//Map&amp;lt;String, Object&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    viewHolder.header.setImageResource((Integer) map.get(&lt;span class=&quot;string&quot;&gt;&quot;header&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    viewHolder.title.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;title&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    viewHolder.version.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;version&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    viewHolder.size.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;size&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; convertView;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;ListView的优化&quot;&gt;&lt;a href=&quot;#ListView的优化&quot; class=&quot;headerlink&quot; title=&quot;ListView的优化&quot;&gt;&lt;/a&gt;ListView的优化&lt;/h3&gt;&lt;p&gt;1.存在问题&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt; 在每次调用g
-    
-    </summary>
-    
-      <category term="Android" scheme="http://hlyin.space/categories/Android/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>多边形质心计算</title>
-    <link href="http://hlyin.space/ImageProcessing/PolygonCentroid/"/>
-    <id>http://hlyin.space/ImageProcessing/PolygonCentroid/</id>
-    <published>2016-02-02T16:00:00.000Z</published>
-    <updated>2016-10-15T11:19:07.000Z</updated>
-    
-    <content type="html">&lt;p&gt;先需要知道几个公式：&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;一、对于n个离散的有质量数据点&lt;/strong&gt;（或者假设一个多边形的质量集中在其顶点上）&lt;br&gt;假定顶点的坐标为(x&lt;sub&gt;i&lt;/sub&gt;, y&lt;sub&gt;i&lt;/sub&gt;)，质量为m&lt;sub&gt;i&lt;/sub&gt;，则质心为：&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;X = \frac{\sum_{i=1}^n ( x_i \cdot m_i )} {\sum_{i=1}^n m_i}，Y = \frac{\sum_{i=1}^n ( y_i \cdot m_i )} {\sum_{i=1}^n m_i}...(1)&lt;/script&gt;&lt;p&gt;&lt;strong&gt;二、对于质量均匀分布的三角形 $△P_0P_1P_2$&lt;/strong&gt;&lt;br&gt;质心为：&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;X = \frac{x_0 + x_1 + x_2} {3}，Y = \frac{y_0 + y_1 + y_2} {3} ...(2)&lt;/script&gt;&lt;p&gt;面积为（叉积求解）：&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;S = \frac{(x_1 - x_0) \cdot (y_2 - y_0) - (x_2 - x_0) \cdot (y_1 - y_0)} {2} ...(3)&lt;/script&gt;&lt;p&gt;其中$(x_0, y_0), (x_1, y_1), (x_2, y_2)$为三角形顶点坐标&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;对于$△P_0P_1P_2$面积，边界构成逆时针回路时取正, 顺时针时取负&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;有了以上公式后，对于求质量均匀分布的多边形质心（包括凹多边形）步骤可以如下：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;将多边形分为多个三角形，&lt;/li&gt;
-&lt;li&gt;根据式(2)求解每个三角形的质心，根据式(3)求解质心，此时即得到了满足式(1)的情况，即多个离散的有质量(用三角形面积表示，有正负，权值)的数据点&lt;/li&gt;
-&lt;li&gt;根据式(1)求得的解即为多边形的质心&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;对于将多边形分解为多个三角形，可以有两种分法：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;确定多边形(n个顶点)的一个顶点，以这个点为基点，依次与其他顶点连线，得到n-2个三角形&lt;/li&gt;
-&lt;li&gt;以直角坐标系原点为基点，依次与多边形的n个顶点连线，得到n个三角形&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;第一种分法，以五边形为例，如下图：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/paper/%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%88%86%E6%B3%951.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;选择顶点$P_0$为基点，依次得到$△P_0P_1P_2$、$△P_0P_2P_3$、$△P_0P_3P_4$，质心分别为$C_1$、$C_2$、$C_3$&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;第二种分法，以四边形为例，如下图：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/paper/%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%88%86%E6%B3%952.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;选择原点O为基点，依次得到$△OP_0P_1$、$△OP_1P_2$、$△OP_2P_3$、$OP_3P_0$&lt;/p&gt;
-&lt;p&gt;对于第二种分法，分成的三角形为 $△OP&lt;em&gt;iP&lt;/em&gt;{i+1}$，其中$O(0,0)$，$P&lt;em&gt;i (x_i, y_i)$，$P&lt;/em&gt;{i+1} (x&lt;em&gt;{i+1}, y&lt;/em&gt;{i+1})$，代入式(2)和式(3)，得到&lt;br&gt;$△OP&lt;em&gt;iP&lt;/em&gt;{i+1}$ 质心为：&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;X_i = \frac{x_i + x_{i+1}} {3}，Y_i = \frac{y_i + y_{i+1}} {3} ...(4)&lt;/script&gt;&lt;p&gt;$△OP&lt;em&gt;iP&lt;/em&gt;{i+1}$面积为（叉积求解）：&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;S_i = \frac{x_i \cdot y_{i+1} - x_{i+1} \cdot y_i} {2} ...(5)&lt;/script&gt;&lt;p&gt;将式(4)和式(5)代入式(1)，得到&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;X = \frac{\sum_{i=1}^n(x_i + x_{i+1})(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)} {3\sum_{i=1}^n(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Y = \frac{\sum_{i=1}^n(y_i + y_{i+1})(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)} {3\sum_{i=1}^n(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}&lt;/script&gt;&lt;p&gt;将多边形面积记为S，因为多边形面积是其分成的多个三角形面积之和（以多边形的某一个顶点为基点的分法显然如此，以原点为基点的分法，将各三角形正负面积相抵后也是多边形的面积），得到&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;S = \frac{1}{2} \cdot {\sum_{i=1}^n(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}&lt;/script&gt;&lt;p&gt;最后可以得到多边形的质心为：&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;X = \frac {1}{6S} {\sum_{i=1}^n(x_i + x_{i+1})(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Y = \frac {1}{6S} {\sum_{i=1}^n(y_i + y_{i+1})(x_i \cdot y_{i+1} - x_{i+1} \cdot y_i)}&lt;/script&gt;&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;附C++代码：&lt;br&gt;输入：多边形边数n及n个顶点的坐标&lt;br&gt;输出：质心坐标&lt;/p&gt;
-&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;meta-string&quot;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;meta-string&quot;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;meta-string&quot;&gt;&amp;lt;cmath&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;std&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;struct&lt;/span&gt; Point &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt; x, y;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;p[&lt;span class=&quot;number&quot;&gt;10000&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;calArea&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Point p1, Point p2)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;//p0为原点，所以简化计算，只用其他两个顶点&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; (p1.x*p2.y - p2.x*p1.y) / &lt;span class=&quot;number&quot;&gt;2.0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n; &lt;span class=&quot;comment&quot;&gt;//n边形&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	scanf_s(&lt;span class=&quot;string&quot;&gt;&quot;%d&quot;&lt;/span&gt;, &amp;amp;n);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	Point centroid; &lt;span class=&quot;comment&quot;&gt;//质心&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	centroid.x = centroid.y = &lt;span class=&quot;number&quot;&gt;0.0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt; totalArea = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, eachArea = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//多边形总面积和各三角形面积&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; n; ++i)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		scanf_s(&lt;span class=&quot;string&quot;&gt;&quot;%lf%lf&quot;&lt;/span&gt;, &amp;amp;p[i].x, &amp;amp;p[i].y);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; n; i++) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		eachArea = calArea(p[i], p[(i + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) % n]);&lt;span class=&quot;comment&quot;&gt;//两个顶点与原点构成的三角形&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		centroid.x += (p[i].x + p[(i + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) % n].x)*eachArea; &lt;span class=&quot;comment&quot;&gt;//每一步质心的除以3放在最后处理&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		centroid.y += (p[i].y + p[(i + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) % n].y)*eachArea;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		totalArea += eachArea; &lt;span class=&quot;comment&quot;&gt;//总面积&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	centroid.x = centroid.x / (totalArea * &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;);&lt;span class=&quot;comment&quot;&gt;//求的多边形重心&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	centroid.y = centroid.y / (totalArea * &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;built_in&quot;&gt;printf&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;%.2lf %.2lf\n&quot;&lt;/span&gt;, centroid.x, centroid.y);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;先需要知道几个公式：&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;一、对于n个离散的有质量数据点&lt;/strong&gt;（或者假设一个多边形的质量集中在其顶点上）&lt;br&gt;假定顶点的坐标为(x&lt;sub&gt;i&lt;/sub&gt;, y&lt;sub&gt;i&lt;/sub&gt;)，质量为m&lt;sub&gt;i&lt;/sub&gt;，则质心为：&lt;
-    
-    </summary>
-    
-      <category term="ImageProcessing" scheme="http://hlyin.space/categories/ImageProcessing/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>操作系统重点</title>
-    <link href="http://hlyin.space/OS/OS_review/"/>
-    <id>http://hlyin.space/OS/OS_review/</id>
-    <published>2016-01-04T16:00:00.000Z</published>
-    <updated>2016-04-10T07:28:00.000Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;第一章、操作系统概述&quot;&gt;&lt;a href=&quot;#第一章、操作系统概述&quot; class=&quot;headerlink&quot; title=&quot;第一章、操作系统概述&quot;&gt;&lt;/a&gt;&lt;strong&gt;第一章、操作系统概述&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1、    OS的概念、特性&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;操作系统：&lt;/strong&gt;是计算机系统中的一个系统软件，是一些程序模块的集合——它们能以尽量&lt;strong&gt;有效地（系统运行效率和资源利用率）&lt;/strong&gt;组织和管理计算机的软硬件资源，&lt;strong&gt;合理（公平，不发生死锁和饥饿）&lt;/strong&gt;地组织计算机的工作流程，控制程序的执行，并向用户提供各种服务功能，使得用户能够灵活、&lt;strong&gt;方便（人机界面—-包括用户使用界面和程序设计接口的易用性、易维护性）&lt;/strong&gt;、有效的使用计算机，并使整个计算机系统能高效地运行；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;OS特性：&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;并发性：&lt;/strong&gt;计算机系统中同时运行着多个程序；处理多个同时性活动的能力，并发多个事件在同一时间间隔发生（CPU数量少于任务数），并行是多个事件在同一时刻发生（CPU数量多于任务数）；&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;共享性：&lt;/strong&gt;操作系统与多个用户的程序共同使用计算机系统中的资源；包括：并发程序对处理器资源的共享、对主存和对外存的共享、对外设的共享；&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;随机性：&lt;/strong&gt;一般操作系统正处于什么样的状态中是无法确切知道的；操作系统必须随时对以不可预测次序发生的事件进行响应；由共享和并发引起&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;虚拟性：&lt;/strong&gt;一个物理实体映射为若干个对应的逻辑实体－－分时或分空间；虚拟是操作系统管理系统资源的重要手段，可提高资源利用率；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;strong&gt;2、OS的功能&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）进程管理：&lt;/strong&gt;完成处理机资源的分配调度等功能；包括：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;进程控制：&lt;/strong&gt;创建、撤销、挂起、改变运行优先级等——主动改变进程的状态&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;进程同步：&lt;/strong&gt;协调并发进程之间的推进步骤，以协调资源共享；——交换信息能力（弱）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;进程通信：&lt;/strong&gt;进程之间传送数据，以协调进程间的协作；——交换信息能力（强），也可以用来协调进程之间的推进&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;进程调度：&lt;/strong&gt;作业和进程的运行切换，以充分利用处理机资源和提高系统性能；——未必是进程控制操作所引起（可能是时间片轮转、I/O操作）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;（2）存储管理：&lt;/strong&gt;管理内存资源；功能：1、存储分配与回收；2、存储保护（保证进程间互不干扰、相互保密）；3、地址映射（变换）：进程逻辑地址到内存物理地址的映射；4、内存扩充（覆盖、交换和虚拟存储）：提高内存利用率、扩大进程的内存空间；&lt;br&gt;&lt;strong&gt;（3）文件管理：&lt;/strong&gt;目的是方便设备的使用，提高CPU与I/O设备利用率；文件存储空间管理、目录管理、文件的读写管理和存取控制；&lt;br&gt;&lt;strong&gt;（4）设备管理：&lt;/strong&gt;除了CPU和内存以外的所有输入输出设备的管理；&lt;br&gt;&lt;strong&gt;（5）作业管理和用户接口：&lt;/strong&gt; OS向用户提供使用它的手段；&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;strong&gt;3、OS的分类&lt;/strong&gt; &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;[x] （1）批处理系统：成批处理、作业流程自动化较高，资源利用率较高，作业吞吐量大，但用户交互性差、调试困难；&lt;/li&gt;
-&lt;li&gt;[x] （2）分时系统：操作系统以时间片为单位，轮流为每个终端用户服务；&lt;/li&gt;
-&lt;li&gt;[x] （3）实时系统：是指使计算机能及时响应外部事件的请求，在规定的严格时间内完成对该事件的处理，并控制所有实时设备和实时任务协调一致地工作的操作系统；&lt;/li&gt;
-&lt;li&gt;[x] （4）嵌入式操作系统：运行在嵌入式系统环境中，对整个嵌入式系统以及它所操作、控制的各种部件装置等等资源进行统一协调、调度、指挥和控制的系统软件；&lt;/li&gt;
-&lt;li&gt;[ ] （5）个人计算机操作系统；&lt;/li&gt;
-&lt;li&gt;[ ] （6）网络操作系统：基于计算机网络，在各种计算机操作系统上按网络体系结构协议标准开发的软件；分布性、自治性、互连性、可见性；&lt;/li&gt;
-&lt;li&gt;[ ] （7）分布式操作系统；透明性、灵活性、可靠性、高性能、可扩充性；&lt;/li&gt;
-&lt;li&gt;[ ] （8）智能卡操作系统&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h3 id=&quot;第二章、操作系统的硬件环境&quot;&gt;&lt;a href=&quot;#第二章、操作系统的硬件环境&quot; class=&quot;headerlink&quot; title=&quot;第二章、操作系统的硬件环境&quot;&gt;&lt;/a&gt;&lt;strong&gt;第二章、操作系统的硬件环境&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1、特权指令、管态目态、程序状态字&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;特权指令：&lt;/strong&gt;指令系统中只能由操作系统使用的指令，不允许一般用户使用；特权指令一般引起处理器状态的切换，处理器通过特殊的机制将处理器状态切换到操作系统运行的特权状态&lt;strong&gt;（管态）&lt;/strong&gt;，然后将处理权移交给操作系统中的一段特殊代码，这一个过程称为&lt;strong&gt;陷入&lt;/strong&gt;；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;管态：&lt;/strong&gt;操作系统管理程序运行的状态，较高的特权级别，又称为特权态（特态）、核心态、系统态；&lt;strong&gt;目态→管态：&lt;/strong&gt;唯一途径是中断（广义）&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;目态：&lt;/strong&gt;用户程序运行时的状态，较低的特权级别，又称普通态（普态）、用户态；&lt;strong&gt;管态→目态：&lt;/strong&gt;设置PSW(修改程序状态字) 可实现&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;PSW：&lt;/strong&gt;用一个专门的寄存器来指示处理器的状态；通常包括：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;[x] CPU的工作状态码：指明管态还是目态，用来说明当前在CPU上执行的是操作系统还是一般用户，从而决定其是否可以使用特权指令或拥有其他的特殊权力；&lt;/li&gt;
-&lt;li&gt;[x] 条件码：反映指令执行后的结果特征；&lt;/li&gt;
-&lt;li&gt;[x] 中断屏蔽码：指出是否允许中断；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/OS_review/os_psw.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;strong&gt;2、多级存储体系&lt;/strong&gt;&lt;br&gt;存储系统设计三个问题：&lt;strong&gt;容量、速度和成本&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;多级存储体系，&lt;/strong&gt;解决存储系统设计的二律背反情况，从上往下为：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;寄存器；&lt;/li&gt;
-&lt;li&gt;高度缓存；&lt;/li&gt;
-&lt;li&gt;内存；&lt;/li&gt;
-&lt;li&gt;磁盘存储器；&lt;/li&gt;
-&lt;li&gt;磁带和光盘存储器；&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;设计原理：&lt;/strong&gt;程序和数据存储访问的&lt;strong&gt;局部性原理&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;存储保护：&lt;/strong&gt;界地址寄存器和存储键&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;中断：&lt;/strong&gt;CPU在正常运行程序时，由于内、外部事件引起CPU暂时中止正在运行的程序，转而去执行请求CPU暂时中止的内、外部事件的服务程序，待该服务程序处理完毕后又返回到被中止的程序的过程；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;中断系统：&lt;/strong&gt;包括&lt;strong&gt;硬件中断装置&lt;/strong&gt;和&lt;strong&gt;软件中断处理程序&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;中断分类：&lt;/strong&gt;根据中断源划分为硬中断（外中断和内中断）和软中断（也叫陷阱或异常）&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h3 id=&quot;第三章、用户接口与作业管理&quot;&gt;&lt;a href=&quot;#第三章、用户接口与作业管理&quot; class=&quot;headerlink&quot; title=&quot;第三章、用户接口与作业管理&quot;&gt;&lt;/a&gt;&lt;strong&gt;第三章、用户接口与作业管理&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1、    作业的概念，作业级接口与程序级接口&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）作业：&lt;/strong&gt;一次应用业务的处理过程中，从输入开始到输出结束，用户要求计算机所做的有关该次业务处理的全部工作；&lt;br&gt;从系统角度看，作业由&lt;strong&gt;程序，数据和作业说明书&lt;/strong&gt;组成，系统通过作业说明书控制文件形式的程序和数据，使之执行并对其进行操作。&lt;br&gt;作业的建立包括两个子过程：作业的输入、JCB的建立；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;（2）作业级接口：&lt;/strong&gt;用于作业控制；对于不同作业，又分为两类：&lt;br&gt;&lt;strong&gt;a、    联机作业控制方式的接口&lt;/strong&gt;&lt;br&gt;用户敲入一条命令，控制就转入系统命令解释程序，对其进行解释，执行，完成要求的功能，之后控制又转回控制台或终端，用户又继续输入命令,如此反复直到完成；&lt;br&gt;&lt;strong&gt;b、    脱机作业控制方式的接口&lt;/strong&gt;&lt;br&gt;由一组作业控制语言组成，系统为脱机用户提供了作业控制语言；用户用此语言将事先考虑到的对作业的各种可能要求写成作业操作说明书，连同作业一起交给系统；系统运行该程序时，一边解释作业控制命令，一边执行该命令，如此反复直到完成；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;（3）程序级接口：&lt;/strong&gt;系统为用户在程序一级提供有关服务设置的；由一组系统调用命令组成，负责管理和控制运行的程序，并在这些程序与系统控制的资源和提供的服务之间实现交互作用（可以是专门为程序员通过汇编程序与操作系统打交道提供的）；用汇编语言编程序的用户，可在程序中直接用这组系统调用命令；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2、JCB：&lt;/strong&gt;作业控制块是批处理作业存在的标志，其中保存有系统对作业进行管理所需要的全部信息，它们被保存于磁盘区域中；&lt;br&gt;（1）JCB的内容：作业标识、作业状态、开始处理时间、作业完成时间等；&lt;br&gt;（2）JCB的建立：当一个作业开始由输入设备向磁盘的输入井传输时，系统输入程序为其建立一个作业控制块，并对其初始化；&lt;br&gt;（3）    JCB的撤销：由系统输出程序撤销。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;3、作业状态及转换&lt;/strong&gt;&lt;br&gt;（1）进入状态；&lt;br&gt;（2）后备状态；作业全部信息存在外存的某些区域中等待调度，系统为后备作业建立作业控制块，并加入后备作业队列中，标志作业建立完成；&lt;br&gt;（3）运行状态；被作业调度选中，且分配了必要资源，建立了一组相应进程后，进入运行状态；运行状态的作业根据进程活动情况又分为3种状态，就绪态，运行态，等待态；&lt;br&gt;（4）完成状态；当作业正常运行结束或因发生错误终止；将其JCB从现行作业队列中除去，并回收资源；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;4、作业调度算法：FCFS/SJF/HRN&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;作业周转时间&lt;/strong&gt; = 结束时间 – 开始时间（即周转=等待+运行）；&lt;br&gt;&lt;strong&gt;响应比R&lt;/strong&gt; = 作业周转时间 / 作业运行时间 = 1 + 作业等待时间/作业运行时间；&lt;br&gt;此外还有基于优先数调度算法HPF、均衡调度算法等；&lt;br&gt;&lt;strong&gt;P81，多道环境下的作业调度&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;5、系统调用：&lt;/strong&gt;系统调用就是用户在程序中调用操作系统所提供的一些子功能；是特殊的过程滴啊用，由特殊的机器指令实现；除调用子程序外，还使系统转入特权方式，即进入管态；系统调用通常只能由汇编语言直接访问。系统调用是操作系统提供给编程人员的唯一接口，编程人员通过系统调用，动态请求和释放资源；&lt;br&gt;进程控制类、文件操作类、进程通信类、设备管理类、信息维护类；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;ex.课本P99页第6题&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;FCFS&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;table-container&quot;&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;作业&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;输入时间&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;进入内存时间&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;开始时间&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;结束时间&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;周转时间&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;JOB1&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:00&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:00&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:00&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:25&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;25&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;JOB2&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:20&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:20&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:25&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:55&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;35&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;JOB3&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:30&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11:30&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11:30&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11:40&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;70&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;JOB4&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:35&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:35&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:55&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11:15&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;40&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;JOB5&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:40&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:55&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11:15&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11:30&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;50&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;p&gt;平均周转时间：（25＋35＋70＋40＋50）/5=44&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;SJF&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;table-container&quot;&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;作业&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;输入时间&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;进入内存时间&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;开始时间&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;结束时间&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;周转时间&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;JOB1&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10：00&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:00&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:00&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:25&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;25&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;JOB2&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10：20&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:20&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:25&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:55&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;35&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;JOB3&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10：30&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11:30&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11:30&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11:40&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;70&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;JOB4&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10：35&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:35&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11:10&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11:30&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;55&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;JOB5&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10：40&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:55&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;10:55&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11:10&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;30&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;p&gt;平均周转时间：(25+35+70+55+30)/5=43&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h3 id=&quot;第四章、进程管理&quot;&gt;&lt;a href=&quot;#第四章、进程管理&quot; class=&quot;headerlink&quot; title=&quot;第四章、进程管理&quot;&gt;&lt;/a&gt;&lt;strong&gt;第四章、进程管理&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1、    程序的顺序执行的特点；多道程序并发执行的特点&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）程序的顺序执行的特点：&lt;/strong&gt;顺序性、封闭性（程序执行结果由初始条件决定，不受外界因素影响）、程序执行结果的确定性、程序执行结果的可再现性；&lt;br&gt;&lt;strong&gt;（2）多道程序并发执行的特点：&lt;/strong&gt;并发程序在执行期间具有相互制约关系、程序与计算不再一一对应、并发程序执行结果不可再现&lt;br&gt;&lt;strong&gt;（3）多道程序环境特点：&lt;/strong&gt;独立性、随机性、资源共享性&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2、    进程的概念；进程的状态及变迁；原语&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1） 进程：&lt;/strong&gt;进程是具有一定独立功能的程序关于某个数据集上的一次运行活动，是资源分配和调度的一个基本单位；&lt;br&gt;&lt;strong&gt;进程与程序的联系：&lt;/strong&gt;程序是进程的组成部分之一，从静态角度看，进程由程序、数据和PCB组成；一个进程可以执行多个程序，一个程序可以构成多个进程；&lt;br&gt;&lt;strong&gt;进程与程序的区别：&lt;/strong&gt;程序是静态的，进程是动态的；&lt;br&gt;&lt;strong&gt;进程的特性：&lt;/strong&gt;并发、动态、独立、交往、异步；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;PCB：&lt;/strong&gt;为了便于系统控制和描述进程活动过程而在操作系统核心中为进程所定义的一个专门的数据结构，系统利用PCB来描述进程的基本情况以及进程的运行变化过程；&lt;strong&gt;PCB是进程存在的唯一标志；P&lt;/strong&gt;CB的内容可分为&lt;strong&gt;调度信息和现场信息&lt;/strong&gt;两大部分；&lt;br&gt;&lt;strong&gt;PCB组织方式：&lt;/strong&gt;线性方式、索引方式、链接方式；&lt;br&gt;&lt;strong&gt;进程队列：&lt;/strong&gt;就绪队列、等待队列、运行队列；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;（2）进程的状态及变迁&lt;/strong&gt;&lt;br&gt;运行态、就绪态、等待态；P107&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;（3）原语：&lt;/strong&gt;原语通常由若干条指令组成，用来实现某个特定的操作，通过一段不可分割或不可中断的程序实现其功能；原语的执行必须是连续的；原语是操作系统核心的一个组成部分，它必须在管态下执行，并且常驻内存；&lt;br&gt;创建原语、撤销原语、阻塞原语、唤醒原语&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;3、    进程互斥、临界资源、临界区；进程同步、信号量、PV操作&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;相关进程：&lt;/strong&gt;逻辑上具有某种联系的进程；&lt;br&gt;&lt;strong&gt;无关进程：&lt;/strong&gt;逻辑上没有任何联系的进程；&lt;br&gt;&lt;strong&gt;进程间相互作用：&lt;/strong&gt;直接相互作用（只发生在相关进程间）、间接相互作用；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;进程互斥：&lt;/strong&gt;进程间的间接相互作用构成进程互斥，如多个进程竞争打印机；&lt;br&gt;&lt;strong&gt;临界资源：&lt;/strong&gt;系统中一些资源一次只允许一个进程使用，这类资源称为临界资源或共享变量；&lt;br&gt;&lt;strong&gt;临界区：&lt;/strong&gt;在进程中访问临界资源的那一段程序称为临界区；临界区使用原则：有空让进、无空等待、多中择一、有限等待、让权等待（等待态放弃占用CPU）；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;进程同步：&lt;/strong&gt;进程同步是指进程之间一种直接的协同工作关系，是一些进程相互合作、共同完成一项任务；进程间的&lt;strong&gt;直接相互作用&lt;/strong&gt;构成进程的同步；直接制约问题；&lt;strong&gt;与次序相关（与时间有关，执行时序上的相互制约）；&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;同步机制：&lt;/strong&gt;解决进程同步；硬件同步机制、信号量及P、V操作、管程、条件临界域、路径表达式（集中式系统）、远程过程调用（分布式系统）；&lt;br&gt;&lt;strong&gt;信号量：&lt;/strong&gt;信号量是一种特殊的变量，它的表面形式是&lt;strong&gt;一个整型变量附加一个队列，&lt;/strong&gt;而且它只能被特殊的操作（即P操作和V操作）使用；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;P、V操作：&lt;/strong&gt;一种简单、易于实现的同步机制，包括P操作和V操作两个原语，P、V操作是对信号量实施操作，用P、V操作可实现进程的同步和互斥；&lt;br&gt;&lt;strong&gt;互斥操作时，P、V处于同一进程；同步操作时，不在同一进程中出现；同步P操作和互斥P操作一起出现时，同步P应在互斥P之前；&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;4、    进程同步：生产者-消费者问题&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）一个生产者，一个消费者，公用一个缓冲区&lt;br&gt;属于同步问题&lt;/strong&gt;&lt;br&gt;&amp;lt;/h3&amp;gt;**&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1、    程序的顺序执行的特点；多道程序并发执行的特点&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）程序的顺序执行的特点：&lt;/strong&gt;顺序性、封闭性（程序执行结果由初始条件决定，不受外界因素影响）、程序执行结果的确定性、程序执行结果的可再现性；&lt;br&gt;&lt;strong&gt;（2）多道程序并发执行的特点：&lt;/strong&gt;并发程序在执行期间具有相互制约关系、程序与计算不再一一对应、并发程序执行结果不可再现&lt;br&gt;&lt;strong&gt;（3）多道程序环境特点：&lt;/strong&gt;独立性、随机性、资源共享性&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2、    进程的概念；进程的状态及变迁；原语&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1） 进程：&lt;/strong&gt;进程是具有一定独立功能的程序关于某个数据集上的一次运行活动，是资源分配和调度的一个基本单位；&lt;br&gt;&lt;strong&gt;进程与程序的联系：&lt;/strong&gt;程序是进程的组成部分之一，从静态角度看，进程由程序、数据和PCB组成；一个进程可以执行多个程序，一个程序可以构成多个进程；&lt;br&gt;&lt;strong&gt;进程与程序的区别：&lt;/strong&gt;程序是静态的，进程是动态的；&lt;br&gt;&lt;strong&gt;进程的特性：&lt;/strong&gt;并发、动态、独立、交往、异步；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;PCB：&lt;/strong&gt;为了便于系统控制和描述进程活动过程而在操作系统核心中为进程所定义的一个专门的数据结构，系统利用PCB来描述进程的基本情况以及进程的运行变化过程；&lt;strong&gt;PCB是进程存在的唯一标志；P&lt;/strong&gt;CB的内容可分为&lt;strong&gt;调度信息和现场信息&lt;/strong&gt;两大部分；&lt;br&gt;&lt;strong&gt;PCB组织方式：&lt;/strong&gt;线性方式、索引方式、链接方式；&lt;br&gt;&lt;strong&gt;进程队列：&lt;/strong&gt;就绪队列、等待队列、运行队列；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;（2）进程的状态及变迁&lt;/strong&gt;&lt;br&gt;运行态、就绪态、等待态；P107&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;（3）原语：&lt;/strong&gt;原语通常由若干条指令组成，用来实现某个特定的操作，通过一段不可分割或不可中断的程序实现其功能；原语的执行必须是连续的；原语是操作系统核心的一个组成部分，它必须在管态下执行，并且常驻内存；&lt;br&gt;创建原语、撤销原语、阻塞原语、唤醒原语&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;3、    进程互斥、临界资源、临界区；进程同步、信号量、PV操作&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;相关进程：&lt;/strong&gt;逻辑上具有某种联系的进程；&lt;br&gt;&lt;strong&gt;无关进程：&lt;/strong&gt;逻辑上没有任何联系的进程；&lt;br&gt;&lt;strong&gt;进程间相互作用：&lt;/strong&gt;直接相互作用（只发生在相关进程间）、间接相互作用；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;进程互斥：&lt;/strong&gt;进程间的间接相互作用构成进程互斥，如多个进程竞争打印机；&lt;br&gt;&lt;strong&gt;临界资源：&lt;/strong&gt;系统中一些资源一次只允许一个进程使用，这类资源称为临界资源或共享变量；&lt;br&gt;&lt;strong&gt;临界区：&lt;/strong&gt;在进程中访问临界资源的那一段程序称为临界区；临界区使用原则：有空让进、无空等待、多中择一、有限等待、让权等待（等待态放弃占用CPU）；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;进程同步：&lt;/strong&gt;进程同步是指进程之间一种直接的协同工作关系，是一些进程相互合作、共同完成一项任务；进程间的&lt;strong&gt;直接相互作用&lt;/strong&gt;构成进程的同步；直接制约问题；&lt;strong&gt;与次序相关（与时间有关，执行时序上的相互制约）；&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;同步机制：&lt;/strong&gt;解决进程同步；硬件同步机制、信号量及P、V操作、管程、条件临界域、路径表达式（集中式系统）、远程过程调用（分布式系统）；&lt;br&gt;&lt;strong&gt;信号量：&lt;/strong&gt;信号量是一种特殊的变量，它的表面形式是&lt;strong&gt;一个整型变量附加一个队列，&lt;/strong&gt;而且它只能被特殊的操作（即P操作和V操作）使用；&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;P、V操作：&lt;/strong&gt;一种简单、易于实现的同步机制，包括P操作和V操作两个原语，P、V操作是对信号量实施操作，用P、V操作可实现进程的同步和互斥；&lt;br&gt;&lt;strong&gt;互斥操作时，P、V处于同一进程；同步操作时，不在同一进程中出现；同步P操作和互斥P操作一起出现时，同步P应在互斥P之前；&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;4、    进程同步：生产者-消费者问题&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（1）一个生产者，一个消费者，公用一个缓冲区&lt;br&gt;属于同步问题&lt;/strong&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;第一章、操作系统概述&quot;&gt;&lt;a href=&quot;#第一章、操作系统概述&quot; class=&quot;headerlink&quot; title=&quot;第一章、操作系统概述&quot;&gt;&lt;/a&gt;&lt;strong&gt;第一章、操作系统概述&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1、    OS的概念、特
-    
-    </summary>
-    
-      <category term="OS" scheme="http://hlyin.space/categories/OS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>扫雷GDI+实现</title>
-    <link href="http://hlyin.space/ProjectImages/MineSweeping/"/>
-    <id>http://hlyin.space/ProjectImages/MineSweeping/</id>
-    <published>2015-12-18T16:00:00.000Z</published>
-    <updated>2016-07-28T17:24:36.000Z</updated>
-    
-    <content type="html">&lt;p&gt;GDI+&lt;/p&gt;
-&lt;p&gt;一、程序功能&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;难度选择功能；用户可以选择游戏等级：初级，中级，高级；&lt;/li&gt;
-&lt;li&gt;基本游戏功能：用户左键点击雷区，若踩中地雷则游戏结束，否则显示所点雷块周围的地雷数目，若周围某一雷块没有地雷则自动翻开，即呈现出安全区；用户右键点击可以进行标记，标记有旗子和问号；&lt;/li&gt;
-&lt;li&gt;计时与地雷数显示：计时器显示当前游戏进行实现、地雷数显示剩余的地雷（标记后减少、取消标记后恢复）；&lt;/li&gt;
-&lt;li&gt;数据存储功能：用户在某一难度打破时间记录后更新排行榜并存储记录&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;二、效果图&lt;/p&gt;
-&lt;p&gt;初级开局时：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_easy.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;点击到地雷后，切换笑脸表情，计时器停止，切换点中的地雷图像&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_easy_lose.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;游戏胜利，停止计时器，提示用户胜利&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_easy_win.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;中级难度&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_normal_lose.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;高级难度&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_hard.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;三、关键部分实现&lt;br&gt;主要写一下雷区的实现原理和部分关键代码，雷区效果如下图所示：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_block.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;雷块（上图中的方格）的实现没有使用winform的button控件，而是使用C#的GDI+绘制出来。GDI+是GDI的后续版本，将应用程序与图形硬件相分离，通过GDI+提供的方法适当调用相应的驱动程序。&lt;/p&gt;
-&lt;p&gt;雷区的数据结构是二维数组，二维数组的一维大小代表雷区行数，二维大小代表雷区列数，每个元素相当于一个雷块。考虑雷块的类型，由于雷块有较多的操作，因而可以将雷块封装成一个类MineBlock，包括的字段有：X、Y，表示雷块的坐标（在二维数组中的下标）；Status，表示雷块的状态（翻开、未翻开、插旗、问号、插旗差错、爆炸）；IsHover，表示鼠标是否悬浮在当前的雷块上（若是，则其颜色改变以示区分）；MineNum，表示当前雷块中的地雷情况，-1表示有地雷，1~8表示当前块没有地雷但是周围8个雷块中的地雷情况，0表示当前块和周围8个块都没有地雷；Visited表示当前块是否被访问过，在广度优先搜索中使用，类视图如下图：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_classview.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;因而二维数组的类型是上面设计的雷块类，MineBlock[,] mineBlock，因为扫雷游戏最多有32行64列，因而此数组初始化为这个大小。设置三个变量分别记录当前游戏难度的行数、列数、地雷数，在选择了不同游戏难度后根据这三个参数对mineBlock数组中元素实例化，设置相应的状态。&lt;/p&gt;
-&lt;p&gt;雷区的第一步实现是将普通雷块绘制出来，为显示美观，将雷区居中，则对于程序实现即设置一个向右偏移量也即横向偏移量X_offset和向下偏移量也即竖向偏移量Y_offset，这两个偏移量通过制定的规则计算得到，对于每个雷块的绘制，则是根据偏移量和二维数组下标确定当前雷块在窗体中的位置，同样出于美观，各雷块间设置1px的间距，则得到雷块横坐标为X_offset + MineBlockLength &lt;em&gt; (i - 1) + 1，纵坐标为Y_offset + MineBlockLength &lt;/em&gt; (j - 1) + 1（这里列优先），则绘制雷块的代码为：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;在列优先遍历二维数组mineBlock中，判断当前遍历元素的状态，若状态为未翻开，判断是否鼠标悬浮在此块（通过一个Point类对象获取鼠标焦点坐标，计算出其在二维数组中下标，以此判断），若不是（即为普通雷块），设置画刷Brush brush = new SolidBrush(Color.FromArgb(192, 192, 192)); 调用方法g.FillRectangle(brush, rect);绘制出灰色的雷块，为了让雷块有立体感，在雷块的下方和右方各划一条线，画线时设置画笔Pen pen = new Pen(new SolidBrush(Color.FromArgb(128,128,128))); 调用方法DrawLine，通过当前雷块的下标计算出线的起止坐标；若是（即鼠标悬浮的雷块），则设置画刷透明度以显示不同颜色的雷块，如：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;对于雷块其他状态，如插旗、插错旗（游戏结束时显示打叉的地雷图像）、点到地雷（显示红色地雷）以及初始化布雷时地雷图像，则通过g.DrawImage方法更换图像，图像添加在资源Resources.resx中，切换时计算图像应显示的坐标并设置其大小，如：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code3.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;对于雷块标记的问号状态和点开雷块显示的数字，通过g.DrawString方法实现，先设置字符的显示大小，再依次和其数组下标来计算出字符应显示的坐标位置，如：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;雷区绘制的基本原理如上所述，其具体实现时还有一些逻辑判断。&lt;/p&gt;
-&lt;p&gt;上述绘制只是实现了一个静态的，并没有处理鼠标点击事件，因而雷区绘制的第二步是通过窗体的FormMain_MouseMove、FormMain_MouseDown、FormMain_MouseUp事件来将上一步绘制的静态雷区模拟成类似于Button控件的实现效果，即对用户的不同类型点击有不同的响应。&lt;/p&gt;
-&lt;p&gt;首先对鼠标悬浮到的雷块进行区别显示，如下图，第一行第二列：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_block2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;此功能的实现在MouseMove事件中，先判断鼠标是否在雷区内，若不是，将悬浮焦点mouseHoverBlock(Point类型)的X、Y属性置为0，表示雷区中不显示悬浮块，若在，则根据焦点坐标计算出当前悬浮的雷块在数组中的下标，并将mouseHoverBlock的X、Y属性置为对应下标，用于在重绘时进行判定，最后调用Refresh方法强制重绘窗体。&lt;/p&gt;
-&lt;p&gt;其次处理鼠标的点击事件，点击分为左击和右击，在MouseDown时切换笑脸图标，在MouseUp也即点击完成时判断点击的类型并进行相应的处理。如果是左击，也即捕获到MouseButtons.Left，若点击的不是地雷且状态为未翻开，则广度优先搜索安全区，若点到地雷则游戏结束，停止计时、切换点击雷块的图像、切换笑脸图像并调用游戏结束函数；若点击的是右键，则根据当前点击雷块的状态进行点击后的图像切换和状态修改。在函数最后调用胜利判断函数，看点击以后用户是否胜利，此外在最后调用Refresh，重绘雷区被点击后的状态。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;GDI+&lt;/p&gt;
-&lt;p&gt;一、程序功能&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;难度选择功能；用户可以选择游戏等级：初级，中级，高级；&lt;/li&gt;
-&lt;li&gt;基本游戏功能：用户左键点击雷区，若踩中地雷则游戏结束，否则显示所点雷块周围的地雷数目，若周围某一雷块没有地雷则
-    
-    </summary>
-    
-      <category term="ProjectImages" scheme="http://hlyin.space/categories/ProjectImages/"/>
     
     
   </entry>

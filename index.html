@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="Louie's Blog">
     <meta name="author" content="Louie">
-    <meta name="description" content="黄刘胤的博客 Louie's blog 代码猴子" />
+    <meta name="description" content="黄刘胤的博客 Louie's blog" />
     <meta name="keywords" content="黄刘胤,Louie,Louiehuang" />
 
     <!-- Favicon, (keep icon in root folder) -->
@@ -143,7 +143,7 @@
 				    
 				    <li><a href="/categories/ProjectImages/" class="animsition-link">ProjectImages<small>(7)</small></a></li>
 				    
-				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(4)</small></a></li>
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(9)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -270,6 +270,138 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/Recommender-System/Logistic_GradientDescent/">Logistic回归与梯度下降算法</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-12-09T16:00:00.000Z" itemprop="datePublished">
+          2016-12-10
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        假设数据集有m行(1…m)，每个样本n个特征(1…n): 
+x = (x_{1}, x_{2}, ..., x_{n})1.定义估计函数:
+h(x) = h_{\theta}(x) = g(\theta_{1} + \theta_{2}x_{2} + ... + \theta_{n}x_{n})令$x_{1} = 1.0$，则有
+h(x) = h_{\theta}(x) = g(\theta_{1}x_{1} + \theta_{2}x
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Recommender-System/Logistic_GradientDescent/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Recommender-System/AdjustedCosineSimandPearsoninCF/">修正余弦和Pearson相关系数在CF中的应用</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-11-24T16:00:00.000Z" itemprop="datePublished">
+          2016-11-25
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. Item-based1.1 余弦相似度(cosine similarity)对于item-based，计算物品相似度，参与计算的是两个物品评分向量（即用户-评分矩阵的列），假设用户-评分矩阵是m*n规模。
+\vec{item_i} = \begin{bmatrix} r_{1i} \\ r_{2i} \\ ... \\ r_{mi} \end{bmatrix}, \quad\quad \vec{item_j} = \begin{b
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Recommender-System/AdjustedCosineSimandPearsoninCF/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Recommender-System/CFcode/">CF代码实现</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-11-21T16:00:00.000Z" itemprop="datePublished">
+          2016-11-22
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        基于物品的协同过滤
+1. 推荐系统实战(项亮)：1.1 加载数据集构造训练集train，加载u3.base，是一个嵌套字典
+12345&#123;userId1 ： &#123;itemId1 : rating11, itemId2: rating12, ...&#125;,userId2 ： &#123;itemId1 : rating21, itemId2: rating22, ...&#125;,... &#125;
+
+构造测试集
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Recommender-System/CFcode/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Recommender-System/PearsonCorrCoef/">Pearson相关系数</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-11-19T16:00:00.000Z" itemprop="datePublished">
+          2016-11-20
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        协方差numpy.cov
+cov(X, Y) = E\left ( (X - E(X))(Y - E(Y)) \right) = E(XY) - E(X)E(Y)样本协方差
+cov(X, Y) = \frac{1}{N - 1}\sum_{i=1}^{N}(X_i - \bar X)(Y_i - \bar Y)除以N-1是为了保证无偏性
+pearson相关系数numpy.corrcoef
+\rho_{XY} = \frac{cov(X,
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Recommender-System/PearsonCorrCoef/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/Recommender-System/Information_entropy/">信息熵与分类算法[转]</a></h3>
                     <span>
                         <span class="post-meta">
@@ -337,7 +469,45 @@ X轴为人口百分比，Y轴为收入百分比，其中人口按照收入从低
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
-                    <h3><a href="/Recommender-System/Precision&Recall/">召回率准确率</a></h3>
+                    <h3><a href="/Recommender-System/python_instance_access_rule/">Python的类实例属性访问规则探讨[转]</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-09-14T16:00:00.000Z" itemprop="datePublished">
+          2016-09-15
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        一般来说，在Python中，类实例属性的访问规则算是比较直观的。但是，仍然存在一些不是很直观的地方，特别是对C++和Java程序员来说，更是如此。
+在这里，我们需要明白以下几个地方：
+
+
+Python是一门动态语言，任何实体都可以动态地添加或删除属性。
+一个类定义了一个作用域。
+类实例也引入了一个作用域，这与相应类定义的作用域不同。
+在类实例中查找属性的时候，首先在实例自己的作用域中查找，如果没有找到，则再在类定义的作用域中查找。
+在对
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Recommender-System/python_instance_access_rule/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Recommender-System/Precision_Recall/">召回率准确率</a></h3>
                     <span>
                         <span class="post-meta">
       <time datetime="2016-09-11T16:00:00.000Z" itemprop="datePublished">
@@ -370,7 +540,7 @@ D = 未检索到且不相关文件
                     </p>
                     
                     <p class="pull-right readMore">
-                        <a href="/Recommender-System/Precision&Recall/">Read More...</a>
+                        <a href="/Recommender-System/Precision_Recall/">Read More...</a>
                     </p>
                     
                 </div>
@@ -576,212 +746,6 @@ $\bigc
             </div>
         </div>
         
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/ProjectImages/RealEstate/">房地产网站[效果图]</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-07-23T16:00:00.000Z" itemprop="datePublished">
-          2016-07-24
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1、首页
-
-
-
-2、管理员
-管理员可以
-
-
-管理房屋验证
-处理用户投诉
-管理用户信息
-管理房屋信息
-管理广告信息
-
-
-房屋验证可按已处理验证和未处理验证进行查询，可设置分页大小，默认为10，对查询出的结果，处理结果栏可选择未处理、已通过、不通过三种结果，如查询未处理验证，将某一条记录的结果改为已通过后，页面异步刷新，此记录不显示，并可在已处理验证中查询到
-
-
-
-用户信息管理
-增删查改用户
-
-房屋信息管理三种查询类别
-3、个人中心分为普通
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/ProjectImages/RealEstate/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/ProjectImages/SearchEngine/">搜索引擎[效果图]</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-07-22T16:00:00.000Z" itemprop="datePublished">
-          2016-07-23
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        使用：
-
-
-语言：Java
-爬虫：Heritrix
-分词：je-analysis
-索引：Lucene
-
-
-1、首页
-
-2、搜索结果页
-
-
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/ProjectImages/SearchEngine/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/ProjectImages/Poetry/">诗词学习网站[效果图]</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-07-21T16:00:00.000Z" itemprop="datePublished">
-          2016-07-22
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1、首页
-
-2、诗词浏览，由左边选择诗人后显示对应的作品
-
-分诗、词、曲三类进行筛选，并可在此三类中选择朝代，选择后左方的代表诗人候选进行更新
-选择诗-唐代后，左边的代表诗人更新
-选择词-清-纳兰性德后显示作品
-3、诗词详情
-
-诗词详情中可进行自测，随机生成填空题形式
-4、登陆界面
-
-5、注册界面
-
-6、晋级用户完成一阶段学习后可参与晋级测验提升等级，提升后提供新一级难度的诗词
-
-
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/ProjectImages/Poetry/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/Information-Security/des/">DES算法</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-05-01T16:00:00.000Z" itemprop="datePublished">
-          2016-05-02
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        算法实现按照《信息安全原理与技术》(郭亚军、宋建华、李莉、董慧慧编著)给出的过程，输入输出格式按照本书56页例3.8指定，即输入16个字符的16进制明文和密钥 (输入16个16进制char后自动处理成64位的2进制进行计算，也即DES分组大小和DES的密钥大小)，输出64位2进制密文（解密时输出64位2进制明文）和对应的16位16进制密文/明文，如下图：
-
-源码丢在github上，有需要的可以下载查看，地址：https://github
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/Information-Security/des/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/Computer-Networks/subnetmask/">子网掩码与子网号</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-04-10T16:00:00.000Z" itemprop="datePublished">
-          2016-04-11
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        &nbsp;&nbsp;&nbsp;&nbsp; 先回顾IP地址，IP地址是分层的，包括网络和主机两个部分，按网络部分和主机部分的不同长度主要分为A、B、C三类(还有多播组的D类和不再使用的E类)，但每一类的网络部分和主机部分的总长度相等，均为32位，如下图：
-
-A类：最前面1位为0，7位标识网络号，24位标识主机号，则第一段取值为1~126，对于A类IP，最多有2^7 - 2 = 126个(可用)A类网络 (减2是因为要去掉全0的主机
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/Computer-Networks/subnetmask/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
         <nav class="pagination" role="pagination">
           
           <a class="pull-right" href="/page/2/">Older Posts →</a>
@@ -791,7 +755,7 @@ A类：最前面1位为0，7位标识网络号，24位标识主机号，则第�
 <section id="statement">
     <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
         <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得底部有句话会显得比较合适.</p>
+            <p>Don't give up on your dreams -- Keep sleeping</p>
         </div>
     </div>
 </section>

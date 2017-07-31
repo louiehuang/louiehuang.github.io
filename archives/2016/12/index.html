@@ -7,14 +7,14 @@
 <!--<![endif]-->
 
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>召回率准确率 | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Archives: 2016/12 | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="Louie's Blog">
     <meta name="author" content="Louie">
-    <meta name="description" content="黄刘胤的博客 Louie's blog 代码猴子" />
+    <meta name="description" content="黄刘胤的博客 Louie's blog" />
     <meta name="keywords" content="黄刘胤,Louie,Louiehuang" />
 
     <!-- Favicon, (keep icon in root folder) -->
@@ -143,7 +143,7 @@
 				    
 				    <li><a href="/categories/ProjectImages/" class="animsition-link">ProjectImages<small>(7)</small></a></li>
 				    
-				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(4)</small></a></li>
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(9)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -223,96 +223,45 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
       
-<section id="intro">
+
+
+<section id="services">
     <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
-    			<span class="post-meta">
-      <time datetime="2016-09-11T16:00:00.000Z" itemprop="datePublished">
-          2016-09-12
-      </time>
-    
-</span>
-                <h1>召回率准确率</h1>
-            </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row boxes">
+                    
+                    
+                        
+                        
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                            
+                              <h4 class="title"><a href="/Recommender-System/Logistic_GradientDescent/">Logistic回归与梯度下降算法</a></h4>
+                            
+                            <p><time datetime="2016-12-09T16:00:00.000Z"><a href="/Recommender-System/Logistic_GradientDescent/">2016-12-10</a></time></p>
+                        </div>
+                    
+                </div>
+            </div>    
         </div>
-        <div class="col-md-8 col-md-offset-2">
-      		<h3 id="一、信息检索中："><a href="#一、信息检索中：" class="headerlink" title="一、信息检索中："></a>一、信息检索中：</h3><blockquote>
-<ul>
-<li>召回率又叫查全率，是针对原来的<strong>样本</strong>而言的，表示相关的文档中有多少被检索了出来；</li>
-<li>准确率又叫查准率，是针对<strong>预测结果</strong>而言，表示检索出的文档中有多少是相关(准确)的；</li>
-</ul>
-</blockquote>
-<p><img src="http://gitimage-10031767.cos.myqcloud.com/blog_image/recommeder_system/precision%26recall_1.jpg" alt=""></p>
-<blockquote>
-<ul>
-<li>A = 检索到且相关文件； </li>
-<li>B = 检索到且不相关文件； </li>
-<li>C = 未检索到且相关文件； </li>
-<li>D = 未检索到且不相关文件</li>
-</ul>
-</blockquote>
-<script type="math/tex; mode=display">召回率(Recall) = \frac{系统检索到的\textbf{相关文件}}{系统\textbf{所有相关的}文件总数} = \frac{A}{A + C}</script><script type="math/tex; mode=display">准确率(Precision) =  \frac{系统检索到的\textbf{相关文件}A}{系统\textbf{所有检索到的}文件总数B} = \frac{A}{A + B}</script><p><strong>举例：</strong><br>假设一共有10篇文章，其中4篇是我需要的。<br>某个算法计算认为10篇文章中有5篇是我需要的，但是实际上，在这5篇里面，只有3篇才是我真正需要的。</p>
-<p>那么，这个算法<br>Recall=3/4=75%，也就是说，一共有用的这4篇里面，到了其中3篇。<br>Precision=3/5=60%，也就是说，算法找的这5篇，有3篇是准确的。</p>
-<p><br></p>
-<p><strong>准确率和召回率是互相影响的，理想情况下期望两者都高，但是一般准确率高时召回率低，召回率低时准确率高</strong></p>
-<p>阈值不同时，可以得到不同的准确率与召回率</p>
-<p>如果在以召回率为X轴，准确率为Y轴，画出不同阈值下的准确率与召回率，一般它会程下图形状：</p>
-<p><img src="http://gitimage-10031767.cos.myqcloud.com/blog_image/recommeder_system/precision%26recall_2.jpg" alt=""></p>
-<p>表示意义：</p>
-<blockquote>
-<ol>
-<li>左上方，召回率低准确率高：返回最相关的文本但漏掉了很多其他相关文本</li>
-<li>右下方，召回率高准确率低：返回了大量相关文本但包含了很多垃圾（相关但无用）</li>
-<li>理想情况是能够到达右上方</li>
-</ol>
-</blockquote>
-<p><br><br><br></p>
-<h3 id="二、推荐系统中："><a href="#二、推荐系统中：" class="headerlink" title="二、推荐系统中："></a>二、推荐系统中：</h3><p>TopN推荐的预测准确率一般通过准确率(precision) / 召回率(recall)度量。</p>
-<p>令R(u)是根据用户在<strong>训练集</strong>上的行为给用户做出的推荐列表，<br>令T(u)是用户在<strong>测试集</strong>上的行为列表，那么</p>
-<script type="math/tex; mode=display">Recall = \frac{\sum_{u∈U}^{}|R(u)\bigcap{T(u)}|}{\sum_{u∈U}^{}|T(u)|}</script><script type="math/tex; mode=display">Precision = \frac{\sum_{u∈U}^{}|R(u)\bigcap{T(u)}|}{\sum_{u∈U}^{}|R(u)|}</script><blockquote>
-<ul>
-<li>召回率表示的是用户感兴趣的有多少被正确预测出来</li>
-<li>准确率表示的是推荐的结果中有多少是用户感兴趣的</li>
-</ul>
-</blockquote>
-<p><br><br><br></p>
-<p>参考链接:<br>[1] <a href="http://charleshm.github.io/2016/03/Model-Performance/" target="_blank" rel="external">机器学习性能评估指标</a><br>[2] <a href="http://blog.csdn.net/wangzhiqing3/article/details/9058523" target="_blank" rel="external">准确率与召回率</a><br>[3] 项亮，推荐系统实践</p>
 
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
+        <!-- 分页 -->
         <nav class="pagination" role="pagination">
-    
-    <a class="pull-left" href="/Recommender-System/Gini_Index/" style="float: left;">
-        ← 基尼系数
-    </a>
-    
-    
-    <a class="pull-right" href="/Recommender-System/Latex_in_Markdown/">
-        Markdown中的基本LaTeX数学公式 →
-    </a>
-    
-</nav>
+          
+          
+        </nav>
+    </div>
+</section> 
 
-        <div class="duoshuo">
-<div class="ds-thread" data-thread-key="Recommender-System/Precision&amp;Recall/" data-title="召回率准确率" data-url="http://hlyin.space/Recommender-System/Precision&amp;Recall/"></div>
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"louiehuang"};
-(function() {
-	var ds = document.createElement('script');
-	ds.type = 'text/javascript';ds.async = true;
-	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-	ds.charset = 'UTF-8';
-	(document.getElementsByTagName('head')[0] 
-	 || document.getElementsByTagName('body')[0]).appendChild(ds);
-})();
-</script>
-</div>
+
+
+<section id="statement">
+    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
+        <div class="row">
+            <p>Don't give up on your dreams -- Keep sleeping</p>
+        </div>
     </div>
 </section>
-
-
       
 <!-- ============================ Footer =========================== -->
 
