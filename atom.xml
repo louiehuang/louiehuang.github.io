@@ -19,7 +19,7 @@
     <title>Logistic回归与梯度下降算法</title>
     <link href="http://hlyin.space/Recommender-System/Logistic_GradientDescent/"/>
     <id>http://hlyin.space/Recommender-System/Logistic_GradientDescent/</id>
-    <published>2016-12-09T16:00:00.000Z</published>
+    <published>2016-12-10T08:00:00.000Z</published>
     <updated>2016-12-25T07:36:01.000Z</updated>
     
     <content type="html">&lt;p&gt;假设数据集有m行(1…m)，每个样本n个特征(1…n): &lt;/p&gt;
@@ -98,7 +98,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>修正余弦和Pearson相关系数在CF中的应用</title>
     <link href="http://hlyin.space/Recommender-System/AdjustedCosineSimandPearsoninCF/"/>
     <id>http://hlyin.space/Recommender-System/AdjustedCosineSimandPearsoninCF/</id>
-    <published>2016-11-24T16:00:00.000Z</published>
+    <published>2016-11-25T08:00:00.000Z</published>
     <updated>2016-12-25T07:18:37.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;1-Item-based&quot;&gt;&lt;a href=&quot;#1-Item-based&quot; class=&quot;headerlink&quot; title=&quot;1. Item-based&quot;&gt;&lt;/a&gt;1. Item-based&lt;/h2&gt;&lt;h3 id=&quot;1-1-余弦相似度-cosine-similarity&quot;&gt;&lt;a href=&quot;#1-1-余弦相似度-cosine-similarity&quot; class=&quot;headerlink&quot; title=&quot;1.1 余弦相似度(cosine similarity)&quot;&gt;&lt;/a&gt;1.1 余弦相似度(cosine similarity)&lt;/h3&gt;&lt;p&gt;对于item-based，计算物品相似度，参与计算的是两个物品评分向量（即用户-评分矩阵的列），假设用户-评分矩阵是m*n规模。&lt;/p&gt;
@@ -139,7 +139,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>CF代码实现</title>
     <link href="http://hlyin.space/Recommender-System/CFcode/"/>
     <id>http://hlyin.space/Recommender-System/CFcode/</id>
-    <published>2016-11-21T16:00:00.000Z</published>
+    <published>2016-11-22T08:00:00.000Z</published>
     <updated>2016-12-25T07:24:57.000Z</updated>
     
     <content type="html">&lt;p&gt;基于物品的协同过滤&lt;/p&gt;
@@ -202,7 +202,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>Pearson相关系数</title>
     <link href="http://hlyin.space/Recommender-System/PearsonCorrCoef/"/>
     <id>http://hlyin.space/Recommender-System/PearsonCorrCoef/</id>
-    <published>2016-11-19T16:00:00.000Z</published>
+    <published>2016-11-20T08:00:00.000Z</published>
     <updated>2016-12-21T07:38:29.000Z</updated>
     
     <content type="html">&lt;p&gt;协方差&lt;br&gt;numpy.cov&lt;/p&gt;
@@ -239,7 +239,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>信息熵与分类算法[转]</title>
     <link href="http://hlyin.space/Recommender-System/Information_entropy/"/>
     <id>http://hlyin.space/Recommender-System/Information_entropy/</id>
-    <published>2016-09-19T16:00:00.000Z</published>
+    <published>2016-09-20T07:00:00.000Z</published>
     <updated>2016-11-21T14:53:35.000Z</updated>
     
     <content type="html">&lt;p&gt;&lt;a href=&quot;http://gaofeihang.blog.163.com/blog/static/8450828520128139648199/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;转载链接&lt;/a&gt;&lt;/p&gt;
@@ -280,7 +280,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>基尼系数</title>
     <link href="http://hlyin.space/Recommender-System/Gini_Index/"/>
     <id>http://hlyin.space/Recommender-System/Gini_Index/</id>
-    <published>2016-09-18T16:00:00.000Z</published>
+    <published>2016-09-19T07:00:00.000Z</published>
     <updated>2016-11-21T14:47:54.000Z</updated>
     
     <content type="html">&lt;p&gt;基尼系数(Gini Index)是一个经济学概念，是20世纪初意大利经济学家基尼（实际应为赫希曼提出）根据洛伦茨曲线提出的判断分配平等程度的指标，用来描述收入整体差距程度。&lt;/p&gt;
@@ -313,7 +313,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>Python的类实例属性访问规则探讨[转]</title>
     <link href="http://hlyin.space/Recommender-System/python_instance_access_rule/"/>
     <id>http://hlyin.space/Recommender-System/python_instance_access_rule/</id>
-    <published>2016-09-14T16:00:00.000Z</published>
+    <published>2016-09-15T07:00:00.000Z</published>
     <updated>2016-12-21T07:43:31.000Z</updated>
     
     <content type="html">&lt;p&gt;一般来说，在Python中，类实例属性的访问规则算是比较直观的。&lt;br&gt;但是，仍然存在一些不是很直观的地方，特别是对C++和Java程序员来说，更是如此。&lt;/p&gt;
@@ -365,7 +365,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>召回率准确率</title>
     <link href="http://hlyin.space/Recommender-System/Precision_Recall/"/>
     <id>http://hlyin.space/Recommender-System/Precision_Recall/</id>
-    <published>2016-09-11T16:00:00.000Z</published>
+    <published>2016-09-12T07:00:00.000Z</published>
     <updated>2016-11-21T14:42:43.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;一、信息检索中：&quot;&gt;&lt;a href=&quot;#一、信息检索中：&quot; class=&quot;headerlink&quot; title=&quot;一、信息检索中：&quot;&gt;&lt;/a&gt;一、信息检索中：&lt;/h3&gt;&lt;blockquote&gt;
@@ -428,7 +428,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>Markdown中的基本LaTeX数学公式</title>
     <link href="http://hlyin.space/Recommender-System/Latex_in_Markdown/"/>
     <id>http://hlyin.space/Recommender-System/Latex_in_Markdown/</id>
-    <published>2016-08-09T16:00:00.000Z</published>
+    <published>2016-08-10T07:00:00.000Z</published>
     <updated>2016-11-21T14:45:06.000Z</updated>
     
     <content type="html">&lt;p&gt;&lt;strong&gt;1. 和号和积分号&lt;/strong&gt;&lt;/p&gt;
@@ -624,7 +624,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>WP字帖[效果图]</title>
     <link href="http://hlyin.space/ProjectImages/WPCopybook/"/>
     <id>http://hlyin.space/ProjectImages/WPCopybook/</id>
-    <published>2016-07-26T16:00:00.000Z</published>
+    <published>2016-07-27T07:00:00.000Z</published>
     <updated>2016-07-28T17:03:06.000Z</updated>
     
     <content type="html">&lt;p&gt;1、首页：&lt;/p&gt;
@@ -660,7 +660,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>仿QQ聊天工具[效果图]</title>
     <link href="http://hlyin.space/ProjectImages/CommnicationTool/"/>
     <id>http://hlyin.space/ProjectImages/CommnicationTool/</id>
-    <published>2016-07-25T16:00:00.000Z</published>
+    <published>2016-07-26T07:00:00.000Z</published>
     <updated>2016-07-28T17:03:29.000Z</updated>
     
     <content type="html">&lt;p&gt;C#编写的winform程序，分服务端和客户端两个程序，采用TCP通信，以xml形式传递数据&lt;/p&gt;
@@ -697,7 +697,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>咖啡网站[效果图]</title>
     <link href="http://hlyin.space/ProjectImages/Coffee/"/>
     <id>http://hlyin.space/ProjectImages/Coffee/</id>
-    <published>2016-07-24T16:00:00.000Z</published>
+    <published>2016-07-25T07:00:00.000Z</published>
     <updated>2016-07-28T17:03:34.000Z</updated>
     
     <content type="html">&lt;p&gt;asp.net&lt;/p&gt;
@@ -735,7 +735,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>房地产网站[效果图]</title>
     <link href="http://hlyin.space/ProjectImages/RealEstate/"/>
     <id>http://hlyin.space/ProjectImages/RealEstate/</id>
-    <published>2016-07-23T16:00:00.000Z</published>
+    <published>2016-07-24T07:00:00.000Z</published>
     <updated>2016-07-28T17:03:38.000Z</updated>
     
     <content type="html">&lt;p&gt;1、首页&lt;/p&gt;
@@ -783,7 +783,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>搜索引擎[效果图]</title>
     <link href="http://hlyin.space/ProjectImages/SearchEngine/"/>
     <id>http://hlyin.space/ProjectImages/SearchEngine/</id>
-    <published>2016-07-22T16:00:00.000Z</published>
+    <published>2016-07-23T07:00:00.000Z</published>
     <updated>2016-07-28T17:03:41.000Z</updated>
     
     <content type="html">&lt;p&gt;使用：&lt;/p&gt;
@@ -825,7 +825,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>诗词学习网站[效果图]</title>
     <link href="http://hlyin.space/ProjectImages/Poetry/"/>
     <id>http://hlyin.space/ProjectImages/Poetry/</id>
-    <published>2016-07-21T16:00:00.000Z</published>
+    <published>2016-07-22T07:00:00.000Z</published>
     <updated>2016-07-28T17:03:44.000Z</updated>
     
     <content type="html">&lt;p&gt;1、首页&lt;/p&gt;
@@ -863,7 +863,7 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     <title>DES算法</title>
     <link href="http://hlyin.space/Information-Security/des/"/>
     <id>http://hlyin.space/Information-Security/des/</id>
-    <published>2016-05-01T16:00:00.000Z</published>
+    <published>2016-05-02T07:00:00.000Z</published>
     <updated>2016-05-08T12:48:52.000Z</updated>
     
     <content type="html">&lt;p&gt;算法实现按照《信息安全原理与技术》(郭亚军、宋建华、李莉、董慧慧编著)给出的过程，输入输出格式按照本书56页例3.8指定，即输入16个字符的16进制明文和密钥 (输入16个16进制char后自动处理成64位的2进制进行计算，也即DES分组大小和DES的密钥大小)，输出64位2进制密文（解密时输出64位2进制明文）和对应的16位16进制密文/明文，如下图：&lt;/p&gt;
@@ -1081,7 +1081,7 @@ biTarget[4] = &amp;#39;\0&amp;#39;;
     <title>子网掩码与子网号</title>
     <link href="http://hlyin.space/Computer-Networks/subnetmask/"/>
     <id>http://hlyin.space/Computer-Networks/subnetmask/</id>
-    <published>2016-04-10T16:00:00.000Z</published>
+    <published>2016-04-11T07:00:00.000Z</published>
     <updated>2016-04-22T13:26:57.000Z</updated>
     
     <content type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 先回顾IP地址，IP地址是分层的，包括&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;网络&lt;/strong&gt;&lt;/font&gt;和&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;主机&lt;/strong&gt;&lt;/font&gt;两个部分，按网络部分和主机部分的不同长度主要分为A、B、C三类(还有多播组的D类和不再使用的E类)，但每一类的网络部分和主机部分的总长度相等，均为32位，如下图：&lt;/p&gt;
@@ -1235,7 +1235,7 @@ biTarget[4] = &amp;#39;\0&amp;#39;;
     <title>访问速度优化(二)---国内解析到coding，国外解析到github</title>
     <link href="http://hlyin.space/Blog/visiting_speed_opt2/"/>
     <id>http://hlyin.space/Blog/visiting_speed_opt2/</id>
-    <published>2016-04-09T16:00:00.000Z</published>
+    <published>2016-04-10T07:00:00.000Z</published>
     <updated>2016-11-22T14:46:41.000Z</updated>
     
     <content type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 之前通过将google字体和加载耗时较长的图片存到云对象存储(COS)大幅提升了这个网站的访问速度，其中google字体因为google的原因而耗时很长，而图片则是因为这个网站代码托管在github，需要从github那边加载，而github，国外的，访问速度相比对国内主机慢不少。&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 因此将网站同时部署到github和coding，比较一下两个地方的ping值：&lt;/p&gt;
@@ -1277,7 +1277,7 @@ biTarget[4] = &amp;#39;\0&amp;#39;;
     <title>访问速度优化(一)---图片及谷歌字体转存COS</title>
     <link href="http://hlyin.space/Blog/visiting_speed_opt1/"/>
     <id>http://hlyin.space/Blog/visiting_speed_opt1/</id>
-    <published>2016-04-08T16:00:00.000Z</published>
+    <published>2016-04-09T07:00:00.000Z</published>
     <updated>2016-11-22T14:46:47.000Z</updated>
     
     <content type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 这个blog (&lt;a href=&quot;http://hlyin.space&quot;&gt;http://hlyin.space&lt;/a&gt;) 一直是用chrome做测试和访问，刚搭建起来的时候打开速度比较正常，大概在2、3秒的样子，但这几天突然变得非常慢，需要等1、2分钟才能加载出来，想起来之前都是挂着ss，而现在没有开ss，觉得可能问题出在访问了被墙的资源，因而做些测试来查找并解决访问速度问题。&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 比较奇怪的是，用firefox和safari访问速度都比较快，只有chrome打开极慢，打开chrome的开发者工具（快捷键F12），选择network项，然后在历史记录中清除缓存以避免影响测试结果，然后访问网站 (&lt;a href=&quot;http://hlyin.space&quot;&gt;http://hlyin.space&lt;/a&gt;) ，如下图，加载时间为1.5分钟，在Time项中可以观察各项请求的耗时，找到了最耗时的项目，502网关错误，即红色项:&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_chrometest1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
@@ -1323,7 +1323,7 @@ biTarget[4] = &amp;#39;\0&amp;#39;;
     <title>添加google统计或百度统计</title>
     <link href="http://hlyin.space/Blog/baidu_analytics/"/>
     <id>http://hlyin.space/Blog/baidu_analytics/</id>
-    <published>2016-04-07T16:00:00.000Z</published>
+    <published>2016-04-08T07:00:00.000Z</published>
     <updated>2016-11-22T14:46:24.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;一、google统计&quot;&gt;&lt;a href=&quot;#一、google统计&quot; class=&quot;headerlink&quot; title=&quot;一、google统计&quot;&gt;&lt;/a&gt;一、google统计&lt;/h2&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 先在 &lt;a href=&quot;https://www.google.com/analytics/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;google统计&lt;/a&gt; 注册账号，在管理-&amp;gt;跟踪信息-&amp;gt;跟踪代码中获取跟踪ID和跟踪代码，形式如下：&lt;br&gt;ID：&lt;code&gt;UA-76175499-1&lt;/code&gt;&lt;/p&gt;
