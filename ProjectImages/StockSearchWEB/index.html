@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Mine Sweeping Using GDI+ | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>StockSearch[WEB] | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -226,61 +226,75 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2015-12-19T08:00:00.000Z" itemprop="datePublished">
-          2015-12-19
+      <time datetime="2017-11-05T07:00:00.000Z" itemprop="datePublished">
+          2017-11-05
       </time>
     
 </span>
-                <h1>Mine Sweeping Using GDI+</h1>
+                <h1>StockSearch[WEB]</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<p>GDI+</p>
-<h2 id="1-Functions"><a href="#1-Functions" class="headerlink" title="1. Functions:"></a>1. Functions:</h2><blockquote>
-<ol>
-<li>Selece Difficulty: Users could change difficulty of the game: beginner, normal, hard</li>
-<li>Play: The rule and UI are exactly the same as Mine Sweeping on Windows XP</li>
-<li>Timing and showing number of remaining mines</li>
-<li>Store data: When users break the record, update leaderboard and store the new data.</li>
-</ol>
-</blockquote>
-<h2 id="2-Screenshots"><a href="#2-Screenshots" class="headerlink" title="2. Screenshots"></a>2. Screenshots</h2><h3 id="2-1-Default-Beginner-Difficulty："><a href="#2-1-Default-Beginner-Difficulty：" class="headerlink" title="2.1 Default - Beginner Difficulty："></a>2.1 Default - Beginner Difficulty：</h3><p><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_easy.jpg" alt=""></p>
-<h3 id="2-2-If-stepping-to-mine"><a href="#2-2-If-stepping-to-mine" class="headerlink" title="2.2 If stepping to mine"></a>2.2 If stepping to mine</h3><p><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_easy_lose.jpg" alt=""></p>
-<h3 id="2-3-Win"><a href="#2-3-Win" class="headerlink" title="2.3 Win"></a>2.3 Win</h3><p><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_easy_win.jpg" alt=""></p>
-<h3 id="2-4-Difficulty-Normal"><a href="#2-4-Difficulty-Normal" class="headerlink" title="2.4 Difficulty - Normal"></a>2.4 Difficulty - Normal</h3><p><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_normal_lose.jpg" alt=""></p>
-<h3 id="2-4-Difficulty-Hard"><a href="#2-4-Difficulty-Hard" class="headerlink" title="2.4 Difficulty - Hard"></a>2.4 Difficulty - Hard</h3><p><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_hard.jpg" alt=""></p>
-<h2 id="3-Implementation"><a href="#3-Implementation" class="headerlink" title="3. Implementation"></a>3. Implementation</h2><p>主要写一下雷区的实现原理和部分关键代码，雷区效果如下图所示：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_block.jpg" alt=""></p>
-<p>雷块（上图中的方格）的实现没有使用winform的button控件，而是使用C#的GDI+绘制出来。GDI+是GDI的后续版本，将应用程序与图形硬件相分离，通过GDI+提供的方法适当调用相应的驱动程序。</p>
-<p>雷区的数据结构是二维数组，二维数组的一维大小代表雷区行数，二维大小代表雷区列数，每个元素相当于一个雷块。考虑雷块的类型，由于雷块有较多的操作，因而可以将雷块封装成一个类MineBlock，包括的字段有：X、Y，表示雷块的坐标（在二维数组中的下标）；Status，表示雷块的状态（翻开、未翻开、插旗、问号、插旗差错、爆炸）；IsHover，表示鼠标是否悬浮在当前的雷块上（若是，则其颜色改变以示区分）；MineNum，表示当前雷块中的地雷情况，-1表示有地雷，1~8表示当前块没有地雷但是周围8个雷块中的地雷情况，0表示当前块和周围8个块都没有地雷；Visited表示当前块是否被访问过，在广度优先搜索中使用，类视图如下图：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_classview.jpg" alt=""></p>
-<p>因而二维数组的类型是上面设计的雷块类，MineBlock[,] mineBlock，因为扫雷游戏最多有32行64列，因而此数组初始化为这个大小。设置三个变量分别记录当前游戏难度的行数、列数、地雷数，在选择了不同游戏难度后根据这三个参数对mineBlock数组中元素实例化，设置相应的状态。</p>
-<p>雷区的第一步实现是将普通雷块绘制出来，为显示美观，将雷区居中，则对于程序实现即设置一个向右偏移量也即横向偏移量<code>X_offset</code>和向下偏移量也即竖向偏移量<code>Y_offset</code>，这两个偏移量通过制定的规则计算得到，对于每个雷块的绘制，则是根据偏移量和二维数组下标确定当前雷块在窗体中的位置，同样出于美观，各雷块间设置1px的间距，则得到雷块横坐标为<code>X_offset + MineBlockLength * (i - 1) + 1</code>，纵坐标为<code>Y_offset + MineBlockLength * (j - 1) + 1</code>（这里列优先），则绘制雷块的代码为：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code1.jpg" alt=""></p>
-<p>在列优先遍历二维数组mineBlock中，判断当前遍历元素的状态，若状态为未翻开，判断是否鼠标悬浮在此块（通过一个Point类对象获取鼠标焦点坐标，计算出其在二维数组中下标，以此判断），若不是（即为普通雷块），设置画刷Brush brush = new SolidBrush(Color.FromArgb(192, 192, 192)); 调用方法g.FillRectangle(brush, rect);绘制出灰色的雷块，为了让雷块有立体感，在雷块的下方和右方各划一条线，画线时设置画笔Pen pen = new Pen(new SolidBrush(Color.FromArgb(128,128,128))); 调用方法DrawLine，通过当前雷块的下标计算出线的起止坐标；若是（即鼠标悬浮的雷块），则设置画刷透明度以显示不同颜色的雷块，如：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code2.jpg" alt=""></p>
-<p>对于雷块其他状态，如插旗、插错旗（游戏结束时显示打叉的地雷图像）、点到地雷（显示红色地雷）以及初始化布雷时地雷图像，则通过g.DrawImage方法更换图像，图像添加在资源Resources.resx中，切换时计算图像应显示的坐标并设置其大小，如：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code3.jpg" alt=""></p>
-<p>对于雷块标记的问号状态和点开雷块显示的数字，通过g.DrawString方法实现，先设置字符的显示大小，再依次和其数组下标来计算出字符应显示的坐标位置，如：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_code4.jpg" alt=""></p>
-<p>雷区绘制的基本原理如上所述，其具体实现时还有一些逻辑判断。</p>
-<p>上述绘制只是实现了一个静态的，并没有处理鼠标点击事件，因而雷区绘制的第二步是通过窗体的<code>FormMain_MouseMove</code>、<code>FormMain_MouseDown</code>、<code>FormMain_MouseUp</code>事件来将上一步绘制的静态雷区模拟成类似于Button控件的实现效果，即对用户的不同类型点击有不同的响应。</p>
-<p>首先对鼠标悬浮到的雷块进行区别显示，如下图，第一行第二列：<br><img src="http://gitimage-10031767.cos.myqcloud.com/project_image/minesweeping/minesweeping_block2.jpg" alt=""></p>
-<p>此功能的实现在MouseMove事件中，先判断鼠标是否在雷区内，若不是，将悬浮焦点mouseHoverBlock(Point类型)的X、Y属性置为0，表示雷区中不显示悬浮块，若在，则根据焦点坐标计算出当前悬浮的雷块在数组中的下标，并将mouseHoverBlock的X、Y属性置为对应下标，用于在重绘时进行判定，最后调用Refresh方法强制重绘窗体。</p>
-<p>其次处理鼠标的点击事件，点击分为左击和右击，在MouseDown时切换笑脸图标，在MouseUp也即点击完成时判断点击的类型并进行相应的处理。如果是左击，也即捕获到MouseButtons.Left，若点击的不是地雷且状态为未翻开，则广度优先搜索安全区，若点到地雷则游戏结束，停止计时、切换点击雷块的图像、切换笑脸图像并调用游戏结束函数；若点击的是右键，则根据当前点击雷块的状态进行点击后的图像切换和状态修改。在函数最后调用胜利判断函数，看点击以后用户是否胜利，此外在最后调用Refresh，重绘雷区被点击后的状态。</p>
+      		<h1 id="StockSearch-WEB"><a href="#StockSearch-WEB" class="headerlink" title="StockSearch - WEB"></a>StockSearch - WEB</h1><p>The core function of this project is to query stock details including its current and historical quotes, 8 different indicators and stock news, and displays these data in tabular or chart form. This project is implemented as a website and a android application.</p>
+<h2 id="1-Description"><a href="#1-Description" class="headerlink" title="1. Description"></a>1. Description</h2><p>Front end is built with Angular4.</p>
+<p>Back end is implemented with Node.js.</p>
+<p><a href="https://tinyurl.com/ybz4tcch" target="_blank" rel="external">This project is deployed at AWS Elastic Beanstalk.</a></p>
+<hr>
+
+
+<h2 id="2-Screenshops"><a href="#2-Screenshops" class="headerlink" title="2. Screenshops"></a>2. Screenshops</h2><h3 id="2-1-From-PC"><a href="#2-1-From-PC" class="headerlink" title="2.1 From PC"></a>2.1 From PC</h3><p><img src="http://gitimage-10031767.file.myqcloud.com/project_image/stockweb/sample.png" alt=""></p>
+<p><img src="http://gitimage-10031767.file.myqcloud.com/project_image/stockweb/sample2.png" alt=""></p>
+<h3 id="2-2-From-Cellphone"><a href="#2-2-From-Cellphone" class="headerlink" title="2.2 From Cellphone"></a>2.2 From Cellphone</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="http://gitimage-10031767.file.myqcloud.com/project_image/stockweb/responsive.jpg" alt="Homepage"></th>
+<th style="text-align:center"><img src="http://gitimage-10031767.file.myqcloud.com/project_image/stockweb/responsive1.jpg" alt="Quotes"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Homepage</td>
+<td style="text-align:center">Quotes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="http://gitimage-10031767.file.myqcloud.com/project_image/stockweb/responsive2.jpg" alt="Indicators"></th>
+<th style="text-align:center"><img src="http://gitimage-10031767.file.myqcloud.com/project_image/stockweb/responsive3.jpg" alt="Histrical Price"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Indicators</td>
+<td style="text-align:center">Histrical Price</td>
+</tr>
+</tbody>
+</table>
+</div>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/ProjectImages/WPCopybook/" style="float: left;">
-        ← Copybook for Calligraphy (WP)
+    <a class="pull-left" href="/ProjectImages/StockSearch-Android/" style="float: left;">
+        ← StockSearch[Android]
     </a>
     
     
-    <a class="pull-right" href="/ProjectImages/CommnicationTool/">
-        Instant Messenger (Imitation QQ) →
+    <a class="pull-right" href="/ProjectImages/RemmenderSystem/">
+        Remmender System →
     </a>
     
 </nav>
 
         <div class="duoshuo">
-<div class="ds-thread" data-thread-key="ProjectImages/MineSweeping/" data-title="Mine Sweeping Using GDI+" data-url="http://louie.top/ProjectImages/MineSweeping/"></div>
+<div class="ds-thread" data-thread-key="ProjectImages/StockSearchWEB/" data-title="StockSearch[WEB]" data-url="http://louie.top/ProjectImages/StockSearchWEB/"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"louiehuang"};
 (function() {
