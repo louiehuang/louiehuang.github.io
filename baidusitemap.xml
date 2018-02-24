@@ -4,6 +4,96 @@
 
     
   <url>
+    <loc>http://louie.link/Image-Processing/PolygonCentroid/</loc>
+    <lastmod>2018-02-24T05:48:41.000Z</lastmod>
+    <data>
+        <display>
+        <title>多边形质心计算</title>
+        <pubTime>2016-02-03T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Image Processing" url="http://louie.link/categories/Image-Processing/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Information-Retrieval/(06)Deduplication/</loc>
+    <lastmod>2018-02-24T05:47:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>(06) Deduplication</title>
+        <pubTime>2018-01-28T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Information Retrieval" url="http://louie.link/categories/Information-Retrieval/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Information-Retrieval/(04)SearchEngineEvaluation/</loc>
+    <lastmod>2018-02-24T05:41:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>(04) Search Engine Evaluation</title>
+        <pubTime>2018-01-17T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Information Retrieval" url="http://louie.link/categories/Information-Retrieval/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Information-Retrieval/(01-03)SearchEngineBasics/</loc>
+    <lastmod>2018-02-24T05:24:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>(01-03) Search Engine Basics and Characterizing the Web</title>
+        <pubTime>2018-01-08T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Information Retrieval" url="http://louie.link/categories/Information-Retrieval/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Information-Retrieval/(05)Crawlers%20and%20Crawling/</loc>
+    <lastmod>2018-02-24T05:22:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>(05) Crawlers and Crawling</title>
+        <pubTime>2018-01-22T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Information Retrieval" url="http://louie.link/categories/Information-Retrieval/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://louie.link/ProjectImages/RecommenderSystem/</loc>
     <lastmod>2018-02-09T03:45:09.000Z</lastmod>
     <data>
@@ -394,24 +484,6 @@
            
              
               <breadCrumb title="Recommender System" url="http://louie.link/categories/Recommender-System/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://louie.link/ImageProcessing/PolygonCentroid/</loc>
-    <lastmod>2016-10-15T11:19:07.000Z</lastmod>
-    <data>
-        <display>
-        <title>多边形质心计算</title>
-        <pubTime>2016-02-03T08:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="ImageProcessing" url="http://louie.link/categories/ImageProcessing/"/>
           
         </display>
     </data>

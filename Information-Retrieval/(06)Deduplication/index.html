@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>(06) Deduplication | Louie&#39;s Blog</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Louie's Blog">
+    <meta name="author" content="Louie">
+    <meta name="description" content="黄刘胤的博客 Louie's blog" />
+    <meta name="keywords" content="黄刘胤,Louie,Louiehuang" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/firedoge.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Louie&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <!--     
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    -->
+    <!-- 改为云存储 -->
+    <!-- <link href='//gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/family%3DOpen%2BSans400%2C600.css' rel='stylesheet' type='text/css'> -->
+    <!-- 或者本地也可以 -->
+    <link href='/css/family=Open+Sans400,600.css' rel='stylesheet' type='text/css'>
+
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  <!-- Baidu -->
+  <!--
+  
+  -->
+
+  <!-- google统计 -->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-76175499-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+
+<body id="index" class="lightnav animsition">
+
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- header -->
+        <div style="text-align:center;margin-top:15px;margin-bottom:-30px;">
+            <img style="height:120px;weight:120px" src="/img/header.jpg" alt="Close"/>
+            <h4 style="margin-top:10px;color:#fff;">黄刘胤 | Louie</h4>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/Animation/" class="animsition-link">Animation<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/Blog/" class="animsition-link">Blog<small>(3)</small></a></li>
+				    
+				    <li><a href="/categories/Computer-Networks/" class="animsition-link">Computer Networks<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/Image-Processing/" class="animsition-link">Image Processing<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/ImageProcessing/" class="animsition-link">ImageProcessing<small>(0)</small></a></li>
+				    
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(4)</small></a></li>
+				    
+				    <li><a href="/categories/Information-Security/" class="animsition-link">Information Security<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/OS/" class="animsition-link">OS<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/ProjectImages/" class="animsition-link">ProjectImages<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(9)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="/Resume.pdf" class="animsition-link">Resume</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About Me</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="http://gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/firedoge.ico" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Louie's Blog</a></li>
+                            <li class="nolink"><span>Always </span>Thinking</li>
+                            
+                            <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-01-28T08:00:00.000Z" itemprop="datePublished">
+          2018-01-28
+      </time>
+    
+</span>
+                <h1>(06) Deduplication</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>Lectrue in 01/28/2018</p>
+<p>[TOC]</p>
+<p>In IR, deduplication means recognizing identical and nearly identical web pages and indexing only a single version.</p>
+<p>For duplicates, a kind of example is that different URLs point to the same page. Say, a html page is placed on different servers thus have different URLs (may be different in protocal / host name / path name / page name).</p>
+<p><strong>Mirroring</strong> is the largest cause of duplication.</p>
+<h2 id="1-Detect-Exact-Duplicate-Pages"><a href="#1-Detect-Exact-Duplicate-Pages" class="headerlink" title="1. Detect Exact Duplicate Pages"></a>1. Detect Exact Duplicate Pages</h2><h3 id="1-1-Reason-to-detect-exact-duplicate-pages"><a href="#1-1-Reason-to-detect-exact-duplicate-pages" class="headerlink" title="1.1 Reason to detect exact duplicate pages"></a>1.1 Reason to detect exact duplicate pages</h3><p>We need to detect duplicate pages for following reasons:</p>
+<blockquote>
+<ol>
+<li>Better Crawling: fetch pages from faster or freshest server &amp; avoid giving users many duplicate search results.</li>
+<li>Redundancy: This is used when a URL fails, try another one that returns the same page.</li>
+<li>Prevent wasting crawling time</li>
+<li>More Accurate Connectivity Analysis: For in-links, combining them from the multiple mirror sites to get an accurate PageRank; For out-links, avoid double counting them. </li>
+</ol>
+</blockquote>
+<h3 id="1-2-Solution-Cryptographic-Hasing"><a href="#1-2-Solution-Cryptographic-Hasing" class="headerlink" title="1.2 Solution (Cryptographic Hasing)"></a>1.2 Solution (Cryptographic Hasing)</h3><p>So how to detect Exact Duplicate Pages?</p>
+<p>We could compute fingerprints using <strong>cryptographic hashing</strong> like SHA-2 or MD5. </p>
+<p>A <strong>hash function</strong> is any function that can be used to map data of arbitrary size to data of fixed size.</p>
+<p>A <strong>cryptographic hash function</strong> is a special class of <strong>hash function</strong> that has certain properties which make it suitable for use in cryptography. It is a mathematical algorithm that <strong>maps data of arbitrary size to a bit string of a fixed size (a hash) and is designed to be a one-way function</strong>, that is, a function which is infeasible to invert.  [1]</p>
+<p>The ideal cryptographic hash function has <strong>five</strong> main properties:</p>
+<blockquote>
+<ol>
+<li>It is quick to compute the hash value for any given message;</li>
+<li>It is infeasible to generate a message from its hash value except by trying all possible messages;</li>
+<li>A small change to a message should change the hash value so extensively that the new hash value appears uncorrelated with the old hash value;</li>
+<li>It is infeasible to find two different messages with the same hash value. </li>
+<li>It is deterministic so the same message always results in the same hash;</li>
+</ol>
+</blockquote>
+<p>So, to identify <strong>Identical Pages</strong>, we could compute the cryptographic hash (SHA-2, MD5) of each web page and maintain in <strong>sorted order</strong>. In this way, it takes $O(log{n})$ to check whether a page is duplicate (Binary Search).</p>
+<h2 id="2-Detect-Near-Duplicate-Pages"><a href="#2-Detect-Near-Duplicate-Pages" class="headerlink" title="2. Detect Near Duplicate Pages"></a>2. Detect Near Duplicate Pages</h2><h3 id="2-1-Reason-to-detect-near-duplicate-pages"><a href="#2-1-Reason-to-detect-near-duplicate-pages" class="headerlink" title="2.1 Reason to detect near duplicate pages"></a>2.1 Reason to detect near duplicate pages</h3><p>Detecting Near Duplicate Pages takes much more effort. At first, we still try to firgure why near duplicate page detection is needed. </p>
+<p>Some reason for doing this:</p>
+<blockquote>
+<ol>
+<li>Clustering. Users may want similar items. “More like this”;</li>
+<li>Detect Plagiarism;</li>
+<li>Detect Spams;</li>
+</ol>
+</blockquote>
+<h3 id="2-2-Solutions-1-Compute-Fingerprints"><a href="#2-2-Solutions-1-Compute-Fingerprints" class="headerlink" title="2.2 Solutions 1 - Compute Fingerprints"></a>2.2 Solutions 1 - Compute Fingerprints</h3><p>One way to detecte Near Duplicate Page is to calculate fingerprints and then test for similarity. </p>
+<p>Documents being treated as n-dimensional vectors are transformed into $f$-bit fingerprints by <code>Simhash</code> or <code>Hamming Distan</code>. Then compare these fingerprints with a difference in at most k bits.</p>
+<h3 id="2-3-Solutions-2-Compute-Shingles"><a href="#2-3-Solutions-2-Compute-Shingles" class="headerlink" title="2.3 Solutions 2 - Compute Shingles"></a>2.3 Solutions 2 - Compute Shingles</h3><h4 id="2-3-1-Distance-Measurements"><a href="#2-3-1-Distance-Measurements" class="headerlink" title="2.3.1 Distance Measurements"></a>2.3.1 Distance Measurements</h4><p>Before diving into <strong>shingles</strong>, let’s first review different <code>Distance Measurements</code></p>
+<h5 id="1-Euclidean-Distance"><a href="#1-Euclidean-Distance" class="headerlink" title="(1) Euclidean Distance"></a>(1) Euclidean Distance</h5><script type="math/tex; mode=display">d(p,q) = d(q,p) = \sqrt{(q_1-p_1)^2 + (q_2-p_2)^2 + \cdots + (q_n-p_n)^2} = \sqrt{\sum_{i=1}^n (q_i-p_i)^2}</script><h5 id="2-Jaccard-Distance-Our-Importance-Here"><a href="#2-Jaccard-Distance-Our-Importance-Here" class="headerlink" title="(2) Jaccard Distance (Our Importance Here)"></a>(2) Jaccard Distance (Our Importance Here)</h5><script type="math/tex; mode=display">Jaccard \: Similarity: JS(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{|A \cap B|}{|A| + |B| - |A \cap B|}</script><script type="math/tex; mode=display">Jaccard \: Distance: JD(A,B) = 1 - J(A,B) = \frac{|A \cup B| - |A \cap B|}{|A \cup B|}</script><p>For example, Consider A = {0, 1, 2, 3, 6} and B = {0, 1, 3, 5, 7, 9}</p>
+<script type="math/tex; mode=display">JS(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{\{0,1,3\}}{\{0,1,2,3,5,6,7,9\}} = \frac{3}{8}</script><h5 id="3-Cosine-Distance"><a href="#3-Cosine-Distance" class="headerlink" title="(3) Cosine Distance"></a>(3) Cosine Distance</h5><script type="math/tex; mode=display">Cosine \: Similarity=\cos(\theta )=\vec{A} \cdot \vec{B}  \over \|\vec{A} \|\|\vec{B} \|=\frac{\sum\limits_{i=1}^{n}{A_{i}B_{i}}}{\sqrt{\sum\limits_{i=1}^{n}{A_{i}^{2}}}\sqrt{\sum\limits_{i=1}^{n}{B_{i}^{2}}}}</script><h5 id="4-Edit-Distance"><a href="#4-Edit-Distance" class="headerlink" title="(4) Edit Distance"></a>(4) Edit Distance</h5><p>The Edit Distance is a way of quantifying how dissimilar two strings (e.g., words) are to one another by <strong>counting the minimum number of operations required to transform one string into the other.</strong></p>
+<h5 id="5-Hamming-Distance"><a href="#5-Hamming-Distance" class="headerlink" title="(5) Hamming Distance"></a>(5) Hamming Distance</h5><p>The Hamming Distance between two strings of equal length is the number of positions at which the corresponding symbols are different.</p>
+<h4 id="2-3-2-Shingling"><a href="#2-3-2-Shingling" class="headerlink" title="2.3.2 Shingling"></a>2.3.2 Shingling</h4><p>We are going to use <strong>Jaccard Similarity</strong> to determine when two web pages are near duplicates. The elements we are comparing are shingles. </p>
+<p><strong>Shingle</strong> is a contiguous subsequence of words in a document. </p>
+<p>Use S(d, k) to represent the set of shingles of a document d of length k. Then for a document containing text: “a rose is a rose is a rose”, S(d, 4) = {“a rose is a”, “rose is a rose”, “is a rose is”, “a rose is a”, “rose is a rose”}.</p>
+<script type="math/tex; mode=display">Resemblance(A, B) = JS(A, B) = \frac{|S(A, k) \cap S(B, k)|}{|S(A, k) \cup S(B, k)|}</script><script type="math/tex; mode=display">Containment(A, B)  = \frac{|S(A, k) \cap S(B, k)|}{|S(A, k)|}</script><p>So to test whether two pages are near identical, we could:</p>
+<blockquote>
+<ol>
+<li>Compute the k-shingles of the two pages, get two sets A and B</li>
+<li>Compute the Jaccard Similarity of the k-shingles, i.e. JS(A, B)</li>
+</ol>
+</blockquote>
+<p>If JS(A, B) &gt;= 0.9 (or other threshold we set), regard the two pages as near identical.</p>
+<p>To speed up the calculation process for JS, we may <font color="red"><strong>map computed shingles into numbers (fingerprints)</strong></font>,  for example, “is a rose is” =&gt; 921. Then compute <code>JS(fingerprint(A), fingerprint(B))</code>.</p>
+<h4 id="2-3-3-Probabilistic-Approach-for-faster-calculation"><a href="#2-3-3-Probabilistic-Approach-for-faster-calculation" class="headerlink" title="2.3.3 Probabilistic Approach for faster calculation"></a>2.3.3 Probabilistic Approach for faster calculation</h4><p>However, comparing fingerprints of all documents still takes too much time since we need to compute Jaccard coefficients pairwise.. So we instead adopt a probabilistic approach to avoid this.</p>
+<p>Following two paragraphs are selected from <strong><em>Introduction to information retrieval</em></strong>, section 19.6 </p>
+<hr>
+
+<p>“First, we map every shingle into a hash value over a large space, say 64 bits.<br>For $j = 1,2$, let $H(d<em>{j})$ be the corresponding set of 64-bit hash values derived from $S(d</em>{j}, k)$. We now invoke the following trick to detect document pairs whose sets $H()$ have large Jaccard overlaps. [2]</p>
+<p>Let $\pi$ be a <strong>random permutation</strong> from the 64-bit integers to the 64-bit integers. Denote by $\Pi(d<em>{j})$ the set of permuted hash values in $H(d</em>{j})$; thus for each $h \in H(d<em>{j})$, there is a corresponding value $\pi(h) \in \Pi(d</em>{j})$ (Obviously. This is just a permutation, not removing elements). Let $x<em>{j}^{\pi}$ be the smallest integer in $\Pi(d</em>{j})$. Then [2]”</p>
+<script type="math/tex; mode=display">JS(S(d_{1},k), S(d_{2},k)) = P(x_{1}^{\pi} = x_{2}^{\pi})</script><hr>
+
+<p>Intuitively, we apply the same random chosed permutation to both document i and j. So if doc i and j are similar =&gt; Their shingle sets are similar =&gt; After permutation, their smallest intergers have a high chance to be equal. If the two docs are not similar, then after permutation, their smallest intergers have a low chance to be equal.</p>
+<p>We cannot ignore the permutation but just compare their smallest intergers, it could be the smallest intergers are equal but everything else is not.</p>
+<p>We do the above for 200 different permutations to avoid coincidence. </p>
+<p><strong>References:</strong></p>
+<p>[1] Cryptographic hash function Retrieved from <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank" rel="external">https://en.wikipedia.org/wiki/Cryptographic_hash_function</a><br>[2] Manning, Christopher D., Prabhakar Raghavan, and Hinrich Schutze.<br>Introduction to information retrieval. Vol. 1. 2008: Cambridge University<br>Press. </p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/Information-Retrieval/(05)Crawlers and Crawling/">
+        (05) Crawlers and Crawling →
+    </a>
+    
+</nav>
+
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Information-Retrieval/(06)Deduplication/" data-title="(06) Deduplication" data-url="http://louie.link/Information-Retrieval/(06)Deduplication/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2015<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Louie. All Rights Reserved.
+                </p>
+                <p>Theme By Kieran</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+<!-- post to baidu -->
+<!-- not using this
+    <script type="text/javascript">
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+--><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

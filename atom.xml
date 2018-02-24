@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://louie.link/"/>
-  <updated>2018-02-07T01:18:48.000Z</updated>
+  <updated>2018-02-24T05:47:35.000Z</updated>
   <id>http://louie.link/</id>
   
   <author>
@@ -14,6 +14,529 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>(06) Deduplication</title>
+    <link href="http://louie.link/Information-Retrieval/(06)Deduplication/"/>
+    <id>http://louie.link/Information-Retrieval/(06)Deduplication/</id>
+    <published>2018-01-28T08:00:00.000Z</published>
+    <updated>2018-02-24T05:47:35.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Lectrue in 01/28/2018&lt;/p&gt;
+&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;In IR, deduplication means recognizing identical and nearly identical web pages and indexing only a single version.&lt;/p&gt;
+&lt;p&gt;For duplicates, a kind of example is that different URLs point to the same page. Say, a html page is placed on different servers thus have different URLs (may be different in protocal / host name / path name / page name).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Mirroring&lt;/strong&gt; is the largest cause of duplication.&lt;/p&gt;
+&lt;h2 id=&quot;1-Detect-Exact-Duplicate-Pages&quot;&gt;&lt;a href=&quot;#1-Detect-Exact-Duplicate-Pages&quot; class=&quot;headerlink&quot; title=&quot;1. Detect Exact Duplicate Pages&quot;&gt;&lt;/a&gt;1. Detect Exact Duplicate Pages&lt;/h2&gt;&lt;h3 id=&quot;1-1-Reason-to-detect-exact-duplicate-pages&quot;&gt;&lt;a href=&quot;#1-1-Reason-to-detect-exact-duplicate-pages&quot; class=&quot;headerlink&quot; title=&quot;1.1 Reason to detect exact duplicate pages&quot;&gt;&lt;/a&gt;1.1 Reason to detect exact duplicate pages&lt;/h3&gt;&lt;p&gt;We need to detect duplicate pages for following reasons:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Better Crawling: fetch pages from faster or freshest server &amp;amp; avoid giving users many duplicate search results.&lt;/li&gt;
+&lt;li&gt;Redundancy: This is used when a URL fails, try another one that returns the same page.&lt;/li&gt;
+&lt;li&gt;Prevent wasting crawling time&lt;/li&gt;
+&lt;li&gt;More Accurate Connectivity Analysis: For in-links, combining them from the multiple mirror sites to get an accurate PageRank; For out-links, avoid double counting them. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;1-2-Solution-Cryptographic-Hasing&quot;&gt;&lt;a href=&quot;#1-2-Solution-Cryptographic-Hasing&quot; class=&quot;headerlink&quot; title=&quot;1.2 Solution (Cryptographic Hasing)&quot;&gt;&lt;/a&gt;1.2 Solution (Cryptographic Hasing)&lt;/h3&gt;&lt;p&gt;So how to detect Exact Duplicate Pages?&lt;/p&gt;
+&lt;p&gt;We could compute fingerprints using &lt;strong&gt;cryptographic hashing&lt;/strong&gt; like SHA-2 or MD5. &lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;hash function&lt;/strong&gt; is any function that can be used to map data of arbitrary size to data of fixed size.&lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;cryptographic hash function&lt;/strong&gt; is a special class of &lt;strong&gt;hash function&lt;/strong&gt; that has certain properties which make it suitable for use in cryptography. It is a mathematical algorithm that &lt;strong&gt;maps data of arbitrary size to a bit string of a fixed size (a hash) and is designed to be a one-way function&lt;/strong&gt;, that is, a function which is infeasible to invert.  [1]&lt;/p&gt;
+&lt;p&gt;The ideal cryptographic hash function has &lt;strong&gt;five&lt;/strong&gt; main properties:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;It is quick to compute the hash value for any given message;&lt;/li&gt;
+&lt;li&gt;It is infeasible to generate a message from its hash value except by trying all possible messages;&lt;/li&gt;
+&lt;li&gt;A small change to a message should change the hash value so extensively that the new hash value appears uncorrelated with the old hash value;&lt;/li&gt;
+&lt;li&gt;It is infeasible to find two different messages with the same hash value. &lt;/li&gt;
+&lt;li&gt;It is deterministic so the same message always results in the same hash;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So, to identify &lt;strong&gt;Identical Pages&lt;/strong&gt;, we could compute the cryptographic hash (SHA-2, MD5) of each web page and maintain in &lt;strong&gt;sorted order&lt;/strong&gt;. In this way, it takes $O(log{n})$ to check whether a page is duplicate (Binary Search).&lt;/p&gt;
+&lt;h2 id=&quot;2-Detect-Near-Duplicate-Pages&quot;&gt;&lt;a href=&quot;#2-Detect-Near-Duplicate-Pages&quot; class=&quot;headerlink&quot; title=&quot;2. Detect Near Duplicate Pages&quot;&gt;&lt;/a&gt;2. Detect Near Duplicate Pages&lt;/h2&gt;&lt;h3 id=&quot;2-1-Reason-to-detect-near-duplicate-pages&quot;&gt;&lt;a href=&quot;#2-1-Reason-to-detect-near-duplicate-pages&quot; class=&quot;headerlink&quot; title=&quot;2.1 Reason to detect near duplicate pages&quot;&gt;&lt;/a&gt;2.1 Reason to detect near duplicate pages&lt;/h3&gt;&lt;p&gt;Detecting Near Duplicate Pages takes much more effort. At first, we still try to firgure why near duplicate page detection is needed. &lt;/p&gt;
+&lt;p&gt;Some reason for doing this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Clustering. Users may want similar items. “More like this”;&lt;/li&gt;
+&lt;li&gt;Detect Plagiarism;&lt;/li&gt;
+&lt;li&gt;Detect Spams;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;2-2-Solutions-1-Compute-Fingerprints&quot;&gt;&lt;a href=&quot;#2-2-Solutions-1-Compute-Fingerprints&quot; class=&quot;headerlink&quot; title=&quot;2.2 Solutions 1 - Compute Fingerprints&quot;&gt;&lt;/a&gt;2.2 Solutions 1 - Compute Fingerprints&lt;/h3&gt;&lt;p&gt;One way to detecte Near Duplicate Page is to calculate fingerprints and then test for similarity. &lt;/p&gt;
+&lt;p&gt;Documents being treated as n-dimensional vectors are transformed into $f$-bit fingerprints by &lt;code&gt;Simhash&lt;/code&gt; or &lt;code&gt;Hamming Distan&lt;/code&gt;. Then compare these fingerprints with a difference in at most k bits.&lt;/p&gt;
+&lt;h3 id=&quot;2-3-Solutions-2-Compute-Shingles&quot;&gt;&lt;a href=&quot;#2-3-Solutions-2-Compute-Shingles&quot; class=&quot;headerlink&quot; title=&quot;2.3 Solutions 2 - Compute Shingles&quot;&gt;&lt;/a&gt;2.3 Solutions 2 - Compute Shingles&lt;/h3&gt;&lt;h4 id=&quot;2-3-1-Distance-Measurements&quot;&gt;&lt;a href=&quot;#2-3-1-Distance-Measurements&quot; class=&quot;headerlink&quot; title=&quot;2.3.1 Distance Measurements&quot;&gt;&lt;/a&gt;2.3.1 Distance Measurements&lt;/h4&gt;&lt;p&gt;Before diving into &lt;strong&gt;shingles&lt;/strong&gt;, let’s first review different &lt;code&gt;Distance Measurements&lt;/code&gt;&lt;/p&gt;
+&lt;h5 id=&quot;1-Euclidean-Distance&quot;&gt;&lt;a href=&quot;#1-Euclidean-Distance&quot; class=&quot;headerlink&quot; title=&quot;(1) Euclidean Distance&quot;&gt;&lt;/a&gt;(1) Euclidean Distance&lt;/h5&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;d(p,q) = d(q,p) = \sqrt{(q_1-p_1)^2 + (q_2-p_2)^2 + \cdots + (q_n-p_n)^2} = \sqrt{\sum_{i=1}^n (q_i-p_i)^2}&lt;/script&gt;&lt;h5 id=&quot;2-Jaccard-Distance-Our-Importance-Here&quot;&gt;&lt;a href=&quot;#2-Jaccard-Distance-Our-Importance-Here&quot; class=&quot;headerlink&quot; title=&quot;(2) Jaccard Distance (Our Importance Here)&quot;&gt;&lt;/a&gt;(2) Jaccard Distance (Our Importance Here)&lt;/h5&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Jaccard \: Similarity: JS(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{|A \cap B|}{|A| + |B| - |A \cap B|}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Jaccard \: Distance: JD(A,B) = 1 - J(A,B) = \frac{|A \cup B| - |A \cap B|}{|A \cup B|}&lt;/script&gt;&lt;p&gt;For example, Consider A = {0, 1, 2, 3, 6} and B = {0, 1, 3, 5, 7, 9}&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;JS(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{\{0,1,3\}}{\{0,1,2,3,5,6,7,9\}} = \frac{3}{8}&lt;/script&gt;&lt;h5 id=&quot;3-Cosine-Distance&quot;&gt;&lt;a href=&quot;#3-Cosine-Distance&quot; class=&quot;headerlink&quot; title=&quot;(3) Cosine Distance&quot;&gt;&lt;/a&gt;(3) Cosine Distance&lt;/h5&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Cosine \: Similarity=\cos(\theta )=\vec{A} \cdot \vec{B}  \over \|\vec{A} \|\|\vec{B} \|=\frac{\sum\limits_{i=1}^{n}{A_{i}B_{i}}}{\sqrt{\sum\limits_{i=1}^{n}{A_{i}^{2}}}\sqrt{\sum\limits_{i=1}^{n}{B_{i}^{2}}}}&lt;/script&gt;&lt;h5 id=&quot;4-Edit-Distance&quot;&gt;&lt;a href=&quot;#4-Edit-Distance&quot; class=&quot;headerlink&quot; title=&quot;(4) Edit Distance&quot;&gt;&lt;/a&gt;(4) Edit Distance&lt;/h5&gt;&lt;p&gt;The Edit Distance is a way of quantifying how dissimilar two strings (e.g., words) are to one another by &lt;strong&gt;counting the minimum number of operations required to transform one string into the other.&lt;/strong&gt;&lt;/p&gt;
+&lt;h5 id=&quot;5-Hamming-Distance&quot;&gt;&lt;a href=&quot;#5-Hamming-Distance&quot; class=&quot;headerlink&quot; title=&quot;(5) Hamming Distance&quot;&gt;&lt;/a&gt;(5) Hamming Distance&lt;/h5&gt;&lt;p&gt;The Hamming Distance between two strings of equal length is the number of positions at which the corresponding symbols are different.&lt;/p&gt;
+&lt;h4 id=&quot;2-3-2-Shingling&quot;&gt;&lt;a href=&quot;#2-3-2-Shingling&quot; class=&quot;headerlink&quot; title=&quot;2.3.2 Shingling&quot;&gt;&lt;/a&gt;2.3.2 Shingling&lt;/h4&gt;&lt;p&gt;We are going to use &lt;strong&gt;Jaccard Similarity&lt;/strong&gt; to determine when two web pages are near duplicates. The elements we are comparing are shingles. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Shingle&lt;/strong&gt; is a contiguous subsequence of words in a document. &lt;/p&gt;
+&lt;p&gt;Use S(d, k) to represent the set of shingles of a document d of length k. Then for a document containing text: “a rose is a rose is a rose”, S(d, 4) = {“a rose is a”, “rose is a rose”, “is a rose is”, “a rose is a”, “rose is a rose”}.&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Resemblance(A, B) = JS(A, B) = \frac{|S(A, k) \cap S(B, k)|}{|S(A, k) \cup S(B, k)|}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Containment(A, B)  = \frac{|S(A, k) \cap S(B, k)|}{|S(A, k)|}&lt;/script&gt;&lt;p&gt;So to test whether two pages are near identical, we could:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Compute the k-shingles of the two pages, get two sets A and B&lt;/li&gt;
+&lt;li&gt;Compute the Jaccard Similarity of the k-shingles, i.e. JS(A, B)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;If JS(A, B) &amp;gt;= 0.9 (or other threshold we set), regard the two pages as near identical.&lt;/p&gt;
+&lt;p&gt;To speed up the calculation process for JS, we may &lt;font color=&quot;red&quot;&gt;&lt;strong&gt;map computed shingles into numbers (fingerprints)&lt;/strong&gt;&lt;/font&gt;,  for example, “is a rose is” =&amp;gt; 921. Then compute &lt;code&gt;JS(fingerprint(A), fingerprint(B))&lt;/code&gt;.&lt;/p&gt;
+&lt;h4 id=&quot;2-3-3-Probabilistic-Approach-for-faster-calculation&quot;&gt;&lt;a href=&quot;#2-3-3-Probabilistic-Approach-for-faster-calculation&quot; class=&quot;headerlink&quot; title=&quot;2.3.3 Probabilistic Approach for faster calculation&quot;&gt;&lt;/a&gt;2.3.3 Probabilistic Approach for faster calculation&lt;/h4&gt;&lt;p&gt;However, comparing fingerprints of all documents still takes too much time since we need to compute Jaccard coefficients pairwise.. So we instead adopt a probabilistic approach to avoid this.&lt;/p&gt;
+&lt;p&gt;Following two paragraphs are selected from &lt;strong&gt;&lt;em&gt;Introduction to information retrieval&lt;/em&gt;&lt;/strong&gt;, section 19.6 &lt;/p&gt;
+&lt;hr&gt;
+
+&lt;p&gt;“First, we map every shingle into a hash value over a large space, say 64 bits.&lt;br&gt;For $j = 1,2$, let $H(d&lt;em&gt;{j})$ be the corresponding set of 64-bit hash values derived from $S(d&lt;/em&gt;{j}, k)$. We now invoke the following trick to detect document pairs whose sets $H()$ have large Jaccard overlaps. [2]&lt;/p&gt;
+&lt;p&gt;Let $\pi$ be a &lt;strong&gt;random permutation&lt;/strong&gt; from the 64-bit integers to the 64-bit integers. Denote by $\Pi(d&lt;em&gt;{j})$ the set of permuted hash values in $H(d&lt;/em&gt;{j})$; thus for each $h \in H(d&lt;em&gt;{j})$, there is a corresponding value $\pi(h) \in \Pi(d&lt;/em&gt;{j})$ (Obviously. This is just a permutation, not removing elements). Let $x&lt;em&gt;{j}^{\pi}$ be the smallest integer in $\Pi(d&lt;/em&gt;{j})$. Then [2]”&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;JS(S(d_{1},k), S(d_{2},k)) = P(x_{1}^{\pi} = x_{2}^{\pi})&lt;/script&gt;&lt;hr&gt;
+
+&lt;p&gt;Intuitively, we apply the same random chosed permutation to both document i and j. So if doc i and j are similar =&amp;gt; Their shingle sets are similar =&amp;gt; After permutation, their smallest intergers have a high chance to be equal. If the two docs are not similar, then after permutation, their smallest intergers have a low chance to be equal.&lt;/p&gt;
+&lt;p&gt;We cannot ignore the permutation but just compare their smallest intergers, it could be the smallest intergers are equal but everything else is not.&lt;/p&gt;
+&lt;p&gt;We do the above for 200 different permutations to avoid coincidence. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;References:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;[1] Cryptographic hash function Retrieved from &lt;a href=&quot;https://en.wikipedia.org/wiki/Cryptographic_hash_function&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://en.wikipedia.org/wiki/Cryptographic_hash_function&lt;/a&gt;&lt;br&gt;[2] Manning, Christopher D., Prabhakar Raghavan, and Hinrich Schutze.&lt;br&gt;Introduction to information retrieval. Vol. 1. 2008: Cambridge University&lt;br&gt;Press. &lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Lectrue in 01/28/2018&lt;/p&gt;
+&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;In IR, deduplication means recognizing identical and nearly identical web pages and indexing on
+    
+    </summary>
+    
+      <category term="Information Retrieval" scheme="http://louie.link/categories/Information-Retrieval/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>(05) Crawlers and Crawling</title>
+    <link href="http://louie.link/Information-Retrieval/(05)Crawlers%20and%20Crawling/"/>
+    <id>http://louie.link/Information-Retrieval/(05)Crawlers and Crawling/</id>
+    <published>2018-01-22T08:00:00.000Z</published>
+    <updated>2018-02-24T05:22:23.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Lectrue in 01/22/2018&lt;/p&gt;
+&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h3 id=&quot;1-Web-Crawler&quot;&gt;&lt;a href=&quot;#1-Web-Crawler&quot; class=&quot;headerlink&quot; title=&quot;1. Web Crawler&quot;&gt;&lt;/a&gt;1. Web Crawler&lt;/h3&gt;&lt;p&gt;A Web Crawler (spider), is an Internet bot that &lt;strong&gt;systematically browses&lt;/strong&gt; the World Wide Web, typically for the purpose of Web indexing (web spidering).&lt;/p&gt;
+&lt;p&gt;There are something related to web crawling that we need to care about:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Crawling Quality: find the “best” pages&lt;/li&gt;
+&lt;li&gt;Crawling Efficiency: avoid dups and near-dups&lt;/li&gt;
+&lt;li&gt;Crawling Etiquette (Politeness): not visiting websites too many times in a short time (this may afftect websites’ performance)&lt;/li&gt;
+&lt;li&gt;Crawling Coverage: what percent of web to cover?&lt;/li&gt;
+&lt;li&gt;Crawling Freshness: pages may change…&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;2-Basic-Crawling-Process&quot;&gt;&lt;a href=&quot;#2-Basic-Crawling-Process&quot; class=&quot;headerlink&quot; title=&quot;2. Basic Crawling Process&quot;&gt;&lt;/a&gt;2. Basic Crawling Process&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;Start with a “seed” URL&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;Fetch and parse a page&lt;ul&gt;
+&lt;li&gt;a) Download the page and store it into a database&lt;/li&gt;
+&lt;li&gt;b) Parse that page, extract its outgoing URLs&lt;/li&gt;
+&lt;li&gt;c) Put the extracted URLs to a &lt;strong&gt;queue&lt;/strong&gt; (So crawling strategy could be BFS, DFS, Best First, …)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;Fetch each URL in the queue and repeat step (2)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For &lt;strong&gt;step 2b&lt;/strong&gt;, notice that &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Links are not just aside in &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt; tag, they could also apear in &lt;code&gt;&amp;lt;frame&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; and so on. &lt;/li&gt;
+&lt;li&gt;Some &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt; do not contain a link, such as &lt;code&gt;&amp;lt;a name=&amp;quot;example&amp;quot;&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Some &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt; may lead to infinite loop&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For &lt;strong&gt;step 2c&lt;/strong&gt;, we could use BFS, DFS or some &lt;strong&gt;Heuristic Method&lt;/strong&gt; to re-ordering URLs on the queue: &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Move forward URLs with larger &lt;strong&gt;In-degree&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Move forward URLs with larger &lt;strong&gt;PageRank&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;3-Some-chanllenges-for-crawling&quot;&gt;&lt;a href=&quot;#3-Some-chanllenges-for-crawling&quot; class=&quot;headerlink&quot; title=&quot;3. Some chanllenges for crawling:&quot;&gt;&lt;/a&gt;3. Some chanllenges for crawling:&lt;/h3&gt;&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Malicious pages (spam, &lt;strong&gt;crawler trap&lt;/strong&gt; such as infinite loop or visiting a page over and over again due to &lt;code&gt;SessionID&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Latency and bandwidth&lt;/li&gt;
+&lt;li&gt;Duplicate pages (This is mainly because of site mirrors)&lt;/li&gt;
+&lt;li&gt;Be polite&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;3-1-About-Spams&quot;&gt;&lt;a href=&quot;#3-1-About-Spams&quot; class=&quot;headerlink&quot; title=&quot;3.1 About Spams&quot;&gt;&lt;/a&gt;3.1 About Spams&lt;/h4&gt;&lt;p&gt;Three generations of spam are listed (They are all outdated): [1]&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Pages that contain many repeated words to rank higher by word frequency&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cloaking.&lt;/strong&gt; Two Different pages/content with same URL. One for the search engine/bot and the other for human.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Doorway Page.&lt;/strong&gt; Doorway page is a keyword stuffed page which after a few minutes redirects to another page. Clicking on a single URL will open multiple links either simultaneously or sometimes later. Mostly you might experience these techniques live when going through any movie downloads (in a pirated way). Best example for this is: torrentz.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;3-2-About-Crawler-Trap-SessionID-2&quot;&gt;&lt;a href=&quot;#3-2-About-Crawler-Trap-SessionID-2&quot; class=&quot;headerlink&quot; title=&quot;3.2 About Crawler Trap - SessionID [2]&quot;&gt;&lt;/a&gt;3.2 About Crawler Trap - SessionID [2]&lt;/h4&gt;&lt;p&gt;A &lt;strong&gt;spider trap&lt;/strong&gt; is when a spider re-spiders the same page over and over again, you can compare it to a maze (labyrinth).&lt;/p&gt;
+&lt;p&gt;The most known spider trap is &lt;strong&gt;Session ID’s&lt;/strong&gt;, a Session ID is often used to keep track&lt;br&gt;of the visitors, and some sites puts a unique ID in the URL: An example is &lt;code&gt;www.webmasterworld.com/page.php?id=264684413484654&lt;/code&gt;&lt;br&gt;Each user gets a unique ID and it’s often requested from each page.&lt;br&gt;The problem here is &lt;strong&gt;when Googlebot comes to the page, it spiders the page and&lt;br&gt;then leaves, it comes back to another page and it finds a link to the same page but since it has been given a different session id now, the link shows up as another URL.&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;This is one of the reasons why Googlebot is very very carefully when it spiders pages which uses the querystring “ID=”. &lt;/p&gt;
+&lt;p&gt;See more: &lt;a href=&quot;https://www.webmasterworld.com/forum3/9213.htm&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Googlebot: Deepbot and Freshbot FAQ and Information&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;4-Robots-txt&quot;&gt;&lt;a href=&quot;#4-Robots-txt&quot; class=&quot;headerlink&quot; title=&quot;4. Robots.txt&quot;&gt;&lt;/a&gt;4. Robots.txt&lt;/h3&gt;&lt;p&gt;Web site owners can use the /robots.txt file to give instructions about their site to web robots; this is called The &lt;strong&gt;Robots Exclusion Protocol&lt;/strong&gt;. [3]&lt;/p&gt;
+&lt;p&gt;Be aware that this is a protocol and &lt;strong&gt;can be ignored by crawler.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;To use robots.txt, place it in the root directory. An exampe is: &lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;# robots.txt for http://www.example.com/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;User-agent: *&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Disallow: /cyberworld/map/ # This is an infinite virtual URL space&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Disallow: /tmp/ # these will soon disappear&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Disallow: /foo.html&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;See more about robots.txt &lt;a href=&quot;http://www.robotstxt.org/robotstxt.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+
+
+
+&lt;p&gt;Web is a graph, not a tree, so we have to detect &lt;strong&gt;pages&lt;/strong&gt; and &lt;strong&gt;URLs&lt;/strong&gt; we’ve already visited to &lt;strong&gt;avoid duplication.&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;5-Avoid-duplicate-URLs&quot;&gt;&lt;a href=&quot;#5-Avoid-duplicate-URLs&quot; class=&quot;headerlink&quot; title=&quot;5 Avoid duplicate URLs&quot;&gt;&lt;/a&gt;5 Avoid duplicate URLs&lt;/h3&gt;&lt;p&gt;To avoid duplicate URLs, we:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Normalize URLs;&lt;/li&gt;
+&lt;li&gt;Determine whetehr a URL has already been seen.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;5-1-Normalizing-URLs&quot;&gt;&lt;a href=&quot;#5-1-Normalizing-URLs&quot; class=&quot;headerlink&quot; title=&quot;5.1 Normalizing URLs&quot;&gt;&lt;/a&gt;5.1 Normalizing URLs&lt;/h4&gt;&lt;p&gt;Normalizing is important. For example, &lt;code&gt;http://www.google.com&lt;/code&gt;, &lt;code&gt;https://www.google.com&lt;/code&gt;, &lt;code&gt;google.com&lt;/code&gt; all point to the same page, but they have different hashcode. &lt;/p&gt;
+&lt;p&gt;Some ways to normalize URLs:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Converting the scheme and host to lower case. &lt;code&gt;HTTP://www.Example.com/&lt;/code&gt; → &lt;code&gt;http://www.example.com/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Capitalizing letters in escape sequences. &lt;code&gt;http://www.example.com/a%c2%b1b&lt;/code&gt; → &lt;code&gt;http://www.example.com/a%C2%B1b&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Decoding percent-encoded octets of unreserved characters. &lt;code&gt;http://www.example.com/%7Eusername/&lt;/code&gt; → &lt;code&gt;http://www.example.com/~username/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Removing the default port. &lt;code&gt;http://www.example.com:80/bar.html&lt;/code&gt; → &lt;code&gt;http://www.example.com/bar.html&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;See more: &lt;a href=&quot;https://en.wikipedia.org/wiki/URL_normalization&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;URL normalization&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;5-2-Determine-whetehr-a-URL-has-already-been-seen&quot;&gt;&lt;a href=&quot;#5-2-Determine-whetehr-a-URL-has-already-been-seen&quot; class=&quot;headerlink&quot; title=&quot;5.2 Determine whetehr a URL has already been seen&quot;&gt;&lt;/a&gt;5.2 Determine whetehr a URL has already been seen&lt;/h4&gt;&lt;p&gt;Two ways to determining whetehr a URL has already been seen:&lt;/p&gt;
+&lt;h5 id=&quot;1-Hash-on-host-and-Trie-on-path&quot;&gt;&lt;a href=&quot;#1-Hash-on-host-and-Trie-on-path&quot; class=&quot;headerlink&quot; title=&quot;(1) Hash(on host) and Trie(on path)&quot;&gt;&lt;/a&gt;(1) Hash(on host) and Trie(on path)&lt;/h5&gt;&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Hash&lt;/strong&gt; on host/domain name&lt;/li&gt;
+&lt;li&gt;Use &lt;strong&gt;trie&lt;/strong&gt; to store and check paths. Nodes will be like “/cs”, “/viterbi”. Put a symbol “$” at the end of each word to make them different from almost identical elements.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For n URLs and at most k branches each layer, time complexity of determining whetehr a URL has been seen is $O(log_k{n})$ (Tree height).&lt;/p&gt;
+&lt;p&gt;If we have a huge amount of URLs, we need to use distributed systems, like consistent hashing to map similar URL to same machine. See more from &lt;a href=&quot;https://loveforprogramming.quora.com/Distributed-Systems-Part-1-A-peek-into-consistent-hashing&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Distributed Systems Part-1: A peek into consistent hashing!&lt;/a&gt;&lt;/p&gt;
+&lt;h5 id=&quot;2-Use-Delta-between-the-current-and-previous-URLs-in-sorted-URLs&quot;&gt;&lt;a href=&quot;#2-Use-Delta-between-the-current-and-previous-URLs-in-sorted-URLs&quot; class=&quot;headerlink&quot; title=&quot;(2) Use $\Delta$ between the current and previous URLs in sorted URLs&quot;&gt;&lt;/a&gt;(2) Use $\Delta$ between the current and previous URLs in sorted URLs&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sort URLs lexicographically&lt;/strong&gt;, &lt;/li&gt;
+&lt;li&gt;Store them as a &lt;strong&gt;delta-encoded&lt;/strong&gt; text file. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In this way, entries are stored as the difference $\Delta$ between the current and previous URL. Advanges of this method are that we could use binary search and required storage is reduced. But notice that restoring actual URL takes more time since we need to apply all $\Delta$s to the initial URL.&lt;/p&gt;
+&lt;h3 id=&quot;6-Avoid-duplicate-Pages&quot;&gt;&lt;a href=&quot;#6-Avoid-duplicate-Pages&quot; class=&quot;headerlink&quot; title=&quot;6. Avoid duplicate Pages&quot;&gt;&lt;/a&gt;6. Avoid duplicate Pages&lt;/h3&gt;&lt;p&gt;This will be disscussed in next artical (Deduplication)&lt;/p&gt;
+&lt;h3 id=&quot;7-Multi-Threaded-Crawling-amp-Distributed-Model&quot;&gt;&lt;a href=&quot;#7-Multi-Threaded-Crawling-amp-Distributed-Model&quot; class=&quot;headerlink&quot; title=&quot;7. Multi-Threaded Crawling &amp;amp; Distributed Model&quot;&gt;&lt;/a&gt;7. Multi-Threaded Crawling &amp;amp; Distributed Model&lt;/h3&gt;&lt;p&gt;Three strategies of Coordination of Distributed Crawling&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Independent&lt;/li&gt;
+&lt;li&gt;Dynamic Assignment: A central coordinator dynamically divides the web and assigns partitions. &lt;/li&gt;
+&lt;li&gt;Static Assignment: Web is partitioned and assigned without a central coordinator before the crawl starts&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Links from one partition to another in Static Assignment can be handled:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Firewall mode: Processes do not follow any inter-partition link, but this actually works not bad -&amp;gt; good coverage with low cost&lt;/li&gt;
+&lt;li&gt;Cross-over mode&lt;/li&gt;
+&lt;li&gt;Exchange mode&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;8-Freshness&quot;&gt;&lt;a href=&quot;#8-Freshness&quot; class=&quot;headerlink&quot; title=&quot;8. Freshness&quot;&gt;&lt;/a&gt;8. Freshness&lt;/h3&gt;&lt;p&gt;Web pages could be created, updated and deleted, so we need to periodically check crawled pages to see if there is any change. To do so, check &lt;code&gt;Last-Modified&lt;/code&gt; response in HTTP header. &lt;/p&gt;
+&lt;p&gt;Be aware that when a page changes either at a low frequency or high frequency, we should not visit it too often. Fot the latter case, if a page changes very frequently, even if visit with short time interval, we still cannot guarantee it’s fresh. In fact, a way to improve freshness is to penalize the elements that change too often. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Front Queue and Back Queue&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;References:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;[1] What is the exact difference between cloaking and doorway pages? Retrieved from &lt;a href=&quot;https://www.quora.com/What-is-the-exact-difference-between-cloaking-and-doorway-pages&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.quora.com/What-is-the-exact-difference-between-cloaking-and-doorway-pages&lt;/a&gt;&lt;br&gt;[2] Googlebot: Deepbot and Freshbot FAQ and Information. Retrieved from &lt;a href=&quot;https://www.webmasterworld.com/forum3/9213.htm&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.webmasterworld.com/forum3/9213.htm&lt;/a&gt;&lt;br&gt;[3] About /robots.txt. Retrieved from &lt;a href=&quot;http://www.robotstxt.org/robotstxt.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.robotstxt.org/robotstxt.html&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Lectrue in 01/22/2018&lt;/p&gt;
+&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h3 id=&quot;1-Web-Crawler&quot;&gt;&lt;a href=&quot;#1-Web-Crawler&quot; class=&quot;headerlink&quot; title=&quot;1. Web Crawler&quot;&gt;&lt;/a&gt;1. W
+    
+    </summary>
+    
+      <category term="Information Retrieval" scheme="http://louie.link/categories/Information-Retrieval/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>(04) Search Engine Evaluation</title>
+    <link href="http://louie.link/Information-Retrieval/(04)SearchEngineEvaluation/"/>
+    <id>http://louie.link/Information-Retrieval/(04)SearchEngineEvaluation/</id>
+    <published>2018-01-17T08:00:00.000Z</published>
+    <updated>2018-02-24T05:41:44.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Lectrue in 01/17/2018&lt;/p&gt;
+&lt;h2 id=&quot;1-Precision-and-Recall&quot;&gt;&lt;a href=&quot;#1-Precision-and-Recall&quot; class=&quot;headerlink&quot; title=&quot;1. Precision and Recall&quot;&gt;&lt;/a&gt;1. Precision and Recall&lt;/h2&gt;&lt;p&gt;Machine Learning on Coursera [Week6 -&amp;gt; error-metrics-for-skewed-classes]:&lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;PC \ AC&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;True Positive&lt;/td&gt;
+&lt;td&gt;False Positive&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;False Negataive&lt;/td&gt;
+&lt;td&gt;True Negataive&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;PC is Predicted Class, AC is Actual Class.&lt;/strong&gt;&lt;br&gt;So, True Positive means for a data record whose class is 1 (positive), we predict is as 1. If we predict such data as 0, then this is False Positive.&lt;/p&gt;
+&lt;p&gt;In Information Retrieval, this form can be defined as:&lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Relevant&lt;/th&gt;
+&lt;th&gt;Non-relevant&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Retrieved&lt;/td&gt;
+&lt;td&gt;True Positive (TP)&lt;/td&gt;
+&lt;td&gt;False Positive (FP)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Not Retrieved&lt;/td&gt;
+&lt;td&gt;False Negataive (FN)&lt;/td&gt;
+&lt;td&gt;True Negataive (TN)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;For example, if a retrieved page is relevant, then this is True Positive; if a retrieved page is not relevant, then this is False Positive. Retrieving this page means we predict it as positive, but this prediction may be true or may be false.&lt;/p&gt;
+&lt;p&gt;After defining these, we could define precesion and recall:&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Precision = \frac{relevant \: items \: retrieved}{all \: \textbf{retrieved} \: items} = \frac{TP}{TP + FP}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Recall = \frac{relevant \: items \: retrieved}{all \: \textbf{relevant}  \: items} = \frac{TP}{TP + FN}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Accuracy  = \frac{all \: relevant \: items}{all \: items} = \frac{TP + TN}{TP + FN + FP + TN}&lt;/script&gt;&lt;p&gt;For web applications, &lt;strong&gt;Precision is more important than Recall&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;We could also use &lt;strong&gt;Set Notation&lt;/strong&gt; to represent precesion and recall:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;A is set of relevant documents&lt;/li&gt;
+&lt;li&gt;B is set of retrieved documents&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Relevant&lt;/th&gt;
+&lt;th&gt;Non-relevant&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Retrieved&lt;/td&gt;
+&lt;td&gt;$A \cap B$&lt;/td&gt;
+&lt;td&gt;$\bar{A} \cap B$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Not Retrieved&lt;/td&gt;
+&lt;td&gt;$A \cap \bar{B}$&lt;/td&gt;
+&lt;td&gt;$\bar{A} \cap \bar{B}$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Precision = \frac{relevant \: items \: retrieved}{all \: \textbf{retrieved} \: items} = \frac{A \cap B}{B}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Recall = \frac{relevant \: items \: retrieved}{all \: \textbf{relevant}  \: items} = \frac{A \cap B}{A}&lt;/script&gt;&lt;p&gt;Recall is diﬃcult to measure on the web since we do not know really how many items are relevant.&lt;/p&gt;
+&lt;p&gt;By empirical confirmation (not theorem), &lt;strong&gt;precision decreases as either the number of docs retrieved (or recall) increases.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/blog_image/recommeder_system/precision%26recall_2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;2-Harmonic-Mean-and-F-Measure&quot;&gt;&lt;a href=&quot;#2-Harmonic-Mean-and-F-Measure&quot; class=&quot;headerlink&quot; title=&quot;2. Harmonic Mean and F Measure&quot;&gt;&lt;/a&gt;2. Harmonic Mean and F Measure&lt;/h2&gt;&lt;p&gt;Pythagorean Means:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Arithmetic Mean&lt;/li&gt;
+&lt;li&gt;Geometric Mean&lt;/li&gt;
+&lt;li&gt;Harmonic Mean&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;Harmonic-Mean&quot;&gt;&lt;a href=&quot;#Harmonic-Mean&quot; class=&quot;headerlink&quot; title=&quot;Harmonic Mean&quot;&gt;&lt;/a&gt;Harmonic Mean&lt;/h3&gt;&lt;p&gt;The &lt;strong&gt;Harmonic Mean tends strongly toward the least element of the list&lt;/strong&gt; making it useful in analyzing search engine results&lt;/p&gt;
+&lt;p&gt;As a simple example, the harmonic mean of 1, 4, and 4 is 2, tends toward the least element 1.&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;HarmonicMean(1,4,4) = \left(\frac{1^{-1}+4^{-1}+4^{-1}}{3}\right)^{-1}=\frac{3}{\frac{1}{1}+\frac{1}{4}+\frac{1}{4}}=\frac{3}{1.5}=2&lt;/script&gt;&lt;h3 id=&quot;F-score&quot;&gt;&lt;a href=&quot;#F-score&quot; class=&quot;headerlink&quot; title=&quot;F-score&quot;&gt;&lt;/a&gt;F-score&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;F-score&lt;/strong&gt; (F1-score) is the harmonic mean of the precision and the recall. &lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;F = \left(\frac{P^{-1}+R^{-1}}{2}\right)^{-1}=\frac{2}{\frac{1}{P}+\frac{1}{R}}=\frac {2PR}{P+R}&lt;/script&gt;&lt;p&gt;A more general form of F-score is:&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;F =\frac{(\beta^2+1)PR}{\beta^2P+R}&lt;/script&gt;&lt;p&gt;$\beta$ is a parameter that controls the relative importance of recall and precision, $\beta = 1$ is F1-score.&lt;/p&gt;
+&lt;h2 id=&quot;3-Mean-Average-Precision&quot;&gt;&lt;a href=&quot;#3-Mean-Average-Precision&quot; class=&quot;headerlink&quot; title=&quot;3. Mean Average Precision&quot;&gt;&lt;/a&gt;3. Mean Average Precision&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Mean average precision (MAP)&lt;/strong&gt; for a &lt;strong&gt;set&lt;/strong&gt; of queries is the &lt;strong&gt;mean&lt;/strong&gt; of the &lt;strong&gt;average precision scores for each query&lt;/strong&gt;. [wikipedia]&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;MAP = \frac{\sum_{q=1}^Q AveP(q)}{Q} \!&lt;/script&gt;&lt;p&gt;where Q is the number of queries.&lt;/p&gt;
+&lt;p&gt;For example, there are two queries, query1 and query2.&lt;/p&gt;
+&lt;p&gt;For &lt;strong&gt;query1&lt;/strong&gt;, there is a relavant documents {a,b,c,d,e}. Calculate Recall / Precision at Fixed Positions, use 1 for revalent document and 0 for irrevanlent. &lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Ranking#1&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Precision&lt;/td&gt;
+&lt;td&gt;1.0&lt;/td&gt;
+&lt;td&gt;0.5&lt;/td&gt;
+&lt;td&gt;0.67&lt;/td&gt;
+&lt;td&gt;0.5&lt;/td&gt;
+&lt;td&gt;0.4&lt;/td&gt;
+&lt;td&gt;0.5&lt;/td&gt;
+&lt;td&gt;0.43&lt;/td&gt;
+&lt;td&gt;0.38&lt;/td&gt;
+&lt;td&gt;0.44&lt;/td&gt;
+&lt;td&gt;0.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Recall&lt;/td&gt;
+&lt;td&gt;0.2&lt;/td&gt;
+&lt;td&gt;0.2&lt;/td&gt;
+&lt;td&gt;0.4&lt;/td&gt;
+&lt;td&gt;0.4&lt;/td&gt;
+&lt;td&gt;0.4&lt;/td&gt;
+&lt;td&gt;0.6&lt;/td&gt;
+&lt;td&gt;0.6&lt;/td&gt;
+&lt;td&gt;0.6&lt;/td&gt;
+&lt;td&gt;0.8&lt;/td&gt;
+&lt;td&gt;1.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;Average Precision for query1 is $\frac{1.0 + 0.67 + 0.5 + 0.44 + 0.5}{5} = 0.62$&lt;/p&gt;
+&lt;p&gt;For &lt;strong&gt;query2&lt;/strong&gt;, there is a relavant documents {f,g,h}. Calculate Recall / Precision at Fixed Positions, use 1 for revalent document and 0 for irrevanlent. &lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Ranking#1&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Precision&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.5&lt;/td&gt;
+&lt;td&gt;0.33&lt;/td&gt;
+&lt;td&gt;0.25&lt;/td&gt;
+&lt;td&gt;0.4&lt;/td&gt;
+&lt;td&gt;0.33&lt;/td&gt;
+&lt;td&gt;0.43&lt;/td&gt;
+&lt;td&gt;0.38&lt;/td&gt;
+&lt;td&gt;0.33&lt;/td&gt;
+&lt;td&gt;0.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Recall&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.33&lt;/td&gt;
+&lt;td&gt;0.33&lt;/td&gt;
+&lt;td&gt;0.33&lt;/td&gt;
+&lt;td&gt;0.67&lt;/td&gt;
+&lt;td&gt;0.67&lt;/td&gt;
+&lt;td&gt;1.0&lt;/td&gt;
+&lt;td&gt;1.0&lt;/td&gt;
+&lt;td&gt;1.0&lt;/td&gt;
+&lt;td&gt;1.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;Average Precision for query1 is $\frac{0.5 + 0.4 + 0.43}{3} = 0.44$&lt;/p&gt;
+&lt;p&gt;So in this case, MAP = $\frac{0.62 + 0.44}{2} = 0.53$&lt;/p&gt;
+&lt;p&gt;Notice that Precesion and Recall are based on retreived relevant items, which means human relavance accessments are needed. And there are just relavant and irrelavant, results are bianry, so how about something in between? &lt;/p&gt;
+&lt;h2 id=&quot;4-Discounted-Cumulative-Gain&quot;&gt;&lt;a href=&quot;#4-Discounted-Cumulative-Gain&quot; class=&quot;headerlink&quot; title=&quot;4. Discounted Cumulative Gain&quot;&gt;&lt;/a&gt;4. Discounted Cumulative Gain&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Discounted Cumulative Gain (DCG)&lt;/strong&gt; measures the usefulness, or gain, of a document &lt;strong&gt;based on its position in the result list.&lt;/strong&gt; The gain is accumulated from the top of the result list to the bottom, with the gain of each result discounted at lower ranks. [1]&lt;/p&gt;
+&lt;p&gt;The Premise of DCG is that highly relavant documents appearing lower in a search result list should be &lt;strong&gt;penalized&lt;/strong&gt; as the graded relevance value is reduced logarithmically proportional to the position of the result. [2]&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;CG and Discounted CG&lt;/strong&gt; accumulated at a particular rank position p are defined as &lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;CG_{p}=\sum _{i=1}^{p}rel_{i}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;DCG_{p}=rel_{1} + \sum_{i=2}^{p}\frac{rel_i}{\log _{2}i}&lt;/script&gt;&lt;p&gt;where $rel_{i}$ is the graded relevance of the result at position i.&lt;/p&gt;
+&lt;h2 id=&quot;5-A-B-Testing&quot;&gt;&lt;a href=&quot;#5-A-B-Testing&quot; class=&quot;headerlink&quot; title=&quot;5. A/B Testing&quot;&gt;&lt;/a&gt;5. A/B Testing&lt;/h2&gt;&lt;p&gt;A/B testing is a way to compare two versions of a single variable typically by testing a subject’s response to variable A against variable B, and determining which of the two variables is more effective.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;References:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;[1]  Kalervo Jarvelin, Jaana Kekalainen: Cumulated gain-based evaluation of IR techniques. ACM Transactions on Information Systems 20(4), 422–446 (2002)&lt;br&gt;[2] Ceri S, Bozzon A, Brambilla M, Della Valle E, Fraternali P, Quarteroni S: The Information Retrieval Process. Web Information Retrieval. 2013, Heidelberg: Springer&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Lectrue in 01/17/2018&lt;/p&gt;
+&lt;h2 id=&quot;1-Precision-and-Recall&quot;&gt;&lt;a href=&quot;#1-Precision-and-Recall&quot; class=&quot;headerlink&quot; title=&quot;1. Precision and Re
+    
+    </summary>
+    
+      <category term="Information Retrieval" scheme="http://louie.link/categories/Information-Retrieval/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>(01-03) Search Engine Basics and Characterizing the Web</title>
+    <link href="http://louie.link/Information-Retrieval/(01-03)SearchEngineBasics/"/>
+    <id>http://louie.link/Information-Retrieval/(01-03)SearchEngineBasics/</id>
+    <published>2018-01-08T08:00:00.000Z</published>
+    <updated>2018-02-24T05:24:52.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Lectrue in 01/08/2018 &amp;amp; 01/10/2018&lt;/p&gt;
+&lt;h3 id=&quot;1-Introduction&quot;&gt;&lt;a href=&quot;#1-Introduction&quot; class=&quot;headerlink&quot; title=&quot;1. Introduction&quot;&gt;&lt;/a&gt;1. Introduction&lt;/h3&gt;&lt;p&gt;Course Introduction&lt;/p&gt;
+&lt;h3 id=&quot;2-Search-Engine-Basics&quot;&gt;&lt;a href=&quot;#2-Search-Engine-Basics&quot; class=&quot;headerlink&quot; title=&quot;2. Search Engine Basics&quot;&gt;&lt;/a&gt;2. Search Engine Basics&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Search Engine&lt;/strong&gt; usually refers to a Web Search Engine. There are also other kind of SE, such as Enterprise Search Engines (search on intranets) and Personal Search Engines.&lt;/p&gt;
+&lt;h4 id=&quot;Search-Engine’s-Major-Elements&quot;&gt;&lt;a href=&quot;#Search-Engine’s-Major-Elements&quot; class=&quot;headerlink&quot; title=&quot;Search Engine’s Major Elements&quot;&gt;&lt;/a&gt;Search Engine’s Major Elements&lt;/h4&gt;&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;The User&lt;/li&gt;
+&lt;li&gt;The Query Processor&lt;/li&gt;
+&lt;li&gt;The Web&lt;/li&gt;
+&lt;li&gt;The Crawler/spider&lt;/li&gt;
+&lt;li&gt;The Indexer&lt;/li&gt;
+&lt;li&gt;The Ads&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Search Engines mainly index &lt;strong&gt;static&lt;/strong&gt; content. Most dynamic content (such as schedule of a certain flight) is missed. URLs of dynamic contents typically contain a ‘?’ character in it. Some dynamic content includes malicious spider traps (infinite loops)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Deep Web&lt;/strong&gt; are parts of the World Wide Web whose contents are not indexed by standard web search engines for any reason.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Dark Web&lt;/strong&gt; is the World Wide Web content that exists on darknets, overlay networks that use the Internet but require specific software, configurations or authorization to access. The dark web forms a small part of the deep web.&lt;/p&gt;
+&lt;h4 id=&quot;User’s-Information-Needs&quot;&gt;&lt;a href=&quot;#User’s-Information-Needs&quot; class=&quot;headerlink&quot; title=&quot;User’s Information Needs&quot;&gt;&lt;/a&gt;User’s Information Needs&lt;/h4&gt;&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Informational – want to learn about something (~40%)&lt;/li&gt;
+&lt;li&gt;Navigational – want to go to that page (~25%)&lt;/li&gt;
+&lt;li&gt;Transactional – want to do something (web-mediated) (~35%)&lt;/li&gt;
+&lt;li&gt;Gray areas&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;3-Characterizing-the-Web&quot;&gt;&lt;a href=&quot;#3-Characterizing-the-Web&quot; class=&quot;headerlink&quot; title=&quot;3. Characterizing the Web&quot;&gt;&lt;/a&gt;3. Characterizing the Web&lt;/h3&gt;&lt;h3 id=&quot;Measuring-the-Web&quot;&gt;&lt;a href=&quot;#Measuring-the-Web&quot; class=&quot;headerlink&quot; title=&quot;Measuring the Web&quot;&gt;&lt;/a&gt;Measuring the Web&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;a) How many websites?&lt;/strong&gt;&lt;br&gt;1.8 billion (According to the Netcraft January 2018 Web Server Survey there are 1,805,260,010 websites)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;b) How many web pages are there?&lt;/strong&gt;&lt;br&gt;30 trillion unique URLs from Google found in 2012. (told by class, but what I searched was that “The Indexed Web contains at least 4.27 billion pages, see &lt;a href=&quot;http://www.worldwidewebsize.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;The size of the World Wide Web (The Internet)&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;c) How are they distributed across TLDs (Top-Level Domain) or across countries?&lt;/strong&gt;&lt;br&gt;131.9 million out of 332.4 million belong to .com or about 39.7% by Q4 2017 (see &lt;a href=&quot;https://www.verisign.com/en_US/domain-names/dnib/index.xhtml?section=executive-summary&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;The Verisign Domain Name Industry Brief&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;d) General properties of the Web graph&lt;/strong&gt;&lt;br&gt;In-degree and out-degree distribution follows a power law&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Lectrue in 01/08/2018 &amp;amp; 01/10/2018&lt;/p&gt;
+&lt;h3 id=&quot;1-Introduction&quot;&gt;&lt;a href=&quot;#1-Introduction&quot; class=&quot;headerlink&quot; title=&quot;1. Introduction&quot;&gt;&lt;
+    
+    </summary>
+    
+      <category term="Information Retrieval" scheme="http://louie.link/categories/Information-Retrieval/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>StockSearch[Android]</title>
@@ -1310,176 +1833,6 @@ biTarget[4] = &amp;#39;\0&amp;#39;;
     </summary>
     
       <category term="Blog" scheme="http://louie.link/categories/Blog/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>访问速度优化(一)---图片及谷歌字体转存COS</title>
-    <link href="http://louie.link/Blog/visiting_speed_opt1/"/>
-    <id>http://louie.link/Blog/visiting_speed_opt1/</id>
-    <published>2016-04-09T07:00:00.000Z</published>
-    <updated>2016-11-22T14:46:47.000Z</updated>
-    
-    <content type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 这个blog (&lt;a href=&quot;http://hlyin.space&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://hlyin.space&lt;/a&gt;) 一直是用chrome做测试和访问，刚搭建起来的时候打开速度比较正常，大概在2、3秒的样子，但这几天突然变得非常慢，需要等1、2分钟才能加载出来，想起来之前都是挂着ss，而现在没有开ss，觉得可能问题出在访问了被墙的资源，因而做些测试来查找并解决访问速度问题。&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 比较奇怪的是，用firefox和safari访问速度都比较快，只有chrome打开极慢，打开chrome的开发者工具（快捷键F12），选择network项，然后在历史记录中清除缓存以避免影响测试结果，然后访问网站 (&lt;a href=&quot;http://hlyin.space&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://hlyin.space&lt;/a&gt;) ，如下图，加载时间为1.5分钟，在Time项中可以观察各项请求的耗时，找到了最耗时的项目，502网关错误，即红色项:&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_chrometest1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;放大一点：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_chrometest_detail.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;错误提示：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;Font from origin ‘&lt;a href=&quot;http://fontstatic.useso.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://fontstatic.useso.com&lt;/a&gt;‘ has been blocked from loading by Cross-Origin Resource Sharing policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘&lt;a href=&quot;http://hlyin.space&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://hlyin.space&lt;/a&gt;‘ is therefore not allowed access. The response had HTTP status code 502.&lt;/li&gt;
-&lt;li&gt;Get &lt;a href=&quot;http://fontstatic.useso.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://fontstatic.useso.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 可以看出，问题出在&lt;code&gt;zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2&lt;/code&gt;这个字体文件，502网关错误，这个字体的链接在&lt;code&gt;http://fontstatic.useso.com&lt;/code&gt;中，页面相关代码如下：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_link.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 这里需要解释一下，blog使用了包括Open Sans等字体在内的谷歌字库字体，而谷歌由于被禁，字体链接不能访问而换成了360的CND，&lt;code&gt;fonts.useso.com&lt;/code&gt;，像上面代码中&lt;code&gt;http://fonts.useso.com/css?family=Open+Sans:400,600&lt;/code&gt; (谷歌的为&lt;code&gt;http://fonts.googleapis.com/css?family=Open+Sans:400,600&lt;/code&gt;)，然而检测结果表明即使换成360CND，这种web font的加载仍十分耗时。&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在这两个link里使用了访问受阻的字体，查看链接，&lt;code&gt;zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2&lt;/code&gt;(无法获取)在第一个链接中被访问，&lt;code&gt;cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf&lt;/code&gt; (也无法获取)在第二个链接中被访问。&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_linkcontent.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/p&gt;&lt;h3&gt;由此可以有两种解决方法：&lt;/h3&gt;&lt;p&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;del&gt;如果不需要这个字库，则可以&lt;strong&gt;直接去掉这两个字体链接&lt;/strong&gt;，即把这两条link语句去掉，&lt;/del&gt; 虽然是省事，但字体效果没有了的话还是不太可取；&lt;/li&gt;
-&lt;li&gt;将字体&lt;strong&gt;添加到自己的云存储中&lt;/strong&gt;通过外链导入，或者&lt;strong&gt;镜像到本地&lt;/strong&gt;，正确的处理方法，之一，当然应该是这样&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 先直接删掉上面那两个link做一下测试，清除缓存后再用chrome测加载时间，结果如下图：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blogspeed_after_delete_font.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 加载时间为13.98秒，相比于1.5分钟有很大的改善，那么可以确定网页打开速度确实受选择的字体影响很大，&lt;strong&gt;为了继续使用选择的字体，将其下载并存放到云存储中。&lt;/strong&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 云对象存储之前用过七牛，但各个云存储供应商，如果不实名认证，能使用的资源非常有限，因为买服务器的时候在腾讯认证过，所以转用腾讯的云存储，使用比较方便，开通对象存储服务就可以，而且50G以内不收费，放图片、字体等资源的话足够了。&lt;br&gt;&lt;strong&gt;（1）&lt;/strong&gt; 先下载所用字体，以&lt;code&gt;http://fonts.useso.com/css?family=Open+Sans:400,600&lt;/code&gt;为例，打开后如下图，打开其中所有的url下载字体，&lt;code&gt;http://fontstatic.useso.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff&lt;/code&gt; 和 &lt;code&gt;http://fontstatic.useso.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNSnhCUOGz7vYGh680lGh-uXM.woff&lt;/code&gt;&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_linkdetail2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;（2）&lt;/strong&gt; 在腾讯云对象存储的控制台新建一个bucket，我这里是gitimage，新建文件夹存放，上传刚刚下载的两个字体文件&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_clodestorage1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;（3）&lt;/strong&gt; 本地新建一个css文件，我直接取名叫&lt;code&gt;family=Open+Sans:400,600.css&lt;/code&gt;将&lt;code&gt;http://fonts.useso.com/css?family=Open+Sans:400,600&lt;/code&gt;的内容复制进来，将url改成云存储中字体的链接，将这个css也存到云存储中，这时就可以用它的地址也替换link中原来的地址： &lt;code&gt;&amp;lt;link href=&amp;#39;//gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/family%3DOpen%2BSans400%2C600.css&amp;#39; rel=&amp;#39;stylesheet&amp;#39; type=&amp;#39;text/css&amp;#39;&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 这样就可以使用谷歌字库的字体了，但13.98秒的打开速度对于一个blog来说打开时间仍很长，继续…&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 现在测试结果里最耗时的两项分别是我的图标和背景的加载，198KB的主页背景(bg.jpg)耗时10.13s，264KB的图标(firedoge.ico)耗时11.86s，讲道理的话这种大小是不会用这么多时间的，然而这两个图都是挂在github，国内访问确实会慢不少，因而也将其转存到国内的云存储中，把图片存进去后如下图：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_clodestorage2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 再次清除缓存后用chrome测试，结果如下，加载时间降至1.81s，虽然现实.ico图标耗时6s多，但整个blog加载出来不到2s，图标并不影响其他部分的显示。&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_afterchangeroute.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在firefox的开发者工具中测试，加载时间为1.01秒，也有改善。&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt/blog_speed_final_firefox.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 至此完成对blog本身的访问速度提升，当然，这是针对国内访问的，国外访问的话实际上用时会增加一些。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 这个blog (&lt;a href=&quot;http://hlyin.space&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://hlyin.space&lt;/a&gt;) 一直是用chrome做测试和访问，刚搭建
-    
-    </summary>
-    
-      <category term="Blog" scheme="http://louie.link/categories/Blog/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>添加google统计或百度统计</title>
-    <link href="http://louie.link/Blog/baidu_analytics/"/>
-    <id>http://louie.link/Blog/baidu_analytics/</id>
-    <published>2016-04-08T07:00:00.000Z</published>
-    <updated>2016-11-22T14:46:24.000Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;一、google统计&quot;&gt;&lt;a href=&quot;#一、google统计&quot; class=&quot;headerlink&quot; title=&quot;一、google统计&quot;&gt;&lt;/a&gt;一、google统计&lt;/h2&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 先在 &lt;a href=&quot;https://www.google.com/analytics/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;google统计&lt;/a&gt; 注册账号，在管理-&amp;gt;跟踪信息-&amp;gt;跟踪代码中获取跟踪ID和跟踪代码，形式如下：&lt;br&gt;ID：&lt;code&gt;UA-76175499-1&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    	(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;i,s,o,g,r,a,m&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	i[&lt;span class=&quot;string&quot;&gt;&#39;GoogleAnalyticsObject&#39;&lt;/span&gt;]=r;i[r]=i[r]||&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; 		 (i[r].q=i[r].q||[]).push(&lt;span class=&quot;built_in&quot;&gt;arguments&lt;/span&gt;)&amp;#125;,i[r].l=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;*&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Date&lt;/span&gt;();a=s.createElement(o),&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  		m=s.getElementsByTagName(o)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  		a.async=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;a.src=g;m.parentNode.insertBefore(a,m)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	&amp;#125;)(&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;,&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;script&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;https://www.google-analytics.com/analytics.js&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;ga&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	ga(&lt;span class=&quot;string&quot;&gt;&#39;create&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;UA-76175499-1&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;auto&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	ga(&lt;span class=&quot;string&quot;&gt;&#39;send&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;pageview&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;因为网站中每个页面都需要加入上面的跟踪代码，所以添加在模板页中，这里是head.ejs。在配置文件config中设置：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#google统计&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;google_analytics:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  enable: true&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  id: UA-76175499-1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  site: hlyin.space&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;在head.ejs中，&amp;lt;/head&amp;gt;之前添加：&lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;!-- google统计 --&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;% if (theme.google_analytics) &amp;#123; %&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script type=&quot;text/javascript&quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	(function(i,s,o,g,r,a,m)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	i[&#39;GoogleAnalyticsObject&#39;]=r;i[r]=i[r]||function()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	 (i[r].q=i[r].q||[]).push(arguments)&amp;#125;,i[r].l=1*new Date();a=s.createElement(o),&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		m=s.getElementsByTagName(o)[0];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		a.async=1;a.src=g;m.parentNode.insertBefore(a,m)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;)(window,document,&#39;script&#39;,&#39;https://www.google-analytics.com/analytics.js&#39;,&#39;ga&#39;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	ga(&#39;create&#39;, &#39;UA-76175499-1&#39;, &#39;auto&#39;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	ga(&#39;send&#39;, &#39;pageview&#39;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;% &amp;#125; %&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;若不设置config文件，则直接将跟踪代码加入模板也可以，即去掉&lt;code&gt;if (theme.google_analytics)&lt;/code&gt;的判断&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h2 id=&quot;一、百度统计&quot;&gt;&lt;a href=&quot;#一、百度统计&quot; class=&quot;headerlink&quot; title=&quot;一、百度统计&quot;&gt;&lt;/a&gt;一、百度统计&lt;/h2&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 一样的，先注册， &lt;a href=&quot;http://tongji.baidu.com/web/welcome/login&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;百度统计&lt;/a&gt; 注册账号，这里没有跟踪ID，只有跟踪代码，如下形式：&lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; _hmt = _hmt || [];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; hm = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.createElement(&lt;span class=&quot;string&quot;&gt;&quot;script&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  hm.src = &lt;span class=&quot;string&quot;&gt;&quot;//hm.baidu.com/hm.js?36f2872301a44655ccaff81408d46228&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; s = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementsByTagName(&lt;span class=&quot;string&quot;&gt;&quot;script&quot;&lt;/span&gt;)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  s.parentNode.insertBefore(hm, s);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;同样添加的模板页即可，config中 &lt;code&gt;baidu_analytics: true&lt;/code&gt;， head.ejs中：&lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;!-- 百度统计 --&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;% if (theme.baidu_analytics) &amp;#123; %&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;script type=&quot;text/javascript&quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		var _hmt = _hmt || [];(function() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		var hm = document.createElement(&quot;script&quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		hm.src = &quot;//hm.baidu.com/hm.js?36f2872301a44655ccaff81408d46228&quot;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		var s = document.getElementsByTagName(&quot;script&quot;)[0];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		s.parentNode.insertBefore(hm, s);&amp;#125;)();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;% &amp;#125; %&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;一、google统计&quot;&gt;&lt;a href=&quot;#一、google统计&quot; class=&quot;headerlink&quot; title=&quot;一、google统计&quot;&gt;&lt;/a&gt;一、google统计&lt;/h2&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 先在 &lt;a href=&quot;h
-    
-    </summary>
-    
-      <category term="Blog" scheme="http://louie.link/categories/Blog/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>《四月是你的谎言》实景</title>
-    <link href="http://louie.link/Animation/april/"/>
-    <id>http://louie.link/Animation/april/</id>
-    <published>2016-04-02T07:00:00.000Z</published>
-    <updated>2016-04-09T13:45:04.000Z</updated>
-    
-    <content type="html">&lt;h4 id=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;a href=&quot;#《四月是你的谎言》实景图&quot; class=&quot;headerlink&quot; title=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;/a&gt;《四月是你的谎言》实景图&lt;/h4&gt;&lt;p&gt;“灰心丧气时就用手托着下巴，你会为双手能派上用处而感到高兴的。 —- 查理•布朗”&lt;/p&gt;
-&lt;audio autoplay loop&gt;&lt;source src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/%E6%A8%AA%E5%B1%B1%E5%85%8B%20-%20%E3%82%A2%E3%82%B1%E3%82%99%E3%82%A4%E3%83%B3.mp3&quot;&gt;&lt;/audio&gt;
-
-&lt;!--&lt;embed height=&quot;100&quot; width=&quot;100&quot; src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/%E6%A8%AA%E5%B1%B1%E5%85%8B%20-%20%E3%82%A2%E3%82%B1%E3%82%99%E3%82%A4%E3%83%B3.mp3&quot; autostart=&quot;true&quot; loop=&quot;true&quot; hidden=&quot;true&quot;&gt;&lt;/embed&gt;--&gt;
-&lt;!--&lt;section align=center&gt;&lt;table style=&quot;BORDER-RIGHT: #ff69b4 3px 
-dashed; BORDER-TOP: #ff69b4 3px dashed; BORDER-LEFT: #ff69b4 3px dashed; 
-BORDER-BOTTOM: #ff69b4 3px dashed&quot; cellSpacing=&quot;0&quot; cellPadding=&quot;0&quot; 
-bgColor=&quot;white&quot; id=&quot;table6&quot;&gt; &lt;tr&gt; &lt;td&gt; &lt;table 
-borderColor=&quot;#ff69b4&quot; align=&quot;center&quot; bgColor=&quot;#ffccf5&quot; border=&quot;2&quot; 
-id=&quot;table7&quot;&gt; &lt;tr&gt; &lt;td style=&quot;FILTER: alpha(opacity=100,style=3)&quot;&gt; 
-&lt;section align=&quot;center&quot;&gt; &lt;embed src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/%E6%A8%AA%E5%B1%B1%E5%85%8B%20-%20%E3%82%A2%E3%82%B1%E3%82%99%E3%82%A4%E3%83%B3.mp3&quot; width=&quot;300&quot; height=&quot;45&quot; type=&quot;audio/mpeg&quot; loop=&quot;-1&quot; autostart=&quot;true&quot; volume=&quot;0&quot;&gt;&lt;/td&gt; &lt;/tr&gt; &lt;/table&gt; &lt;/td&gt; &lt;/tr&gt; &lt;/table&gt;--&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_1.jpg&quot; alt=&quot;image_1&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_3.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_5.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_6.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_8.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_9.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_10.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xsmi9.com1.z0.glb.clouddn.com/siyue_image_11.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;a href=&quot;#《四月是你的谎言》实景图&quot; class=&quot;headerlink&quot; title=&quot;《四月是你的谎言》实景图&quot;&gt;&lt;/a&gt;《四月是你的谎言》实景图&lt;/h4&gt;&lt;p&gt;“灰心丧气时就用手托着下巴，你会为双手能派上用处而感到高兴的
-    
-    </summary>
-    
-      <category term="Animation" scheme="http://louie.link/categories/Animation/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Android ListView优化</title>
-    <link href="http://louie.link/Android/Android_ListView_opt/"/>
-    <id>http://louie.link/Android/Android_ListView_opt/</id>
-    <published>2016-03-19T07:00:00.000Z</published>
-    <updated>2016-04-12T07:12:06.000Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;ListView的优化&quot;&gt;&lt;a href=&quot;#ListView的优化&quot; class=&quot;headerlink&quot; title=&quot;ListView的优化&quot;&gt;&lt;/a&gt;ListView的优化&lt;/h3&gt;&lt;p&gt;1.存在问题&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt; 在每次调用getView方法中都要执行&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;两个很耗时的操作&lt;/strong&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;inflate方法 (获取布局对象)&lt;/li&gt;
-&lt;li&gt;findViewById&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; View &lt;span class=&quot;title&quot;&gt;getView&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; position, View convertView, ViewGroup parent)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    View view = inflater.inflate(R.layout.item, &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//view才有findViewById, 而this(这里是Adapter)没有, (MainActivity有)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ImageView header = (ImageView) view.findViewById(R.id.header);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView title = (TextView) view.findViewById(R.id.title);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView version = (TextView) view.findViewById(R.id.version);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView size = (TextView) view.findViewById(R.id.size);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Map map = list.get(position); &lt;span class=&quot;comment&quot;&gt;//Map&amp;lt;String, Object&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    header.setImageResource((Integer) map.get(&lt;span class=&quot;string&quot;&gt;&quot;header&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    title.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;title&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    version.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;version&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    size.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;size&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; view;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;2.解决方案&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt; 在getView方法中使用&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;convertView和ViewHolder&lt;/strong&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;inflate方法耗时：convertView解决 （1级优化）&lt;/li&gt;
-&lt;li&gt;findViewById方法耗时：ViewHolder解决 （2级优化）&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.kgc.cn/upload/snapscreen/20160319/145837389990900.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;滑出去的item1的布局对象不销毁，而可以直接提供给下一次出现的item6，省去了填充时间 (省去反射操作)， 之后滑出去的item2则给item7 … item5给item10，到了item6以后，因为item6本来就是用的Recycler里的而不是反射的，后面的所有item都可以循环用item1~item5的反射操作生成的5个对象，也即整个操作，最多只有5次反射(item1~item5)。缓冲池，5 (4+1)个视图缓存，多的1是为了处理上半截或下半截。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.kgc.cn/upload/snapscreen/20160319/145837474528357.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;使用ConvertView后代码如下：&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; View &lt;span class=&quot;title&quot;&gt;getView&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; position, View convertView, ViewGroup parent)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(convertView == &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        convertView = inflater.inflate(R.layout.item, &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ImageView header = (ImageView) convertView.findViewById(R.id.header);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView title = (TextView) convertView.findViewById(R.id.title);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView version = (TextView) convertView.findViewById(R.id.version);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView size = (TextView) convertView.findViewById(R.id.size);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Map map = list.get(position); &lt;span class=&quot;comment&quot;&gt;//Map&amp;lt;String, Object&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    header.setImageResource((Integer) map.get(&lt;span class=&quot;string&quot;&gt;&quot;header&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    title.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;title&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    version.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;version&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    size.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;size&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; convertView;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.kgc.cn/upload/snapscreen/20160319/145837585787884.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;滑出去的item1，除了布局对象不销毁，控件对象也不销毁，因此item6则不用再调用4次findViewById&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.kgc.cn/upload/snapscreen/20160319/145837621143618.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;使用convertView和ViewHolder后代码如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ViewHolder&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ImageView header;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView title;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView version;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    TextView size;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; View &lt;span class=&quot;title&quot;&gt;getView&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; position, View convertView, ViewGroup parent)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ViewHolder viewHolder = &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (convertView == &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        convertView = inflater.inflate(R.layout.item, &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ViewHolder();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//view才有findViewById, 而this(这里是Adapter)没有, (MainActivity有)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder.header = (ImageView) convertView.findViewById(R.id.header);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder.title = (TextView) convertView.findViewById(R.id.title);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder.version = (TextView) convertView.findViewById(R.id.version);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder.size = (TextView) convertView.findViewById(R.id.size);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        convertView.setTag(viewHolder); &lt;span class=&quot;comment&quot;&gt;//&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        viewHolder = (ViewHolder) convertView.getTag();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Map map = list.get(position); &lt;span class=&quot;comment&quot;&gt;//Map&amp;lt;String, Object&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    viewHolder.header.setImageResource((Integer) map.get(&lt;span class=&quot;string&quot;&gt;&quot;header&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    viewHolder.title.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;title&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    viewHolder.version.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;version&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    viewHolder.size.setText((String) map.get(&lt;span class=&quot;string&quot;&gt;&quot;size&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; convertView;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;ListView的优化&quot;&gt;&lt;a href=&quot;#ListView的优化&quot; class=&quot;headerlink&quot; title=&quot;ListView的优化&quot;&gt;&lt;/a&gt;ListView的优化&lt;/h3&gt;&lt;p&gt;1.存在问题&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt; 在每次调用g
-    
-    </summary>
-    
-      <category term="Android" scheme="http://louie.link/categories/Android/"/>
     
     
   </entry>
