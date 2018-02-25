@@ -18,7 +18,7 @@
     <meta name="keywords" content="黄刘胤,Louie,LouieHuang" />
 
     <!-- Favicon, (keep icon in root folder) -->
-    <link rel="Shortcut Icon" href="/img/firedoge.ico" type="image/ico">
+    <link rel="Shortcut Icon" href="/img/logo.ico" type="image/ico">
 
     <link rel="alternate" href="/atom.xml" title="Louie&#39;s Blog" type="application/atom+xml">
     <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
@@ -133,7 +133,7 @@
 				    
 				    <li><a href="/categories/Image-Processing/" class="animsition-link">Image Processing<small>(1)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(4)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(6)</small></a></li>
 				    
 				    <li><a href="/categories/Information-Security/" class="animsition-link">Information Security<small>(1)</small></a></li>
 				    
@@ -179,7 +179,7 @@
                     <!-- Nav logo -->
                     <div class="logo">
                         <a href="/" title="Logo" class="animsition-link">
-                         <img src="http://gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/firedoge.ico" alt="Logo" width="35px;"/> 
+                         <img src="/img/logo.ico" alt="Logo" width="35px;"/> 
                         </a>
                     </div>
                     <!-- // Nav logo -->
@@ -224,7 +224,7 @@
         <!-- ============================ Hero Image =========================== -->
 
         <section id="hero" class="scrollme">
-            <div class="container-fluid element-img" style="background: url(http://gitimage-10031767.cos.myqcloud.com/blog_image/Theme_Image/b1%281192_720%29.jpg) no-repeat center center fixed;background-size: cover">
+            <div class="container-fluid element-img" style="background: url(/img/bg.jpg) no-repeat center center fixed;background-size: cover">
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
@@ -264,6 +264,73 @@
 
 <section id="intro">
     <div class="container">
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Recommender-System/PearsonCorrCoef/">Pearson相关系数</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-11-20T08:00:00.000Z" itemprop="datePublished">
+          2016-11-20
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        协方差numpy.cov
+cov(X, Y) = E\left ( (X - E(X))(Y - E(Y)) \right) = E(XY) - E(X)E(Y)样本协方差
+cov(X, Y) = \frac{1}{N - 1}\sum_{i=1}^{N}(X_i - \bar X)(Y_i - \bar Y)除以N-1是为了保证无偏性
+pearson相关系数numpy.corrcoef
+\rho_{XY} = \frac{cov(X,
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Recommender-System/PearsonCorrCoef/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Recommender-System/Information_entropy/">信息熵与分类算法[转]</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-09-20T07:00:00.000Z" itemprop="datePublished">
+          2016-09-20
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        转载链接
+在介绍熵之前，先从另一个概念说起：信息量
+世界杯决赛的两支球队中，哪支球队获得了冠军？在对球队实力没有任何了解的情况下，每支球队夺冠的概率都是1/2，所以谁获得冠军这条信息的信息量是 $-log{2}{\frac{1}{2}} = 1$ bit如果信息是四强中的球队谁获得了冠军，它的信息量是 $-log{2}{\frac{1}{4}} = 2$ bit
+其实这正好对应了计算机对数字的表示，如果用二进制表示，每一位出现0和1的概
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Recommender-System/Information_entropy/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
@@ -637,76 +704,6 @@ A类：最前面1位为0，7位标识网络号，24位标识主机号，则第�
                     
                     <p class="pull-right readMore">
                         <a href="/Blog/baidu_analytics/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/Android/Android_ListView_opt/">Android ListView优化</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-03-19T07:00:00.000Z" itemprop="datePublished">
-          2016-03-19
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        ListView的优化1.存在问题
-
- 在每次调用getView方法中都要执行两个很耗时的操作
-
-inflate方法 (获取布局对象)
-findViewById
-
-
-12345678910111213141516171819@Overridepublic View getView(int position, View convertView, ViewGroup parent) &#123;    View view = inflate
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/Android/Android_ListView_opt/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/Image-Processing/PolygonCentroid/">多边形质心计算</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-02-03T08:00:00.000Z" itemprop="datePublished">
-          2016-02-03
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        先需要知道几个公式：
-一、对于n个离散的有质量数据点（或者假设一个多边形的质量集中在其顶点上）假定顶点的坐标为(xi, yi)，质量为mi，则质心为：
-X = \frac{\sum_{i=1}^n ( x_i \cdot m_i )} {\sum_{i=1}^n m_i}，Y = \frac{\sum_{i=1}^n ( y_i \cdot m_i )} {\sum_{i=1}^n m_i}...(1)二、对于质量均匀分布的三角形 $△
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/Image-Processing/PolygonCentroid/">Read More...</a>
                     </p>
                     
                 </div>

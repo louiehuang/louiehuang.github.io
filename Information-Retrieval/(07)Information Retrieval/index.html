@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Category: OS | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>(07) Introduction to Information Retrieval | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -221,45 +221,161 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/OS/OS_review/">操作系统重点</a></h4>
-                            
-                            <p><time datetime="2016-01-05T08:00:00.000Z"><a href="/OS/OS_review/">2016-01-05</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-01-29T08:00:00.000Z" itemprop="datePublished">
+          2018-01-29
+      </time>
+    
+</span>
+                <h1>(07) Introduction to Information Retrieval</h1>
+            </div>
         </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>Lectrue in 01/29/2018</p>
+<h3 id="1-Information-Retrieval-Models"><a href="#1-Information-Retrieval-Models" class="headerlink" title="1. Information Retrieval Models"></a>1. Information Retrieval Models</h3><p>A retrieval model should define document and query representation and retreival function. There are three major models:</p>
+<blockquote>
+<ol>
+<li>Boolean models</li>
+<li>Vector Space models</li>
+<li>Probabilistic models</li>
+</ol>
+</blockquote>
+<h4 id="1-1-Basic-Pre-Processing-Steps"><a href="#1-1-Basic-Pre-Processing-Steps" class="headerlink" title="1.1 Basic Pre-Processing Steps"></a>1.1 Basic Pre-Processing Steps</h4><blockquote>
+<ol>
+<li>Extract content that we need</li>
+<li>Word segmentation (break into tokens)</li>
+<li>Stemming</li>
+<li>Stop words removal</li>
+<li>Detect common phrases </li>
+<li>Buid inverted index (word to doc)</li>
+</ol>
+</blockquote>
+<h3 id="2-Boolean-Model"><a href="#2-Boolean-Model" class="headerlink" title="2. Boolean Model"></a>2. Boolean Model</h3><p>Boolean model is efficient for queries and easy to understand. But it also have some disadvantages: </p>
+<blockquote>
+<ol>
+<li>Difficult to express complex user requests</li>
+<li>Difficult to rank search result (since all the results satisfy the query)</li>
+<li>Difficult to perform relevance feedback (It’s not easy to know how to modify a query that brings irrlevant results to one that brings relevant results)</li>
+</ol>
+</blockquote>
+<h3 id="3-Vector-Space-Model"><a href="#3-Vector-Space-Model" class="headerlink" title="3. Vector Space Model"></a>3. Vector Space Model</h3><p>Suppose we’ve found t distict terms in all the documents we have, we form a dictionary using these t terms. Then each document and query can be represented by a t-dimensional vertor. </p>
+<h4 id="3-1-Term-Document-Matrix"><a href="#3-1-Term-Document-Matrix" class="headerlink" title="3.1 Term-Document Matrix"></a>3.1 Term-Document Matrix</h4><p>n documents and t temrs form a (n, t) Matrix</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>$D_1$</th>
+<th>$D_2$</th>
+<th>$D_3$</th>
+<th>…</th>
+<th>$D_n$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$T_1$</td>
+<td>$w_{11}$</td>
+<td>$w_{12}$</td>
+<td>$w_{13}$</td>
+<td>…</td>
+<td>$w_{1n}$</td>
+</tr>
+<tr>
+<td>$T_2$</td>
+<td>$w_{21}$</td>
+<td>$w_{22}$</td>
+<td>$w_{23}$</td>
+<td>…</td>
+<td>$w_{2n}$</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>$T_t$</td>
+<td>$w_{t1}$</td>
+<td>$w_{t2}$</td>
+<td>$w_{t3}$</td>
+<td>…</td>
+<td>$w_{tn}$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="3-2-Term-Weights-Term-Frequency"><a href="#3-2-Term-Weights-Term-Frequency" class="headerlink" title="3.2 Term Weights: Term Frequency"></a>3.2 Term Weights: Term Frequency</h4><p>Assumption here is that the more frequent a term in a document, the more important it is.$f_{t,d}$ is the frequency of term t in document d.</p>
+<p>We may normalize $tf$ across the entire documents (to prevent a bias towards longer documents):</p>
+<script type="math/tex; mode=display">tf_{t,d} = \frac{f_{t,d}}{max{\{f_{t^{\prime}, d \; : \; t^{\prime} \in d}\}}}</script><h4 id="3-2-Term-Weights-Inverse-Document-Frequency"><a href="#3-2-Term-Weights-Inverse-Document-Frequency" class="headerlink" title="3.2 Term Weights: Inverse Document Frequency"></a>3.2 Term Weights: Inverse Document Frequency</h4><p>The idea of $idf$ is that if a term appeara in many different documents, then it may be less indicative of overall topic.</p>
+<p>$df_{t}$ is the <code>document frequency of term t</code>, which is also <code>the number of documents containing term t</code>.</p>
+<p>$idf_{t}$ is <code>inverse document frequency of term t</code>.</p>
+<script type="math/tex; mode=display">idf_{t} = log_{2}{\frac{N}{df_{t}}}</script><p>where $N$ is the total number of documents.</p>
+<h4 id="3-3-TF-IDF-Weighting"><a href="#3-3-TF-IDF-Weighting" class="headerlink" title="3.3 TF-IDF Weighting"></a>3.3 TF-IDF Weighting</h4><script type="math/tex; mode=display">tf \cdot idf_{t,d} = tf_{t,d} \times idf_{t}</script><p>So, for a query q, we score the it against a document d by: </p>
+<script type="math/tex; mode=display">Score(q, d) = \sum{tf \cdot idf_{t,d}}</script><p>where $t \in q \cap d$.</p>
+<p><a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf" target="_blank" rel="external">Examples</a></p>
+<h4 id="3-4-Ranking"><a href="#3-4-Ranking" class="headerlink" title="3.4 Ranking"></a>3.4 Ranking</h4><blockquote>
+<ol>
+<li>Represent each document as a weighted $tf \cdot idf$ vector</li>
+<li>Represent the query also as a weighted $tf \cdot idf$ vector</li>
+<li>Compute the cosine similarity for the query vector and each document vector</li>
+<li>Return the top K results with highest score</li>
+</ol>
+</blockquote>
+<p>To make the selecting top K process more efficient, we could use <strong>Heap</strong>.</p>
+<blockquote>
+<ol>
+<li>Using $O(N)$ to heapify</li>
+<li>Using $O(KlogN)$ to select K results</li>
+</ol>
+</blockquote>
+<p>But in this way, we still need to compute cosines from query to each of n documents. =&gt; Time consuming.</p>
+<p>So we could do some extra <font color="red"><strong>Pre-Processing</strong></font> work. That is, <strong>for each term t, we pre-compute its k nearest docs.</strong> This is actullay treating each term as a single term query.</p>
+<p><strong>In this way, to search a query with t terms, we first union these t terms k nearest neighbors, form a set <code>S</code>. Then we can only compute cosines from the query to docs in S.</strong></p>
 
-        <!-- 分页 -->
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
         <nav class="pagination" role="pagination">
-          
-          
-        </nav>
-    </div>
-</section> 
+    
+    <a class="pull-left" href="/Information-Retrieval/(08)LexiconandTextNormalization/" style="float: left;">
+        ← (08) Lexicon and Text Normalization
+    </a>
+    
+    
+    <a class="pull-right" href="/Information-Retrieval/(06)Deduplication/">
+        (06) Deduplication →
+    </a>
+    
+</nav>
 
-
-
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>Don't give up on your dreams -- Keep sleeping</p>
-        </div>
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Information-Retrieval/(07)Information Retrieval/" data-title="(07) Introduction to Information Retrieval" data-url="http://louie.link/Information-Retrieval/(07)Information Retrieval/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

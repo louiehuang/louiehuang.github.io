@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Category: OS | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>(08) Lexicon and Text Normalization | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -221,45 +221,108 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/OS/OS_review/">操作系统重点</a></h4>
-                            
-                            <p><time datetime="2016-01-05T08:00:00.000Z"><a href="/OS/OS_review/">2016-01-05</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-01-31T08:00:00.000Z" itemprop="datePublished">
+          2018-01-31
+      </time>
+    
+</span>
+                <h1>(08) Lexicon and Text Normalization</h1>
+            </div>
         </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>Lectrue in 01/31/2018</p>
+<h3 id="1-Zipf’s-Law-Power-Law"><a href="#1-Zipf’s-Law-Power-Law" class="headerlink" title="1. Zipf’s Law (Power Law)"></a>1. Zipf’s Law (Power Law)</h3><p>Power Law is:</p>
+<script type="math/tex; mode=display">Power \; Law : y = kx^{c}</script><p>where k and c are constants.</p>
+<p>Zipf’s law is a power law with c = –1</p>
+<script type="math/tex; mode=display">Zipf’s \; Law : y = kx^{-1} = \frac{k}{x}</script><p>Zipf’s law states that given some corpus of natural language utterances, <strong>the frequency of any word is inversely proportional to its rank in the frequency table.</strong> [1]</p>
+<h3 id="2-Heap’s-Law"><a href="#2-Heap’s-Law" class="headerlink" title="2. Heap’s Law"></a>2. Heap’s Law</h3><p>If $V$ is the size of the vocabulary and $n$ is the number of words:</p>
+<script type="math/tex; mode=display">V = Kn^{\beta}</script><p>where K is a constant and $\beta \in (0,1) $</p>
+<p>Heap’s law describes the number of distinct words (V) in a set of documents as a function of the document length (n) [2]</p>
+<h3 id="3-Stemming-and-Lemmatization"><a href="#3-Stemming-and-Lemmatization" class="headerlink" title="3. Stemming and Lemmatization"></a>3. Stemming and Lemmatization</h3><p><a href="https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html" target="_blank" rel="external">see</a></p>
+<p>The goal of both stemming and lemmatization is to reduce inflectional forms and sometimes derivationally related forms of a word to a common base form. For instance:</p>
+<blockquote>
+<ol>
+<li>am, are, is $\Rightarrow$ be </li>
+<li>car, cars, car’s, cars’ $\Rightarrow$ car</li>
+</ol>
+</blockquote>
+<p>However, the two words differ in their flavor. </p>
+<p><strong>Stemming</strong> usually refers to a crude heuristic process that chops off the ends of words in the hope of achieving this goal correctly most of the time, and often includes the removal of derivational affixes. </p>
+<p><strong>Lemmatization</strong> usually refers to doing things properly with the use of a vocabulary and morphological analysis of words, normally aiming to remove inflectional endings only and to return the base or dictionary form of a word, which is known as the lemma . </p>
+<p>If confronted with the token <code>saw</code>, stemming might return just <code>s</code>, whereas lemmatization would attempt to return either <code>see</code> or <code>saw</code> depending on whether the use of the token was as a verb or a noun. </p>
+<p>The two may also differ in that stemming most commonly collapses derivationally related words, whereas lemmatization commonly only collapses the different inflectional forms of a lemma. [3]</p>
+<p><strong>Porter’s algorithm</strong></p>
+<h3 id="4-Soundex-Algorithm"><a href="#4-Soundex-Algorithm" class="headerlink" title="4. Soundex Algorithm"></a>4. Soundex Algorithm</h3><p>This is an interesting algorithm.</p>
+<p>Soundex Algorithm is a phonetic algorithm for indexing names by their sound when pronounced in English. </p>
+<p>The Soundex code for a name consists of a letter followed by three numerical digits: the letter is the first letter of the name, and the digits encode the remaining consonants. Consonants at a similar place of articulation share the same digit so, for example, the labial consonants B, F, P, and V are each encoded as the number 1. [4]</p>
+<p>The correct value can be found as follows:</p>
+<ul>
+<li><ol>
+<li>Retain the first letter of the name and drop all other occurrences of {a, e, i, o, u, y, h, w}.</li>
+</ol>
+</li>
+<li><ol>
+<li>Replace consonants with digits as follows (after the first letter):<ul>
+<li>b, f, p, v → 1</li>
+<li>c, g, j, k, q, s, x, z → 2</li>
+<li>d, t → 3</li>
+<li>l → 4</li>
+<li>m, n → 5</li>
+<li>r → 6</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>If two or more letters with the same number are adjacent in the original name (before step 1), only retain the first letter; also two letters with the same number separated by ‘h’ or ‘w’ are coded as a single number, whereas such letters separated by a vowel are coded twice. This rule also applies to the first letter.</li>
+</ol>
+</li>
+<li><ol>
+<li>If you have too few letters in your word that you can’t assign three numbers, append with 0s until there are three numbers. If you have more than 3 letters, just retain the first 3 numbers.</li>
+</ol>
+</li>
+</ul>
+<p>For exampl,e “disapont” has code “D215”, we could use other words that also have code “D215” to do spelling correction. (“disband”, “disbands”, “dispensary”, “despondent” and so on)</p>
+<p><strong>References:</strong></p>
+<p>[1] Zipf’s law, Retreived from <a href="https://en.wikipedia.org/wiki/Zipf%27s_law" target="_blank" rel="external">https://en.wikipedia.org/wiki/Zipf%27s_law</a><br>[2] Heap’s Law, Retreived from <a href="https://en.wikipedia.org/wiki/Heaps%27_law" target="_blank" rel="external">https://en.wikipedia.org/wiki/Heaps%27_law</a><br>[3] Stemming and lemmatization, Retreived from <a href="https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html" target="_blank" rel="external">https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html</a><br>[4] Soundex, Retreived from <a href="https://en.wikipedia.org/wiki/Soundex" target="_blank" rel="external">https://en.wikipedia.org/wiki/Soundex</a></p>
 
-        <!-- 分页 -->
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
         <nav class="pagination" role="pagination">
-          
-          
-        </nav>
-    </div>
-</section> 
+    
+    
+    <a class="pull-right" href="/Information-Retrieval/(07)Information Retrieval/">
+        (07) Introduction to Information Retrieval →
+    </a>
+    
+</nav>
 
-
-
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>Don't give up on your dreams -- Keep sleeping</p>
-        </div>
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Information-Retrieval/(08)LexiconandTextNormalization/" data-title="(08) Lexicon and Text Normalization" data-url="http://louie.link/Information-Retrieval/(08)LexiconandTextNormalization/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

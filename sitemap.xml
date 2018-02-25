@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://louie.link/Image-Processing/PolygonCentroid/</loc>
+    <loc>http://louie.link/Information-Retrieval/(06)Deduplication/</loc>
     
-    <lastmod>2018-02-24T05:48:41.000Z</lastmod>
+    <lastmod>2018-02-25T07:22:33.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://louie.link/Information-Retrieval/(06)Deduplication/</loc>
+    <loc>http://louie.link/Information-Retrieval/(08)LexiconandTextNormalization/</loc>
     
-    <lastmod>2018-02-24T05:47:35.000Z</lastmod>
+    <lastmod>2018-02-24T10:17:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/Information-Retrieval/(07)Information%20Retrieval/</loc>
+    
+    <lastmod>2018-02-24T09:50:04.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/Image-Processing/PolygonCentroid/</loc>
+    
+    <lastmod>2018-02-24T05:48:41.000Z</lastmod>
     
   </url>
   

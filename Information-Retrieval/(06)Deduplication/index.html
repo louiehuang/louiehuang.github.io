@@ -18,7 +18,7 @@
     <meta name="keywords" content="黄刘胤,Louie,LouieHuang" />
 
     <!-- Favicon, (keep icon in root folder) -->
-    <link rel="Shortcut Icon" href="/img/firedoge.ico" type="image/ico">
+    <link rel="Shortcut Icon" href="/img/logo.ico" type="image/ico">
 
     <link rel="alternate" href="/atom.xml" title="Louie&#39;s Blog" type="application/atom+xml">
     <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
@@ -133,7 +133,7 @@
 				    
 				    <li><a href="/categories/Image-Processing/" class="animsition-link">Image Processing<small>(1)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(4)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(6)</small></a></li>
 				    
 				    <li><a href="/categories/Information-Security/" class="animsition-link">Information Security<small>(1)</small></a></li>
 				    
@@ -179,7 +179,7 @@
                     <!-- Nav logo -->
                     <div class="logo">
                         <a href="/" title="Logo" class="animsition-link">
-                         <img src="http://gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/firedoge.ico" alt="Logo" width="35px;"/> 
+                         <img src="/img/logo.ico" alt="Logo" width="35px;"/> 
                         </a>
                     </div>
                     <!-- // Nav logo -->
@@ -277,7 +277,7 @@
 <p>Documents being treated as n-dimensional vectors are transformed into $f$-bit fingerprints by <code>Simhash</code> or <code>Hamming Distan</code>. Then compare these fingerprints with a difference in at most k bits.</p>
 <h3 id="2-3-Solutions-2-Compute-Shingles"><a href="#2-3-Solutions-2-Compute-Shingles" class="headerlink" title="2.3 Solutions 2 - Compute Shingles"></a>2.3 Solutions 2 - Compute Shingles</h3><h4 id="2-3-1-Distance-Measurements"><a href="#2-3-1-Distance-Measurements" class="headerlink" title="2.3.1 Distance Measurements"></a>2.3.1 Distance Measurements</h4><p>Before diving into <strong>shingles</strong>, let’s first review different <code>Distance Measurements</code></p>
 <h5 id="1-Euclidean-Distance"><a href="#1-Euclidean-Distance" class="headerlink" title="(1) Euclidean Distance"></a>(1) Euclidean Distance</h5><script type="math/tex; mode=display">d(p,q) = d(q,p) = \sqrt{(q_1-p_1)^2 + (q_2-p_2)^2 + \cdots + (q_n-p_n)^2} = \sqrt{\sum_{i=1}^n (q_i-p_i)^2}</script><h5 id="2-Jaccard-Distance-Our-Importance-Here"><a href="#2-Jaccard-Distance-Our-Importance-Here" class="headerlink" title="(2) Jaccard Distance (Our Importance Here)"></a>(2) Jaccard Distance (Our Importance Here)</h5><script type="math/tex; mode=display">Jaccard \: Similarity: JS(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{|A \cap B|}{|A| + |B| - |A \cap B|}</script><script type="math/tex; mode=display">Jaccard \: Distance: JD(A,B) = 1 - J(A,B) = \frac{|A \cup B| - |A \cap B|}{|A \cup B|}</script><p>For example, Consider A = {0, 1, 2, 3, 6} and B = {0, 1, 3, 5, 7, 9}</p>
-<script type="math/tex; mode=display">JS(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{\{0,1,3\}}{\{0,1,2,3,5,6,7,9\}} = \frac{3}{8}</script><h5 id="3-Cosine-Distance"><a href="#3-Cosine-Distance" class="headerlink" title="(3) Cosine Distance"></a>(3) Cosine Distance</h5><script type="math/tex; mode=display">Cosine \: Similarity=\cos(\theta )=\vec{A} \cdot \vec{B}  \over \|\vec{A} \|\|\vec{B} \|=\frac{\sum\limits_{i=1}^{n}{A_{i}B_{i}}}{\sqrt{\sum\limits_{i=1}^{n}{A_{i}^{2}}}\sqrt{\sum\limits_{i=1}^{n}{B_{i}^{2}}}}</script><h5 id="4-Edit-Distance"><a href="#4-Edit-Distance" class="headerlink" title="(4) Edit Distance"></a>(4) Edit Distance</h5><p>The Edit Distance is a way of quantifying how dissimilar two strings (e.g., words) are to one another by <strong>counting the minimum number of operations required to transform one string into the other.</strong></p>
+<script type="math/tex; mode=display">JS(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{\{0,1,3\}}{\{0,1,2,3,5,6,7,9\}} = \frac{3}{8}</script><h5 id="3-Cosine-Distance"><a href="#3-Cosine-Distance" class="headerlink" title="(3) Cosine Distance"></a>(3) Cosine Distance</h5><script type="math/tex; mode=display">Cosine \: Similarity=\cos(\theta )=\frac{\vec{A} \cdot \vec{B}}{\|\vec{A} \|\|\vec{B}\|} = \frac{\sum\limits_{i=1}^{n}{A_{i}B_{i}}}{\sqrt{\sum\limits_{i=1}^{n}{A_{i}^{2}}}\sqrt{\sum\limits_{i=1}^{n}{B_{i}^{2}}}}</script><h5 id="4-Edit-Distance"><a href="#4-Edit-Distance" class="headerlink" title="(4) Edit Distance"></a>(4) Edit Distance</h5><p>The Edit Distance is a way of quantifying how dissimilar two strings (e.g., words) are to one another by <strong>counting the minimum number of operations required to transform one string into the other.</strong></p>
 <h5 id="5-Hamming-Distance"><a href="#5-Hamming-Distance" class="headerlink" title="(5) Hamming Distance"></a>(5) Hamming Distance</h5><p>The Hamming Distance between two strings of equal length is the number of positions at which the corresponding symbols are different.</p>
 <h4 id="2-3-2-Shingling"><a href="#2-3-2-Shingling" class="headerlink" title="2.3.2 Shingling"></a>2.3.2 Shingling</h4><p>We are going to use <strong>Jaccard Similarity</strong> to determine when two web pages are near duplicates. The elements we are comparing are shingles. </p>
 <p><strong>Shingle</strong> is a contiguous subsequence of words in a document. </p>
@@ -309,6 +309,10 @@
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/Information-Retrieval/(07)Information Retrieval/" style="float: left;">
+        ← (07) Introduction to Information Retrieval
+    </a>
     
     
     <a class="pull-right" href="/Information-Retrieval/(05)Crawlers and Crawling/">

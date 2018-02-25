@@ -4,6 +4,60 @@
 
     
   <url>
+    <loc>http://louie.link/Information-Retrieval/(06)Deduplication/</loc>
+    <lastmod>2018-02-25T07:22:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>(06) Deduplication</title>
+        <pubTime>2018-01-28T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Information Retrieval" url="http://louie.link/categories/Information-Retrieval/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Information-Retrieval/(08)LexiconandTextNormalization/</loc>
+    <lastmod>2018-02-24T10:17:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>(08) Lexicon and Text Normalization</title>
+        <pubTime>2018-01-31T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Information Retrieval" url="http://louie.link/categories/Information-Retrieval/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Information-Retrieval/(07)Information%20Retrieval/</loc>
+    <lastmod>2018-02-24T09:50:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>(07) Introduction to Information Retrieval</title>
+        <pubTime>2018-01-29T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Information Retrieval" url="http://louie.link/categories/Information-Retrieval/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://louie.link/Image-Processing/PolygonCentroid/</loc>
     <lastmod>2018-02-24T05:48:41.000Z</lastmod>
     <data>
@@ -15,24 +69,6 @@
            
              
               <breadCrumb title="Image Processing" url="http://louie.link/categories/Image-Processing/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://louie.link/Information-Retrieval/(06)Deduplication/</loc>
-    <lastmod>2018-02-24T05:47:35.000Z</lastmod>
-    <data>
-        <display>
-        <title>(06) Deduplication</title>
-        <pubTime>2018-01-28T08:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Information Retrieval" url="http://louie.link/categories/Information-Retrieval/"/>
           
         </display>
     </data>

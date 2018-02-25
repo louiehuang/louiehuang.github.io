@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://louie.link/"/>
-  <updated>2018-02-24T05:47:35.000Z</updated>
+  <updated>2018-02-24T10:17:58.000Z</updated>
   <id>http://louie.link/</id>
   
   <author>
@@ -16,11 +16,212 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>(08) Lexicon and Text Normalization</title>
+    <link href="http://louie.link/Information-Retrieval/(08)LexiconandTextNormalization/"/>
+    <id>http://louie.link/Information-Retrieval/(08)LexiconandTextNormalization/</id>
+    <published>2018-01-31T08:00:00.000Z</published>
+    <updated>2018-02-24T10:17:58.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Lectrue in 01/31/2018&lt;/p&gt;
+&lt;h3 id=&quot;1-Zipf’s-Law-Power-Law&quot;&gt;&lt;a href=&quot;#1-Zipf’s-Law-Power-Law&quot; class=&quot;headerlink&quot; title=&quot;1. Zipf’s Law (Power Law)&quot;&gt;&lt;/a&gt;1. Zipf’s Law (Power Law)&lt;/h3&gt;&lt;p&gt;Power Law is:&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Power \; Law : y = kx^{c}&lt;/script&gt;&lt;p&gt;where k and c are constants.&lt;/p&gt;
+&lt;p&gt;Zipf’s law is a power law with c = –1&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Zipf’s \; Law : y = kx^{-1} = \frac{k}{x}&lt;/script&gt;&lt;p&gt;Zipf’s law states that given some corpus of natural language utterances, &lt;strong&gt;the frequency of any word is inversely proportional to its rank in the frequency table.&lt;/strong&gt; [1]&lt;/p&gt;
+&lt;h3 id=&quot;2-Heap’s-Law&quot;&gt;&lt;a href=&quot;#2-Heap’s-Law&quot; class=&quot;headerlink&quot; title=&quot;2. Heap’s Law&quot;&gt;&lt;/a&gt;2. Heap’s Law&lt;/h3&gt;&lt;p&gt;If $V$ is the size of the vocabulary and $n$ is the number of words:&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;V = Kn^{\beta}&lt;/script&gt;&lt;p&gt;where K is a constant and $\beta \in (0,1) $&lt;/p&gt;
+&lt;p&gt;Heap’s law describes the number of distinct words (V) in a set of documents as a function of the document length (n) [2]&lt;/p&gt;
+&lt;h3 id=&quot;3-Stemming-and-Lemmatization&quot;&gt;&lt;a href=&quot;#3-Stemming-and-Lemmatization&quot; class=&quot;headerlink&quot; title=&quot;3. Stemming and Lemmatization&quot;&gt;&lt;/a&gt;3. Stemming and Lemmatization&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;see&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The goal of both stemming and lemmatization is to reduce inflectional forms and sometimes derivationally related forms of a word to a common base form. For instance:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;am, are, is $\Rightarrow$ be &lt;/li&gt;
+&lt;li&gt;car, cars, car’s, cars’ $\Rightarrow$ car&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;However, the two words differ in their flavor. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Stemming&lt;/strong&gt; usually refers to a crude heuristic process that chops off the ends of words in the hope of achieving this goal correctly most of the time, and often includes the removal of derivational affixes. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lemmatization&lt;/strong&gt; usually refers to doing things properly with the use of a vocabulary and morphological analysis of words, normally aiming to remove inflectional endings only and to return the base or dictionary form of a word, which is known as the lemma . &lt;/p&gt;
+&lt;p&gt;If confronted with the token &lt;code&gt;saw&lt;/code&gt;, stemming might return just &lt;code&gt;s&lt;/code&gt;, whereas lemmatization would attempt to return either &lt;code&gt;see&lt;/code&gt; or &lt;code&gt;saw&lt;/code&gt; depending on whether the use of the token was as a verb or a noun. &lt;/p&gt;
+&lt;p&gt;The two may also differ in that stemming most commonly collapses derivationally related words, whereas lemmatization commonly only collapses the different inflectional forms of a lemma. [3]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Porter’s algorithm&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;4-Soundex-Algorithm&quot;&gt;&lt;a href=&quot;#4-Soundex-Algorithm&quot; class=&quot;headerlink&quot; title=&quot;4. Soundex Algorithm&quot;&gt;&lt;/a&gt;4. Soundex Algorithm&lt;/h3&gt;&lt;p&gt;This is an interesting algorithm.&lt;/p&gt;
+&lt;p&gt;Soundex Algorithm is a phonetic algorithm for indexing names by their sound when pronounced in English. &lt;/p&gt;
+&lt;p&gt;The Soundex code for a name consists of a letter followed by three numerical digits: the letter is the first letter of the name, and the digits encode the remaining consonants. Consonants at a similar place of articulation share the same digit so, for example, the labial consonants B, F, P, and V are each encoded as the number 1. [4]&lt;/p&gt;
+&lt;p&gt;The correct value can be found as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;Retain the first letter of the name and drop all other occurrences of {a, e, i, o, u, y, h, w}.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;Replace consonants with digits as follows (after the first letter):&lt;ul&gt;
+&lt;li&gt;b, f, p, v → 1&lt;/li&gt;
+&lt;li&gt;c, g, j, k, q, s, x, z → 2&lt;/li&gt;
+&lt;li&gt;d, t → 3&lt;/li&gt;
+&lt;li&gt;l → 4&lt;/li&gt;
+&lt;li&gt;m, n → 5&lt;/li&gt;
+&lt;li&gt;r → 6&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;If two or more letters with the same number are adjacent in the original name (before step 1), only retain the first letter; also two letters with the same number separated by ‘h’ or ‘w’ are coded as a single number, whereas such letters separated by a vowel are coded twice. This rule also applies to the first letter.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;If you have too few letters in your word that you can’t assign three numbers, append with 0s until there are three numbers. If you have more than 3 letters, just retain the first 3 numbers.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For exampl,e “disapont” has code “D215”, we could use other words that also have code “D215” to do spelling correction. (“disband”, “disbands”, “dispensary”, “despondent” and so on)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;References:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;[1] Zipf’s law, Retreived from &lt;a href=&quot;https://en.wikipedia.org/wiki/Zipf%27s_law&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://en.wikipedia.org/wiki/Zipf%27s_law&lt;/a&gt;&lt;br&gt;[2] Heap’s Law, Retreived from &lt;a href=&quot;https://en.wikipedia.org/wiki/Heaps%27_law&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://en.wikipedia.org/wiki/Heaps%27_law&lt;/a&gt;&lt;br&gt;[3] Stemming and lemmatization, Retreived from &lt;a href=&quot;https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html&lt;/a&gt;&lt;br&gt;[4] Soundex, Retreived from &lt;a href=&quot;https://en.wikipedia.org/wiki/Soundex&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://en.wikipedia.org/wiki/Soundex&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Lectrue in 01/31/2018&lt;/p&gt;
+&lt;h3 id=&quot;1-Zipf’s-Law-Power-Law&quot;&gt;&lt;a href=&quot;#1-Zipf’s-Law-Power-Law&quot; class=&quot;headerlink&quot; title=&quot;1. Zipf’s Law (Powe
+    
+    </summary>
+    
+      <category term="Information Retrieval" scheme="http://louie.link/categories/Information-Retrieval/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>(07) Introduction to Information Retrieval</title>
+    <link href="http://louie.link/Information-Retrieval/(07)Information%20Retrieval/"/>
+    <id>http://louie.link/Information-Retrieval/(07)Information Retrieval/</id>
+    <published>2018-01-29T08:00:00.000Z</published>
+    <updated>2018-02-24T09:50:04.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Lectrue in 01/29/2018&lt;/p&gt;
+&lt;h3 id=&quot;1-Information-Retrieval-Models&quot;&gt;&lt;a href=&quot;#1-Information-Retrieval-Models&quot; class=&quot;headerlink&quot; title=&quot;1. Information Retrieval Models&quot;&gt;&lt;/a&gt;1. Information Retrieval Models&lt;/h3&gt;&lt;p&gt;A retrieval model should define document and query representation and retreival function. There are three major models:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Boolean models&lt;/li&gt;
+&lt;li&gt;Vector Space models&lt;/li&gt;
+&lt;li&gt;Probabilistic models&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;1-1-Basic-Pre-Processing-Steps&quot;&gt;&lt;a href=&quot;#1-1-Basic-Pre-Processing-Steps&quot; class=&quot;headerlink&quot; title=&quot;1.1 Basic Pre-Processing Steps&quot;&gt;&lt;/a&gt;1.1 Basic Pre-Processing Steps&lt;/h4&gt;&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Extract content that we need&lt;/li&gt;
+&lt;li&gt;Word segmentation (break into tokens)&lt;/li&gt;
+&lt;li&gt;Stemming&lt;/li&gt;
+&lt;li&gt;Stop words removal&lt;/li&gt;
+&lt;li&gt;Detect common phrases &lt;/li&gt;
+&lt;li&gt;Buid inverted index (word to doc)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;2-Boolean-Model&quot;&gt;&lt;a href=&quot;#2-Boolean-Model&quot; class=&quot;headerlink&quot; title=&quot;2. Boolean Model&quot;&gt;&lt;/a&gt;2. Boolean Model&lt;/h3&gt;&lt;p&gt;Boolean model is efficient for queries and easy to understand. But it also have some disadvantages: &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Difficult to express complex user requests&lt;/li&gt;
+&lt;li&gt;Difficult to rank search result (since all the results satisfy the query)&lt;/li&gt;
+&lt;li&gt;Difficult to perform relevance feedback (It’s not easy to know how to modify a query that brings irrlevant results to one that brings relevant results)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;3-Vector-Space-Model&quot;&gt;&lt;a href=&quot;#3-Vector-Space-Model&quot; class=&quot;headerlink&quot; title=&quot;3. Vector Space Model&quot;&gt;&lt;/a&gt;3. Vector Space Model&lt;/h3&gt;&lt;p&gt;Suppose we’ve found t distict terms in all the documents we have, we form a dictionary using these t terms. Then each document and query can be represented by a t-dimensional vertor. &lt;/p&gt;
+&lt;h4 id=&quot;3-1-Term-Document-Matrix&quot;&gt;&lt;a href=&quot;#3-1-Term-Document-Matrix&quot; class=&quot;headerlink&quot; title=&quot;3.1 Term-Document Matrix&quot;&gt;&lt;/a&gt;3.1 Term-Document Matrix&lt;/h4&gt;&lt;p&gt;n documents and t temrs form a (n, t) Matrix&lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;$D_1$&lt;/th&gt;
+&lt;th&gt;$D_2$&lt;/th&gt;
+&lt;th&gt;$D_3$&lt;/th&gt;
+&lt;th&gt;…&lt;/th&gt;
+&lt;th&gt;$D_n$&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;$T_1$&lt;/td&gt;
+&lt;td&gt;$w_{11}$&lt;/td&gt;
+&lt;td&gt;$w_{12}$&lt;/td&gt;
+&lt;td&gt;$w_{13}$&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;$w_{1n}$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$T_2$&lt;/td&gt;
+&lt;td&gt;$w_{21}$&lt;/td&gt;
+&lt;td&gt;$w_{22}$&lt;/td&gt;
+&lt;td&gt;$w_{23}$&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;$w_{2n}$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$T_t$&lt;/td&gt;
+&lt;td&gt;$w_{t1}$&lt;/td&gt;
+&lt;td&gt;$w_{t2}$&lt;/td&gt;
+&lt;td&gt;$w_{t3}$&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;$w_{tn}$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;h4 id=&quot;3-2-Term-Weights-Term-Frequency&quot;&gt;&lt;a href=&quot;#3-2-Term-Weights-Term-Frequency&quot; class=&quot;headerlink&quot; title=&quot;3.2 Term Weights: Term Frequency&quot;&gt;&lt;/a&gt;3.2 Term Weights: Term Frequency&lt;/h4&gt;&lt;p&gt;Assumption here is that the more frequent a term in a document, the more important it is.$f_{t,d}$ is the frequency of term t in document d.&lt;/p&gt;
+&lt;p&gt;We may normalize $tf$ across the entire documents (to prevent a bias towards longer documents):&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;tf_{t,d} = \frac{f_{t,d}}{max{\{f_{t^{\prime}, d \; : \; t^{\prime} \in d}\}}}&lt;/script&gt;&lt;h4 id=&quot;3-2-Term-Weights-Inverse-Document-Frequency&quot;&gt;&lt;a href=&quot;#3-2-Term-Weights-Inverse-Document-Frequency&quot; class=&quot;headerlink&quot; title=&quot;3.2 Term Weights: Inverse Document Frequency&quot;&gt;&lt;/a&gt;3.2 Term Weights: Inverse Document Frequency&lt;/h4&gt;&lt;p&gt;The idea of $idf$ is that if a term appeara in many different documents, then it may be less indicative of overall topic.&lt;/p&gt;
+&lt;p&gt;$df_{t}$ is the &lt;code&gt;document frequency of term t&lt;/code&gt;, which is also &lt;code&gt;the number of documents containing term t&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;$idf_{t}$ is &lt;code&gt;inverse document frequency of term t&lt;/code&gt;.&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;idf_{t} = log_{2}{\frac{N}{df_{t}}}&lt;/script&gt;&lt;p&gt;where $N$ is the total number of documents.&lt;/p&gt;
+&lt;h4 id=&quot;3-3-TF-IDF-Weighting&quot;&gt;&lt;a href=&quot;#3-3-TF-IDF-Weighting&quot; class=&quot;headerlink&quot; title=&quot;3.3 TF-IDF Weighting&quot;&gt;&lt;/a&gt;3.3 TF-IDF Weighting&lt;/h4&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;tf \cdot idf_{t,d} = tf_{t,d} \times idf_{t}&lt;/script&gt;&lt;p&gt;So, for a query q, we score the it against a document d by: &lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Score(q, d) = \sum{tf \cdot idf_{t,d}}&lt;/script&gt;&lt;p&gt;where $t \in q \cap d$.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Tf%E2%80%93idf&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Examples&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;3-4-Ranking&quot;&gt;&lt;a href=&quot;#3-4-Ranking&quot; class=&quot;headerlink&quot; title=&quot;3.4 Ranking&quot;&gt;&lt;/a&gt;3.4 Ranking&lt;/h4&gt;&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Represent each document as a weighted $tf \cdot idf$ vector&lt;/li&gt;
+&lt;li&gt;Represent the query also as a weighted $tf \cdot idf$ vector&lt;/li&gt;
+&lt;li&gt;Compute the cosine similarity for the query vector and each document vector&lt;/li&gt;
+&lt;li&gt;Return the top K results with highest score&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To make the selecting top K process more efficient, we could use &lt;strong&gt;Heap&lt;/strong&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Using $O(N)$ to heapify&lt;/li&gt;
+&lt;li&gt;Using $O(KlogN)$ to select K results&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;But in this way, we still need to compute cosines from query to each of n documents. =&amp;gt; Time consuming.&lt;/p&gt;
+&lt;p&gt;So we could do some extra &lt;font color=&quot;red&quot;&gt;&lt;strong&gt;Pre-Processing&lt;/strong&gt;&lt;/font&gt; work. That is, &lt;strong&gt;for each term t, we pre-compute its k nearest docs.&lt;/strong&gt; This is actullay treating each term as a single term query.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;In this way, to search a query with t terms, we first union these t terms k nearest neighbors, form a set &lt;code&gt;S&lt;/code&gt;. Then we can only compute cosines from the query to docs in S.&lt;/strong&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Lectrue in 01/29/2018&lt;/p&gt;
+&lt;h3 id=&quot;1-Information-Retrieval-Models&quot;&gt;&lt;a href=&quot;#1-Information-Retrieval-Models&quot; class=&quot;headerlink&quot; title=&quot;1. 
+    
+    </summary>
+    
+      <category term="Information Retrieval" scheme="http://louie.link/categories/Information-Retrieval/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>(06) Deduplication</title>
     <link href="http://louie.link/Information-Retrieval/(06)Deduplication/"/>
     <id>http://louie.link/Information-Retrieval/(06)Deduplication/</id>
     <published>2018-01-28T08:00:00.000Z</published>
-    <updated>2018-02-24T05:47:35.000Z</updated>
+    <updated>2018-02-25T07:22:33.000Z</updated>
     
     <content type="html">&lt;p&gt;Lectrue in 01/28/2018&lt;/p&gt;
 &lt;p&gt;[TOC]&lt;/p&gt;
@@ -64,7 +265,7 @@
 &lt;p&gt;Documents being treated as n-dimensional vectors are transformed into $f$-bit fingerprints by &lt;code&gt;Simhash&lt;/code&gt; or &lt;code&gt;Hamming Distan&lt;/code&gt;. Then compare these fingerprints with a difference in at most k bits.&lt;/p&gt;
 &lt;h3 id=&quot;2-3-Solutions-2-Compute-Shingles&quot;&gt;&lt;a href=&quot;#2-3-Solutions-2-Compute-Shingles&quot; class=&quot;headerlink&quot; title=&quot;2.3 Solutions 2 - Compute Shingles&quot;&gt;&lt;/a&gt;2.3 Solutions 2 - Compute Shingles&lt;/h3&gt;&lt;h4 id=&quot;2-3-1-Distance-Measurements&quot;&gt;&lt;a href=&quot;#2-3-1-Distance-Measurements&quot; class=&quot;headerlink&quot; title=&quot;2.3.1 Distance Measurements&quot;&gt;&lt;/a&gt;2.3.1 Distance Measurements&lt;/h4&gt;&lt;p&gt;Before diving into &lt;strong&gt;shingles&lt;/strong&gt;, let’s first review different &lt;code&gt;Distance Measurements&lt;/code&gt;&lt;/p&gt;
 &lt;h5 id=&quot;1-Euclidean-Distance&quot;&gt;&lt;a href=&quot;#1-Euclidean-Distance&quot; class=&quot;headerlink&quot; title=&quot;(1) Euclidean Distance&quot;&gt;&lt;/a&gt;(1) Euclidean Distance&lt;/h5&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;d(p,q) = d(q,p) = \sqrt{(q_1-p_1)^2 + (q_2-p_2)^2 + \cdots + (q_n-p_n)^2} = \sqrt{\sum_{i=1}^n (q_i-p_i)^2}&lt;/script&gt;&lt;h5 id=&quot;2-Jaccard-Distance-Our-Importance-Here&quot;&gt;&lt;a href=&quot;#2-Jaccard-Distance-Our-Importance-Here&quot; class=&quot;headerlink&quot; title=&quot;(2) Jaccard Distance (Our Importance Here)&quot;&gt;&lt;/a&gt;(2) Jaccard Distance (Our Importance Here)&lt;/h5&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Jaccard \: Similarity: JS(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{|A \cap B|}{|A| + |B| - |A \cap B|}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Jaccard \: Distance: JD(A,B) = 1 - J(A,B) = \frac{|A \cup B| - |A \cap B|}{|A \cup B|}&lt;/script&gt;&lt;p&gt;For example, Consider A = {0, 1, 2, 3, 6} and B = {0, 1, 3, 5, 7, 9}&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;JS(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{\{0,1,3\}}{\{0,1,2,3,5,6,7,9\}} = \frac{3}{8}&lt;/script&gt;&lt;h5 id=&quot;3-Cosine-Distance&quot;&gt;&lt;a href=&quot;#3-Cosine-Distance&quot; class=&quot;headerlink&quot; title=&quot;(3) Cosine Distance&quot;&gt;&lt;/a&gt;(3) Cosine Distance&lt;/h5&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Cosine \: Similarity=\cos(\theta )=\vec{A} \cdot \vec{B}  \over \|\vec{A} \|\|\vec{B} \|=\frac{\sum\limits_{i=1}^{n}{A_{i}B_{i}}}{\sqrt{\sum\limits_{i=1}^{n}{A_{i}^{2}}}\sqrt{\sum\limits_{i=1}^{n}{B_{i}^{2}}}}&lt;/script&gt;&lt;h5 id=&quot;4-Edit-Distance&quot;&gt;&lt;a href=&quot;#4-Edit-Distance&quot; class=&quot;headerlink&quot; title=&quot;(4) Edit Distance&quot;&gt;&lt;/a&gt;(4) Edit Distance&lt;/h5&gt;&lt;p&gt;The Edit Distance is a way of quantifying how dissimilar two strings (e.g., words) are to one another by &lt;strong&gt;counting the minimum number of operations required to transform one string into the other.&lt;/strong&gt;&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;JS(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{\{0,1,3\}}{\{0,1,2,3,5,6,7,9\}} = \frac{3}{8}&lt;/script&gt;&lt;h5 id=&quot;3-Cosine-Distance&quot;&gt;&lt;a href=&quot;#3-Cosine-Distance&quot; class=&quot;headerlink&quot; title=&quot;(3) Cosine Distance&quot;&gt;&lt;/a&gt;(3) Cosine Distance&lt;/h5&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Cosine \: Similarity=\cos(\theta )=\frac{\vec{A} \cdot \vec{B}}{\|\vec{A} \|\|\vec{B}\|} = \frac{\sum\limits_{i=1}^{n}{A_{i}B_{i}}}{\sqrt{\sum\limits_{i=1}^{n}{A_{i}^{2}}}\sqrt{\sum\limits_{i=1}^{n}{B_{i}^{2}}}}&lt;/script&gt;&lt;h5 id=&quot;4-Edit-Distance&quot;&gt;&lt;a href=&quot;#4-Edit-Distance&quot; class=&quot;headerlink&quot; title=&quot;(4) Edit Distance&quot;&gt;&lt;/a&gt;(4) Edit Distance&lt;/h5&gt;&lt;p&gt;The Edit Distance is a way of quantifying how dissimilar two strings (e.g., words) are to one another by &lt;strong&gt;counting the minimum number of operations required to transform one string into the other.&lt;/strong&gt;&lt;/p&gt;
 &lt;h5 id=&quot;5-Hamming-Distance&quot;&gt;&lt;a href=&quot;#5-Hamming-Distance&quot; class=&quot;headerlink&quot; title=&quot;(5) Hamming Distance&quot;&gt;&lt;/a&gt;(5) Hamming Distance&lt;/h5&gt;&lt;p&gt;The Hamming Distance between two strings of equal length is the number of positions at which the corresponding symbols are different.&lt;/p&gt;
 &lt;h4 id=&quot;2-3-2-Shingling&quot;&gt;&lt;a href=&quot;#2-3-2-Shingling&quot; class=&quot;headerlink&quot; title=&quot;2.3.2 Shingling&quot;&gt;&lt;/a&gt;2.3.2 Shingling&lt;/h4&gt;&lt;p&gt;We are going to use &lt;strong&gt;Jaccard Similarity&lt;/strong&gt; to determine when two web pages are near duplicates. The elements we are comparing are shingles. &lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Shingle&lt;/strong&gt; is a contiguous subsequence of words in a document. &lt;/p&gt;
@@ -1637,202 +1838,6 @@ biTarget[4] = &amp;#39;\0&amp;#39;;
     </summary>
     
       <category term="Information Security" scheme="http://louie.link/categories/Information-Security/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>子网掩码与子网号</title>
-    <link href="http://louie.link/Computer-Networks/subnetmask/"/>
-    <id>http://louie.link/Computer-Networks/subnetmask/</id>
-    <published>2016-04-11T07:00:00.000Z</published>
-    <updated>2016-04-22T13:26:57.000Z</updated>
-    
-    <content type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 先回顾IP地址，IP地址是分层的，包括&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;网络&lt;/strong&gt;&lt;/font&gt;和&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;主机&lt;/strong&gt;&lt;/font&gt;两个部分，按网络部分和主机部分的不同长度主要分为A、B、C三类(还有多播组的D类和不再使用的E类)，但每一类的网络部分和主机部分的总长度相等，均为32位，如下图：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/subnet_mask/ip_type.png&quot; alt=&quot;Drawing&quot; width=&quot;400px&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A类：&lt;/strong&gt;最前面1位为0，7位标识网络号，24位标识主机号，则第一段取值为1~126，对于A类IP，最多有2^7 - 2 = 126个(可用)A类网络 (减2是因为要去掉全0的主机地址和全1的广播地址)，每个A类网路中，最多可有2^24 - 2 = 16777214 台(可用)主机&lt;br&gt;&lt;del&gt;地址：1.0.0.0 ~ 126.0.0.0&lt;/del&gt;&lt;br&gt;&lt;del&gt;0.0.0.0 和 127.0.0.0保留&lt;/del&gt; &lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;B类：&lt;/strong&gt;最前面2位为10，14位标识网络号，16位标识主机号，则第一段取值为128~191，对于B类IP，有2^14 - 1 = 16383个B类网络 (B类网络不会有全0全1，减1减的是128.0.0.0这个不指派地址)，每个B类网路中，最多可有2^16 - 2 =65534 台主机&lt;br&gt;地址：128.0.0.1 ~ 191.254.255.254&lt;br&gt;128.0.0.0 不指派&lt;br&gt;&lt;del&gt;地址：128.1.0.0 ~ 191.254.0.0&lt;/del&gt;&lt;br&gt;&lt;del&gt;128.0.0.0 和 191.255.0.0保留&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;C类：&lt;/strong&gt;最前面3位为110，21位标识网络号，8位标识主机号，则第一段取值为192~223，对于C类IP，有2^21 - 1 = 2097151个C类网络，每个C类网路中，最多可有2^8 - 2 =254 台主机&lt;/p&gt;
-&lt;p&gt;&lt;del&gt;地址：192.0.1.0 ~ 223.255.254.0&lt;/del&gt;&lt;br&gt;&lt;del&gt;192.0.0.0 和 223.255.255.0保留&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 为了提高地址分配的效率和减少分配网络号总数，采取&lt;strong&gt;划分子网&lt;/strong&gt;的策略，在多个网络中共享一个网络号的机制涉及使用子网掩码，子网掩码的作用就是用来判断任意两个或多个IP地址是否属于同一个子网。&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 子网划分的实现是基于&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;网络位占用主机位&lt;/strong&gt;&lt;/font&gt;的，以21位网络位和8位主机位的C类地址为例，若将一个C类网络划分成2个子网，则网络位需要占用1位主机位，即现在是22位网络位和7位主机位，通过占用的这1位的值来区分划分成的2个子网，同理，若划分成3个或4个子网则占用2个主机位…&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 但是现在，一个外部的网络，并不知道连接的这个C类网络是否划分了子网，所以需要子网掩码，当未划分时，A类地址的缺省子网掩码为255.0.0.0，B类为255.255.0.0，C类为255.255.255.0，仍以C类网络为例，划分成2个子网(占1位主机位)后子网掩码为255.255.255.128(128个主机，126个可用主机)，划分成4个子网(占位主机位)后子网掩码为255.255.255.192，如下表：&lt;/p&gt;
-&lt;div class=&quot;table-container&quot;&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;占用主机位位数&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;划分子网数&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;子网掩码&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;主机数&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;可用主机数&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;0&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;不划分&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;255.255.255.0&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;256&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;254&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;2&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;255.255.255.128&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;128&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;126&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;2&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;4&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;255.255.255.192&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;64&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;62&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;3&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;8&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;255.255.255.224&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;32&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;30&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;4&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;16&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;255.255.255.240&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;16&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;14&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;5&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;32&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;255.255.255.248&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;8&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;6&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;6&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;64&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;255.255.255.252&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;4&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; ifconfig(win为ipconfig) 查看当前计算机的ip地址及子网掩码，当前ip为192.168.1.105，即C类网络，子网掩码0xffffff00，即255.255.255.0，未划分。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/subnet_mask/ifconfig.png&quot; alt=&quot;Drawing&quot; width=&quot;400px&quot;&gt;&lt;/p&gt;
-&lt;!-- ![](http://gitimage-10031767.file.myqcloud.com/blog_image/subnet_mask/ifconfig.png) --&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 子网掩码是一个IPv4地址，在一个给定的子网中，所有主机都配置相同的掩码，即&lt;font color=&quot;red&quot;&gt;每个子网只有一个掩码，但需要注意，并不是子网掩码相同就是同一子网&lt;/font&gt;，看一个《计算机网络系统方法》中的例子，如下图：&lt;br&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/subnet_mask/book_subnet.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 假设H1向H2发数据，首先H1需要判断H2是不是和自己在同一子网中，这一过程为：将&lt;font color=&quot;red&quot;&gt;H2的IP地址&lt;/font&gt;与&lt;font color=&quot;red&quot;&gt;H1的子网掩码&lt;/font&gt;进行&lt;font color=&quot;red&quot;&gt;按位与&lt;/font&gt;运算，将结果与H1的子网号相比，若相同，则属于同一子网，否则不是。那么将H2的IP地址128.96.34.139与上H1的子网掩码255.255.255.128后，结果为128.96.34.128，不等于H1的子网号128.96.34.0，因而H1与H2并不在同一子网中，即使这两个子网的子网掩码相同，都为255.255.255.128。而之所以相同的子网掩码却可以有不同的子网号，从计算上看是由于与之相&amp;amp;的IP地址不同，但实质原因是被占用的主机位可以有不同的取值而决定的，比如一个C类IP，划分成2个子网，则主机位被占用1位，而这被占用的1位取0或取1，便形成了2个不同的子网号。&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 通过前面的计算，H1可以知道H2与其不在同一子网，因此将分组给它的默认路由器R1由R1负责转发，根据转发表确定转发路径，发送到子网号为128.96.34.128的网络中，这之后需要确定在此网络中的接收主机，因为此网络中可能不止有一台主机H2，比如还有IP地址为128.96.34.140的H4，这时将子网掩码取反后再与H2的IP地址，即用0.0.0.127 &amp;amp; 128.96.34.139，结果0.0.0.11即为主机号，根据主机号在网络中确定具体的接收主机。&lt;/p&gt;
-&lt;h3 id=&quot;结论和归纳：&quot;&gt;&lt;a href=&quot;#结论和归纳：&quot; class=&quot;headerlink&quot; title=&quot;结论和归纳：&quot;&gt;&lt;/a&gt;结论和归纳：&lt;/h3&gt;&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;font color=&quot;red&quot;&gt;每个子网只有一个掩码，但需要注意，并不是子网掩码相同就是同一子网&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;子网号 = IP &amp;amp; 子网掩码&lt;/li&gt;
-&lt;li&gt;主机号 = IP &amp;amp; 掩码取反&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h4 id=&quot;补充-来自知乎-：&quot;&gt;&lt;a href=&quot;#补充-来自知乎-：&quot; class=&quot;headerlink&quot; title=&quot;补充(来自知乎)：&quot;&gt;&lt;/a&gt;补充(来自知乎)：&lt;/h4&gt;&lt;p&gt;比较下面的两个IP地址，&lt;br&gt;A：219.218.44.123&lt;br&gt;B：219.218.45.34&lt;br&gt;在子网掩码M1：255.255.254.0下为同一子网，而在M2：255.255.255.0下为不同子网。&lt;/p&gt;
-&lt;p&gt;分析：&lt;/p&gt;
-&lt;div class=&quot;table-container&quot;&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;主机&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;地址&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;A:&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11011011-11011010-00101100-01111011&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;B:&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11011011-11011010-00101101-00100010&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;div class=&quot;table-container&quot;&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;子网掩码&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;地址&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;M1:&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11111111-11111111-11111110-00000000（254）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;M2:&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;11111111-11111111-11111111-00000000（255）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;p&gt;通过做and运算，可以看出来&lt;br&gt;A&amp;amp;M1:11011011-11011010-00101100-00000000&lt;br&gt;B&amp;amp;M1:11011011-11011010-00101100-00000000&lt;/p&gt;
-&lt;p&gt;A&amp;amp;M2:11011011-11011010-001011&lt;font color=&quot;red&quot;&gt;00&lt;/font&gt;-00000000&lt;br&gt;B&amp;amp;M2:11011011-11011010-001011&lt;font color=&quot;red&quot;&gt;01&lt;/font&gt;-00000000&lt;/p&gt;
-&lt;p&gt;假设还有如下IP&lt;br&gt;C：219.218.45.200&lt;br&gt;可以得出在子网M2：255.255.255.0下跟B同子网，而在子网M3：255.255.255.128下为不同子网。&lt;/p&gt;
-&lt;h4 id=&quot;参考：&quot;&gt;&lt;a href=&quot;#参考：&quot; class=&quot;headerlink&quot; title=&quot;参考：&quot;&gt;&lt;/a&gt;参考：&lt;/h4&gt;&lt;p&gt;[1] Larry L.peterson, Bruce S.Davie. 计算机网络系统方法[M].四川: 机械工业出版社, 2015: 113-119&lt;br&gt;[1] 恒思凝. 子网掩码判断两个ip是否在同一子网如何保证准确. &lt;a href=&quot;http://www.zhihu.com/question/36296884/answer/68366061&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.zhihu.com/question/36296884/answer/68366061&lt;/a&gt;&lt;br&gt;[2] 计算机网络地址，主机地址，子网掩码，网段，子网划分的理解. &lt;a href=&quot;http://blog.csdn.net/hzhsan/article/details/12783193&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/hzhsan/article/details/12783193&lt;/a&gt;&lt;br&gt;[3] 计算机网络子网掩码. &lt;a href=&quot;http://blog.csdn.net/oklizy/article/details/6805836&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/oklizy/article/details/6805836&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 先回顾IP地址，IP地址是分层的，包括&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;网络&lt;/strong&gt;&lt;/font&gt;和&lt;font color=&quot;red&quot;&gt;&lt;strong&gt;主机&lt;/strong&gt;&lt;/font&gt;两个部分
-    
-    </summary>
-    
-      <category term="Computer Networks" scheme="http://louie.link/categories/Computer-Networks/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>访问速度优化(二)---国内解析到coding，国外解析到github</title>
-    <link href="http://louie.link/Blog/visiting_speed_opt2/"/>
-    <id>http://louie.link/Blog/visiting_speed_opt2/</id>
-    <published>2016-04-10T07:00:00.000Z</published>
-    <updated>2016-11-22T14:46:41.000Z</updated>
-    
-    <content type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 之前通过将google字体和加载耗时较长的图片存到云对象存储(COS)大幅提升了这个网站的访问速度，其中google字体因为google的原因而耗时很长，而图片则是因为这个网站代码托管在github，需要从github那边加载，而github，国外的，访问速度相比对国内主机慢不少。&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 因此将网站同时部署到github和coding，比较一下两个地方的ping值：&lt;/p&gt;
-&lt;p&gt;(1) ping github， 平均366.384ms&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/ping_github.png&quot; alt=&quot;Drawing&quot; width=&quot;400px&quot;&gt;&lt;/p&gt;
-&lt;p&gt;(2)ping coding， 平均34.388ms，ping值低10倍&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/ping_coding.png&quot; alt=&quot;Drawing&quot; width=&quot;400px&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 代码托管到coding和托管到github一样的流程，在coding注册账号后新建项目，不同于github pages的项目名必须和github用户名相同，在coding的项目名可以任意起，域名结构为：&lt;code&gt;username.coding.io/projectname&lt;/code&gt;， 但若想通过&lt;code&gt;username.coding.io&lt;/code&gt;访问，即不带项目名访问，则需要将项目名命名为用户名，如下图：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/codingproject.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 然后部署，可以同时部署到coding和github，配置中添加一条部署仓库即可，以SSH连接为例：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;deploy:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  type: git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  repo:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      github: git@github.com:louiehuang/louiehuang.github.io.git,master&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      coding: git@git.coding.net:louiehuang/louiehuang.git,master&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 然而我在mac下deploy的速度很慢，不知原因，所以手动push，先在coding的账户-&amp;gt;SSH公钥里添加公钥，直接添加github的公钥即可。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;在本地cd到放仓库的地方，然后clone下来，我的项目是&lt;code&gt;git clone git@git.coding.net:louiehuang/louiehuang.git&lt;/code&gt;，clone下来的仓库就是louiehuang.git&lt;/li&gt;
-&lt;li&gt;将generate生成的public文件夹下所有文件复制到仓库louiehuang.git&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;git add *&lt;/code&gt;，添加所有新加项，因为.gitignore的设置不用&lt;code&gt;git add .&lt;/code&gt;，把这个ignore文件删掉后也可以用&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;git commit -m &amp;quot;comment&amp;quot;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;git push origin master&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 然后在coding中的项目中将Pages服务打开，将自己的域名添加进来，之后设置域名解析，将国内访问解析到coding，国外解析到github，在自己的云解析平台设置，如下图：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.file.myqcloud.com/blog_image/blog_speed_opt_2/domain.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 至此完成了在coding的托管。因为每次更新都需要同时更新coding和github两个地方，所以写了段命令来bash，每次同时push到coding和github的仓库。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 之前通过将google字体和加载耗时较长的图片存到云对象存储(COS)大幅提升了这个网站的访问速度，其中google字体因为google的原因而耗时很长，而图片则是因为这个网站代码托管在github，需要从github那边加
-    
-    </summary>
-    
-      <category term="Blog" scheme="http://louie.link/categories/Blog/"/>
     
     
   </entry>
