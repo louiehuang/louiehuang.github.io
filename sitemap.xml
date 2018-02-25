@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://louie.link/about.html</loc>
+    
+    <lastmod>2018-02-25T07:27:33.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://louie.link/Information-Retrieval/(06)Deduplication/</loc>
     
     <lastmod>2018-02-25T07:22:33.000Z</lastmod>
@@ -152,13 +159,6 @@
     <loc>http://louie.link/Recommender-System/PearsonCorrCoef/</loc>
     
     <lastmod>2016-12-21T07:38:29.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://louie.link/about.html</loc>
-    
-    <lastmod>2016-11-22T15:28:28.000Z</lastmod>
     
   </url>
   
