@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://louie.link/Dynamic-Programming/(1)CoinChange/</loc>
+    
+    <lastmod>2018-03-05T06:18:38.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/Dynamic-Programming/(0)DynamicProgrammingBasics/</loc>
+    
+    <lastmod>2018-03-05T00:23:55.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://louie.link/about.html</loc>
     
     <lastmod>2018-02-25T07:27:33.000Z</lastmod>
