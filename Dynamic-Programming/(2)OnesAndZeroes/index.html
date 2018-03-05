@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Archives: 2016/5 | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Ones and Zeroes | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -223,45 +223,78 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/Information-Security/des/">DES Algorithm</a></h4>
-                            
-                            <p><time datetime="2016-05-02T07:00:00.000Z"><a href="/Information-Security/des/">2016-05-02</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-03-01T08:00:00.000Z" itemprop="datePublished">
+          2018-03-01
+      </time>
+    
+</span>
+                <h1>Ones and Zeroes</h1>
+            </div>
         </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="Ones-and-Zeroes"><a href="#Ones-and-Zeroes" class="headerlink" title="Ones and Zeroes"></a>Ones and Zeroes</h2><p>Suppose you are a dominator of <strong>m</strong> <code>0s</code> and <strong>n</strong> <code>1s</code> respectively. On the other hand, there is an array with strings consisting of only <code>0s</code> and <code>1s</code>. Now your task is to find the <strong>maximum</strong> number of strings that you can form with given <strong>m</strong> <code>0s</code> and <strong>n</strong> <code>1s</code>. Each <code>0</code> and <code>1</code> can be used at most <strong>once</strong>.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: Array = &#123;&quot;10&quot;, &quot;0001&quot;, &quot;111001&quot;, &quot;1&quot;, &quot;0&quot;&#125;, m = 5, n = 3</span><br><span class="line">Output: 4</span><br><span class="line"></span><br><span class="line">Explanation: This are totally 4 strings can be formed by the using of 5 0s and 3 1s, which are “10,”0001”,”1”,”0”</span><br></pre></td></tr></table></figure>
+<p><strong>Solution:</strong></p>
+<p>This problem is similar to 0-1 knapsack problem. </p>
+<p>We can use <code>dp[k, i, j]</code> to represent using first k strings that have i <code>0</code>s and j <code>1</code>s. For the <code>k</code>th string, let <code>zeros</code> denote the number of <code>0</code>s in string k, and <code>ones</code> denote the number of <code>1</code>s in string k. There are two possible actions:</p>
+<blockquote>
+<ol>
+<li>If we pick the <code>k</code>th string, we will have <code>zeros</code> more <code>0</code>s and <code>ones</code> more <code>1</code>s, which means we still need <code>i-zeros</code> <code>0</code>s and <code>j-ones</code> <code>1</code>s, so $dp[k, i, j] = dp[k, i - zeros, j - ones] + 1$</li>
+<li>If we do not pick the <code>k</code>th string, then $dp[k, i, j] = dp[k-1, i, j]$</li>
+</ol>
+</blockquote>
+<p><code>dp[k, i, j]</code> is a three-dimensional array. We can reduce it to a two-dimensional array - in the <code>k</code>th round, <strong>overwrite</strong> the result of the <code>k-1</code>th round. In this way, we use <code>dp[i][j]</code> the represent the maximum number of strings that can form with i <code>0</code>s and j <code>1</code>s in the <code>k</code>th round (using first k strings). </p>
+<blockquote>
+<ol>
+<li>If we pick the <code>k</code>th string, then $dp[i, j] = dp[i - zeros, j - ones] + 1$ </li>
+<li>If we do not pick the <code>k</code>th string, then $dp[i, j] = dp[i, j]$ (remain unchanged, dp[i,j] on the right side is the result in (k-1) round)</li>
+</ol>
+</blockquote>
+<p><strong>State Transition Equation:</strong></p>
+<script type="math/tex; mode=display">dp[i, j] = max\{dp[i, j], dp[i - zeros, j - ones] + 1\}</script><p>We need to be careful about the implementation of this way. <strong>Both <code>i</code> and <code>j</code> should start from the largest number to decrease</strong> so that we can guarantee that <code>dp[i - zeros, j - ones]</code> we have is the result in the (k-1)th round rather than the result we have just calculated in the kth round. </p>
+<p>This is obvious, suppose we are updating <code>dp[i][j]</code>, we need to check <code>dp[i - zeros, j - ones]</code>, it’s left to <code>dp[i][j]</code>, if we start i and j from small to big, we are using <code>dp[i - zeros, j - ones]</code> updated in kth round. </p>
+<p>For example, in the kth round, i = 5, j = 6, zeros = 2, ones = 3, to compute <code>dp[5][6]</code>, we need <code>dp[5-2][6-3] = dp[3][3]</code>, we need its value to be the one computed in the (k-1)th round rather than in the current kth round. If we start i and j from small to big, then in the kth round, we will compute <code>dp[3][3]</code> before computing <code>dp[5][6]</code> which means <code>dp[3][3]</code> is the result in the kth round, this is not what we want. </p>
+<p><code>i &gt;= zeros</code> &amp;&amp; <code>j &gt;= ones</code> are to make sure <code>dp[][]</code> will not have negative index. Just <strong>be aware of how i and j are updated.</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMaxForm</span><span class="params">(String[] strs, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[m+<span class="number">1</span>][n+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; strs.length; k++)&#123; <span class="comment">//check all string one by one</span></span><br><span class="line">        <span class="keyword">int</span> zeros = numberOfZeros(strs[k]); <span class="comment">//number of zeros this string has</span></span><br><span class="line">        <span class="keyword">int</span> ones = strs[k].length() - zeros; <span class="comment">////number of ones this string has</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = m; i &gt;= zeros; i--) <span class="comment">//make sure dp[i][j] is the (k-1)'s round result</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = n; j &gt;= ones; j--) <span class="comment">//make sure...</span></span><br><span class="line">                dp[i][j] = Math.max(dp[i][j], dp[i - zeros][j - ones] + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[m][n];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">numberOfZeros</span><span class="params">(String str)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> zeros = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> ch : str.toCharArray())</span><br><span class="line">        <span class="keyword">if</span>(ch == <span class="string">'0'</span>)</span><br><span class="line">            zeros++;</span><br><span class="line">    <span class="keyword">return</span> zeros;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <!-- 分页 -->
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
         <nav class="pagination" role="pagination">
-          
-          
-        </nav>
-    </div>
-</section> 
+    
+    
+    <a class="pull-right" href="/Dynamic-Programming/(1)CoinChange/">
+        Coin Change →
+    </a>
+    
+</nav>
 
-
-
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>Don't give up on your dreams -- Keep sleeping</p>
-        </div>
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Dynamic-Programming/(2)OnesAndZeroes/" data-title="Ones and Zeroes" data-url="http://louie.link/Dynamic-Programming/(2)OnesAndZeroes/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://louie.link/"/>
-  <updated>2018-03-05T06:18:38.000Z</updated>
+  <updated>2018-03-05T08:19:17.000Z</updated>
   <id>http://louie.link/</id>
   
   <author>
@@ -16,11 +16,56 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Ones and Zeroes</title>
+    <link href="http://louie.link/Dynamic-Programming/(2)OnesAndZeroes/"/>
+    <id>http://louie.link/Dynamic-Programming/(2)OnesAndZeroes/</id>
+    <published>2018-03-01T08:00:00.000Z</published>
+    <updated>2018-03-05T08:19:17.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;Ones-and-Zeroes&quot;&gt;&lt;a href=&quot;#Ones-and-Zeroes&quot; class=&quot;headerlink&quot; title=&quot;Ones and Zeroes&quot;&gt;&lt;/a&gt;Ones and Zeroes&lt;/h2&gt;&lt;p&gt;Suppose you are a dominator of &lt;strong&gt;m&lt;/strong&gt; &lt;code&gt;0s&lt;/code&gt; and &lt;strong&gt;n&lt;/strong&gt; &lt;code&gt;1s&lt;/code&gt; respectively. On the other hand, there is an array with strings consisting of only &lt;code&gt;0s&lt;/code&gt; and &lt;code&gt;1s&lt;/code&gt;. Now your task is to find the &lt;strong&gt;maximum&lt;/strong&gt; number of strings that you can form with given &lt;strong&gt;m&lt;/strong&gt; &lt;code&gt;0s&lt;/code&gt; and &lt;strong&gt;n&lt;/strong&gt; &lt;code&gt;1s&lt;/code&gt;. Each &lt;code&gt;0&lt;/code&gt; and &lt;code&gt;1&lt;/code&gt; can be used at most &lt;strong&gt;once&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Input: Array = &amp;#123;&amp;quot;10&amp;quot;, &amp;quot;0001&amp;quot;, &amp;quot;111001&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;0&amp;quot;&amp;#125;, m = 5, n = 3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Output: 4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Explanation: This are totally 4 strings can be formed by the using of 5 0s and 3 1s, which are “10,”0001”,”1”,”0”&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This problem is similar to 0-1 knapsack problem. &lt;/p&gt;
+&lt;p&gt;We can use &lt;code&gt;dp[k, i, j]&lt;/code&gt; to represent using first k strings that have i &lt;code&gt;0&lt;/code&gt;s and j &lt;code&gt;1&lt;/code&gt;s. For the &lt;code&gt;k&lt;/code&gt;th string, let &lt;code&gt;zeros&lt;/code&gt; denote the number of &lt;code&gt;0&lt;/code&gt;s in string k, and &lt;code&gt;ones&lt;/code&gt; denote the number of &lt;code&gt;1&lt;/code&gt;s in string k. There are two possible actions:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;If we pick the &lt;code&gt;k&lt;/code&gt;th string, we will have &lt;code&gt;zeros&lt;/code&gt; more &lt;code&gt;0&lt;/code&gt;s and &lt;code&gt;ones&lt;/code&gt; more &lt;code&gt;1&lt;/code&gt;s, which means we still need &lt;code&gt;i-zeros&lt;/code&gt; &lt;code&gt;0&lt;/code&gt;s and &lt;code&gt;j-ones&lt;/code&gt; &lt;code&gt;1&lt;/code&gt;s, so $dp[k, i, j] = dp[k, i - zeros, j - ones] + 1$&lt;/li&gt;
+&lt;li&gt;If we do not pick the &lt;code&gt;k&lt;/code&gt;th string, then $dp[k, i, j] = dp[k-1, i, j]$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;dp[k, i, j]&lt;/code&gt; is a three-dimensional array. We can reduce it to a two-dimensional array - in the &lt;code&gt;k&lt;/code&gt;th round, &lt;strong&gt;overwrite&lt;/strong&gt; the result of the &lt;code&gt;k-1&lt;/code&gt;th round. In this way, we use &lt;code&gt;dp[i][j]&lt;/code&gt; the represent the maximum number of strings that can form with i &lt;code&gt;0&lt;/code&gt;s and j &lt;code&gt;1&lt;/code&gt;s in the &lt;code&gt;k&lt;/code&gt;th round (using first k strings). &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;If we pick the &lt;code&gt;k&lt;/code&gt;th string, then $dp[i, j] = dp[i - zeros, j - ones] + 1$ &lt;/li&gt;
+&lt;li&gt;If we do not pick the &lt;code&gt;k&lt;/code&gt;th string, then $dp[i, j] = dp[i, j]$ (remain unchanged, dp[i,j] on the right side is the result in (k-1) round)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;State Transition Equation:&lt;/strong&gt;&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;dp[i, j] = max\{dp[i, j], dp[i - zeros, j - ones] + 1\}&lt;/script&gt;&lt;p&gt;We need to be careful about the implementation of this way. &lt;strong&gt;Both &lt;code&gt;i&lt;/code&gt; and &lt;code&gt;j&lt;/code&gt; should start from the largest number to decrease&lt;/strong&gt; so that we can guarantee that &lt;code&gt;dp[i - zeros, j - ones]&lt;/code&gt; we have is the result in the (k-1)th round rather than the result we have just calculated in the kth round. &lt;/p&gt;
+&lt;p&gt;This is obvious, suppose we are updating &lt;code&gt;dp[i][j]&lt;/code&gt;, we need to check &lt;code&gt;dp[i - zeros, j - ones]&lt;/code&gt;, it’s left to &lt;code&gt;dp[i][j]&lt;/code&gt;, if we start i and j from small to big, we are using &lt;code&gt;dp[i - zeros, j - ones]&lt;/code&gt; updated in kth round. &lt;/p&gt;
+&lt;p&gt;For example, in the kth round, i = 5, j = 6, zeros = 2, ones = 3, to compute &lt;code&gt;dp[5][6]&lt;/code&gt;, we need &lt;code&gt;dp[5-2][6-3] = dp[3][3]&lt;/code&gt;, we need its value to be the one computed in the (k-1)th round rather than in the current kth round. If we start i and j from small to big, then in the kth round, we will compute &lt;code&gt;dp[3][3]&lt;/code&gt; before computing &lt;code&gt;dp[5][6]&lt;/code&gt; which means &lt;code&gt;dp[3][3]&lt;/code&gt; is the result in the kth round, this is not what we want. &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;i &amp;gt;= zeros&lt;/code&gt; &amp;amp;&amp;amp; &lt;code&gt;j &amp;gt;= ones&lt;/code&gt; are to make sure &lt;code&gt;dp[][]&lt;/code&gt; will not have negative index. Just &lt;strong&gt;be aware of how i and j are updated.&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;findMaxForm&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String[] strs, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; m, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[][] dp = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[m+&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][n+&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; k = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; k &amp;lt; strs.length; k++)&amp;#123; &lt;span class=&quot;comment&quot;&gt;//check all string one by one&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; zeros = numberOfZeros(strs[k]); &lt;span class=&quot;comment&quot;&gt;//number of zeros this string has&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; ones = strs[k].length() - zeros; &lt;span class=&quot;comment&quot;&gt;////number of ones this string has&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = m; i &amp;gt;= zeros; i--) &lt;span class=&quot;comment&quot;&gt;//make sure dp[i][j] is the (k-1)&#39;s round result&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; j = n; j &amp;gt;= ones; j--) &lt;span class=&quot;comment&quot;&gt;//make sure...&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                dp[i][j] = Math.max(dp[i][j], dp[i - zeros][j - ones] + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; dp[m][n];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;numberOfZeros&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String str)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; zeros = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; ch : str.toCharArray())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(ch == &lt;span class=&quot;string&quot;&gt;&#39;0&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            zeros++;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; zeros;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Ones-and-Zeroes&quot;&gt;&lt;a href=&quot;#Ones-and-Zeroes&quot; class=&quot;headerlink&quot; title=&quot;Ones and Zeroes&quot;&gt;&lt;/a&gt;Ones and Zeroes&lt;/h2&gt;&lt;p&gt;Suppose you are a 
+    
+    </summary>
+    
+      <category term="Dynamic Programming" scheme="http://louie.link/categories/Dynamic-Programming/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Coin Change</title>
     <link href="http://louie.link/Dynamic-Programming/(1)CoinChange/"/>
     <id>http://louie.link/Dynamic-Programming/(1)CoinChange/</id>
     <published>2018-02-28T08:00:00.000Z</published>
-    <updated>2018-03-05T06:18:38.000Z</updated>
+    <updated>2018-03-05T07:37:04.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;Coin-Change&quot;&gt;&lt;a href=&quot;#Coin-Change&quot; class=&quot;headerlink&quot; title=&quot;Coin Change&quot;&gt;&lt;/a&gt;Coin Change&lt;/h2&gt;&lt;h3 id=&quot;1-Minimum-number-of-coins&quot;&gt;&lt;a href=&quot;#1-Minimum-number-of-coins&quot; class=&quot;headerlink&quot; title=&quot;1. Minimum number of coins&quot;&gt;&lt;/a&gt;1. Minimum number of coins&lt;/h3&gt;&lt;p&gt;Compute the minimum number of coins needed to make change for a given amount $m$. Assume that we have an infinite supply of each coin. All denominations $d_k$ are sorted in ascending order: $1 = coin_1 &amp;lt; coin_2 &amp;lt; … &amp;lt; coin_n$. (&lt;strong&gt;$coin_1= 1$ here is simply to make sure that there will always exist a solution, will discuss the case that no solution exists later on&lt;/strong&gt;)&lt;/p&gt;
 &lt;p&gt;For this problem, Greedy Algorithm cannot always find the optimal solution. For example, we have m = 100, D = {1,5,50,80}, greedy that selects largest coin will produce {80,5,5,5,5}, 5 coins, while we just need 2, {50,50}.&lt;/p&gt;
@@ -48,7 +93,7 @@
 &lt;p&gt;Our $dp[][]$ will be like following table. We filled this table row by row, from left to right. First we fill row$0$, we only use coin[0], thus the number of coins needed for 3 is 3, for 4 is 4, for 6 is 6. Then we fill row1, now we can use coin[0] and coin[1], which are 1 and 3. Then row2…&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;		0	1	2	3	4	5	6	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;0(1)	0	1	2	3	4	5	6	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1(3)	0	1	2	1	2	3	2	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2(4)	0	1	2	1	1	2	2	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3(7)	0	1	2	1	1	2	2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;Code is like this:&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;minCoins&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[] coins, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; target)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[][] dp = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[coins.length][target + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 1. dp[k][0] = 0, default&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 2. dp[0][x] = x, using coins[0] = 1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; j = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; j &amp;lt;= target; j++) &lt;span class=&quot;comment&quot;&gt;//3. initialize (only if coins[0] = 1)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        dp[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;][j] = j;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 4. Recurrence Relation&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; i &amp;lt; coins.length; i++) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; j = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; j &amp;lt;= target; j++) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (j &amp;lt; coins[i]) dp[i][j] = dp[i - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][j];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; 			 dp[i][j] = Math.min(dp[i][j - coins[i]] + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, dp[i - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][j]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; dp[coins.length - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][target]; &lt;span class=&quot;comment&quot;&gt;// bottom right corner&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;minCoins&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[] coins, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; target)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[][] dp = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[coins.length][target + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 1. dp[k][0] = 0, default&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 2. dp[0][x] = x, using coins[0] = 1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; j = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; j &amp;lt;= target; j++) &lt;span class=&quot;comment&quot;&gt;//3. initialize (only if coins[0] = 1)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        dp[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;][j] = j;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 4. Recurrence Relation&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; i &amp;lt; coins.length; i++) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; j = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; j &amp;lt;= target; j++) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (j &amp;lt; coins[i]) &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                dp[i][j] = dp[i - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][j];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; 			 &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                dp[i][j] = Math.min(dp[i][j - coins[i]] + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, dp[i - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][j]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; dp[coins.length - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][target]; &lt;span class=&quot;comment&quot;&gt;// bottom right corner&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h4 id=&quot;2-Solution2-optimize-memory-using-dp&quot;&gt;&lt;a href=&quot;#2-Solution2-optimize-memory-using-dp&quot; class=&quot;headerlink&quot; title=&quot;2. Solution2, optimize memory using $dp[]$&quot;&gt;&lt;/a&gt;2. Solution2, optimize memory using $dp[]$&lt;/h4&gt;&lt;p&gt;In the above solution, we used a two-dimensional array to store our intermediate results. We considered two variables, k and x, use the first k kinds of coinds to represent amount x, thus have dp[k, x]. &lt;strong&gt;But $k$ is not really necessary.&lt;/strong&gt; =&amp;gt; $dp[x]$ is enough.&lt;/p&gt;
 &lt;p&gt;There are two ways to think of it.&lt;/p&gt;
 &lt;p&gt;(1) The first way. Still follows the thought of using the first k kinds of coins to represent amount x (pick coins one by one). But instead record every results for each k, we &lt;strong&gt;overwrite&lt;/strong&gt; the results of $(k-1)$. This is correct because in kth round, we have the optimal solution to using $(k-1)$ kinds of coins like in solution 1, we can just consider whether use kth kind of coin or not. Let dp[x] denote the minimun number of coins needed to represent x. &lt;/p&gt;
@@ -95,7 +140,7 @@
     <link href="http://louie.link/Dynamic-Programming/(0)DynamicProgrammingBasics/"/>
     <id>http://louie.link/Dynamic-Programming/(0)DynamicProgrammingBasics/</id>
     <published>2018-02-28T08:00:00.000Z</published>
-    <updated>2018-03-05T00:23:55.000Z</updated>
+    <updated>2018-03-05T08:20:10.000Z</updated>
     
     <content type="html">&lt;p&gt;I’ve been asked a DP problem today during the interview. It was not hard but I failed to think it clearly. I feel really really bad, so I think I need to review and sum up what I’ve learnt about DP. I’ll go over the problems I’ve met in the past few years and then find some new ones to practice. &lt;/p&gt;
 &lt;h2 id=&quot;Dynamic-Programming-Concepts&quot;&gt;&lt;a href=&quot;#Dynamic-Programming-Concepts&quot; class=&quot;headerlink&quot; title=&quot;Dynamic Programming Concepts&quot;&gt;&lt;/a&gt;Dynamic Programming Concepts&lt;/h2&gt;&lt;p&gt;“The basic idea of Dynamic Programming is drawn from the intuition behind divide and conquer and is essentially the opposite of the greedy strategy: one &lt;strong&gt;implicitly&lt;/strong&gt; explores the space of &lt;strong&gt;all&lt;/strong&gt; possible solutions, by carefully decomposing things into a series of subproblems, and then building up correct solutions to larger and larger subproblems.”[1]&lt;/p&gt;
@@ -115,7 +160,7 @@
 &lt;/ol&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&quot;4-An-simple-example-Fibonacci-Numbers&quot;&gt;&lt;a href=&quot;#4-An-simple-example-Fibonacci-Numbers&quot; class=&quot;headerlink&quot; title=&quot;4. An simple example: Fibonacci Numbers&quot;&gt;&lt;/a&gt;4. An simple example: Fibonacci Numbers&lt;/h3&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;\left\{\begin{aligned}F_n &amp;= F_{n-1} + F_{n-2} \\F_0 &amp;= F_1 = 1\end{aligned}\right.&lt;/script&gt;&lt;p&gt;If using Divide &amp;amp; Conquer:&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;fib&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (n &amp;lt;=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;	    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; fib(n-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) + fib(n-&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;fib&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (n &amp;lt;=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;	    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; fib(n-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) + fib(n-&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;This implementation is quite straightforward, but we have recomputed many same subproblems many times. The solution to the recurrence is exponential - we double the work on each recursive call.&lt;/p&gt;
 &lt;p&gt;Draw a recursion tree for fib(5), we can see that f(3) is calculated 2 times, f(2) is calculated 3 times…&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;                          fib(5)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                     /             \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;               fib(4)                fib(3)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;             /      \                /     \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         fib(3)      fib(2)         fib(2)    fib(1)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        /     \        /    \       /    \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   fib(2)   fib(1)  fib(1) fib(0) fib(1) fib(0)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  /    \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;fib(1) fib(0)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -123,7 +168,7 @@
 &lt;h4 id=&quot;4-1-Memoization-Top-Down&quot;&gt;&lt;a href=&quot;#4-1-Memoization-Top-Down&quot; class=&quot;headerlink&quot; title=&quot;4.1 Memoization (Top Down)&quot;&gt;&lt;/a&gt;4.1 Memoization (Top Down)&lt;/h4&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[] dp = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[n+&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dp[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;] = dp[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;fib&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (dp[n] != &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; dp[n]; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;            dp[n] = fib(n-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) + fib(n-&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; dp[n]; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;This implementation really looks like the recursive version, we just use a table to store the computed results. Whenever we need solution to a subproblem, we first lookup the table. If it’s already there, just return it, if not, we calculate it and store it to the table. &lt;/p&gt;
 &lt;p&gt;Why Memoization is top down? Because we are looking for solutions from the root of the &lt;strong&gt;recursion tree&lt;/strong&gt; to its bottom. To compute fib(5), we first look into fib(4) and fib(3), to compute fib(4), we first look into fib(3) and fib(2)… &lt;strong&gt;Top Down is for recursion tree&lt;/strong&gt;, like a tree grows from a single root down to its leaves; for the table we still fill dp[2] first, then dp[3], dp[4]…&lt;/p&gt;
-&lt;h4 id=&quot;4-2-Tabulation-Bottom-Up&quot;&gt;&lt;a href=&quot;#4-2-Tabulation-Bottom-Up&quot; class=&quot;headerlink&quot; title=&quot;4.2 Tabulation (Bottom Up)&quot;&gt;&lt;/a&gt;4.2 Tabulation (Bottom Up)&lt;/h4&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[] dp = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[n+&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;fib&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	dp[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;] = dp[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;; i &amp;lt;= n; i++)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		dp[i] = dp[i-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] + dp[i-&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt;; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;4-2-Tabulation-Bottom-Up&quot;&gt;&lt;a href=&quot;#4-2-Tabulation-Bottom-Up&quot; class=&quot;headerlink&quot; title=&quot;4.2 Tabulation (Bottom Up)&quot;&gt;&lt;/a&gt;4.2 Tabulation (Bottom Up)&lt;/h4&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[] dp = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[n+&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;fib&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	dp[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;] = dp[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;; i &amp;lt;= n; i++)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		dp[i] = dp[i-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] + dp[i-&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;Tabulation is a iterative version. &lt;/p&gt;
 &lt;p&gt;Why Tabulation is bottom up? To compute fib(n), we always first compute fib(0), then fib(1), then fib(2), then fib(3) and so on. So we are building the solutions of subproblems bottom-up, like a tree grows from leaves to root (sounds like the tree is growing unnaturally)…&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;References:&lt;/strong&gt;&lt;/p&gt;
@@ -1502,202 +1547,6 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
       &lt;h3 id=&quot;一、信息检索中：&quot;&gt;&lt;a href=&quot;#一、信息检索中：&quot; class=&quot;headerlink&quot; title=&quot;一、信息检索中：&quot;&gt;&lt;/a&gt;一、信息检索中：&lt;/h3&gt;&lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;召回率又叫查全率，是针对原来的&lt;strong&gt;样本&lt;/
-    
-    </summary>
-    
-      <category term="Recommender System" scheme="http://louie.link/categories/Recommender-System/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Markdown中的基本LaTeX数学公式</title>
-    <link href="http://louie.link/Recommender-System/Latex_in_Markdown/"/>
-    <id>http://louie.link/Recommender-System/Latex_in_Markdown/</id>
-    <published>2016-08-10T07:00:00.000Z</published>
-    <updated>2016-11-21T14:45:06.000Z</updated>
-    
-    <content type="html">&lt;p&gt;&lt;strong&gt;1. 和号和积分号&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;table-container&quot;&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;命令&lt;/th&gt;
-&lt;th&gt;显示&lt;/th&gt;
-&lt;th&gt;命令&lt;/th&gt;
-&lt;th&gt;显示&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;\sum_{i=1}^{N}&lt;/td&gt;
-&lt;td&gt;$\sum_{i=1}^{N}$&lt;/td&gt;
-&lt;td&gt;\int_{a}^{b}&lt;/td&gt;
-&lt;td&gt;$\int_{a}^{b}$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\prod&lt;/td&gt;
-&lt;td&gt;$\prod$&lt;/td&gt;
-&lt;td&gt;\iint&lt;/td&gt;
-&lt;td&gt;$\iint$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\prod_{i=1}^{N}&lt;/td&gt;
-&lt;td&gt;$\prod_{i=1}^{N}$&lt;/td&gt;
-&lt;td&gt;\iint_{a}^{b}&lt;/td&gt;
-&lt;td&gt;$\iint_{a}^{b}$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\bigcup&lt;/td&gt;
-&lt;td&gt;$\bigcup$&lt;/td&gt;
-&lt;td&gt;\bigcap&lt;/td&gt;
-&lt;td&gt;$\bigcap$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\bigcup_{i=1}^{N}&lt;/td&gt;
-&lt;td&gt;$\bigcup_{i=1}^{N}$&lt;/td&gt;
-&lt;td&gt;\bigcap_{i=1}^{N}&lt;/td&gt;
-&lt;td&gt;$\bigcap_{i=1}^{N}$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2. 其它常用命令&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;table-container&quot;&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;命令&lt;/th&gt;
-&lt;th&gt;显示&lt;/th&gt;
-&lt;th&gt;命令&lt;/th&gt;
-&lt;th&gt;显示&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;\sqrt[3]{2}&lt;/td&gt;
-&lt;td&gt;$\sqrt[3]{2}$&lt;/td&gt;
-&lt;td&gt;\sqrt{2}&lt;/td&gt;
-&lt;td&gt;$\sqrt{2}$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;x^{3}&lt;/td&gt;
-&lt;td&gt;$x^{3}$&lt;/td&gt;
-&lt;td&gt;x_{3}&lt;/td&gt;
-&lt;td&gt;$x_{3}$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\lim_{x \to 0}&lt;/td&gt;
-&lt;td&gt;$\lim_{x \to 0}$&lt;/td&gt;
-&lt;td&gt;\frac{x}{y}&lt;/td&gt;
-&lt;td&gt;$\frac{x}{y}$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;3. 希腊字母&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;table-container&quot;&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;命令&lt;/th&gt;
-&lt;th&gt;显示&lt;/th&gt;
-&lt;th&gt;命令&lt;/th&gt;
-&lt;th&gt;显示&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;\alpha&lt;/td&gt;
-&lt;td&gt;$\alpha$&lt;/td&gt;
-&lt;td&gt;\xi&lt;/td&gt;
-&lt;td&gt;$\xi$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\beta&lt;/td&gt;
-&lt;td&gt;$\beta$&lt;/td&gt;
-&lt;td&gt;\nu&lt;/td&gt;
-&lt;td&gt;$\nu$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\gamma&lt;/td&gt;
-&lt;td&gt;$\gamma$&lt;/td&gt;
-&lt;td&gt;\pi&lt;/td&gt;
-&lt;td&gt;$\pi$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\delta&lt;/td&gt;
-&lt;td&gt;$\delta$&lt;/td&gt;
-&lt;td&gt;\rho&lt;/td&gt;
-&lt;td&gt;$\rho$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\epsilon&lt;/td&gt;
-&lt;td&gt;$\epsilon$&lt;/td&gt;
-&lt;td&gt;\sigma&lt;/td&gt;
-&lt;td&gt;$\sigma$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\zeta&lt;/td&gt;
-&lt;td&gt;$\zeta$&lt;/td&gt;
-&lt;td&gt;\tau&lt;/td&gt;
-&lt;td&gt;$\tau$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\eta&lt;/td&gt;
-&lt;td&gt;$\eta$&lt;/td&gt;
-&lt;td&gt;\upsilon&lt;/td&gt;
-&lt;td&gt;$\upsilon$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\theta&lt;/td&gt;
-&lt;td&gt;$\theta$&lt;/td&gt;
-&lt;td&gt;\phi&lt;/td&gt;
-&lt;td&gt;$\phi$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\iota&lt;/td&gt;
-&lt;td&gt;$\iota$&lt;/td&gt;
-&lt;td&gt;\chi&lt;/td&gt;
-&lt;td&gt;$\chi$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\kappa&lt;/td&gt;
-&lt;td&gt;$\kappa$&lt;/td&gt;
-&lt;td&gt;\psi&lt;/td&gt;
-&lt;td&gt;$\psi$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\lambda&lt;/td&gt;
-&lt;td&gt;$\lambda$&lt;/td&gt;
-&lt;td&gt;\omega&lt;/td&gt;
-&lt;td&gt;$\omega$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\mu&lt;/td&gt;
-&lt;td&gt;$\mu$&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;1. 和号和积分号&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;table-container&quot;&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;命令&lt;/th&gt;
-&lt;th&gt;显示&lt;/th&gt;
-&lt;th&gt;命令&lt;/th&gt;
-&lt;th&gt;显示&lt;/th&gt;
-&lt;/tr&gt;
-&lt;
     
     </summary>
     

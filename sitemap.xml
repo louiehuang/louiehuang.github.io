@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://louie.link/Dynamic-Programming/(1)CoinChange/</loc>
+    <loc>http://louie.link/Dynamic-Programming/(0)DynamicProgrammingBasics/</loc>
     
-    <lastmod>2018-03-05T06:18:38.000Z</lastmod>
+    <lastmod>2018-03-05T08:20:10.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://louie.link/Dynamic-Programming/(0)DynamicProgrammingBasics/</loc>
+    <loc>http://louie.link/Dynamic-Programming/(2)OnesAndZeroes/</loc>
     
-    <lastmod>2018-03-05T00:23:55.000Z</lastmod>
+    <lastmod>2018-03-05T08:19:17.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/Dynamic-Programming/(1)CoinChange/</loc>
+    
+    <lastmod>2018-03-05T07:37:04.000Z</lastmod>
     
   </url>
   

@@ -4,11 +4,11 @@
 
     
   <url>
-    <loc>http://louie.link/Dynamic-Programming/(1)CoinChange/</loc>
-    <lastmod>2018-03-05T06:18:38.000Z</lastmod>
+    <loc>http://louie.link/Dynamic-Programming/(0)DynamicProgrammingBasics/</loc>
+    <lastmod>2018-03-05T08:20:10.000Z</lastmod>
     <data>
         <display>
-        <title>Coin Change</title>
+        <title>Dynamic Programming Basics</title>
         <pubTime>2018-02-28T08:00:00.000Z</pubTime>
         
          
@@ -22,11 +22,29 @@
 
     
   <url>
-    <loc>http://louie.link/Dynamic-Programming/(0)DynamicProgrammingBasics/</loc>
-    <lastmod>2018-03-05T00:23:55.000Z</lastmod>
+    <loc>http://louie.link/Dynamic-Programming/(2)OnesAndZeroes/</loc>
+    <lastmod>2018-03-05T08:19:17.000Z</lastmod>
     <data>
         <display>
-        <title>Dynamic Programming Basics</title>
+        <title>Ones and Zeroes</title>
+        <pubTime>2018-03-01T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Dynamic Programming" url="http://louie.link/categories/Dynamic-Programming/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Dynamic-Programming/(1)CoinChange/</loc>
+    <lastmod>2018-03-05T07:37:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>Coin Change</title>
         <pubTime>2018-02-28T08:00:00.000Z</pubTime>
         
          
