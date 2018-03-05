@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://louie.link/"/>
-  <updated>2018-03-05T10:49:41.000Z</updated>
+  <updated>2018-03-05T10:54:23.000Z</updated>
   <id>http://louie.link/</id>
   
   <author>
@@ -16,13 +16,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Form a palindrome II (Deletion)</title>
-    <link href="http://louie.link/Dynamic-Programming/(4)FormPalindromeII(Deletion)/"/>
-    <id>http://louie.link/Dynamic-Programming/(4)FormPalindromeII(Deletion)/</id>
+    <title>Form a palindrome I (Deletion)</title>
+    <link href="http://louie.link/Dynamic-Programming/(4)FormPalindromeI(Deletion)/"/>
+    <id>http://louie.link/Dynamic-Programming/(4)FormPalindromeI(Deletion)/</id>
     <published>2018-03-01T08:00:00.000Z</published>
-    <updated>2018-03-05T10:49:41.000Z</updated>
+    <updated>2018-03-05T10:54:23.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;Form-a-palindrome-II&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-II&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome II&quot;&gt;&lt;/a&gt;Form a palindrome II&lt;/h2&gt;&lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given a string of S as input. Your task is to write a program to remove or delete minimum number of characters from the string so that the resultant string is palindrome.&lt;/p&gt;
+    <content type="html">&lt;h2 id=&quot;Form-a-palindrome-I&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-I&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome I&quot;&gt;&lt;/a&gt;Form a palindrome I&lt;/h2&gt;&lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given a string of S as input. Your task is to write a program to remove or delete minimum number of characters from the string so that the resultant string is palindrome.&lt;/p&gt;
 &lt;p&gt;Note: The order of characters in the string should be maintained.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;input: aebcbda&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;output: 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Remove characters &amp;apos;e&amp;apos; and &amp;apos;d&amp;apos; =&amp;gt; &amp;apos;abcba&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -34,7 +34,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Form-a-palindrome-II&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-II&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome II&quot;&gt;&lt;/a&gt;Form a palindrome II&lt;/h2&gt;&lt;
+      &lt;h2 id=&quot;Form-a-palindrome-I&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-I&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome I&quot;&gt;&lt;/a&gt;Form a palindrome I&lt;/h2&gt;&lt;h3 i
     
     </summary>
     
@@ -44,13 +44,13 @@
   </entry>
   
   <entry>
-    <title>Form a palindrome I (Insertion)</title>
-    <link href="http://louie.link/Dynamic-Programming/(5)FormPalindromeI(Insertion)/"/>
-    <id>http://louie.link/Dynamic-Programming/(5)FormPalindromeI(Insertion)/</id>
+    <title>Form a palindrome II (Insertion)</title>
+    <link href="http://louie.link/Dynamic-Programming/(5)FormPalindromeII(Insertion)/"/>
+    <id>http://louie.link/Dynamic-Programming/(5)FormPalindromeII(Insertion)/</id>
     <published>2018-03-01T08:00:00.000Z</published>
-    <updated>2018-03-05T10:42:24.000Z</updated>
+    <updated>2018-03-05T10:54:28.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;Form-a-palindrome-I&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-I&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome I&quot;&gt;&lt;/a&gt;Form a palindrome I&lt;/h2&gt;&lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given a string, find the minimum number of characters to be inserted to convert it to palindrome. &lt;/p&gt;
+    <content type="html">&lt;h2 id=&quot;Form-a-palindrome-II&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-II&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome II&quot;&gt;&lt;/a&gt;Form a palindrome II&lt;/h2&gt;&lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given a string, find the minimum number of characters to be inserted to convert it to palindrome. &lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ab: Number of insertions required is 1. bab or aba&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;aa: Number of insertions required is 0. aa&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;abcd: Number of insertions required is 3. dcbabcd&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h3 id=&quot;Solution1&quot;&gt;&lt;a href=&quot;#Solution1&quot; class=&quot;headerlink&quot; title=&quot;Solution1&quot;&gt;&lt;/a&gt;Solution1&lt;/h3&gt;&lt;p&gt;Let &lt;code&gt;dp[i][j]&lt;/code&gt; denote the minimum number of characters to be inserted for str[i, … j]. &lt;/p&gt;
@@ -69,7 +69,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Form-a-palindrome-I&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-I&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome I&quot;&gt;&lt;/a&gt;Form a palindrome I&lt;/h2&gt;&lt;h3 i
+      &lt;h2 id=&quot;Form-a-palindrome-II&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-II&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome II&quot;&gt;&lt;/a&gt;Form a palindrome II&lt;/h2&gt;&lt;
     
     </summary>
     
