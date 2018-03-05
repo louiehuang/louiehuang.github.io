@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Category: OS | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Form a palindrome II (Deletion) | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -223,45 +223,61 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/OS/OS_review/">操作系统重点</a></h4>
-                            
-                            <p><time datetime="2016-01-05T08:00:00.000Z"><a href="/OS/OS_review/">2016-01-05</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-03-01T08:00:00.000Z" itemprop="datePublished">
+          2018-03-01
+      </time>
+    
+</span>
+                <h1>Form a palindrome II (Deletion)</h1>
+            </div>
         </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="Form-a-palindrome-II"><a href="#Form-a-palindrome-II" class="headerlink" title="Form a palindrome II"></a>Form a palindrome II</h2><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Given a string of S as input. Your task is to write a program to remove or delete minimum number of characters from the string so that the resultant string is palindrome.</p>
+<p>Note: The order of characters in the string should be maintained.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">input: aebcbda</span><br><span class="line">output: 2</span><br><span class="line">Remove characters &apos;e&apos; and &apos;d&apos; =&gt; &apos;abcba&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>This problem can be solved using LCS. Since we are going to form a palindrome, we can first the the longest common sequence of the input string and its reverse string. Then this LCS must be in the final palindrome, we just need to change other characters in input string by deletion (or insertion) to make the rest characters paired up. </p>
+<p>For example, we have <code>str = &quot;abcdb&quot;</code>, its reverse string is <code>&quot;bdcba&quot;</code>, their LCS is <code>bcb</code>, this must be in the final palindrome. The rest characters in <code>str</code> are <code>a,d</code>, we just need to delete them, then we can form a palindrome <code>bcb</code>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">formPalindrome</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    String lcs = LCS(str, <span class="keyword">new</span> StringBuilder(str).reverse().toString());</span><br><span class="line">    <span class="keyword">return</span> str.length() - lcs.length();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This problem can also be solved by finding the length of the <code>Longest Palindromic Subsequence</code></p>
 
-        <!-- 分页 -->
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
         <nav class="pagination" role="pagination">
-          
-          
-        </nav>
-    </div>
-</section> 
+    
+    
+    <a class="pull-right" href="/Dynamic-Programming/(5)FormPalindromeI(Insertion)/">
+        Form a palindrome I (Insertion) →
+    </a>
+    
+</nav>
 
-
-
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>Don't give up on your dreams -- Keep sleeping</p>
-        </div>
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Dynamic-Programming/(4)FormPalindromeII(Deletion)/" data-title="Form a palindrome II (Deletion)" data-url="http://louie.link/Dynamic-Programming/(4)FormPalindromeII(Deletion)/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

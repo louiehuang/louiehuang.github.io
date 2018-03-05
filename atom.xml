@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://louie.link/"/>
-  <updated>2018-03-05T08:19:17.000Z</updated>
+  <updated>2018-03-05T10:49:41.000Z</updated>
   <id>http://louie.link/</id>
   
   <author>
@@ -16,17 +16,79 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Form a palindrome II (Deletion)</title>
+    <link href="http://louie.link/Dynamic-Programming/(4)FormPalindromeII(Deletion)/"/>
+    <id>http://louie.link/Dynamic-Programming/(4)FormPalindromeII(Deletion)/</id>
+    <published>2018-03-01T08:00:00.000Z</published>
+    <updated>2018-03-05T10:49:41.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;Form-a-palindrome-II&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-II&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome II&quot;&gt;&lt;/a&gt;Form a palindrome II&lt;/h2&gt;&lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given a string of S as input. Your task is to write a program to remove or delete minimum number of characters from the string so that the resultant string is palindrome.&lt;/p&gt;
+&lt;p&gt;Note: The order of characters in the string should be maintained.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;input: aebcbda&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;output: 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Remove characters &amp;apos;e&amp;apos; and &amp;apos;d&amp;apos; =&amp;gt; &amp;apos;abcba&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;Solution&quot;&gt;&lt;a href=&quot;#Solution&quot; class=&quot;headerlink&quot; title=&quot;Solution&quot;&gt;&lt;/a&gt;Solution&lt;/h3&gt;&lt;p&gt;This problem can be solved using LCS. Since we are going to form a palindrome, we can first the the longest common sequence of the input string and its reverse string. Then this LCS must be in the final palindrome, we just need to change other characters in input string by deletion (or insertion) to make the rest characters paired up. &lt;/p&gt;
+&lt;p&gt;For example, we have &lt;code&gt;str = &amp;quot;abcdb&amp;quot;&lt;/code&gt;, its reverse string is &lt;code&gt;&amp;quot;bdcba&amp;quot;&lt;/code&gt;, their LCS is &lt;code&gt;bcb&lt;/code&gt;, this must be in the final palindrome. The rest characters in &lt;code&gt;str&lt;/code&gt; are &lt;code&gt;a,d&lt;/code&gt;, we just need to delete them, then we can form a palindrome &lt;code&gt;bcb&lt;/code&gt;.&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;formPalindrome&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String str)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    String lcs = LCS(str, &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; StringBuilder(str).reverse().toString());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; str.length() - lcs.length();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;This problem can also be solved by finding the length of the &lt;code&gt;Longest Palindromic Subsequence&lt;/code&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Form-a-palindrome-II&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-II&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome II&quot;&gt;&lt;/a&gt;Form a palindrome II&lt;/h2&gt;&lt;
+    
+    </summary>
+    
+      <category term="Dynamic Programming" scheme="http://louie.link/categories/Dynamic-Programming/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Form a palindrome I (Insertion)</title>
+    <link href="http://louie.link/Dynamic-Programming/(5)FormPalindromeI(Insertion)/"/>
+    <id>http://louie.link/Dynamic-Programming/(5)FormPalindromeI(Insertion)/</id>
+    <published>2018-03-01T08:00:00.000Z</published>
+    <updated>2018-03-05T10:42:24.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;Form-a-palindrome-I&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-I&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome I&quot;&gt;&lt;/a&gt;Form a palindrome I&lt;/h2&gt;&lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given a string, find the minimum number of characters to be inserted to convert it to palindrome. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ab: Number of insertions required is 1. bab or aba&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;aa: Number of insertions required is 0. aa&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;abcd: Number of insertions required is 3. dcbabcd&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;Solution1&quot;&gt;&lt;a href=&quot;#Solution1&quot; class=&quot;headerlink&quot; title=&quot;Solution1&quot;&gt;&lt;/a&gt;Solution1&lt;/h3&gt;&lt;p&gt;Let &lt;code&gt;dp[i][j]&lt;/code&gt; denote the minimum number of characters to be inserted for str[i, … j]. &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;If &lt;code&gt;str[i] == str[j]&lt;/code&gt;, then &lt;code&gt;dp[i][j] = dp[i+1][j-1]&lt;/code&gt;. For example, &lt;code&gt;abcdda&lt;/code&gt;, we just need to find the solution to &lt;code&gt;bcdd&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;If &lt;code&gt;str[i] != str[j]&lt;/code&gt;, then we need to consider &lt;code&gt;str[i,...j-1]&lt;/code&gt; and &lt;code&gt;str[i+1, ...j]&lt;/code&gt;, find the smaller one, and plus 1 for insertion. For example, &lt;code&gt;abcde&lt;/code&gt;, &lt;code&gt;a != e&lt;/code&gt;, then we need to compute &lt;code&gt;abcd&lt;/code&gt; and &lt;code&gt;bcde&lt;/code&gt;, find a smaller one, we choose &lt;code&gt;abcd&lt;/code&gt;, suppose this subprolem’s solution is 3 (&lt;code&gt;dcbabcd&lt;/code&gt;) then insert &lt;code&gt;e&lt;/code&gt; (+1) to the front to make it palindrome =&amp;gt; &lt;code&gt;edcbabcde&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So we have: &lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\left\{\begin{aligned}dp[i][j] &amp;= dp[i+1][j-1], if \; str[i] = str[j] \\ dp[i][j] &amp;= min\{dp[i][j-1], dp[i+1][j]\}, if \; str[i] \ne str[j]\end{aligned}\right.&lt;/script&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;formPalindrome&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[] arr, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[][] dp = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[n][n];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//fill the table diagonally&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; dist = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; dist &amp;lt; n; dist ++)&amp;#123; &lt;span class=&quot;comment&quot;&gt;//distance between i and j&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; n - dist; i++)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; j = i + dist;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(arr[i] == arr[j])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                dp[i][j] = dp[i+&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][j-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                dp[i][j] = Math.min(dp[i][j-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;], dp[i+&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][j]) + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; dp[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;][n-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;Solution2&quot;&gt;&lt;a href=&quot;#Solution2&quot; class=&quot;headerlink&quot; title=&quot;Solution2&quot;&gt;&lt;/a&gt;Solution2&lt;/h3&gt;&lt;p&gt;This problem can also be solved using LCS. Since we are going to form a palindrome, we can first the the longest common sequence of the input string and its reverse string. Then this LCS must be in the final palindrome, we just need to change other characters in input string by insertion (or deletion) to make the rest characters paired up. &lt;/p&gt;
+&lt;p&gt;For example, we have &lt;code&gt;str = &amp;quot;abcdb&amp;quot;&lt;/code&gt;, its reverse string is &lt;code&gt;&amp;quot;bdcba&amp;quot;&lt;/code&gt;, their LCS is &lt;code&gt;bcb&lt;/code&gt;, this must be in the final palindrome. The rest characters in &lt;code&gt;str&lt;/code&gt; are &lt;code&gt;a,d&lt;/code&gt;, we just need to add another &lt;code&gt;a&lt;/code&gt; and &lt;code&gt;d&lt;/code&gt;, then we can form a palindrome &lt;code&gt;abdcdba&lt;/code&gt;.&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;formPalindrome&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String str)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    String lcs = LCS(str, &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; StringBuilder(str).reverse().toString());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; str.length() - lcs.length();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Form-a-palindrome-I&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-I&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome I&quot;&gt;&lt;/a&gt;Form a palindrome I&lt;/h2&gt;&lt;h3 i
+    
+    </summary>
+    
+      <category term="Dynamic Programming" scheme="http://louie.link/categories/Dynamic-Programming/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Ones and Zeroes</title>
     <link href="http://louie.link/Dynamic-Programming/(2)OnesAndZeroes/"/>
     <id>http://louie.link/Dynamic-Programming/(2)OnesAndZeroes/</id>
     <published>2018-03-01T08:00:00.000Z</published>
-    <updated>2018-03-05T08:19:17.000Z</updated>
+    <updated>2018-03-05T08:23:42.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;Ones-and-Zeroes&quot;&gt;&lt;a href=&quot;#Ones-and-Zeroes&quot; class=&quot;headerlink&quot; title=&quot;Ones and Zeroes&quot;&gt;&lt;/a&gt;Ones and Zeroes&lt;/h2&gt;&lt;p&gt;Suppose you are a dominator of &lt;strong&gt;m&lt;/strong&gt; &lt;code&gt;0s&lt;/code&gt; and &lt;strong&gt;n&lt;/strong&gt; &lt;code&gt;1s&lt;/code&gt; respectively. On the other hand, there is an array with strings consisting of only &lt;code&gt;0s&lt;/code&gt; and &lt;code&gt;1s&lt;/code&gt;. Now your task is to find the &lt;strong&gt;maximum&lt;/strong&gt; number of strings that you can form with given &lt;strong&gt;m&lt;/strong&gt; &lt;code&gt;0s&lt;/code&gt; and &lt;strong&gt;n&lt;/strong&gt; &lt;code&gt;1s&lt;/code&gt;. Each &lt;code&gt;0&lt;/code&gt; and &lt;code&gt;1&lt;/code&gt; can be used at most &lt;strong&gt;once&lt;/strong&gt;.&lt;/p&gt;
+    <content type="html">&lt;h2 id=&quot;Ones-and-Zeroes&quot;&gt;&lt;a href=&quot;#Ones-and-Zeroes&quot; class=&quot;headerlink&quot; title=&quot;Ones and Zeroes&quot;&gt;&lt;/a&gt;Ones and Zeroes&lt;/h2&gt;&lt;h3 id=&quot;1-Description&quot;&gt;&lt;a href=&quot;#1-Description&quot; class=&quot;headerlink&quot; title=&quot;1. Description&quot;&gt;&lt;/a&gt;1. Description&lt;/h3&gt;&lt;p&gt;Suppose you are a dominator of &lt;strong&gt;m&lt;/strong&gt; &lt;code&gt;0s&lt;/code&gt; and &lt;strong&gt;n&lt;/strong&gt; &lt;code&gt;1s&lt;/code&gt; respectively. On the other hand, there is an array with strings consisting of only &lt;code&gt;0s&lt;/code&gt; and &lt;code&gt;1s&lt;/code&gt;. Now your task is to find the &lt;strong&gt;maximum&lt;/strong&gt; number of strings that you can form with given &lt;strong&gt;m&lt;/strong&gt; &lt;code&gt;0s&lt;/code&gt; and &lt;strong&gt;n&lt;/strong&gt; &lt;code&gt;1s&lt;/code&gt;. Each &lt;code&gt;0&lt;/code&gt; and &lt;code&gt;1&lt;/code&gt; can be used at most &lt;strong&gt;once&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Input: Array = &amp;#123;&amp;quot;10&amp;quot;, &amp;quot;0001&amp;quot;, &amp;quot;111001&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;0&amp;quot;&amp;#125;, m = 5, n = 3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Output: 4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Explanation: This are totally 4 strings can be formed by the using of 5 0s and 3 1s, which are “10,”0001”,”1”,”0”&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;This problem is similar to 0-1 knapsack problem. &lt;/p&gt;
+&lt;h3 id=&quot;2-Solution&quot;&gt;&lt;a href=&quot;#2-Solution&quot; class=&quot;headerlink&quot; title=&quot;2. Solution&quot;&gt;&lt;/a&gt;2. Solution&lt;/h3&gt;&lt;p&gt;This problem is similar to 0-1 knapsack problem. &lt;/p&gt;
 &lt;p&gt;We can use &lt;code&gt;dp[k, i, j]&lt;/code&gt; to represent using first k strings that have i &lt;code&gt;0&lt;/code&gt;s and j &lt;code&gt;1&lt;/code&gt;s. For the &lt;code&gt;k&lt;/code&gt;th string, let &lt;code&gt;zeros&lt;/code&gt; denote the number of &lt;code&gt;0&lt;/code&gt;s in string k, and &lt;code&gt;ones&lt;/code&gt; denote the number of &lt;code&gt;1&lt;/code&gt;s in string k. There are two possible actions:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ol&gt;
@@ -51,7 +113,54 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Ones-and-Zeroes&quot;&gt;&lt;a href=&quot;#Ones-and-Zeroes&quot; class=&quot;headerlink&quot; title=&quot;Ones and Zeroes&quot;&gt;&lt;/a&gt;Ones and Zeroes&lt;/h2&gt;&lt;p&gt;Suppose you are a 
+      &lt;h2 id=&quot;Ones-and-Zeroes&quot;&gt;&lt;a href=&quot;#Ones-and-Zeroes&quot; class=&quot;headerlink&quot; title=&quot;Ones and Zeroes&quot;&gt;&lt;/a&gt;Ones and Zeroes&lt;/h2&gt;&lt;h3 id=&quot;1-Description
+    
+    </summary>
+    
+      <category term="Dynamic Programming" scheme="http://louie.link/categories/Dynamic-Programming/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Longest Common Subsequence</title>
+    <link href="http://louie.link/Dynamic-Programming/(3)LongestCommonSubsequence/"/>
+    <id>http://louie.link/Dynamic-Programming/(3)LongestCommonSubsequence/</id>
+    <published>2018-03-01T08:00:00.000Z</published>
+    <updated>2018-03-05T10:14:01.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;Longest-Common-Subsequence&quot;&gt;&lt;a href=&quot;#Longest-Common-Subsequence&quot; class=&quot;headerlink&quot; title=&quot;Longest Common Subsequence&quot;&gt;&lt;/a&gt;Longest Common Subsequence&lt;/h2&gt;&lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given two sequences, find the length of longest subsequence present in both of them. Both the strings are of uppercase.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Examples:&lt;/strong&gt;&lt;br&gt;LCS for input Sequences “ABCDGH” and “AEDFHR” is “ADH” of length 3.&lt;br&gt;LCS for input Sequences “AGGTAB” and “GXTXAYB” is “GTAB” of length 4.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Input:&lt;/strong&gt;&lt;br&gt;First line of the input contains number of test cases &lt;strong&gt;T&lt;/strong&gt;, the &lt;strong&gt;T&lt;/strong&gt; test cases follow.&lt;br&gt;Each test case consist of 2 space separated integers &lt;strong&gt;A&lt;/strong&gt; and &lt;strong&gt;B&lt;/strong&gt; denoting the size of string &lt;strong&gt;str1&lt;/strong&gt; and &lt;strong&gt;str2&lt;/strong&gt; respectively. The next two lines contains the 2 string &lt;strong&gt;str1&lt;/strong&gt; and &lt;strong&gt;str2&lt;/strong&gt; .&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Output:&lt;/strong&gt;&lt;br&gt;For each test case print the length of longest  common subsequence of the two strings .&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;Input:&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6 6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ABCDGH&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;AEDFHR&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ABC&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;AC&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Output:&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;Solution-find-length&quot;&gt;&lt;a href=&quot;#Solution-find-length&quot; class=&quot;headerlink&quot; title=&quot;Solution (find length)&quot;&gt;&lt;/a&gt;Solution (find length)&lt;/h3&gt;&lt;p&gt;We have two strings, assume the length of the first string is &lt;code&gt;m&lt;/code&gt;, and the length of the second string is &lt;code&gt;n&lt;/code&gt;. We have two variables, it natural to think use both of them. Let’s try so. Use &lt;code&gt;dp[i][j]&lt;/code&gt; to denote the length of the longest subsequence of &lt;code&gt;str1.substring(0,i)&lt;/code&gt; and &lt;code&gt;str2.substring(0,j)&lt;/code&gt;. &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;If &lt;code&gt;str1[i-1] == str2[j-1]&lt;/code&gt;(last characters of two strings), then &lt;code&gt;dp[i][j] = dp[i-1][j-1] + 1&lt;/code&gt;. For example, two substrings are &lt;code&gt;ABCDGH&lt;/code&gt; and &lt;code&gt;AEDFH&lt;/code&gt;, we just need to find the longest subsequence of &lt;code&gt;ABCDG&lt;/code&gt; and &lt;code&gt;AEDF&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;If &lt;code&gt;str1[i-1] != str2[j-1]&lt;/code&gt;, then &lt;code&gt;dp[i][j] = max{dp[i-1][j], dp[i][j-1]}&lt;/code&gt;. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;LCS&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[] arrA, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; m, &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[] arrB, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[][] dp = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[m + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][n + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; i &amp;lt;= m; i++)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; j = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; j &amp;lt;= n; j++)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(arrA[i-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] == arrB[j-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                dp[i][j] = dp[i-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][j-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                dp[i][j] = Math.max(dp[i-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][j], dp[i][j-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; dp[m][n];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/13102045/scanner-is-skipping-nextline-after-using-next-or-nextfoo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Reference&lt;/a&gt; To read input, if using both &lt;code&gt;nextInt()&lt;/code&gt;  and &lt;code&gt;nextLine&lt;/code&gt;(), be careful that &lt;a href=&quot;http://docs.oracle.com/javase/7/docs/api/java/util/Scanner.html#nextInt%28%29&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;code&gt;Scanner.nextInt&lt;/code&gt;&lt;/a&gt; method does not consume the &lt;em&gt;last newline&lt;/em&gt; character of input, and thus that &lt;em&gt;newline&lt;/em&gt; is consumed in the next call to &lt;a href=&quot;http://docs.oracle.com/javase/7/docs/api/java/util/Scanner.html#nextLine%28%29&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;code&gt;Scanner.nextLine&lt;/code&gt;&lt;/a&gt;. So we need to code like this:&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(String[] args)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Scanner scan = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Scanner(System.in);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; t = scan.nextInt();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt;(t-- &amp;gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; m = scan.nextInt(); &lt;span class=&quot;comment&quot;&gt;//length of String a&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n = scan.nextInt(); &lt;span class=&quot;comment&quot;&gt;//length of String b&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        scan.nextLine();  &lt;span class=&quot;comment&quot;&gt;// Consume newline left-over&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        String a = scan.nextLine();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        String b = scan.nextLine();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        System.out.println(LCS(a.toCharArray(), m, b.toCharArray(), n));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;If we do not put &lt;code&gt;scan.nextLine();&lt;/code&gt; before using &lt;code&gt;nextLine();&lt;/code&gt;, then String a will be empty string =&amp;gt; &lt;code&gt;a = &amp;quot;&amp;quot;&lt;/code&gt;, &lt;code&gt;b = ABCDGH&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;Or we can use &lt;code&gt;next()&lt;/code&gt; to read string a and b.&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(String[] args)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Scanner scan = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Scanner(System.in);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; t = scan.nextInt();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt;(t-- &amp;gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; m = scan.nextInt(); &lt;span class=&quot;comment&quot;&gt;//length of String a&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n = scan.nextInt(); &lt;span class=&quot;comment&quot;&gt;//length of String b&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        String a = scan.next();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        String b = scan.next();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        System.out.println(LCS(a.toCharArray(), m, b.toCharArray(), n));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;Extension-find-subsequence&quot;&gt;&lt;a href=&quot;#Extension-find-subsequence&quot; class=&quot;headerlink&quot; title=&quot;Extension (find subsequence)&quot;&gt;&lt;/a&gt;Extension (find subsequence)&lt;/h3&gt;&lt;p&gt;The solution above could give us the length of the longest subsequence. But how do we find the actual subsequence? &lt;/p&gt;
+&lt;p&gt;Let’s see the table that above solution will produce for input &lt;code&gt;str1 = &amp;quot;AGGTAB&amp;quot;, str2 = &amp;quot;GXTXAYB&amp;quot;&lt;/code&gt;. And the longest common sequence is &lt;code&gt;GTAB&lt;/code&gt;.&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;		G	X	T	X	A	Y	B&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	0	0	0	0	0	0	0	0	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;A	0	0	0	0	0	1	1	1	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;G	0	1	1	1	1	1	1	1	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;G	0	1	1	1	1	1	1	1	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;T	0	1	1	2	2	2	2	2	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;A	0	1	1	2	2	3	3	3	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;B	0	1	1	2	2	3	3	4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;We can start from the bottom-right corner &lt;code&gt;dp[m][n]&lt;/code&gt;.  For&lt;code&gt;dp[6][7]&lt;/code&gt;, &lt;code&gt;str1[5] == str2[6] == &amp;#39;B&amp;#39;&lt;/code&gt;, so we know that &lt;code&gt;B&lt;/code&gt; is in the common subsequence and we need to check &lt;code&gt;dp[m-1][n-1]&lt;/code&gt;(diagonally) next time. For &lt;code&gt;dp[5][6]&lt;/code&gt;, &lt;code&gt;str1[5] == &amp;#39;A&amp;#39; != &amp;#39;Y&amp;#39; == str2[6]&lt;/code&gt;, we will check left cell and top cell, since &lt;code&gt;dp[5][5] = 3 &amp;gt; 2 = dp[4][6]&lt;/code&gt;, we know the result of &lt;code&gt;dp[5][6] = 3&lt;/code&gt; came from &lt;code&gt;dp[5][5]&lt;/code&gt;, so we go left. Then produce &lt;code&gt;A&lt;/code&gt;, go diagonally; do not output, go left, produce &lt;code&gt;T&lt;/code&gt;, go diagonally; do not output, go top or left; produce &lt;code&gt;G&lt;/code&gt;, stop.&lt;/p&gt;
+&lt;p&gt;In this manner, we will have &lt;code&gt;BATG&lt;/code&gt;, reverse it will be our final answer &lt;code&gt;GTAB&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; String &lt;span class=&quot;title&quot;&gt;findLCS&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[] arrA, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; m, &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[] arrB, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[][] dp = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[m + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][n + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; i &amp;lt;= m; i++)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; j = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; j &amp;lt;= n; j++)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(arrA[i-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] == arrB[j-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                dp[i][j] = dp[i-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][j-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                dp[i][j] = Math.max(dp[i-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][j], dp[i][j-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    StringBuilder lcs = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; StringBuilder();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = m, j = n;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt;(i &amp;gt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;amp;&amp;amp; j &amp;gt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(arrA[i-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] == arrB[j-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;])&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            lcs.append(arrA[i-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            i--; j--;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(dp[i-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][j] &amp;gt; dp[i][j-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;])&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                i--; &lt;span class=&quot;comment&quot;&gt;//go top&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(dp[i-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;][j] &amp;lt; dp[i][j-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;])&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                j--; &lt;span class=&quot;comment&quot;&gt;//go left&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                i--; j--; &lt;span class=&quot;comment&quot;&gt;//go diagonal&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; lcs.reverse().toString(); &lt;span class=&quot;comment&quot;&gt;//reverse() since we started from the bottom-right corner&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Longest-Common-Subsequence&quot;&gt;&lt;a href=&quot;#Longest-Common-Subsequence&quot; class=&quot;headerlink&quot; title=&quot;Longest Common Subsequence&quot;&gt;&lt;/a&gt;Longest 
     
     </summary>
     
@@ -65,7 +174,7 @@
     <link href="http://louie.link/Dynamic-Programming/(1)CoinChange/"/>
     <id>http://louie.link/Dynamic-Programming/(1)CoinChange/</id>
     <published>2018-02-28T08:00:00.000Z</published>
-    <updated>2018-03-05T07:37:04.000Z</updated>
+    <updated>2018-03-05T10:14:37.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;Coin-Change&quot;&gt;&lt;a href=&quot;#Coin-Change&quot; class=&quot;headerlink&quot; title=&quot;Coin Change&quot;&gt;&lt;/a&gt;Coin Change&lt;/h2&gt;&lt;h3 id=&quot;1-Minimum-number-of-coins&quot;&gt;&lt;a href=&quot;#1-Minimum-number-of-coins&quot; class=&quot;headerlink&quot; title=&quot;1. Minimum number of coins&quot;&gt;&lt;/a&gt;1. Minimum number of coins&lt;/h3&gt;&lt;p&gt;Compute the minimum number of coins needed to make change for a given amount $m$. Assume that we have an infinite supply of each coin. All denominations $d_k$ are sorted in ascending order: $1 = coin_1 &amp;lt; coin_2 &amp;lt; … &amp;lt; coin_n$. (&lt;strong&gt;$coin_1= 1$ here is simply to make sure that there will always exist a solution, will discuss the case that no solution exists later on&lt;/strong&gt;)&lt;/p&gt;
 &lt;p&gt;For this problem, Greedy Algorithm cannot always find the optimal solution. For example, we have m = 100, D = {1,5,50,80}, greedy that selects largest coin will produce {80,5,5,5,5}, 5 coins, while we just need 2, {50,50}.&lt;/p&gt;
@@ -78,14 +187,10 @@
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;dp[k,x] = min\{dp[k-1, x], dp[k, x-coin_k] + 1\}&lt;/script&gt;&lt;p&gt;Therefore, the problem has optimal substructure property as the problem can be solved using solutions to subproblems.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;If m = 0, then the number should be 0, $dp[k, 0] = 0$&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;If just use $coin[0] = 1$, then the number is our target amount, $dp[0,x] = x$.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;If the amount needed now is less the the current coin k, i.e. $x &amp;lt; d_k$, $dp[k, x] = dp[k-1, x]$&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;$dp[k,x] = min{dp[k, x-coin_k] + 1, dp[k-1, x]}$&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;If m = 0, then the number should be 0, $dp[k, 0] = 0$&lt;/li&gt;
+&lt;li&gt;If just use $coin[0] = 1$, then the number is our target amount, $dp[0,x] = x$.&lt;/li&gt;
+&lt;li&gt;If the amount needed now is less the the current coin k, i.e. $x &amp;lt; d_k$, $dp[k, x] = dp[k-1, x]$&lt;/li&gt;
+&lt;li&gt;$dp[k,x] = min{dp[k, x-coin_k] + 1, dp[k-1, x]}$&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;For example:&lt;/p&gt;
@@ -1399,154 +1504,6 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     
       &lt;p&gt;&lt;a href=&quot;http://gaofeihang.blog.163.com/blog/static/8450828520128139648199/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;转载链接&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在介绍熵之前，先从另一个概
-    
-    </summary>
-    
-      <category term="Recommender System" scheme="http://louie.link/categories/Recommender-System/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>基尼系数</title>
-    <link href="http://louie.link/Recommender-System/Gini_Index/"/>
-    <id>http://louie.link/Recommender-System/Gini_Index/</id>
-    <published>2016-09-19T07:00:00.000Z</published>
-    <updated>2016-11-21T14:47:54.000Z</updated>
-    
-    <content type="html">&lt;p&gt;基尼系数(Gini Index)是一个经济学概念，是20世纪初意大利经济学家基尼（实际应为赫希曼提出）根据洛伦茨曲线提出的判断分配平等程度的指标，用来描述收入整体差距程度。&lt;/p&gt;
-&lt;p&gt;基尼系数和信息熵这两个指标可以用来定义推荐系统的覆盖率（描述一个推荐系统对物品长尾的发掘能力，覆盖率最简单的一个定义为推荐系统能够推荐出来的物品占总物品集合的比例）&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h3 id=&quot;经济学中基尼系数的意义&quot;&gt;&lt;a href=&quot;#经济学中基尼系数的意义&quot; class=&quot;headerlink&quot; title=&quot;经济学中基尼系数的意义&quot;&gt;&lt;/a&gt;经济学中基尼系数的意义&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/blog_image/recommeder_system/Gini_Index_1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;X轴为人口百分比，Y轴为收入百分比，其中人口按照收入从低到高排序过，即越接近原点的人口收入越低&lt;br&gt;如果各层次人民收入完全均等，那么对应一条 y=x 的线段，即最贫穷的人和最富的人收入相等&lt;br&gt;而实际的情况由洛伦兹曲线表示，贫富差距越大，最接近原点的人口(X)对应的收入(Y)增长最小，最远离原点的人口(X)对应的收入(Y)增长最小，即弯曲程度越大，收入分配越不平等。&lt;/p&gt;
-&lt;p&gt;基尼系数定义为 $G = \frac{A}{A + B}$&lt;/p&gt;
-&lt;p&gt;山西农业大学张建华先生提出了一个简便易用的公式：假定一定数量的人口按收入由低到高顺序排队，分为人数相等的n组，从第1组到第i组人口累计收入占全部人口总收入的比重为$W_{i}$，则说明：该公式是利用定积分的定义将对洛伦茨曲线的积分(面积B)分成n个等高梯形的面积之和得到的。&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;G = 1 - \frac{1}{n}(2\sum_{i=1}^{n-1}{W_{i}+1})&lt;/script&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h3 id=&quot;应用到推荐系统中&quot;&gt;&lt;a href=&quot;#应用到推荐系统中&quot; class=&quot;headerlink&quot; title=&quot;应用到推荐系统中&quot;&gt;&lt;/a&gt;应用到推荐系统中&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/blog_image/recommeder_system/Gini_Index_2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;X轴人口换成物品（按照流行度从低到高排列），Y轴收入换成流行度，那么洛伦兹曲线即表示最不流行的x%物品的总流行度占推荐系统的比例y%&lt;/p&gt;
-&lt;p&gt;同样，基尼系数定义为 $G = \frac{A}{A + B}$&lt;/p&gt;
-&lt;p&gt;若系统中物品的流行度很平均，那么A就很小，从而基尼系数很小，若系统物品流行度分配很不平均，那么A很大，从而基尼系数很大，即可以从基尼系数判断系统物品流行度的分配，从而定义覆盖率。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;基尼系数(Gini Index)是一个经济学概念，是20世纪初意大利经济学家基尼（实际应为赫希曼提出）根据洛伦茨曲线提出的判断分配平等程度的指标，用来描述收入整体差距程度。&lt;/p&gt;
-&lt;p&gt;基尼系数和信息熵这两个指标可以用来定义推荐系统的覆盖率（描述一个推荐系统对物品长尾的发
-    
-    </summary>
-    
-      <category term="Recommender System" scheme="http://louie.link/categories/Recommender-System/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Python的类实例属性访问规则探讨[转]</title>
-    <link href="http://louie.link/Recommender-System/python_instance_access_rule/"/>
-    <id>http://louie.link/Recommender-System/python_instance_access_rule/</id>
-    <published>2016-09-15T07:00:00.000Z</published>
-    <updated>2016-12-21T07:43:31.000Z</updated>
-    
-    <content type="html">&lt;p&gt;一般来说，在Python中，类实例属性的访问规则算是比较直观的。&lt;br&gt;但是，仍然存在一些不是很直观的地方，特别是对C++和Java程序员来说，更是如此。&lt;/p&gt;
-&lt;p&gt;在这里，我们需要明白以下几个地方：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;Python是一门动态语言，任何实体都可以动态地添加或删除属性。&lt;/li&gt;
-&lt;li&gt;一个类定义了一个作用域。&lt;/li&gt;
-&lt;li&gt;类实例也引入了一个作用域，这与相应类定义的作用域不同。&lt;/li&gt;
-&lt;li&gt;在类实例中查找属性的时候，首先在实例自己的作用域中查找，如果没有找到，则再在类定义的作用域中查找。&lt;/li&gt;
-&lt;li&gt;在对类实例属性进行赋值的时候，实际上会在类实例定义的作用域中添加一个属性（如果还不存在的话），并不会影响到相应类中定义的同名属性。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;下面看一个例子，加深对上述几点的理解：&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;A&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      cls_i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      cls_j = &amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.instance_i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.instance_j = &amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;在这里，我们先定义类A的一个实例a，然后再看看类A的作用域和实例a的作用域中分别有什么：&lt;/p&gt;
-&lt;p&gt;代码如下:&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a = A()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a.__dict__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;apos;instance_j&amp;apos;: &amp;#123;&amp;#125;, &amp;apos;instance_i&amp;apos;: 0&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; A.__dict__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;apos;__init__&amp;apos;: , &amp;apos;__module__&amp;apos;: &amp;apos;__main__&amp;apos;, &amp;apos;cls_i&amp;apos;: 0, &amp;apos;cls_j&amp;apos;: &amp;#123;&amp;#125;, &amp;apos;__doc__&amp;apos;: None&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;我们看到，a的作用域中有instance_i和instance_j，A的作用域中有cls_i和cls_j。&lt;br&gt;我们再来看看名字查找是如何发生的：&lt;/p&gt;
-&lt;p&gt;代码如下:&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a.cls_i&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a.instance_i&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;在查找cls_i的时候，实例a的作用域中是没有它的，却在A的作用域中找到了它；在查找instance_i的时候，直接可在a的作用域中找到它。&lt;br&gt;如果我们企图通过实例a来修改cls_i的值，那会怎样呢：&lt;/p&gt;
-&lt;p&gt;代码如下:&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a.cls_i = 1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a.__dict__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;apos;instance_j&amp;apos;: &amp;#123;&amp;#125;, &amp;apos;cls_i&amp;apos;: 1, &amp;apos;instance_i&amp;apos;: 0&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; A.__dict__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;apos;__init__&amp;apos;: , &amp;apos;__module__&amp;apos;: &amp;apos;__main__&amp;apos;, &amp;apos;cls_i&amp;apos;: 0, &amp;apos;cls_j&amp;apos;: &amp;#123;&amp;#125;, &amp;apos;__doc__&amp;apos;: None&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;我们可以看到，a的作用域中多了一个cls_i属性，其值为1；同时，我们也注意到A作用域中的cls_i属性的值仍然为0；在这里，我们其实是增加了一个实例属性，并没有修改到类属性。&lt;br&gt;如果我们通过实例a操纵cls_j中的数据（注意不是cls_j本身），又会怎么样呢：&lt;/p&gt;
-&lt;p&gt;代码如下:&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a.cls_j[&amp;apos;a&amp;apos;] = &amp;apos;a&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a.__dict__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;apos;instance_j&amp;apos;: &amp;#123;&amp;#125;, &amp;apos;cls_i&amp;apos;: 1, &amp;apos;instance_i&amp;apos;: 0&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; A.__dict__&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;apos;__init__&amp;apos;: , &amp;apos;__module__&amp;apos;: &amp;apos;__main__&amp;apos;, &amp;apos;cls_i&amp;apos;: 0, &amp;apos;cls_j&amp;apos;: &amp;#123;&amp;apos;a&amp;apos;: &amp;apos;a&amp;apos;&amp;#125;, &amp;apos;__doc__&amp;apos;: None&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;我们可以看到a的作用域没有发生什么变化，但是A的作用域发生了一些变化，cls_j中的数据发生了变化。&lt;br&gt;实例的作用域发生变化，并不会影响到该类的其它实例，但是类的作用域发生变化，则会影响到该类的所有实例，包括在这之前创建的实例：&lt;/p&gt;
-&lt;p&gt;代码如下:&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; A.cls_k = 0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&amp;gt;&amp;gt; i.cls_k&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一般来说，在Python中，类实例属性的访问规则算是比较直观的。&lt;br&gt;但是，仍然存在一些不是很直观的地方，特别是对C++和Java程序员来说，更是如此。&lt;/p&gt;
-&lt;p&gt;在这里，我们需要明白以下几个地方：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;Python是一
-    
-    </summary>
-    
-      <category term="Recommender System" scheme="http://louie.link/categories/Recommender-System/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>召回率准确率</title>
-    <link href="http://louie.link/Recommender-System/Precision_Recall/"/>
-    <id>http://louie.link/Recommender-System/Precision_Recall/</id>
-    <published>2016-09-12T07:00:00.000Z</published>
-    <updated>2016-11-21T14:42:43.000Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;一、信息检索中：&quot;&gt;&lt;a href=&quot;#一、信息检索中：&quot; class=&quot;headerlink&quot; title=&quot;一、信息检索中：&quot;&gt;&lt;/a&gt;一、信息检索中：&lt;/h3&gt;&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;召回率又叫查全率，是针对原来的&lt;strong&gt;样本&lt;/strong&gt;而言的，表示相关的文档中有多少被检索了出来；&lt;/li&gt;
-&lt;li&gt;准确率又叫查准率，是针对&lt;strong&gt;预测结果&lt;/strong&gt;而言，表示检索出的文档中有多少是相关(准确)的；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/blog_image/recommeder_system/precision%26recall_1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;A = 检索到且相关文件； &lt;/li&gt;
-&lt;li&gt;B = 检索到且不相关文件； &lt;/li&gt;
-&lt;li&gt;C = 未检索到且相关文件； &lt;/li&gt;
-&lt;li&gt;D = 未检索到且不相关文件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;召回率(Recall) = \frac{系统检索到的\textbf{相关文件}}{系统\textbf{所有相关的}文件总数} = \frac{A}{A + C}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;准确率(Precision) =  \frac{系统检索到的\textbf{相关文件}A}{系统\textbf{所有检索到的}文件总数B} = \frac{A}{A + B}&lt;/script&gt;&lt;p&gt;&lt;strong&gt;举例：&lt;/strong&gt;&lt;br&gt;假设一共有10篇文章，其中4篇是我需要的。&lt;br&gt;某个算法计算认为10篇文章中有5篇是我需要的，但是实际上，在这5篇里面，只有3篇才是我真正需要的。&lt;/p&gt;
-&lt;p&gt;那么，这个算法&lt;br&gt;Recall=3/4=75%，也就是说，一共有用的这4篇里面，到了其中3篇。&lt;br&gt;Precision=3/5=60%，也就是说，算法找的这5篇，有3篇是准确的。&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;准确率和召回率是互相影响的，理想情况下期望两者都高，但是一般准确率高时召回率低，召回率低时准确率高&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;阈值不同时，可以得到不同的准确率与召回率&lt;/p&gt;
-&lt;p&gt;如果在以召回率为X轴，准确率为Y轴，画出不同阈值下的准确率与召回率，一般它会程下图形状：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://gitimage-10031767.cos.myqcloud.com/blog_image/recommeder_system/precision%26recall_2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;表示意义：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;左上方，召回率低准确率高：返回最相关的文本但漏掉了很多其他相关文本&lt;/li&gt;
-&lt;li&gt;右下方，召回率高准确率低：返回了大量相关文本但包含了很多垃圾（相关但无用）&lt;/li&gt;
-&lt;li&gt;理想情况是能够到达右上方&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
-&lt;h3 id=&quot;二、推荐系统中：&quot;&gt;&lt;a href=&quot;#二、推荐系统中：&quot; class=&quot;headerlink&quot; title=&quot;二、推荐系统中：&quot;&gt;&lt;/a&gt;二、推荐系统中：&lt;/h3&gt;&lt;p&gt;TopN推荐的预测准确率一般通过准确率(precision) / 召回率(recall)度量。&lt;/p&gt;
-&lt;p&gt;令R(u)是根据用户在&lt;strong&gt;训练集&lt;/strong&gt;上的行为给用户做出的推荐列表，&lt;br&gt;令T(u)是用户在&lt;strong&gt;测试集&lt;/strong&gt;上的行为列表，那么&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;Recall = \frac{\sum_{u∈U}^{}|R(u)\bigcap{T(u)}|}{\sum_{u∈U}^{}|T(u)|}&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;Precision = \frac{\sum_{u∈U}^{}|R(u)\bigcap{T(u)}|}{\sum_{u∈U}^{}|R(u)|}&lt;/script&gt;&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;召回率表示的是用户感兴趣的有多少被正确预测出来&lt;/li&gt;
-&lt;li&gt;准确率表示的是推荐的结果中有多少是用户感兴趣的&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;参考链接:&lt;br&gt;[1] &lt;a href=&quot;http://charleshm.github.io/2016/03/Model-Performance/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;机器学习性能评估指标&lt;/a&gt;&lt;br&gt;[2] &lt;a href=&quot;http://blog.csdn.net/wangzhiqing3/article/details/9058523&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;准确率与召回率&lt;/a&gt;&lt;br&gt;[3] 项亮，推荐系统实践&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;一、信息检索中：&quot;&gt;&lt;a href=&quot;#一、信息检索中：&quot; class=&quot;headerlink&quot; title=&quot;一、信息检索中：&quot;&gt;&lt;/a&gt;一、信息检索中：&lt;/h3&gt;&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;召回率又叫查全率，是针对原来的&lt;strong&gt;样本&lt;/
     
     </summary>
     

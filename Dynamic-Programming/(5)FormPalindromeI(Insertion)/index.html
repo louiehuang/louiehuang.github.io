@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Category: OS | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Form a palindrome I (Insertion) | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -223,45 +223,72 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/OS/OS_review/">操作系统重点</a></h4>
-                            
-                            <p><time datetime="2016-01-05T08:00:00.000Z"><a href="/OS/OS_review/">2016-01-05</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-03-01T08:00:00.000Z" itemprop="datePublished">
+          2018-03-01
+      </time>
+    
+</span>
+                <h1>Form a palindrome I (Insertion)</h1>
+            </div>
         </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="Form-a-palindrome-I"><a href="#Form-a-palindrome-I" class="headerlink" title="Form a palindrome I"></a>Form a palindrome I</h2><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Given a string, find the minimum number of characters to be inserted to convert it to palindrome. </p>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ab: Number of insertions required is 1. bab or aba</span><br><span class="line">aa: Number of insertions required is 0. aa</span><br><span class="line">abcd: Number of insertions required is 3. dcbabcd</span><br></pre></td></tr></table></figure>
+<h3 id="Solution1"><a href="#Solution1" class="headerlink" title="Solution1"></a>Solution1</h3><p>Let <code>dp[i][j]</code> denote the minimum number of characters to be inserted for str[i, … j]. </p>
+<blockquote>
+<ol>
+<li>If <code>str[i] == str[j]</code>, then <code>dp[i][j] = dp[i+1][j-1]</code>. For example, <code>abcdda</code>, we just need to find the solution to <code>bcdd</code></li>
+<li>If <code>str[i] != str[j]</code>, then we need to consider <code>str[i,...j-1]</code> and <code>str[i+1, ...j]</code>, find the smaller one, and plus 1 for insertion. For example, <code>abcde</code>, <code>a != e</code>, then we need to compute <code>abcd</code> and <code>bcde</code>, find a smaller one, we choose <code>abcd</code>, suppose this subprolem’s solution is 3 (<code>dcbabcd</code>) then insert <code>e</code> (+1) to the front to make it palindrome =&gt; <code>edcbabcde</code></li>
+</ol>
+</blockquote>
+<p>So we have: </p>
+<script type="math/tex; mode=display">\left\{\begin{aligned}dp[i][j] &= dp[i+1][j-1], if \; str[i] = str[j] \\ dp[i][j] &= min\{dp[i][j-1], dp[i+1][j]\}, if \; str[i] \ne str[j]\end{aligned}\right.</script><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">formPalindrome</span><span class="params">(<span class="keyword">char</span>[] arr, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n][n];</span><br><span class="line">    <span class="comment">//fill the table diagonally</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> dist = <span class="number">1</span>; dist &lt; n; dist ++)&#123; <span class="comment">//distance between i and j</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - dist; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + dist;</span><br><span class="line">            <span class="keyword">if</span>(arr[i] == arr[j])</span><br><span class="line">                dp[i][j] = dp[i+<span class="number">1</span>][j-<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                dp[i][j] = Math.min(dp[i][j-<span class="number">1</span>], dp[i+<span class="number">1</span>][j]) + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">0</span>][n-<span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Solution2"><a href="#Solution2" class="headerlink" title="Solution2"></a>Solution2</h3><p>This problem can also be solved using LCS. Since we are going to form a palindrome, we can first the the longest common sequence of the input string and its reverse string. Then this LCS must be in the final palindrome, we just need to change other characters in input string by insertion (or deletion) to make the rest characters paired up. </p>
+<p>For example, we have <code>str = &quot;abcdb&quot;</code>, its reverse string is <code>&quot;bdcba&quot;</code>, their LCS is <code>bcb</code>, this must be in the final palindrome. The rest characters in <code>str</code> are <code>a,d</code>, we just need to add another <code>a</code> and <code>d</code>, then we can form a palindrome <code>abdcdba</code>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">formPalindrome</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    String lcs = LCS(str, <span class="keyword">new</span> StringBuilder(str).reverse().toString());</span><br><span class="line">    <span class="keyword">return</span> str.length() - lcs.length();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <!-- 分页 -->
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
         <nav class="pagination" role="pagination">
-          
-          
-        </nav>
-    </div>
-</section> 
+    
+    <a class="pull-left" href="/Dynamic-Programming/(4)FormPalindromeII(Deletion)/" style="float: left;">
+        ← Form a palindrome II (Deletion)
+    </a>
+    
+    
+    <a class="pull-right" href="/Dynamic-Programming/(2)OnesAndZeroes/">
+        Ones and Zeroes →
+    </a>
+    
+</nav>
 
-
-
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>Don't give up on your dreams -- Keep sleeping</p>
-        </div>
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Dynamic-Programming/(5)FormPalindromeI(Insertion)/" data-title="Form a palindrome I (Insertion)" data-url="http://louie.link/Dynamic-Programming/(5)FormPalindromeI(Insertion)/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

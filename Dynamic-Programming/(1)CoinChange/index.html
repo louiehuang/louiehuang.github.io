@@ -131,7 +131,7 @@
 				    
 				    <li><a href="/categories/Computer-Networks/" class="animsition-link">Computer Networks<small>(1)</small></a></li>
 				    
-				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(3)</small></a></li>
+				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(6)</small></a></li>
 				    
 				    <li><a href="/categories/Image-Processing/" class="animsition-link">Image Processing<small>(1)</small></a></li>
 				    
@@ -248,14 +248,10 @@
 <script type="math/tex; mode=display">dp[k,x] = min\{dp[k-1, x], dp[k, x-coin_k] + 1\}</script><p>Therefore, the problem has optimal substructure property as the problem can be solved using solutions to subproblems.</p>
 <blockquote>
 <ol>
-<li><p>If m = 0, then the number should be 0, $dp[k, 0] = 0$</p>
-</li>
-<li><p>If just use $coin[0] = 1$, then the number is our target amount, $dp[0,x] = x$.</p>
-</li>
-<li><p>If the amount needed now is less the the current coin k, i.e. $x &lt; d_k$, $dp[k, x] = dp[k-1, x]$</p>
-</li>
-<li><p>$dp[k,x] = min{dp[k, x-coin_k] + 1, dp[k-1, x]}$</p>
-</li>
+<li>If m = 0, then the number should be 0, $dp[k, 0] = 0$</li>
+<li>If just use $coin[0] = 1$, then the number is our target amount, $dp[0,x] = x$.</li>
+<li>If the amount needed now is less the the current coin k, i.e. $x &lt; d_k$, $dp[k, x] = dp[k-1, x]$</li>
+<li>$dp[k,x] = min{dp[k, x-coin_k] + 1, dp[k-1, x]}$</li>
 </ol>
 </blockquote>
 <p>For example:</p>
@@ -298,8 +294,8 @@
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/Dynamic-Programming/(2)OnesAndZeroes/" style="float: left;">
-        ← Ones and Zeroes
+    <a class="pull-left" href="/Dynamic-Programming/(3)LongestCommonSubsequence/" style="float: left;">
+        ← Longest Common Subsequence
     </a>
     
     
