@@ -2,44 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://louie.link/Dynamic-Programming/(5)FormPalindromeII(Insertion)/</loc>
+    <loc>http://louie.link/Dynamic-Programming/06_FormPalindromeII(Insertion)/</loc>
     
-    <lastmod>2018-03-05T10:54:28.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://louie.link/Dynamic-Programming/(4)FormPalindromeI(Deletion)/</loc>
-    
-    <lastmod>2018-03-05T10:54:23.000Z</lastmod>
+    <lastmod>2018-03-06T23:29:51.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://louie.link/Dynamic-Programming/(1)CoinChange/</loc>
+    <loc>http://louie.link/Dynamic-Programming/05_FormPalindromeI(Deletion)/</loc>
     
-    <lastmod>2018-03-05T10:14:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://louie.link/Dynamic-Programming/(3)LongestCommonSubsequence/</loc>
-    
-    <lastmod>2018-03-05T10:14:01.000Z</lastmod>
+    <lastmod>2018-03-06T23:29:46.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://louie.link/Dynamic-Programming/(2)OnesAndZeroes/</loc>
+    <loc>http://louie.link/Dynamic-Programming/04_LongestCommonSubsequence/</loc>
     
-    <lastmod>2018-03-05T08:23:42.000Z</lastmod>
+    <lastmod>2018-03-06T23:29:42.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://louie.link/Dynamic-Programming/(0)DynamicProgrammingBasics/</loc>
+    <loc>http://louie.link/Dynamic-Programming/03_OnesAndZeroes/</loc>
     
-    <lastmod>2018-03-05T08:20:10.000Z</lastmod>
+    <lastmod>2018-03-06T23:29:38.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/Dynamic-Programming/02_CoinChange/</loc>
+    
+    <lastmod>2018-03-06T23:29:34.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/Dynamic-Programming/01_DynamicProgrammingBasics/</loc>
+    
+    <lastmod>2018-03-06T23:29:29.000Z</lastmod>
     
   </url>
   

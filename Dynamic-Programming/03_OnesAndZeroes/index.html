@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Form a palindrome II (Insertion) | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>03 Ones and Zeroes | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -233,45 +233,54 @@
       </time>
     
 </span>
-                <h1>Form a palindrome II (Insertion)</h1>
+                <h1>03 Ones and Zeroes</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="Form-a-palindrome-II"><a href="#Form-a-palindrome-II" class="headerlink" title="Form a palindrome II"></a>Form a palindrome II</h2><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Given a string, find the minimum number of characters to be inserted to convert it to palindrome. </p>
+      		<h2 id="Ones-and-Zeroes"><a href="#Ones-and-Zeroes" class="headerlink" title="Ones and Zeroes"></a>Ones and Zeroes</h2><h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1. Description"></a>1. Description</h3><p>Suppose you are a dominator of <strong>m</strong> <code>0s</code> and <strong>n</strong> <code>1s</code> respectively. On the other hand, there is an array with strings consisting of only <code>0s</code> and <code>1s</code>. Now your task is to find the <strong>maximum</strong> number of strings that you can form with given <strong>m</strong> <code>0s</code> and <strong>n</strong> <code>1s</code>. Each <code>0</code> and <code>1</code> can be used at most <strong>once</strong>.</p>
 <p><strong>Example:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ab: Number of insertions required is 1. bab or aba</span><br><span class="line">aa: Number of insertions required is 0. aa</span><br><span class="line">abcd: Number of insertions required is 3. dcbabcd</span><br></pre></td></tr></table></figure>
-<h3 id="Solution1"><a href="#Solution1" class="headerlink" title="Solution1"></a>Solution1</h3><p>Let <code>dp[i][j]</code> denote the minimum number of characters to be inserted for str[i, … j]. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: Array = &#123;&quot;10&quot;, &quot;0001&quot;, &quot;111001&quot;, &quot;1&quot;, &quot;0&quot;&#125;, m = 5, n = 3</span><br><span class="line">Output: 4</span><br><span class="line"></span><br><span class="line">Explanation: This are totally 4 strings can be formed by the using of 5 0s and 3 1s, which are “10,”0001”,”1”,”0”</span><br></pre></td></tr></table></figure>
+<h3 id="2-Solution"><a href="#2-Solution" class="headerlink" title="2. Solution"></a>2. Solution</h3><p>This problem is similar to 0-1 knapsack problem. </p>
+<p>We can use <code>dp[k, i, j]</code> to represent using first k strings that have i <code>0</code>s and j <code>1</code>s. For the <code>k</code>th string, let <code>zeros</code> denote the number of <code>0</code>s in string k, and <code>ones</code> denote the number of <code>1</code>s in string k. There are two possible actions:</p>
 <blockquote>
 <ol>
-<li>If <code>str[i] == str[j]</code>, then <code>dp[i][j] = dp[i+1][j-1]</code>. For example, <code>abcdda</code>, we just need to find the solution to <code>bcdd</code></li>
-<li>If <code>str[i] != str[j]</code>, then we need to consider <code>str[i,...j-1]</code> and <code>str[i+1, ...j]</code>, find the smaller one, and plus 1 for insertion. For example, <code>abcde</code>, <code>a != e</code>, then we need to compute <code>abcd</code> and <code>bcde</code>, find a smaller one, we choose <code>abcd</code>, suppose this subprolem’s solution is 3 (<code>dcbabcd</code>) then insert <code>e</code> (+1) to the front to make it palindrome =&gt; <code>edcbabcde</code></li>
+<li>If we pick the <code>k</code>th string, we will have <code>zeros</code> more <code>0</code>s and <code>ones</code> more <code>1</code>s, which means we still need <code>i-zeros</code> <code>0</code>s and <code>j-ones</code> <code>1</code>s, so $dp[k, i, j] = dp[k, i - zeros, j - ones] + 1$</li>
+<li>If we do not pick the <code>k</code>th string, then $dp[k, i, j] = dp[k-1, i, j]$</li>
 </ol>
 </blockquote>
-<p>So we have: </p>
-<script type="math/tex; mode=display">\left\{\begin{aligned}dp[i][j] &= dp[i+1][j-1], if \; str[i] = str[j] \\ dp[i][j] &= min\{dp[i][j-1], dp[i+1][j]\}, if \; str[i] \ne str[j]\end{aligned}\right.</script><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">formPalindrome</span><span class="params">(<span class="keyword">char</span>[] arr, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n][n];</span><br><span class="line">    <span class="comment">//fill the table diagonally</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> dist = <span class="number">1</span>; dist &lt; n; dist ++)&#123; <span class="comment">//distance between i and j</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - dist; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + dist;</span><br><span class="line">            <span class="keyword">if</span>(arr[i] == arr[j])</span><br><span class="line">                dp[i][j] = dp[i+<span class="number">1</span>][j-<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                dp[i][j] = Math.min(dp[i][j-<span class="number">1</span>], dp[i+<span class="number">1</span>][j]) + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">0</span>][n-<span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Solution2"><a href="#Solution2" class="headerlink" title="Solution2"></a>Solution2</h3><p>This problem can also be solved using LCS. Since we are going to form a palindrome, we can first the the longest common sequence of the input string and its reverse string. Then this LCS must be in the final palindrome, we just need to change other characters in input string by insertion (or deletion) to make the rest characters paired up. </p>
-<p>For example, we have <code>str = &quot;abcdb&quot;</code>, its reverse string is <code>&quot;bdcba&quot;</code>, their LCS is <code>bcb</code>, this must be in the final palindrome. The rest characters in <code>str</code> are <code>a,d</code>, we just need to add another <code>a</code> and <code>d</code>, then we can form a palindrome <code>abdcdba</code>.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">formPalindrome</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    String lcs = LCS(str, <span class="keyword">new</span> StringBuilder(str).reverse().toString());</span><br><span class="line">    <span class="keyword">return</span> str.length() - lcs.length();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>dp[k, i, j]</code> is a three-dimensional array. We can reduce it to a two-dimensional array - in the <code>k</code>th round, <strong>overwrite</strong> the result of the <code>k-1</code>th round. In this way, we use <code>dp[i][j]</code> the represent the maximum number of strings that can form with i <code>0</code>s and j <code>1</code>s in the <code>k</code>th round (using first k strings). </p>
+<blockquote>
+<ol>
+<li>If we pick the <code>k</code>th string, then $dp[i, j] = dp[i - zeros, j - ones] + 1$ </li>
+<li>If we do not pick the <code>k</code>th string, then $dp[i, j] = dp[i, j]$ (remain unchanged, dp[i,j] on the right side is the result in (k-1) round)</li>
+</ol>
+</blockquote>
+<p><strong>State Transition Equation:</strong></p>
+<script type="math/tex; mode=display">dp[i, j] = max\{dp[i, j], dp[i - zeros, j - ones] + 1\}</script><p>We need to be careful about the implementation of this way. <strong>Both <code>i</code> and <code>j</code> should start from the largest number to decrease</strong> so that we can guarantee that <code>dp[i - zeros, j - ones]</code> we have is the result in the (k-1)th round rather than the result we have just calculated in the kth round. </p>
+<p>This is obvious, suppose we are updating <code>dp[i][j]</code>, we need to check <code>dp[i - zeros, j - ones]</code>, it’s left to <code>dp[i][j]</code>, if we start i and j from small to big, we are using <code>dp[i - zeros, j - ones]</code> updated in kth round. </p>
+<p>For example, in the kth round, i = 5, j = 6, zeros = 2, ones = 3, to compute <code>dp[5][6]</code>, we need <code>dp[5-2][6-3] = dp[3][3]</code>, we need its value to be the one computed in the (k-1)th round rather than in the current kth round. If we start i and j from small to big, then in the kth round, we will compute <code>dp[3][3]</code> before computing <code>dp[5][6]</code> which means <code>dp[3][3]</code> is the result in the kth round, this is not what we want. </p>
+<p><code>i &gt;= zeros</code> &amp;&amp; <code>j &gt;= ones</code> are to make sure <code>dp[][]</code> will not have negative index. Just <strong>be aware of how i and j are updated.</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMaxForm</span><span class="params">(String[] strs, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[m+<span class="number">1</span>][n+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; strs.length; k++)&#123; <span class="comment">//check all string one by one</span></span><br><span class="line">        <span class="keyword">int</span> zeros = numberOfZeros(strs[k]); <span class="comment">//number of zeros this string has</span></span><br><span class="line">        <span class="keyword">int</span> ones = strs[k].length() - zeros; <span class="comment">////number of ones this string has</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = m; i &gt;= zeros; i--) <span class="comment">//make sure dp[i][j] is the (k-1)'s round result</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = n; j &gt;= ones; j--) <span class="comment">//make sure...</span></span><br><span class="line">                dp[i][j] = Math.max(dp[i][j], dp[i - zeros][j - ones] + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[m][n];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">numberOfZeros</span><span class="params">(String str)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> zeros = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> ch : str.toCharArray())</span><br><span class="line">        <span class="keyword">if</span>(ch == <span class="string">'0'</span>)</span><br><span class="line">            zeros++;</span><br><span class="line">    <span class="keyword">return</span> zeros;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/Dynamic-Programming/(4)FormPalindromeI(Deletion)/" style="float: left;">
-        ← Form a palindrome I (Deletion)
+    <a class="pull-left" href="/Dynamic-Programming/05_FormPalindromeI(Deletion)/" style="float: left;">
+        ← 05 Form a palindrome I (Deletion)
     </a>
     
     
-    <a class="pull-right" href="/Dynamic-Programming/(2)OnesAndZeroes/">
-        Ones and Zeroes →
+    <a class="pull-right" href="/Dynamic-Programming/04_LongestCommonSubsequence/">
+        04 Longest Common Subsequence →
     </a>
     
 </nav>
 
         <!-- not using this
             <div class="duoshuo">
-<div class="ds-thread" data-thread-key="Dynamic-Programming/(5)FormPalindromeII(Insertion)/" data-title="Form a palindrome II (Insertion)" data-url="http://louie.link/Dynamic-Programming/(5)FormPalindromeII(Insertion)/"></div>
+<div class="ds-thread" data-thread-key="Dynamic-Programming/03_OnesAndZeroes/" data-title="03 Ones and Zeroes" data-url="http://louie.link/Dynamic-Programming/03_OnesAndZeroes/"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"louiehuang"};
 (function() {

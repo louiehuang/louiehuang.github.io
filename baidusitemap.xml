@@ -4,11 +4,47 @@
 
     
   <url>
-    <loc>http://louie.link/Dynamic-Programming/(5)FormPalindromeII(Insertion)/</loc>
-    <lastmod>2018-03-05T10:54:28.000Z</lastmod>
+    <loc>http://louie.link/Dynamic-Programming/06_FormPalindromeII(Insertion)/</loc>
+    <lastmod>2018-03-06T23:29:51.000Z</lastmod>
     <data>
         <display>
-        <title>Form a palindrome II (Insertion)</title>
+        <title>06 Form a palindrome II (Insertion)</title>
+        <pubTime>2018-03-03T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Dynamic Programming" url="http://louie.link/categories/Dynamic-Programming/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Dynamic-Programming/05_FormPalindromeI(Deletion)/</loc>
+    <lastmod>2018-03-06T23:29:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>05 Form a palindrome I (Deletion)</title>
+        <pubTime>2018-03-03T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Dynamic Programming" url="http://louie.link/categories/Dynamic-Programming/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Dynamic-Programming/04_LongestCommonSubsequence/</loc>
+    <lastmod>2018-03-06T23:29:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>04 Longest Common Subsequence</title>
         <pubTime>2018-03-01T08:00:00.000Z</pubTime>
         
          
@@ -22,11 +58,11 @@
 
     
   <url>
-    <loc>http://louie.link/Dynamic-Programming/(4)FormPalindromeI(Deletion)/</loc>
-    <lastmod>2018-03-05T10:54:23.000Z</lastmod>
+    <loc>http://louie.link/Dynamic-Programming/03_OnesAndZeroes/</loc>
+    <lastmod>2018-03-06T23:29:38.000Z</lastmod>
     <data>
         <display>
-        <title>Form a palindrome I (Deletion)</title>
+        <title>03 Ones and Zeroes</title>
         <pubTime>2018-03-01T08:00:00.000Z</pubTime>
         
          
@@ -40,11 +76,11 @@
 
     
   <url>
-    <loc>http://louie.link/Dynamic-Programming/(1)CoinChange/</loc>
-    <lastmod>2018-03-05T10:14:37.000Z</lastmod>
+    <loc>http://louie.link/Dynamic-Programming/02_CoinChange/</loc>
+    <lastmod>2018-03-06T23:29:34.000Z</lastmod>
     <data>
         <display>
-        <title>Coin Change</title>
+        <title>02 Coin Change</title>
         <pubTime>2018-02-28T08:00:00.000Z</pubTime>
         
          
@@ -58,47 +94,11 @@
 
     
   <url>
-    <loc>http://louie.link/Dynamic-Programming/(3)LongestCommonSubsequence/</loc>
-    <lastmod>2018-03-05T10:14:01.000Z</lastmod>
+    <loc>http://louie.link/Dynamic-Programming/01_DynamicProgrammingBasics/</loc>
+    <lastmod>2018-03-06T23:29:29.000Z</lastmod>
     <data>
         <display>
-        <title>Longest Common Subsequence</title>
-        <pubTime>2018-03-01T08:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Dynamic Programming" url="http://louie.link/categories/Dynamic-Programming/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://louie.link/Dynamic-Programming/(2)OnesAndZeroes/</loc>
-    <lastmod>2018-03-05T08:23:42.000Z</lastmod>
-    <data>
-        <display>
-        <title>Ones and Zeroes</title>
-        <pubTime>2018-03-01T08:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Dynamic Programming" url="http://louie.link/categories/Dynamic-Programming/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://louie.link/Dynamic-Programming/(0)DynamicProgrammingBasics/</loc>
-    <lastmod>2018-03-05T08:20:10.000Z</lastmod>
-    <data>
-        <display>
-        <title>Dynamic Programming Basics</title>
+        <title>01 Dynamic Programming Basics</title>
         <pubTime>2018-02-28T08:00:00.000Z</pubTime>
         
          
