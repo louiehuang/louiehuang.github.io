@@ -237,7 +237,7 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h1 id="0-1-Knapsack-Problem"><a href="#0-1-Knapsack-Problem" class="headerlink" title="0-1 Knapsack Problem"></a>0-1 Knapsack Problem</h1><h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1. Description"></a>1. Description</h3><p>Given n <strong>unique</strong> items,each with a <strong>weight</strong> and a <strong>value</strong>, determine the subset of items such that the total weight &lt;= a given capacity W, and the total value V is as large as possible. You cannot break an item, so you can either pick the complete item, or don’t pick it (0-1 property).</p>
+      		<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1. Description"></a>1. Description</h3><p>Given n <strong>unique</strong> items,each with a <strong>weight</strong> and a <strong>value</strong>, determine the subset of items such that the total weight &lt;= a given capacity W, and the total value V is as large as possible. You cannot break an item, so you can either pick the complete item, or don’t pick it (0-1 property).</p>
 <p>(The fractional knapsack problem can be solved by a greedy algorithm. But 0-1 knapsack cannot)</p>
 <p>For example, we have W = 10, and items:</p>
 <div class="table-container">
@@ -274,12 +274,12 @@
 </table>
 </div>
 <p>Using greedy, we may choose item 1 and 2, thus have total value = 30+14, but in fact, we could choose item 1,3,4 thus have total value = 30+9+12.</p>
-<h3 id="2-Solution"><a href="#2-Solution" class="headerlink" title="2. Solution"></a>2. Solution</h3><p>Use $x<em>k$ to denote item k, if we choose it, $x_k=1$, otherwise, $x_k=0$, then for 0-1 Knapsack Problem, we are essentially trying to maximize $\sum</em>{k=1}^{n}v<em>kx_k$ while $\sum</em>{k=1}^{n}w_kx_k \le W$.</p>
-<p>Let <code>dp[k, w]</code> be the maximum value we can achieve by using a knapsack of capacity $w \in [0,W]$ and with $k \in [1,n]$ items.</p>
+<h3 id="2-Solution"><a href="#2-Solution" class="headerlink" title="2. Solution"></a>2. Solution</h3><p>Use $x_{k}$ to denote item k, if we choose it, $x_k=1$, otherwise, $x_k=0$, then for 0-1 Knapsack Problem, we are essentially trying to:</p>
+<script type="math/tex; mode=display">\left\{\begin{aligned}maximize \sum_{k=1}^{n}v_{k}x_{k}  \\\sum_{k=1}^{n}w_{k}x_{k} \le W\end{aligned}\right.​</script><p>Let <code>dp[k, w]</code> be the maximum value we can achieve by using a knapsack of capacity $w \in [0,W]$ and with $k \in [1,n]$ items.</p>
 <p>Consider item $k$, we could either choose it or not. </p>
 <blockquote>
 <ol>
-<li>If we choose item $k$, $dp[k, ]w = dp[k-1, w-w_k] + v_k$, we can regard $w-w_k$ as make room for item $k$, so the total weight for (k-1) items is $w-w_k$.</li>
+<li>If we choose item $k$, $dp[k, w] = dp[k-1, w-w_k] + v_k$, we can regard $w-w_k$ as make room for item $k$, so the total weight for (k-1) items is $w-w_k$.</li>
 </ol>
 <ol>
 <li>If we do not choose item $k$, then $dp[k,w] = dp[k-1,w]$</li>
@@ -329,8 +329,8 @@
         <nav class="pagination" role="pagination">
     
     
-    <a class="pull-right" href="/Dynamic-Programming/06_FormPalindromeII(Insertion)/">
-        06 Form a palindrome II (Insertion) →
+    <a class="pull-right" href="/Dynamic-Programming/05_FormPalindromeI(Deletion)/">
+        05 Form a palindrome I (Deletion) →
     </a>
     
 </nav>

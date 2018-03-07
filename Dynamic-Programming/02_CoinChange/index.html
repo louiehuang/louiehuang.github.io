@@ -241,8 +241,10 @@
 <p>For this problem, Greedy Algorithm cannot always find the optimal solution. For example, we have m = 100, D = {1,5,50,80}, greedy that selects largest coin will produce {80,5,5,5,5}, 5 coins, while we just need 2, {50,50}.</p>
 <h4 id="1-1-Solution1-using-dp"><a href="#1-1-Solution1-using-dp" class="headerlink" title="1.1 Solution1 using $dp[][]$"></a>1.1 Solution1 using $dp[][]$</h4><p>Consider using DP. To count minimum number of coins, we can divide all set solutions in two sets.</p>
 <blockquote>
-<p> 1) Solutions that do not contain kth coin $coin[k]$.</p>
-<p> 2) Solutions that contain at least one $coin[k]$.  Since we can use infinite same coin, we need to know  the minimum number of coins to make up amount $x - coin_k$ by using first <code>k</code>coins (including it), which is $dp[k, x-coin_k]$</p>
+<ol>
+<li>Solutions that do not contain kth coin $coin[k]$.</li>
+<li>Solutions that contain at least one $coin[k]$.  Since we can use infinite same coin, we need to know  the minimum number of coins to make up amount $x - coin_k$ by using first <code>k</code>coins (including it), which is $dp[k, x-coin_k]$</li>
+</ol>
 </blockquote>
 <p>Let $dp[k,x]$ be the least number of coins needed to represent amount $x$ ($0 \le x \le m$) using the first $k$ ($0 \le k \lt n$, k=0 is coin[0], the first kind of coin) kinds of coins. Then it can be written as the smaller one of the above two situations:</p>
 <script type="math/tex; mode=display">dp[k,x] = min\{dp[k-1, x], dp[k, x-coin_k] + 1\}</script><p>Therefore, the problem has optimal substructure property as the problem can be solved using solutions to subproblems.</p>
@@ -294,8 +296,8 @@
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/Dynamic-Programming/03_OnesAndZeroes/" style="float: left;">
-        ← 03 Ones and Zeroes
+    <a class="pull-left" href="/Dynamic-Programming/04_LongestCommonSubsequence/" style="float: left;">
+        ← 04 Longest Common Subsequence
     </a>
     
     
