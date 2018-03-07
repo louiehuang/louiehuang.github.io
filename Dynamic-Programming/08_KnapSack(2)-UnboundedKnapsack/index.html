@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Archives: 2017/11 | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Unbounded Knapsack Problem | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -223,54 +223,72 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
       
-
-
-<section id="services" style="min-height:600px">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/ProjectImages/StockSearch-Android/">StockSearch[Android]</a></h4>
-                            
-                            <p><time datetime="2017-11-24T08:00:00.000Z"><a href="/ProjectImages/StockSearch-Android/">2017-11-24</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/ProjectImages/StockSearchWEB/">StockSearch[WEB]</a></h4>
-                            
-                            <p><time datetime="2017-11-05T07:00:00.000Z"><a href="/ProjectImages/StockSearchWEB/">2017-11-05</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-03-06T08:00:00.000Z" itemprop="datePublished">
+          2018-03-06
+      </time>
+    
+</span>
+                <h1>Unbounded Knapsack Problem</h1>
+            </div>
         </div>
-
-        <!-- 分页 -->
+        <div class="col-md-8 col-md-offset-2">
+      		<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1. Description"></a>1. Description</h3><p>Given n kinds items,each with a <strong>weight</strong> and a <strong>value</strong> determine the subset of items such that the total weight &lt;= a given capacity W, and the total value V is as large as possible. <strong>Here, we are allowed to use unlimited number of instances of an item.</strong> </p>
+<p>For example,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input : W = 100</span><br><span class="line">        val[]  = &#123;1, 30&#125;</span><br><span class="line">        wt[] = &#123;1, 50&#125;</span><br><span class="line">Output : 100</span><br><span class="line">(We choose the first kind of item 100 times.)</span><br></pre></td></tr></table></figure>
+<h3 id="2-A-simple-thought-O-nW-sum-frac-W-w-k"><a href="#2-A-simple-thought-O-nW-sum-frac-W-w-k" class="headerlink" title="2. A simple thought - $O(nW\sum{\frac{W}{w_k}})$"></a>2. A simple thought - $O(nW\sum{\frac{W}{w_k}})$</h3><p>The difference between Unbounded Knapsack Problem and 0-1 Knapsack Problem is that here we can choose an item <strong>many times.</strong> </p>
+<p>An naive thought towards this problem is that we try all possiblities that an item $k$ can be chosen (It can be chosen $[0, \lfloor\frac{w}{w_k}\rfloor]$ times, where w is current available capacity, initially W.</p>
+<p>Use notation $dp[k,w]$ to represent the optimal value using a knapsack of capacity $0 \le w \le W$ and with first $k$ kinds of items, $1\le k\le n$.</p>
+<p>(1) If we do not take item $k$, $dp[k,w] = dp[k-1, w]$<br>(2) If we do take item $k$, $dp[k,w] = max{dp[k-1, w-cw<em>k] + cv_k}$, where $0 \le cw</em>{k} \le w$, i.e.  $0 \le c \le \lfloor\frac{W}{w_k}\rfloor$</p>
+<p>So our recurrence relation is: </p>
+<script type="math/tex; mode=display">dp[k,w] = max\{dp[k-1, w], max\{dp[k-1, w-cw_k] + cv_k\}\}</script><p>Time complexity for this will be $O(nW\sum{\frac{W}{w_k}})$. But we can do some pruning, if $v_i &gt; v_j$ &amp;&amp; $w_i &lt; w_j$, then we do not have to consider item $j$.</p>
+<h3 id="3-Solution-O-nW"><a href="#3-Solution-O-nW" class="headerlink" title="3. Solution - O(nW)"></a>3. Solution - O(nW)</h3><p>In <code>0-1 knapsack problem</code>, we came up with the solution:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">knapSack</span><span class="params">(<span class="keyword">int</span>[] val, <span class="keyword">int</span>[] wt, <span class="keyword">int</span> n, <span class="keyword">int</span> W)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[W+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; k++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> w = W; w &gt;= wt[k]; w--) <span class="comment">//start from W, then decrement, we can stop at wt[k]</span></span><br><span class="line">            dp[w] = Math.max(dp[w-wt[k]] + val[k], dp[w]);</span><br><span class="line">    <span class="keyword">return</span> dp[W];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We can slightly modify this solution to solve this Unbounded Knapsack Problem:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">knapSack</span><span class="params">(<span class="keyword">int</span>[] val, <span class="keyword">int</span>[] wt, <span class="keyword">int</span> n, <span class="keyword">int</span> W)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[W+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; k++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> w = wt[k]; w &lt;= W; w++) <span class="comment">//start from wt[t], then increment</span></span><br><span class="line">            dp[w] = Math.max(dp[w-wt[k]] + val[k], dp[w]);</span><br><span class="line">    <span class="keyword">return</span> dp[W];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>As you can see, the only difference between these two solution is just <strong>the order of the inner <code>for-loop</code>.</strong></p>
+<p>So, why could this solution work? Let’s first review why in <code>0-1 Knapsack Problem</code> we decrement <code>w</code>. The purpose of decrementing <code>w</code> is to make sure that in the <code>k</code>th round, status <code>dp[k,w]</code> comes from <code>dp[k-1, w-wk]</code>. <strong>In other words, this is to make sure that each item can only be chosen once.</strong>  </p>
+<p>But now, our <code>Unbounded Knapsack Problem</code> does not have this requirement, so when considering “adding the <code>k</code>th kind of item”, we also need to consider the sub-result that we have already chosen the <code>k</code>th item, which is<code>dp[k, w-wk]</code>. That’s why we can increment w here. </p>
+<p>If we write transition equation explitly, we’ll have:</p>
+<script type="math/tex; mode=display">dp[k, w] = max\{dp[k-1, w], dp[k, w-w_k] + v_k\}</script><p>Implement this with one-dimentional array, we can also have the solution above.</p>
+<p>To compare, <code>0-1 Knapsack Problem</code>, we have:</p>
+<script type="math/tex; mode=display">dp[k, w] = max\{dp[k-1, w], dp[k-1, w-w_k] + v_k\}</script>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
         <nav class="pagination" role="pagination">
-          
-          
-        </nav>
-    </div>
-</section> 
+    
+    
+    <a class="pull-right" href="/Dynamic-Programming/07_KnapSack(1)-01Knapsack/">
+        0-1 Knapsack Problem →
+    </a>
+    
+</nav>
 
-
-
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>Don't give up on your dreams -- Keep sleeping</p>
-        </div>
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Dynamic-Programming/08_KnapSack(2)-UnboundedKnapsack/" data-title="Unbounded Knapsack Problem" data-url="http://louie.link/Dynamic-Programming/08_KnapSack(2)-UnboundedKnapsack/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

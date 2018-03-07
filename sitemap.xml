@@ -2,9 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://louie.link/Dynamic-Programming/08_KnapSack(2)-UnboundedKnapsack/</loc>
+    
+    <lastmod>2018-03-07T08:49:51.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/Dynamic-Programming/06_FormPalindromeII(Insertion)/</loc>
+    
+    <lastmod>2018-03-07T07:51:26.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/Dynamic-Programming/05_FormPalindromeI(Deletion)/</loc>
+    
+    <lastmod>2018-03-07T07:51:22.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/Dynamic-Programming/04_LongestCommonSubsequence/</loc>
+    
+    <lastmod>2018-03-07T07:51:19.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/Dynamic-Programming/03_OnesAndZeroes/</loc>
+    
+    <lastmod>2018-03-07T07:51:16.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://louie.link/Dynamic-Programming/02_CoinChange/</loc>
     
-    <lastmod>2018-03-07T07:41:04.000Z</lastmod>
+    <lastmod>2018-03-07T07:51:02.000Z</lastmod>
     
   </url>
   
@@ -16,37 +51,9 @@
   </url>
   
   <url>
-    <loc>http://louie.link/Dynamic-Programming/06_FormPalindromeII(Insertion)/</loc>
-    
-    <lastmod>2018-03-06T23:29:51.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://louie.link/Dynamic-Programming/05_FormPalindromeI(Deletion)/</loc>
-    
-    <lastmod>2018-03-06T23:29:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://louie.link/Dynamic-Programming/04_LongestCommonSubsequence/</loc>
-    
-    <lastmod>2018-03-06T23:29:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://louie.link/Dynamic-Programming/03_OnesAndZeroes/</loc>
-    
-    <lastmod>2018-03-06T23:29:38.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://louie.link/Dynamic-Programming/01_DynamicProgrammingBasics/</loc>
     
-    <lastmod>2018-03-06T23:29:29.000Z</lastmod>
+    <lastmod>2018-03-06T23:31:30.000Z</lastmod>
     
   </url>
   

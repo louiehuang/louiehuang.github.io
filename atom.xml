@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://louie.link/"/>
-  <updated>2018-03-07T07:36:34.000Z</updated>
+  <updated>2018-03-07T08:49:51.000Z</updated>
   <id>http://louie.link/</id>
   
   <author>
@@ -14,6 +14,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Unbounded Knapsack Problem</title>
+    <link href="http://louie.link/Dynamic-Programming/08_KnapSack(2)-UnboundedKnapsack/"/>
+    <id>http://louie.link/Dynamic-Programming/08_KnapSack(2)-UnboundedKnapsack/</id>
+    <published>2018-03-06T08:00:00.000Z</published>
+    <updated>2018-03-07T08:49:51.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;1-Description&quot;&gt;&lt;a href=&quot;#1-Description&quot; class=&quot;headerlink&quot; title=&quot;1. Description&quot;&gt;&lt;/a&gt;1. Description&lt;/h3&gt;&lt;p&gt;Given n kinds items,each with a &lt;strong&gt;weight&lt;/strong&gt; and a &lt;strong&gt;value&lt;/strong&gt; determine the subset of items such that the total weight &amp;lt;= a given capacity W, and the total value V is as large as possible. &lt;strong&gt;Here, we are allowed to use unlimited number of instances of an item.&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;For example,&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Input : W = 100&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        val[]  = &amp;#123;1, 30&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        wt[] = &amp;#123;1, 50&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Output : 100&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;(We choose the first kind of item 100 times.)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;2-A-simple-thought-O-nW-sum-frac-W-w-k&quot;&gt;&lt;a href=&quot;#2-A-simple-thought-O-nW-sum-frac-W-w-k&quot; class=&quot;headerlink&quot; title=&quot;2. A simple thought - $O(nW\sum{\frac{W}{w_k}})$&quot;&gt;&lt;/a&gt;2. A simple thought - $O(nW\sum{\frac{W}{w_k}})$&lt;/h3&gt;&lt;p&gt;The difference between Unbounded Knapsack Problem and 0-1 Knapsack Problem is that here we can choose an item &lt;strong&gt;many times.&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;An naive thought towards this problem is that we try all possiblities that an item $k$ can be chosen (It can be chosen $[0, \lfloor\frac{w}{w_k}\rfloor]$ times, where w is current available capacity, initially W.&lt;/p&gt;
+&lt;p&gt;Use notation $dp[k,w]$ to represent the optimal value using a knapsack of capacity $0 \le w \le W$ and with first $k$ kinds of items, $1\le k\le n$.&lt;/p&gt;
+&lt;p&gt;(1) If we do not take item $k$, $dp[k,w] = dp[k-1, w]$&lt;br&gt;(2) If we do take item $k$, $dp[k,w] = max{dp[k-1, w-cw&lt;em&gt;k] + cv_k}$, where $0 \le cw&lt;/em&gt;{k} \le w$, i.e.  $0 \le c \le \lfloor\frac{W}{w_k}\rfloor$&lt;/p&gt;
+&lt;p&gt;So our recurrence relation is: &lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;dp[k,w] = max\{dp[k-1, w], max\{dp[k-1, w-cw_k] + cv_k\}\}&lt;/script&gt;&lt;p&gt;Time complexity for this will be $O(nW\sum{\frac{W}{w_k}})$. But we can do some pruning, if $v_i &amp;gt; v_j$ &amp;amp;&amp;amp; $w_i &amp;lt; w_j$, then we do not have to consider item $j$.&lt;/p&gt;
+&lt;h3 id=&quot;3-Solution-O-nW&quot;&gt;&lt;a href=&quot;#3-Solution-O-nW&quot; class=&quot;headerlink&quot; title=&quot;3. Solution - O(nW)&quot;&gt;&lt;/a&gt;3. Solution - O(nW)&lt;/h3&gt;&lt;p&gt;In &lt;code&gt;0-1 knapsack problem&lt;/code&gt;, we came up with the solution:&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;knapSack&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[] val, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[] wt, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; W)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[] dp = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[W+&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; k = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; k &amp;lt; n; k++)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; w = W; w &amp;gt;= wt[k]; w--) &lt;span class=&quot;comment&quot;&gt;//start from W, then decrement, we can stop at wt[k]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            dp[w] = Math.max(dp[w-wt[k]] + val[k], dp[w]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; dp[W];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;We can slightly modify this solution to solve this Unbounded Knapsack Problem:&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;knapSack&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[] val, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[] wt, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; W)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[] dp = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[W+&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; k = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; k &amp;lt; n; k++)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; w = wt[k]; w &amp;lt;= W; w++) &lt;span class=&quot;comment&quot;&gt;//start from wt[t], then increment&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            dp[w] = Math.max(dp[w-wt[k]] + val[k], dp[w]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; dp[W];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;As you can see, the only difference between these two solution is just &lt;strong&gt;the order of the inner &lt;code&gt;for-loop&lt;/code&gt;.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;So, why could this solution work? Let’s first review why in &lt;code&gt;0-1 Knapsack Problem&lt;/code&gt; we decrement &lt;code&gt;w&lt;/code&gt;. The purpose of decrementing &lt;code&gt;w&lt;/code&gt; is to make sure that in the &lt;code&gt;k&lt;/code&gt;th round, status &lt;code&gt;dp[k,w]&lt;/code&gt; comes from &lt;code&gt;dp[k-1, w-wk]&lt;/code&gt;. &lt;strong&gt;In other words, this is to make sure that each item can only be chosen once.&lt;/strong&gt;  &lt;/p&gt;
+&lt;p&gt;But now, our &lt;code&gt;Unbounded Knapsack Problem&lt;/code&gt; does not have this requirement, so when considering “adding the &lt;code&gt;k&lt;/code&gt;th kind of item”, we also need to consider the sub-result that we have already chosen the &lt;code&gt;k&lt;/code&gt;th item, which is&lt;code&gt;dp[k, w-wk]&lt;/code&gt;. That’s why we can increment w here. &lt;/p&gt;
+&lt;p&gt;If we write transition equation explitly, we’ll have:&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;dp[k, w] = max\{dp[k-1, w], dp[k, w-w_k] + v_k\}&lt;/script&gt;&lt;p&gt;Implement this with one-dimentional array, we can also have the solution above.&lt;/p&gt;
+&lt;p&gt;To compare, &lt;code&gt;0-1 Knapsack Problem&lt;/code&gt;, we have:&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;dp[k, w] = max\{dp[k-1, w], dp[k-1, w-w_k] + v_k\}&lt;/script&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-Description&quot;&gt;&lt;a href=&quot;#1-Description&quot; class=&quot;headerlink&quot; title=&quot;1. Description&quot;&gt;&lt;/a&gt;1. Description&lt;/h3&gt;&lt;p&gt;Given n kinds items,each
+    
+    </summary>
+    
+      <category term="Dynamic Programming" scheme="http://louie.link/categories/Dynamic-Programming/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>0-1 Knapsack Problem</title>
@@ -125,9 +164,9 @@
     <link href="http://louie.link/Dynamic-Programming/05_FormPalindromeI(Deletion)/"/>
     <id>http://louie.link/Dynamic-Programming/05_FormPalindromeI(Deletion)/</id>
     <published>2018-03-03T08:00:00.000Z</published>
-    <updated>2018-03-06T23:29:46.000Z</updated>
+    <updated>2018-03-07T07:51:22.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;Form-a-palindrome-I&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-I&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome I&quot;&gt;&lt;/a&gt;Form a palindrome I&lt;/h2&gt;&lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given a string of S as input. Your task is to write a program to remove or delete minimum number of characters from the string so that the resultant string is palindrome.&lt;/p&gt;
+    <content type="html">&lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given a string of S as input. Your task is to write a program to remove or delete minimum number of characters from the string so that the resultant string is palindrome.&lt;/p&gt;
 &lt;p&gt;Note: The order of characters in the string should be maintained.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;input: aebcbda&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;output: 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Remove characters &amp;apos;e&amp;apos; and &amp;apos;d&amp;apos; =&amp;gt; &amp;apos;abcba&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -151,7 +190,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Form-a-palindrome-I&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-I&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome I&quot;&gt;&lt;/a&gt;Form a palindrome I&lt;/h2&gt;&lt;h3 i
+      &lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given a string of S as input. Your
     
     </summary>
     
@@ -165,9 +204,9 @@
     <link href="http://louie.link/Dynamic-Programming/06_FormPalindromeII(Insertion)/"/>
     <id>http://louie.link/Dynamic-Programming/06_FormPalindromeII(Insertion)/</id>
     <published>2018-03-03T08:00:00.000Z</published>
-    <updated>2018-03-06T23:29:51.000Z</updated>
+    <updated>2018-03-07T07:51:26.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;Form-a-palindrome-II&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-II&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome II&quot;&gt;&lt;/a&gt;Form a palindrome II&lt;/h2&gt;&lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given a string, find the minimum number of characters to be inserted to convert it to palindrome. &lt;/p&gt;
+    <content type="html">&lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given a string, find the minimum number of characters to be inserted to convert it to palindrome. &lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ab: Number of insertions required is 1. bab or aba&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;aa: Number of insertions required is 0. aa&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;abcd: Number of insertions required is 3. dcbabcd&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h3 id=&quot;Solution1&quot;&gt;&lt;a href=&quot;#Solution1&quot; class=&quot;headerlink&quot; title=&quot;Solution1&quot;&gt;&lt;/a&gt;Solution1&lt;/h3&gt;&lt;p&gt;Let &lt;code&gt;dp[i][j]&lt;/code&gt; denote the minimum number of characters to be inserted for str[i, … j]. &lt;/p&gt;
@@ -198,7 +237,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Form-a-palindrome-II&quot;&gt;&lt;a href=&quot;#Form-a-palindrome-II&quot; class=&quot;headerlink&quot; title=&quot;Form a palindrome II&quot;&gt;&lt;/a&gt;Form a palindrome II&lt;/h2&gt;&lt;
+      &lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given a string, find the minimum n
     
     </summary>
     
@@ -212,9 +251,9 @@
     <link href="http://louie.link/Dynamic-Programming/03_OnesAndZeroes/"/>
     <id>http://louie.link/Dynamic-Programming/03_OnesAndZeroes/</id>
     <published>2018-03-01T08:00:00.000Z</published>
-    <updated>2018-03-06T23:29:38.000Z</updated>
+    <updated>2018-03-07T07:51:16.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;Ones-and-Zeroes&quot;&gt;&lt;a href=&quot;#Ones-and-Zeroes&quot; class=&quot;headerlink&quot; title=&quot;Ones and Zeroes&quot;&gt;&lt;/a&gt;Ones and Zeroes&lt;/h2&gt;&lt;h3 id=&quot;1-Description&quot;&gt;&lt;a href=&quot;#1-Description&quot; class=&quot;headerlink&quot; title=&quot;1. Description&quot;&gt;&lt;/a&gt;1. Description&lt;/h3&gt;&lt;p&gt;Suppose you are a dominator of &lt;strong&gt;m&lt;/strong&gt; &lt;code&gt;0s&lt;/code&gt; and &lt;strong&gt;n&lt;/strong&gt; &lt;code&gt;1s&lt;/code&gt; respectively. On the other hand, there is an array with strings consisting of only &lt;code&gt;0s&lt;/code&gt; and &lt;code&gt;1s&lt;/code&gt;. Now your task is to find the &lt;strong&gt;maximum&lt;/strong&gt; number of strings that you can form with given &lt;strong&gt;m&lt;/strong&gt; &lt;code&gt;0s&lt;/code&gt; and &lt;strong&gt;n&lt;/strong&gt; &lt;code&gt;1s&lt;/code&gt;. Each &lt;code&gt;0&lt;/code&gt; and &lt;code&gt;1&lt;/code&gt; can be used at most &lt;strong&gt;once&lt;/strong&gt;.&lt;/p&gt;
+    <content type="html">&lt;h3 id=&quot;1-Description&quot;&gt;&lt;a href=&quot;#1-Description&quot; class=&quot;headerlink&quot; title=&quot;1. Description&quot;&gt;&lt;/a&gt;1. Description&lt;/h3&gt;&lt;p&gt;Suppose you are a dominator of &lt;strong&gt;m&lt;/strong&gt; &lt;code&gt;0s&lt;/code&gt; and &lt;strong&gt;n&lt;/strong&gt; &lt;code&gt;1s&lt;/code&gt; respectively. On the other hand, there is an array with strings consisting of only &lt;code&gt;0s&lt;/code&gt; and &lt;code&gt;1s&lt;/code&gt;. Now your task is to find the &lt;strong&gt;maximum&lt;/strong&gt; number of strings that you can form with given &lt;strong&gt;m&lt;/strong&gt; &lt;code&gt;0s&lt;/code&gt; and &lt;strong&gt;n&lt;/strong&gt; &lt;code&gt;1s&lt;/code&gt;. Each &lt;code&gt;0&lt;/code&gt; and &lt;code&gt;1&lt;/code&gt; can be used at most &lt;strong&gt;once&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Input: Array = &amp;#123;&amp;quot;10&amp;quot;, &amp;quot;0001&amp;quot;, &amp;quot;111001&amp;quot;, &amp;quot;1&amp;quot;, &amp;quot;0&amp;quot;&amp;#125;, m = 5, n = 3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Output: 4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Explanation: This are totally 4 strings can be formed by the using of 5 0s and 3 1s, which are “10,”0001”,”1”,”0”&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h3 id=&quot;2-Solution&quot;&gt;&lt;a href=&quot;#2-Solution&quot; class=&quot;headerlink&quot; title=&quot;2. Solution&quot;&gt;&lt;/a&gt;2. Solution&lt;/h3&gt;&lt;p&gt;This problem is similar to 0-1 knapsack problem. &lt;/p&gt;
@@ -242,7 +281,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Ones-and-Zeroes&quot;&gt;&lt;a href=&quot;#Ones-and-Zeroes&quot; class=&quot;headerlink&quot; title=&quot;Ones and Zeroes&quot;&gt;&lt;/a&gt;Ones and Zeroes&lt;/h2&gt;&lt;h3 id=&quot;1-Description
+      &lt;h3 id=&quot;1-Description&quot;&gt;&lt;a href=&quot;#1-Description&quot; class=&quot;headerlink&quot; title=&quot;1. Description&quot;&gt;&lt;/a&gt;1. Description&lt;/h3&gt;&lt;p&gt;Suppose you are a domina
     
     </summary>
     
@@ -256,9 +295,9 @@
     <link href="http://louie.link/Dynamic-Programming/04_LongestCommonSubsequence/"/>
     <id>http://louie.link/Dynamic-Programming/04_LongestCommonSubsequence/</id>
     <published>2018-03-01T08:00:00.000Z</published>
-    <updated>2018-03-06T23:29:42.000Z</updated>
+    <updated>2018-03-07T07:51:19.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;Longest-Common-Subsequence&quot;&gt;&lt;a href=&quot;#Longest-Common-Subsequence&quot; class=&quot;headerlink&quot; title=&quot;Longest Common Subsequence&quot;&gt;&lt;/a&gt;Longest Common Subsequence&lt;/h2&gt;&lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given two sequences, find the length of longest subsequence present in both of them. Both the strings are of uppercase.&lt;/p&gt;
+    <content type="html">&lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given two sequences, find the length of longest subsequence present in both of them. Both the strings are of uppercase.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Examples:&lt;/strong&gt;&lt;br&gt;LCS for input Sequences “ABCDGH” and “AEDFHR” is “ADH” of length 3.&lt;br&gt;LCS for input Sequences “AGGTAB” and “GXTXAYB” is “GTAB” of length 4.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Input:&lt;/strong&gt;&lt;br&gt;First line of the input contains number of test cases &lt;strong&gt;T&lt;/strong&gt;, the &lt;strong&gt;T&lt;/strong&gt; test cases follow.&lt;br&gt;Each test case consist of 2 space separated integers &lt;strong&gt;A&lt;/strong&gt; and &lt;strong&gt;B&lt;/strong&gt; denoting the size of string &lt;strong&gt;str1&lt;/strong&gt; and &lt;strong&gt;str2&lt;/strong&gt; respectively. The next two lines contains the 2 string &lt;strong&gt;str1&lt;/strong&gt; and &lt;strong&gt;str2&lt;/strong&gt; .&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Output:&lt;/strong&gt;&lt;br&gt;For each test case print the length of longest  common subsequence of the two strings .&lt;/p&gt;
@@ -289,7 +328,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Longest-Common-Subsequence&quot;&gt;&lt;a href=&quot;#Longest-Common-Subsequence&quot; class=&quot;headerlink&quot; title=&quot;Longest Common Subsequence&quot;&gt;&lt;/a&gt;Longest 
+      &lt;h3 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h3&gt;&lt;p&gt;Given two sequences, find the leng
     
     </summary>
     
@@ -299,13 +338,13 @@
   </entry>
   
   <entry>
-    <title>02 Coin Change</title>
+    <title>Coin Change</title>
     <link href="http://louie.link/Dynamic-Programming/02_CoinChange/"/>
     <id>http://louie.link/Dynamic-Programming/02_CoinChange/</id>
     <published>2018-02-28T08:00:00.000Z</published>
-    <updated>2018-03-07T07:41:04.000Z</updated>
+    <updated>2018-03-07T07:51:02.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;Coin-Change&quot;&gt;&lt;a href=&quot;#Coin-Change&quot; class=&quot;headerlink&quot; title=&quot;Coin Change&quot;&gt;&lt;/a&gt;Coin Change&lt;/h2&gt;&lt;h3 id=&quot;1-Minimum-number-of-coins&quot;&gt;&lt;a href=&quot;#1-Minimum-number-of-coins&quot; class=&quot;headerlink&quot; title=&quot;1. Minimum number of coins&quot;&gt;&lt;/a&gt;1. Minimum number of coins&lt;/h3&gt;&lt;p&gt;Compute the minimum number of coins needed to make change for a given amount $m$. Assume that we have an infinite supply of each coin. All denominations $d_k$ are sorted in ascending order: $1 = coin_1 &amp;lt; coin_2 &amp;lt; … &amp;lt; coin_n$. (&lt;strong&gt;$coin_1= 1$ here is simply to make sure that there will always exist a solution, will discuss the case that no solution exists later on&lt;/strong&gt;)&lt;/p&gt;
+    <content type="html">&lt;h3 id=&quot;1-Minimum-number-of-coins&quot;&gt;&lt;a href=&quot;#1-Minimum-number-of-coins&quot; class=&quot;headerlink&quot; title=&quot;1. Minimum number of coins&quot;&gt;&lt;/a&gt;1. Minimum number of coins&lt;/h3&gt;&lt;p&gt;Compute the minimum number of coins needed to make change for a given amount $m$. Assume that we have an infinite supply of each coin. All denominations $d_k$ are sorted in ascending order: $1 = coin_1 &amp;lt; coin_2 &amp;lt; … &amp;lt; coin_n$. (&lt;strong&gt;$coin_1= 1$ here is simply to make sure that there will always exist a solution, will discuss the case that no solution exists later on&lt;/strong&gt;)&lt;/p&gt;
 &lt;p&gt;For this problem, Greedy Algorithm cannot always find the optimal solution. For example, we have m = 100, D = {1,5,50,80}, greedy that selects largest coin will produce {80,5,5,5,5}, 5 coins, while we just need 2, {50,50}.&lt;/p&gt;
 &lt;h4 id=&quot;1-1-Solution1-using-dp&quot;&gt;&lt;a href=&quot;#1-1-Solution1-using-dp&quot; class=&quot;headerlink&quot; title=&quot;1.1 Solution1 using $dp[][]$&quot;&gt;&lt;/a&gt;1.1 Solution1 using $dp[][]$&lt;/h4&gt;&lt;p&gt;Consider using DP. To count minimum number of coins, we can divide all set solutions in two sets.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -314,7 +353,7 @@
 &lt;li&gt;Solutions that contain at least one $coin[k]$.  Since we can use infinite same coin, we need to know  the minimum number of coins to make up amount $x - coin_k$ by using first &lt;code&gt;k&lt;/code&gt;coins (including it), which is $dp[k, x-coin_k]$&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Let $dp[k,x]$ be the least number of coins needed to represent amount $x$ ($0 \le x \le m$) using the first $k$ ($0 \le k \lt n$, k=0 is coin[0], the first kind of coin) kinds of coins. Then it can be written as the smaller one of the above two situations:&lt;/p&gt;
+&lt;p&gt;Let $dp[k,x]$ be the least number of coins needed to represent amount $x$ ($0 \le x \le m$) using the first $k$ ($1 \le k \lt n$, k=0 is coin[0], the first kind of coin) kinds of coins. Then it can be written as the smaller one of the above two situations:&lt;/p&gt;
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;dp[k,x] = min\{dp[k-1, x], dp[k, x-coin_k] + 1\}&lt;/script&gt;&lt;p&gt;Therefore, the problem has optimal substructure property as the problem can be solved using solutions to subproblems.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ol&gt;
@@ -362,7 +401,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Coin-Change&quot;&gt;&lt;a href=&quot;#Coin-Change&quot; class=&quot;headerlink&quot; title=&quot;Coin Change&quot;&gt;&lt;/a&gt;Coin Change&lt;/h2&gt;&lt;h3 id=&quot;1-Minimum-number-of-coins&quot;&gt;&lt;a
+      &lt;h3 id=&quot;1-Minimum-number-of-coins&quot;&gt;&lt;a href=&quot;#1-Minimum-number-of-coins&quot; class=&quot;headerlink&quot; title=&quot;1. Minimum number of coins&quot;&gt;&lt;/a&gt;1. Minimum
     
     </summary>
     
@@ -372,11 +411,11 @@
   </entry>
   
   <entry>
-    <title>01 Dynamic Programming Basics</title>
+    <title>Dynamic Programming Basics</title>
     <link href="http://louie.link/Dynamic-Programming/01_DynamicProgrammingBasics/"/>
     <id>http://louie.link/Dynamic-Programming/01_DynamicProgrammingBasics/</id>
     <published>2018-02-28T08:00:00.000Z</published>
-    <updated>2018-03-06T23:29:29.000Z</updated>
+    <updated>2018-03-06T23:31:30.000Z</updated>
     
     <content type="html">&lt;p&gt;I’ve been asked a DP problem today during the interview. It was not hard but I failed to think it clearly. I feel really really bad, so I think I need to review and sum up what I’ve learnt about DP. I’ll go over the problems I’ve met in the past few years and then find some new ones to practice. &lt;/p&gt;
 &lt;h2 id=&quot;Dynamic-Programming-Concepts&quot;&gt;&lt;a href=&quot;#Dynamic-Programming-Concepts&quot; class=&quot;headerlink&quot; title=&quot;Dynamic Programming Concepts&quot;&gt;&lt;/a&gt;Dynamic Programming Concepts&lt;/h2&gt;&lt;p&gt;“The basic idea of Dynamic Programming is drawn from the intuition behind divide and conquer and is essentially the opposite of the greedy strategy: one &lt;strong&gt;implicitly&lt;/strong&gt; explores the space of &lt;strong&gt;all&lt;/strong&gt; possible solutions, by carefully decomposing things into a series of subproblems, and then building up correct solutions to larger and larger subproblems.”[1]&lt;/p&gt;
@@ -1557,43 +1596,6 @@ P(y=0|x;\theta) &amp; =  1 - h_{\theta}(x)
     
       &lt;p&gt;基于物品的协同过滤&lt;/p&gt;
 &lt;h3 id=&quot;1-推荐系统实战-项亮-：&quot;&gt;&lt;a href=&quot;#1-推荐系统实战-项亮-：&quot; class=&quot;headerlink&quot; title=&quot;1. 推荐系统实战(项亮)：&quot;&gt;&lt;/a&gt;1. 推荐系统实战(项亮)：&lt;/h3&gt;&lt;h4 id=&quot;1-
-    
-    </summary>
-    
-      <category term="Recommender System" scheme="http://louie.link/categories/Recommender-System/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Pearson相关系数</title>
-    <link href="http://louie.link/Recommender-System/PearsonCorrCoef/"/>
-    <id>http://louie.link/Recommender-System/PearsonCorrCoef/</id>
-    <published>2016-11-20T08:00:00.000Z</published>
-    <updated>2016-12-21T07:38:29.000Z</updated>
-    
-    <content type="html">&lt;p&gt;协方差&lt;br&gt;numpy.cov&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;cov(X, Y) = E\left ( (X - E(X))(Y - E(Y)) \right) = E(XY) - E(X)E(Y)&lt;/script&gt;&lt;p&gt;样本协方差&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;cov(X, Y) = \frac{1}{N - 1}\sum_{i=1}^{N}(X_i - \bar X)(Y_i - \bar Y)&lt;/script&gt;&lt;p&gt;除以N-1是为了保证无偏性&lt;/p&gt;
-&lt;p&gt;pearson相关系数&lt;br&gt;numpy.corrcoef&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\rho_{XY} = \frac{cov(X, Y)}{\sqrt{D(X)}\sqrt{D(Y)}}&lt;/script&gt;&lt;p&gt;即&lt;br&gt;np.corrcoef(x, y) = np.cov(x, y, &lt;font color=&quot;red&quot;&gt;bias = True&lt;/font&gt;) / (std(x) * std(y))&lt;/p&gt;
-&lt;p&gt;std(x)求标准差, var(x)求方差&lt;/p&gt;
-&lt;p&gt;np.cov中不指定bias时(bias = False, 无偏)是除以N-1，指定bias为True或1时是除以N&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; numpy &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; np&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;x = [&lt;span class=&quot;number&quot;&gt;-2.1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;-1&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;4.3&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;y = [&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;0.12&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;np.cov(x,y)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;array([[ &lt;span class=&quot;number&quot;&gt;11.71&lt;/span&gt;      ,  &lt;span class=&quot;number&quot;&gt;-4.286&lt;/span&gt;     ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       [ &lt;span class=&quot;number&quot;&gt;-4.286&lt;/span&gt;     ,   &lt;span class=&quot;number&quot;&gt;2.14413333&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;np.cov(x,y,bias=&lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;array([[ &lt;span class=&quot;number&quot;&gt;7.80666667&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;-2.85733333&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       [&lt;span class=&quot;number&quot;&gt;-2.85733333&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;1.42942222&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;np.cov(x,y,bias=&lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;) / (std(x) * std(y))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;array([[ &lt;span class=&quot;number&quot;&gt;2.33696686&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;-0.85535781&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       [&lt;span class=&quot;number&quot;&gt;-0.85535781&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;0.42790508&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;np.corrcoef(x,y)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;array([[ &lt;span class=&quot;number&quot;&gt;1.&lt;/span&gt;        , &lt;span class=&quot;number&quot;&gt;-0.85535781&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       [&lt;span class=&quot;number&quot;&gt;-0.85535781&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;1.&lt;/span&gt;        ]])&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;矩阵的第i行j列数据表示第i组数与第j组数的相关系数，对角线为1(自己和自己的相关为1，第0行0列除以 (std(x) * std(x))，第1行1列除以 (std(y) * std(y)) )&lt;/p&gt;
-&lt;p&gt;pearson相关系数也可以以下列公式计算&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\rho_{XY} = \frac{cov(X, Y)}{\sqrt{D(X)}\sqrt{D(Y)}} = \frac{\frac{1}{N - 1}\sum_{i=1}^{N}(X_i - \bar X)(Y_i - \bar Y)}{\sqrt{\frac{1}{N-1}\sum_{i=1}^{n}(x_i - \bar x)^2}\sqrt{\frac{1}{N-1}\sum_{i=1}^{n}(y_i - \bar y)^2}} = \frac{\sum_{i=1}^{N}(X_i - \bar X)(Y_i - \bar Y)}{\sqrt{\sum_{i=1}^{n}(x_i - \bar x)^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar y)^2}}&lt;/script&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;num = sum((x-mean(x))*(y-mean(y)))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;dex = sum((x - mean(x))**&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)**&lt;span class=&quot;number&quot;&gt;0.5&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;dey = sum((y - mean(y))**&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)**&lt;span class=&quot;number&quot;&gt;0.5&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;denom = dex * dey&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;num / denom &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;-0.85535780952279472&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;np.corrcoef有一个参数rowvar，帮助文档对其的解释为:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;rowvar&lt;/strong&gt; : int, optional&lt;br&gt;If rowvar is non-zero (default), then each row represents a variable, with observations in the columns. Otherwise, the relationship is transposed: each column represents a variable, while the rows contain observations.&lt;/p&gt;
-&lt;p&gt;也就是说，默认的np.corrcoef(x, y)是计算&lt;strong&gt;行向量&lt;/strong&gt;的相似度，x、y都是行向量，如x = [-2.1, -1,  4.3]&lt;br&gt;如果计算&lt;strong&gt;列向量&lt;/strong&gt;的相似度，可以将rowvar的值置为0&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;x = [&lt;span class=&quot;number&quot;&gt;-2.1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;-1&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;4.3&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;y = [&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;0.12&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;Mx = mat(x)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;Mx&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;matrix([[&lt;span class=&quot;number&quot;&gt;-2.1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;-1.&lt;/span&gt; ,  &lt;span class=&quot;number&quot;&gt;4.3&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;MxT = Mx.T&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;MxT&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;matrix([[&lt;span class=&quot;number&quot;&gt;-2.1&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [&lt;span class=&quot;number&quot;&gt;-1.&lt;/span&gt; ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [ &lt;span class=&quot;number&quot;&gt;4.3&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;My = mat(y)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;My&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;matrix([[ &lt;span class=&quot;number&quot;&gt;3.&lt;/span&gt;  ,  &lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt; ,  &lt;span class=&quot;number&quot;&gt;0.12&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;MyT = My.T&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;MyT&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;matrix([[ &lt;span class=&quot;number&quot;&gt;3.&lt;/span&gt;  ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [ &lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt; ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [ &lt;span class=&quot;number&quot;&gt;0.12&lt;/span&gt;]])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;np.corrcoef(MxT, MyT, rowvar=&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;array([[ &lt;span class=&quot;number&quot;&gt;1.&lt;/span&gt;        , &lt;span class=&quot;number&quot;&gt;-0.85535781&lt;/span&gt;],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       [&lt;span class=&quot;number&quot;&gt;-0.85535781&lt;/span&gt;,  &lt;span class=&quot;number&quot;&gt;1.&lt;/span&gt;        ]])&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;协方差&lt;br&gt;numpy.cov&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;cov(X, Y) = E\left ( (X - E(X))(Y - E(Y)) \right) = E(XY) - E(X)E(Y)&lt;/script&gt;&lt;
     
     </summary>
     
