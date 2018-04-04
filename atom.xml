@@ -56,11 +56,11 @@
   </entry>
   
   <entry>
-    <title>Reorganize an array</title>
+    <title>14 Reorganize an array</title>
     <link href="http://louie.link/AlgorithmPractice/14_ReOrderArray/"/>
     <id>http://louie.link/AlgorithmPractice/14_ReOrderArray/</id>
     <published>2018-04-03T07:00:00.000Z</published>
-    <updated>2018-04-04T01:43:22.000Z</updated>
+    <updated>2018-04-04T06:10:36.000Z</updated>
     
     <content type="html">&lt;p&gt;&lt;strong&gt;Problem Statement in Chinese:&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。&lt;/p&gt;
@@ -120,11 +120,11 @@
   </entry>
   
   <entry>
-    <title>Reconstruct a Binary Tree</title>
+    <title>06 Reconstruct a Binary Tree</title>
     <link href="http://louie.link/AlgorithmPractice/06_ReconstructBinaryTree/"/>
     <id>http://louie.link/AlgorithmPractice/06_ReconstructBinaryTree/</id>
     <published>2018-04-03T07:00:00.000Z</published>
-    <updated>2018-04-03T23:38:28.000Z</updated>
+    <updated>2018-04-04T06:10:27.000Z</updated>
     
     <content type="html">&lt;p&gt;&lt;strong&gt;Problem Statement in Chinese:&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。&lt;/p&gt;

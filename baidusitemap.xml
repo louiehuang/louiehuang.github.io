@@ -4,6 +4,42 @@
 
     
   <url>
+    <loc>http://louie.link/AlgorithmPractice/14_ReOrderArray/</loc>
+    <lastmod>2018-04-04T06:10:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>14 Reorganize an array</title>
+        <pubTime>2018-04-03T07:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/06_ReconstructBinaryTree/</loc>
+    <lastmod>2018-04-04T06:10:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>06 Reconstruct a Binary Tree</title>
+        <pubTime>2018-04-03T07:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://louie.link/AlgorithmPractice/17_MergeTwoSortedList/</loc>
     <lastmod>2018-04-04T03:53:56.000Z</lastmod>
     <data>
@@ -27,24 +63,6 @@
     <data>
         <display>
         <title>15 Find the kth Last Element in LinkedList</title>
-        <pubTime>2018-04-03T07:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://louie.link/AlgorithmPractice/14_ReOrderArray/</loc>
-    <lastmod>2018-04-04T01:43:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Reorganize an array</title>
         <pubTime>2018-04-03T07:00:00.000Z</pubTime>
         
          
@@ -135,24 +153,6 @@
     <data>
         <display>
         <title>07 Implement a Queue with two Stacks</title>
-        <pubTime>2018-04-03T07:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://louie.link/AlgorithmPractice/06_ReconstructBinaryTree/</loc>
-    <lastmod>2018-04-03T23:38:28.000Z</lastmod>
-    <data>
-        <display>
-        <title>Reconstruct a Binary Tree</title>
         <pubTime>2018-04-03T07:00:00.000Z</pubTime>
         
          
