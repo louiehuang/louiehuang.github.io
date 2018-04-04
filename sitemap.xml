@@ -2,6 +2,97 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://louie.link/AlgorithmPractice/17_MergeTwoSortedList/</loc>
+    
+    <lastmod>2018-04-04T03:53:56.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/15_Find_the_kth_Last_Element_in_List/</loc>
+    
+    <lastmod>2018-04-04T01:49:21.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/14_ReOrderArray/</loc>
+    
+    <lastmod>2018-04-04T01:43:22.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/11_Power(x,y)/</loc>
+    
+    <lastmod>2018-04-04T01:30:55.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/10_NumberOfOne/</loc>
+    
+    <lastmod>2018-04-04T01:14:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/09_FibonacciAndJumpFloor/</loc>
+    
+    <lastmod>2018-04-04T01:04:31.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/08_FindMinimuminRotatedSortedArray/</loc>
+    
+    <lastmod>2018-04-04T00:32:03.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/07_ImplementQueueWithTwoStacks/</loc>
+    
+    <lastmod>2018-04-03T23:47:21.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/06_ReconstructBinaryTree/</loc>
+    
+    <lastmod>2018-04-03T23:38:28.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/05_PrintListReversely/</loc>
+    
+    <lastmod>2018-04-03T23:20:51.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/04_ReplaceWhitespace/</loc>
+    
+    <lastmod>2018-04-03T22:56:47.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/03_SearchTwoDimensionalArray/</loc>
+    
+    <lastmod>2018-04-03T22:45:16.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/OS/OS_review/</loc>
+    
+    <lastmod>2018-03-07T23:49:11.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://louie.link/Dynamic-Programming/08_KnapSack(2)-UnboundedKnapsack/</loc>
     
     <lastmod>2018-03-07T09:20:26.000Z</lastmod>
@@ -278,13 +369,6 @@
     <loc>http://louie.link/Android/Android_ListView_opt/</loc>
     
     <lastmod>2016-04-12T07:12:06.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://louie.link/OS/OS_review/</loc>
-    
-    <lastmod>2016-04-10T07:28:00.000Z</lastmod>
     
   </url>
   
