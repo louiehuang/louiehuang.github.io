@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://louie.link/AlgorithmPractice/20_SpiralMatrix/</loc>
+    
+    <lastmod>2018-04-05T06:20:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/19_SymmetricTree/</loc>
+    
+    <lastmod>2018-04-05T06:13:18.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/18__HasSubtree/</loc>
+    
+    <lastmod>2018-04-05T06:08:19.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/17_MergeTwoSortedList/</loc>
+    
+    <lastmod>2018-04-05T05:41:17.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://louie.link/AlgorithmPractice/14_ReOrderArray/</loc>
     
     <lastmod>2018-04-04T06:10:36.000Z</lastmod>
@@ -12,13 +40,6 @@
     <loc>http://louie.link/AlgorithmPractice/06_ReconstructBinaryTree/</loc>
     
     <lastmod>2018-04-04T06:10:27.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://louie.link/AlgorithmPractice/17_MergeTwoSortedList/</loc>
-    
-    <lastmod>2018-04-04T03:53:56.000Z</lastmod>
     
   </url>
   

@@ -4,6 +4,78 @@
 
     
   <url>
+    <loc>http://louie.link/AlgorithmPractice/20_SpiralMatrix/</loc>
+    <lastmod>2018-04-05T06:20:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>20 Spiral Matrix</title>
+        <pubTime>2018-04-04T07:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/19_SymmetricTree/</loc>
+    <lastmod>2018-04-05T06:13:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>19_Symmetric Tree</title>
+        <pubTime>2018-04-04T07:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/18__HasSubtree/</loc>
+    <lastmod>2018-04-05T06:08:19.000Z</lastmod>
+    <data>
+        <display>
+        <title>18 Substructure of a Tree</title>
+        <pubTime>2018-04-04T07:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/17_MergeTwoSortedList/</loc>
+    <lastmod>2018-04-05T05:41:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>17 Merge Two Sorted List</title>
+        <pubTime>2018-04-03T07:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://louie.link/AlgorithmPractice/14_ReOrderArray/</loc>
     <lastmod>2018-04-04T06:10:36.000Z</lastmod>
     <data>
@@ -27,24 +99,6 @@
     <data>
         <display>
         <title>06 Reconstruct a Binary Tree</title>
-        <pubTime>2018-04-03T07:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://louie.link/AlgorithmPractice/17_MergeTwoSortedList/</loc>
-    <lastmod>2018-04-04T03:53:56.000Z</lastmod>
-    <data>
-        <display>
-        <title>17 Merge Two Sorted List</title>
         <pubTime>2018-04-03T07:00:00.000Z</pubTime>
         
          

@@ -125,7 +125,7 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/categories/AlgorithmPractice/" class="animsition-link">AlgorithmPractice<small>(12)</small></a></li>
+				    <li><a href="/categories/AlgorithmPractice/" class="animsition-link">AlgorithmPractice<small>(15)</small></a></li>
 				    
 				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(1)</small></a></li>
 				    
@@ -239,13 +239,15 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<p><strong>Problem Statement in Chinese:</strong></p>
+      		<p><strong>Problem Statement:</strong></p>
 <p>输入两个单调递增的链表，输出两个链表合成后的链表，合成后的链表仍满足单调不减规则。</p>
 <p><br></p>
-<p><strong>Problem Statement in English:</strong></p>
+<p><strong>Problem Statement:</strong></p>
 <p>Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.</p>
 <p><br></p>
 <p><strong>Solution:</strong></p>
+<p>Just note that after merging, list1 or list2 may still have some nodes left.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">Merge</span><span class="params">(ListNode list1,ListNode list2)</span> </span>&#123;</span><br><span class="line">    ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">    ListNode cur = dummy;</span><br><span class="line">    <span class="keyword">while</span>(list1 != <span class="keyword">null</span> &amp;&amp; list2 != <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(list1.val &lt; list2.val)&#123;</span><br><span class="line">            cur.next = list1;</span><br><span class="line">            list1 = list1.next;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            cur.next = list2;</span><br><span class="line">            list2 = list2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        cur = cur.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(list1 != <span class="keyword">null</span>)</span><br><span class="line">        cur.next = list1;</span><br><span class="line">    <span class="keyword">if</span>(list2 != <span class="keyword">null</span>)</span><br><span class="line">        cur.next = list2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dummy.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
             <div class="clearfix"></div>
             <hr class="nogutter">

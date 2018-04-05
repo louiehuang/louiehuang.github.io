@@ -125,7 +125,7 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/categories/AlgorithmPractice/" class="animsition-link">AlgorithmPractice<small>(12)</small></a></li>
+				    <li><a href="/categories/AlgorithmPractice/" class="animsition-link">AlgorithmPractice<small>(15)</small></a></li>
 				    
 				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(1)</small></a></li>
 				    
@@ -268,6 +268,111 @@
 
 <section id="intro">
     <div class="container">
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Recommender-System/Information_entropy/">信息熵与分类算法[转]</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-09-20T07:00:00.000Z" itemprop="datePublished">
+          2016-09-20
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        转载链接
+在介绍熵之前，先从另一个概念说起：信息量
+世界杯决赛的两支球队中，哪支球队获得了冠军？在对球队实力没有任何了解的情况下，每支球队夺冠的概率都是1/2，所以谁获得冠军这条信息的信息量是 $-log{2}{\frac{1}{2}} = 1$ bit如果信息是四强中的球队谁获得了冠军，它的信息量是 $-log{2}{\frac{1}{4}} = 2$ bit
+其实这正好对应了计算机对数字的表示，如果用二进制表示，每一位出现0和1的概
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Recommender-System/Information_entropy/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Recommender-System/Gini_Index/">基尼系数</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-09-19T07:00:00.000Z" itemprop="datePublished">
+          2016-09-19
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        基尼系数(Gini Index)是一个经济学概念，是20世纪初意大利经济学家基尼（实际应为赫希曼提出）根据洛伦茨曲线提出的判断分配平等程度的指标，用来描述收入整体差距程度。
+基尼系数和信息熵这两个指标可以用来定义推荐系统的覆盖率（描述一个推荐系统对物品长尾的发掘能力，覆盖率最简单的一个定义为推荐系统能够推荐出来的物品占总物品集合的比例）
+
+经济学中基尼系数的意义
+X轴为人口百分比，Y轴为收入百分比，其中人口按照收入从低到高排序过，即越接
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Recommender-System/Gini_Index/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Recommender-System/python_instance_access_rule/">Python的类实例属性访问规则探讨[转]</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-09-15T07:00:00.000Z" itemprop="datePublished">
+          2016-09-15
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        一般来说，在Python中，类实例属性的访问规则算是比较直观的。但是，仍然存在一些不是很直观的地方，特别是对C++和Java程序员来说，更是如此。
+在这里，我们需要明白以下几个地方：
+
+
+Python是一门动态语言，任何实体都可以动态地添加或删除属性。
+一个类定义了一个作用域。
+类实例也引入了一个作用域，这与相应类定义的作用域不同。
+在类实例中查找属性的时候，首先在实例自己的作用域中查找，如果没有找到，则再在类定义的作用域中查找。
+在对
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Recommender-System/python_instance_access_rule/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
@@ -607,103 +712,6 @@ findViewById
                     
                     <p class="pull-right readMore">
                         <a href="/Android/Android_ListView_opt/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/Image-Processing/PolygonCentroid/">多边形质心计算</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-02-03T08:00:00.000Z" itemprop="datePublished">
-          2016-02-03
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        先需要知道几个公式：
-一、对于n个离散的有质量数据点（或者假设一个多边形的质量集中在其顶点上）假定顶点的坐标为(xi, yi)，质量为mi，则质心为：
-X = \frac{\sum_{i=1}^n ( x_i \cdot m_i )} {\sum_{i=1}^n m_i}，Y = \frac{\sum_{i=1}^n ( y_i \cdot m_i )} {\sum_{i=1}^n m_i}...(1)二、对于质量均匀分布的三角形 $△
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/Image-Processing/PolygonCentroid/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/OS/OS_review/">操作系统复习</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-01-05T08:00:00.000Z" itemprop="datePublished">
-          2016-01-05
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        第一章、操作系统概述1、    OS的概念、特性操作系统：是计算机系统中的一个系统软件，是一些程序模块的集合——它们能以尽量有效地（系统运行效率和资源利用率）组织和管理计算机的软硬件资源，合理（公平，不发生死锁和饥饿）地组织计算机的工作流程，控制程序的执行，并向用户提供各种服务功能，使得用户能够灵活、方便（人机界面—-包括用户使用界面和程序设计接口的易用性、易维护性）、有效的使用计算机，并使整个计算机系统能高效地运行；
-OS特性：
-
-
-
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/OS/OS_review/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/ProjectImages/WPCopybook/">Copybook for Calligraphy (WP)</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2015-12-20T08:00:00.000Z" itemprop="datePublished">
-          2015-12-20
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. DescriptionThis is a WP project aiming at helping beginners to learn Chinese calligraphy better through mimicing works done by famous calligraphers like Wang xizhi, Yan zhenqing and so on. 
-The reason we choose WP is 
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/ProjectImages/WPCopybook/">Read More...</a>
                     </p>
                     
                 </div>
