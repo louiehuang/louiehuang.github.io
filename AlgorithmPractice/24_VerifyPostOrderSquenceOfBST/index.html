@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Archives: 2016/9 | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>24 Verify Post-order Squence Of BST | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -225,72 +225,64 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
       
-
-
-<section id="services" style="min-height:600px">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/Recommender-System/Information_entropy/">信息熵与分类算法[转]</a></h4>
-                            
-                            <p><time datetime="2016-09-20T07:00:00.000Z"><a href="/Recommender-System/Information_entropy/">2016-09-20</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/Recommender-System/Gini_Index/">基尼系数</a></h4>
-                            
-                            <p><time datetime="2016-09-19T07:00:00.000Z"><a href="/Recommender-System/Gini_Index/">2016-09-19</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/Recommender-System/python_instance_access_rule/">Python的类实例属性访问规则探讨[转]</a></h4>
-                            
-                            <p><time datetime="2016-09-15T07:00:00.000Z"><a href="/Recommender-System/python_instance_access_rule/">2016-09-15</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/Recommender-System/Precision_Recall/">召回率准确率</a></h4>
-                            
-                            <p><time datetime="2016-09-12T07:00:00.000Z"><a href="/Recommender-System/Precision_Recall/">2016-09-12</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-05T07:00:00.000Z" itemprop="datePublished">
+          2018-04-05
+      </time>
+    
+</span>
+                <h1>24 Verify Post-order Squence Of BST</h1>
+            </div>
         </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p><strong>Problem Statement:</strong></p>
+<p>输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。</p>
+<p><br></p>
+<p><strong>Problem Statement:</strong></p>
+<p>Given an integer array, judge whether it is a kind of post-order traversal of a binary search tree. Each element in the array is unique.</p>
+<p><br></p>
+<p><strong>Solution:</strong></p>
+<p>Suppose arr = {4,8,6,12,16,14,10}, then 10 is the root, {12,16,14} are in the right subtree since they are greater than 10 and {4,8,6} are in the left subtree since they are smaller than 10. Then we check {12,16,14}, 14 is the root, 12 is in the left subtree and 16 is in the right subtree… so this is a recursion, repeat this process, we have a possible BST (we do not have in-order sequence so we cannot determine the BST):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     10</span><br><span class="line">   /    \</span><br><span class="line">  6     14</span><br><span class="line"> / \   /  \</span><br><span class="line">4   8 12  16</span><br></pre></td></tr></table></figure>
+<p>Now we want to know in what cases that a post-order sequence is invalid. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">VerifySquenceOfBST</span><span class="params">(<span class="keyword">int</span>[] sequence)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sequence == <span class="keyword">null</span> || sequence.length == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> helper(sequence, <span class="number">0</span>, sequence.length - <span class="number">1</span>); <span class="comment">// [lo, hi]</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span>[] sequence, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (lo &gt;= hi) <span class="comment">//since we used 'leftRoot + 1, hi - 1', lo could &gt; hi</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">int</span> root = sequence[hi];</span><br><span class="line">    <span class="keyword">int</span> leftRoot = hi - <span class="number">1</span>; <span class="comment">//left to root</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// first, find left-subtree's root, traverse backwards</span></span><br><span class="line">    <span class="keyword">while</span> (leftRoot &gt;= lo) &#123;</span><br><span class="line">        <span class="keyword">if</span> (sequence[leftRoot] &lt; root)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        leftRoot--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// we found the left-subtree's root, all the elements in left-subtree should be smaller than root value</span></span><br><span class="line">    <span class="comment">// keep traversing backward, if there exists an element &gt; root, then invalid left subtree</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = leftRoot; i &gt;= lo; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (sequence[i] &gt; root)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//hi - 1 is rightRoot</span></span><br><span class="line">    <span class="keyword">return</span> helper(sequence, lo, leftRoot) &amp;&amp; helper(sequence, leftRoot + <span class="number">1</span>, hi - <span class="number">1</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <!-- 分页 -->
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
         <nav class="pagination" role="pagination">
-          
-          
-        </nav>
-    </div>
-</section> 
+    
+    
+    <a class="pull-right" href="/AlgorithmPractice/21_MinStack/">
+        21 Min Stack →
+    </a>
+    
+</nav>
 
-
-
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>Don't give up on your dreams -- Keep sleeping</p>
-        </div>
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="AlgorithmPractice/24_VerifyPostOrderSquenceOfBST/" data-title="24 Verify Post-order Squence Of BST" data-url="http://louie.link/AlgorithmPractice/24_VerifyPostOrderSquenceOfBST/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

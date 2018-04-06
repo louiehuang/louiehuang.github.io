@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Archives: 2016/9 | Louie&#39;s Blog</title>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>23 Print Binary Tree | Louie&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -225,72 +225,66 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
       
-
-
-<section id="services" style="min-height:600px">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/Recommender-System/Information_entropy/">信息熵与分类算法[转]</a></h4>
-                            
-                            <p><time datetime="2016-09-20T07:00:00.000Z"><a href="/Recommender-System/Information_entropy/">2016-09-20</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/Recommender-System/Gini_Index/">基尼系数</a></h4>
-                            
-                            <p><time datetime="2016-09-19T07:00:00.000Z"><a href="/Recommender-System/Gini_Index/">2016-09-19</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/Recommender-System/python_instance_access_rule/">Python的类实例属性访问规则探讨[转]</a></h4>
-                            
-                            <p><time datetime="2016-09-15T07:00:00.000Z"><a href="/Recommender-System/python_instance_access_rule/">2016-09-15</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/Recommender-System/Precision_Recall/">召回率准确率</a></h4>
-                            
-                            <p><time datetime="2016-09-12T07:00:00.000Z"><a href="/Recommender-System/Precision_Recall/">2016-09-12</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-05T07:00:00.000Z" itemprop="datePublished">
+          2018-04-05
+      </time>
+    
+</span>
+                <h1>23 Print Binary Tree</h1>
+            </div>
         </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p><strong>Problem Statement:</strong></p>
+<p>从上往下打印出二叉树的每个节点，同层节点从左至右打印。</p>
+<p><br></p>
+<p><strong>Problem Statement:</strong></p>
+<p>Print a binary tree in level order.</p>
+<p><br></p>
+<p><strong>Solution:</strong></p>
+<p>This is just a BFS.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">PrintFromTopToBottom</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    ArrayList&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    queue.offer(root);</span><br><span class="line">    <span class="keyword">while</span>(!queue.isEmpty())&#123;</span><br><span class="line">        <span class="keyword">int</span> size = queue.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++)&#123;</span><br><span class="line">            TreeNode node = queue.poll();</span><br><span class="line">            res.add(node.val);</span><br><span class="line">            <span class="keyword">if</span>(node.left != <span class="keyword">null</span>)</span><br><span class="line">                queue.offer(node.left);</span><br><span class="line">            <span class="keyword">if</span>(node.right != <span class="keyword">null</span>)</span><br><span class="line">                queue.offer(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <!-- 分页 -->
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
         <nav class="pagination" role="pagination">
-          
-          
-        </nav>
-    </div>
-</section> 
+    
+    <a class="pull-left" href="/AlgorithmPractice/22_IsPopOrder/" style="float: left;">
+        ← 22 Is Stack Pop Order
+    </a>
+    
+    
+    <a class="pull-right" href="/AlgorithmPractice/18__HasSubtree/">
+        18 Substructure of a Tree →
+    </a>
+    
+</nav>
 
-
-
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>Don't give up on your dreams -- Keep sleeping</p>
-        </div>
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="AlgorithmPractice/23_PrintBinaryTree/" data-title="23 Print Binary Tree" data-url="http://louie.link/AlgorithmPractice/23_PrintBinaryTree/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

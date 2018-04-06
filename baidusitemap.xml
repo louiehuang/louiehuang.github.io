@@ -4,6 +4,78 @@
 
     
   <url>
+    <loc>http://louie.link/AlgorithmPractice/24_VerifyPostOrderSquenceOfBST/</loc>
+    <lastmod>2018-04-06T06:00:41.000Z</lastmod>
+    <data>
+        <display>
+        <title>24 Verify Post-order Squence Of BST</title>
+        <pubTime>2018-04-05T07:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/23_PrintBinaryTree/</loc>
+    <lastmod>2018-04-05T20:45:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>23 Print Binary Tree</title>
+        <pubTime>2018-04-05T07:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/22_IsPopOrder/</loc>
+    <lastmod>2018-04-05T20:42:45.000Z</lastmod>
+    <data>
+        <display>
+        <title>22 Is Stack Pop Order</title>
+        <pubTime>2018-04-05T07:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/AlgorithmPractice/21_MinStack/</loc>
+    <lastmod>2018-04-05T20:36:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>21 Min Stack</title>
+        <pubTime>2018-04-05T07:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://louie.link/AlgorithmPractice/20_SpiralMatrix/</loc>
     <lastmod>2018-04-05T06:20:49.000Z</lastmod>
     <data>
@@ -76,6 +148,24 @@
 
     
   <url>
+    <loc>http://louie.link/AlgorithmPractice/15_Find_the_kth_Last_Element_in_List/</loc>
+    <lastmod>2018-04-05T05:41:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>15 Find the kth Last Element in LinkedList</title>
+        <pubTime>2018-04-03T07:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://louie.link/AlgorithmPractice/14_ReOrderArray/</loc>
     <lastmod>2018-04-04T06:10:36.000Z</lastmod>
     <data>
@@ -99,24 +189,6 @@
     <data>
         <display>
         <title>06 Reconstruct a Binary Tree</title>
-        <pubTime>2018-04-03T07:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="AlgorithmPractice" url="http://louie.link/categories/AlgorithmPractice/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://louie.link/AlgorithmPractice/15_Find_the_kth_Last_Element_in_List/</loc>
-    <lastmod>2018-04-04T01:49:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>15 Find the kth Last Element in LinkedList</title>
         <pubTime>2018-04-03T07:00:00.000Z</pubTime>
         
          
