@@ -1394,11 +1394,15 @@ span.sb-caret { /* Caret Down */
 #blog-post #facebook.sharrre .box {
 	background-color: #49659F;
 }
+#blog-post #linkedin.sharrre .box {
+    background-color: #49659F;
+}
 #blog-post #googleplus.sharrre .box {
 	background-color: #DD4B39;
 }
 #blog-post .sharrre .box:active,
 #blog-post #facebook .box:active,
+#blog-post #linkedin .box:active,
 #blog-post #googleplus .box:active {
 	margin-top:4px;
 }
@@ -3440,13 +3444,14 @@ footer .footer_bottom {
 /* Import the font file with the icons in it */
 @font-face { font-family: 'icons'; src:  url('../fonts/icons.woff') format('woff'); font-weight: normal; font-style: normal; }
 /* Apply these base styles to all icons */
-.icon-feed:before, .icon-twitter:before, .icon-google-plus:before, .icon-facebook:before, .icon-sina-weibo, .icon-github{ font-family: 'icons'; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1; -webkit-font-smoothing: antialiased; text-decoration: none; }
+.icon-feed:before, .icon-twitter:before, .icon-google-plus:before, .icon-linkedin:before, .icon-facebook:before, .icon-sina-weibo, .icon-github{ font-family: 'icons'; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1; -webkit-font-smoothing: antialiased; text-decoration: none; }
 /* Each icon is created by inserting the corret character into the
    content of the :before pseudo element. Like a boss. */
 .icon-feed:before { content: "\e631"; }
 .icon-twitter:before { content: "\e630"; font-size: 1.1em; }
 .icon-google-plus:before { content: "\e62d"; }
 .icon-facebook:before { content: "\e62f"; }
+.icon-linkedin:before { content: "\eac9"; }
 .icon-sina-weibo:before { content: "\e666"; }
 .icon-github:before { content: "\e636"; }
 /*---------------- END ------------------------*/

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>(Week5) 01 Back Propagation | Louie&#39;s Blog</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Louie's Blog">
+    <meta name="author" content="黄刘胤,Louie">
+    <meta name="description" content="黄刘胤的博客 Louie's blog" />
+    <meta name="keywords" content="黄刘胤,Louie,LouieHuang" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/logo.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Louie&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/xcode.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <!--     
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    -->
+    <!-- 改为云存储 -->
+    <!-- <link href='//gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/family%3DOpen%2BSans400%2C600.css' rel='stylesheet' type='text/css'> -->
+    <!-- 或者本地也可以 -->
+    <link href='/css/family=Open+Sans400,600.css' rel='stylesheet' type='text/css'>
+
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  <!-- Baidu -->
+  <!--
+  
+  -->
+
+  <!-- google统计 -->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-76175499-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+
+<body id="index" class="lightnav animsition">
+
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- header -->
+        <div style="text-align:center;margin-top:15px;margin-bottom:-30px;">
+            <img style="height:120px;weight:120px" src="/img/header.jpg" alt="Close"/>
+            <h4 style="margin-top:10px;color:#fff;">黄刘胤 | Louie</h4>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
+				    
+				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    
+				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
+				    
+				    <li><a href="/categories/Miscellaneous/" class="animsition-link">Miscellaneous<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Project-Images/" class="animsition-link">Project Images<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(8)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="/Resume.pdf" class="animsition-link">Resume</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About Me</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.ico" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Louie's Blog</a></li>
+                            <li class="nolink"><span>Always </span>Thinking</li>
+                            
+                            <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-02-12T08:00:00.000Z" itemprop="datePublished">
+          2018-02-12
+      </time>
+    
+</span>
+                <h1>(Week5) 01 Back Propagation</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="NN-Back-Propagation-and-Cost-Function"><a href="#NN-Back-Propagation-and-Cost-Function" class="headerlink" title="NN: Back Propagation and Cost Function"></a>NN: Back Propagation and Cost Function</h2><p>Materials are from <a href="https://www.coursera.org/learn/machine-learning/home/week/5" target="_blank" rel="external">Coursera Machine Learning by Andrew Ng</a>. </p>
+<h3 id="1-Cost-Function"><a href="#1-Cost-Function" class="headerlink" title="1. Cost Function"></a>1. Cost Function</h3><p>Let’s first define a few variables that we will need to use:</p>
+<ul>
+<li>$L$ = total number of layers in the network</li>
+<li>$s_l$ = number of units (not counting bias unit) in layer $l$</li>
+<li>$K$ = number of output units/classes</li>
+</ul>
+<p>Recall that in neural networks, we may have many output nodes. We denote $h_\Theta(x)_k$ as being a hypothesis that results in the $k^{th}$ output. Our cost function for neural networks is going to be a generalization of the one we used for logistic regression. Recall that the cost function for regularized logistic regression was:</p>
+<script type="math/tex; mode=display">J(\theta) = - \frac{1}{m} \sum_{i=1}^m [ y^{(i)}\ \log (h_\theta (x^{(i)})) + (1 - y^{(i)})\ \log (1 - h_\theta(x^{(i)}))] + \frac{\lambda}{2m}\sum_{j=1}^n \theta_j^2</script><p>For neural networks, it is going to be slightly more complicated:</p>
+<script type="math/tex; mode=display">\begin{gather*} J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \left[y^{(i)}_k \log ((h_\Theta (x^{(i)}))_k) + (1 - y^{(i)}_k)\log (1 - (h_\Theta(x^{(i)}))_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2\end{gather*}</script><p>We have added a few nested summations to account for our multiple output nodes. In the first part of the equation, before the square brackets, we have an additional nested summation that loops through the number of output nodes.</p>
+<p>In the regularization part, after the square brackets, we must account for multiple theta matrices. The number of columns in our current theta matrix is equal to the number of nodes in our current layer (including the bias unit). The number of rows in our current theta matrix is equal to the number of nodes in the next layer (excluding the bias unit). As before with logistic regression, we square every term.</p>
+<p>Note:</p>
+<ul>
+<li>the double sum simply adds up the logistic regression costs calculated for each cell in the output layer.</li>
+<li>the triple sum simply adds up the squares of all the individual $Θ$s in the entire network.</li>
+<li>the i in the triple sum does <strong>not</strong> refer to training example i.</li>
+</ul>
+<p><br></p>
+<h3 id="2-Backpropagation-Algorithm"><a href="#2-Backpropagation-Algorithm" class="headerlink" title="2. Backpropagation Algorithm"></a>2. Backpropagation Algorithm</h3><p>“Backpropagation” is neural-network terminology for minimizing our cost function, just like what we were doing with gradient descent in logistic and linear regression. Our goal is to compute:</p>
+<script type="math/tex; mode=display">\min_\Theta J(\Theta)</script><p>That is, we want to minimize our cost function $J$ using an optimal set of parameters in theta. In this section we’ll look at the equations we use to compute the partial derivative of $J(Θ)$:</p>
+<script type="math/tex; mode=display">\dfrac{\partial}{\partial \Theta_{i,j}^{(l)}}J(\Theta)</script><p>To do so, we use the following algorithm:</p>
+<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/05/BackpropagationAlgorithm.png" alt="img"></p>
+<p><strong>Back propagation Algorithm</strong></p>
+<p>Given training set $\lbrace (x^{(1)}, y^{(1)}) \cdots (x^{(m)}, y^{(m)})\rbrace$</p>
+<ul>
+<li>Set $\Delta^{(l)}_{i,j} := 0$ for all $(l,i,j)$, (hence you end up having a matrix full of zeros)</li>
+</ul>
+<p>For training example $t =1$ to m:</p>
+<ol>
+<li>Set $a^{(1)} := x^{(t)}$</li>
+<li>Perform forward propagation to compute $a^{(l)}$ for $l=2,3,…,L$</li>
+</ol>
+<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/05/Gradient.png" alt="img"></p>
+<ol>
+<li>Using $y^{(t)}$, compute $\delta^{(L)} = a^{(L)} - y^{(t)}$</li>
+</ol>
+<p>Where $L$ is our total number of layers and $a^{(L)}$ is the vector of outputs of the activation units for the last layer. So our “error values” for the last layer are simply the differences of our actual results in the last layer and the correct outputs in $y$. To get the delta values of the layers before the last layer, we can use an equation that steps us back from right to left:</p>
+<ol>
+<li>Compute $\delta^{(L-1)}, \delta^{(L-2)},\dots,\delta^{(2)}$ using $\delta^{(l)} = ((\Theta^{(l)})^T \delta^{(l+1)})\ .<em>\ [a^{(l)}\ .</em>\ (1 - a^{(l)})]$</li>
+</ol>
+<p>The delta values of layer $l$ are calculated by multiplying the delta values in the next layer with the theta matrix of layer $l$. We then element-wise multiply that with a function called $g’$, or g-prime, which is the derivative of the activation function $g$ evaluated with the input values given by $z^{(l)}$.</p>
+<p>The <strong>g-prime derivative</strong> terms can also be written out as:</p>
+<script type="math/tex; mode=display">g'(z^{(l)}) = a^{(l)}\ .*\ (1 - a^{(l)})</script><p>Following is how we calculate the derivative of $g(x) = \sigma(x) = \frac{1}{1+e^{-x}}$.</p>
+<script type="math/tex; mode=display">\begin{align} \dfrac{d}{dx} \sigma(x) &= \dfrac{d}{dx} \left[ \dfrac{1}{1 + e^{-x}} \right] \\ &= \dfrac{d}{dx} \left( 1 + \mathrm{e}^{-x} \right)^{-1} \\ &= -(1 + e^{-x})^{-2}(-e^{-x}) \\ &= \dfrac{e^{-x}}{\left(1 + e^{-x}\right)^2} \\ &= \dfrac{1}{1 + e^{-x}\ } \cdot \dfrac{e^{-x}}{1 + e^{-x}}  \\ &= \dfrac{1}{1 + e^{-x}\ } \cdot \dfrac{(1 + e^{-x}) - 1}{1 + e^{-x}}  \\ &= \dfrac{1}{1 + e^{-x}\ } \cdot \left( \dfrac{1 + e^{-x}}{1 + e^{-x}} - \dfrac{1}{1 + e^{-x}} \right) \\ &= \dfrac{1}{1 + e^{-x}\ } \cdot \left( 1 - \dfrac{1}{1 + e^{-x}} \right) \\ &= \sigma(x) \cdot (1 - \sigma(x))\end{align}</script><ol>
+<li>$\Delta^{(l)}<em>{i,j} := \Delta^{(l)}</em>{i,j} + a_j^{(l)} \delta_i^{(l+1)}$ or with vectorization, $\Delta^{(l)} := \Delta^{(l)} + \delta^{(l+1)}(a^{(l)})^T$</li>
+</ol>
+<p>Hence we update our new $Δ$ matrix.</p>
+<ul>
+<li>$D^{(l)}<em>{i,j} := \dfrac{1}{m}\left(\Delta^{(l)}</em>{i,j} + \lambda\Theta^{(l)}_{i,j}\right)$, if j≠0.</li>
+<li>$D^{(l)}<em>{i,j} := \dfrac{1}{m}\Delta^{(l)}</em>{i,j}$, If j=0.</li>
+</ul>
+<p>The capital-delta matrix $D$ is used as an “accumulator” to add up our values as we go along and eventually compute our partial derivative. Thus we get $\frac \partial {\partial \Theta_{ij}^{(l)}} J(\Theta)$.</p>
+<p><br></p>
+<h3 id="3-Backpropagation-Intuition"><a href="#3-Backpropagation-Intuition" class="headerlink" title="3. Backpropagation Intuition"></a>3. Backpropagation Intuition</h3><p>Recall that the cost function for a neural network is:</p>
+<script type="math/tex; mode=display">\begin{gather*}J(\Theta) = - \frac{1}{m} \sum_{t=1}^m\sum_{k=1}^K \left[ y^{(t)}_k \ \log (h_\Theta (x^{(t)}))_k + (1 - y^{(t)}_k)\ \log (1 - h_\Theta(x^{(t)})_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_l+1} ( \Theta_{j,i}^{(l)})^2\end{gather*}</script><p>If we consider simple non-multiclass classification (k = 1) and disregard regularization, the cost is computed with:</p>
+<script type="math/tex; mode=display">cost(t) =y^{(t)} \ \log (h_\Theta (x^{(t)})) + (1 - y^{(t)})\ \log (1 - h_\Theta(x^{(t)}))</script><p>Intuitively, $\delta_j^{(l)}$ is the “error” for $a_j^{(l)}$ (unit j in layer l). More formally, the delta values are actually the derivative of the cost function:</p>
+<script type="math/tex; mode=display">\delta_j^{(l)} = \dfrac{\partial}{\partial z_j^{(l)}} cost(t)</script><p>Recall that <strong>our derivative is the slope of a line tangent to the cost function, so the steeper the slope the more incorrect we are.</strong> Let us consider the following neural network below and see how we could calculate some $\delta_j^{(l)}$:</p>
+<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/05/Forward.png" alt="img"></p>
+<p>In the image above, to calculate $\delta<em>2^{(2)}$, we multiply the weights $\Theta</em>{12}^{(2)}$ and $\Theta<em>{22}^{(2)}$ by their respective $\delta$ values found to the right of each edge. So we get $\delta_2^{(2)} = \Theta</em>{12}^{(2)} \cdot \delta<em>1^{(3)} + \Theta</em>{22}^{(2)} \cdot \delta_2^{(3)}$. </p>
+<p>To calculate every single possible $\delta<em>j^{(l)}$, we could start from the right of our diagram. We can think of our edges as our $\Theta</em>{ij}$. Going from right to left, to calculate the value of $\delta<em>j^{(l)}$, you can just take the over all sum of each weight times the $\delta$ it is coming from. Hence, another example would be $\delta_2^{(3)} = \Theta</em>{12}^{(3)} \cdot \delta_1^{(4)}$.</p>
+<p><br></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/Machine-Learning/05_02_BackPropagationInPractice/" style="float: left;">
+        ← (Week5) 02 Back Propagation In Practice
+    </a>
+    
+    
+    <a class="pull-right" href="/Machine-Learning/04_02_NN_Applications/">
+        (Week4) 02 Neural Network Applications →
+    </a>
+    
+</nav>
+
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Machine-Learning/05_01_BackPropagation/" data-title="(Week5) 01 Back Propagation" data-url="http://louie.link/Machine-Learning/05_01_BackPropagation/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2015<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 黄刘胤,Louie. All Rights Reserved.
+                </p>
+                <p>Theme By Kieran</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+<!-- post to baidu -->
+<!-- not using this
+    <script type="text/javascript">
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+--><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

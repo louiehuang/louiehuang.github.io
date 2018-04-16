@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>(Week2) 01 Multivariate Linear Regression | Louie&#39;s Blog</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Louie's Blog">
+    <meta name="author" content="黄刘胤,Louie">
+    <meta name="description" content="黄刘胤的博客 Louie's blog" />
+    <meta name="keywords" content="黄刘胤,Louie,LouieHuang" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/logo.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Louie&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/xcode.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <!--     
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    -->
+    <!-- 改为云存储 -->
+    <!-- <link href='//gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/family%3DOpen%2BSans400%2C600.css' rel='stylesheet' type='text/css'> -->
+    <!-- 或者本地也可以 -->
+    <link href='/css/family=Open+Sans400,600.css' rel='stylesheet' type='text/css'>
+
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  <!-- Baidu -->
+  <!--
+  
+  -->
+
+  <!-- google统计 -->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-76175499-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+
+<body id="index" class="lightnav animsition">
+
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- header -->
+        <div style="text-align:center;margin-top:15px;margin-bottom:-30px;">
+            <img style="height:120px;weight:120px" src="/img/header.jpg" alt="Close"/>
+            <h4 style="margin-top:10px;color:#fff;">黄刘胤 | Louie</h4>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
+				    
+				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    
+				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
+				    
+				    <li><a href="/categories/Miscellaneous/" class="animsition-link">Miscellaneous<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Project-Images/" class="animsition-link">Project Images<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(8)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="/Resume.pdf" class="animsition-link">Resume</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About Me</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.ico" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Louie's Blog</a></li>
+                            <li class="nolink"><span>Always </span>Thinking</li>
+                            
+                            <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-02-05T08:00:00.000Z" itemprop="datePublished">
+          2018-02-05
+      </time>
+    
+</span>
+                <h1>(Week2) 01 Multivariate Linear Regression</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="Multivariate-Linear-Regression"><a href="#Multivariate-Linear-Regression" class="headerlink" title="Multivariate Linear Regression"></a>Multivariate Linear Regression</h2><p>Materials are from <a href="https://www.coursera.org/learn/machine-learning/home/week/2" target="_blank" rel="external">Coursera Machine Learning by Andrew Ng</a>. </p>
+<h3 id="1-Multiple-Features"><a href="#1-Multiple-Features" class="headerlink" title="1. Multiple Features"></a>1. Multiple Features</h3><p>Linear regression with multiple variables is also known as “multivariate linear regression”.</p>
+<p>We now introduce notation for equations where we can have any number of input variables.</p>
+<script type="math/tex; mode=display">\begin{align*}x_j^{(i)} &= \text{value of feature } j \text{ in the }i^{th}\text{ training example} \newline x^{(i)}& = \text{the input (features) of the }i^{th}\text{ training example} \newline m &= \text{the number of training examples} \newline n &= \text{the number of features} \end{align*}</script><p>The multivariable form of the hypothesis function accommodating these multiple features is as follows:</p>
+<script type="math/tex; mode=display">h_\theta (x) = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \theta_3 x_3 + \cdots + \theta_n x_n</script><p>In order to develop intuition about this function, we can think about $θ_0$ as the basic price of a house, $θ_1$ as the price per square meter, $θ_2$ as the price per floor, etc. $x_1$ will be the number of square meters in the house, $x_2$ the number of floors, etc.</p>
+<p>Using the definition of matrix multiplication, our multivariable hypothesis function can be concisely represented as:</p>
+<script type="math/tex; mode=display">\begin{align*}h_\theta(x) =\begin{bmatrix}\theta_0 \hspace{2em} \theta_1 \hspace{2em} ... \hspace{2em} \theta_n\end{bmatrix}\begin{bmatrix}x_0 \newline x_1 \newline \vdots \newline x_n\end{bmatrix}= \theta^T x\end{align*}</script><p>This is a vectorization of our hypothesis function for one training example.</p>
+<p>Remark: Note that for convenience reasons in this course we assume (by adding) $x_{0}^{(i)} =1 \text{ for } (i\in { 1,\dots, m } )$. This allows us to do matrix operations with $\theta$ and $x$. Hence making the two vectors $θ$ and $x^{(i)}$ match each other element-wise (that is, have the same number of elements: n+1).]</p>
+<p><br></p>
+<h3 id="2-GD-For-Multiple-Variables"><a href="#2-GD-For-Multiple-Variables" class="headerlink" title="2. GD For Multiple Variables"></a>2. GD For Multiple Variables</h3><p>The gradient descent equation itself is generally the same form; we just have to repeat it for our <code>n</code> features:</p>
+<script type="math/tex; mode=display">\begin{align*} & \text{repeat until convergence:} \; \lbrace \newline \; & \theta_0 := \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_0^{(i)}\newline \; & \theta_1 := \theta_1 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_1^{(i)} \newline \; & \theta_2 := \theta_2 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_2^{(i)} \newline & \cdots \newline \rbrace \end{align*}</script><p>In other words:</p>
+<script type="math/tex; mode=display">\begin{align*}& \text{repeat until convergence:} \; \lbrace \newline \; & \theta_j := \theta_j - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)} \; & \text{for j := 0...n}\newline \rbrace\end{align*}</script><p>The following image compares gradient descent with one variable to gradient descent with multiple variables:</p>
+<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/02/1.png" alt="img"></p>
+<p><br></p>
+<h3 id="3-GD-in-Practice-I-Feature-Scaling"><a href="#3-GD-in-Practice-I-Feature-Scaling" class="headerlink" title="3. GD in Practice I - Feature Scaling"></a>3. GD in Practice I - Feature Scaling</h3><p>We can speed up gradient descent by <strong>having each of our input values in roughly the same range</strong>. This is because <strong>$θ$ will descend quickly on small ranges and slowly on large ranges</strong>, and so will <strong>oscillate</strong> inefficiently down to the optimum when the variables are very uneven.</p>
+<p>The way to prevent this is to modify the ranges of our input variables so that they are all roughly the same. Ideally:</p>
+<script type="math/tex; mode=display">−1 ≤ x(i) ≤ 1 \;\; or \; −0.5 ≤ x(i) ≤ 0.5</script><p>These aren’t exact requirements; we are only trying to speed things up. The goal is to get all input variables into roughly one of these ranges, give or take a few.</p>
+<p>Two techniques to help with this are <strong>feature scaling</strong> and <strong>mean normalization</strong>. </p>
+<ul>
+<li>Feature scaling involves dividing the input values by the range (i.e. the maximum value minus the minimum value) of the input variable, resulting in a new range of just 1. </li>
+<li>Mean normalization involves subtracting the average value for an input variable from the values for that input variable resulting in a new average value for the input variable of just zero. </li>
+</ul>
+<p>To implement both of these techniques, adjust your input values as shown in this formula:</p>
+<script type="math/tex; mode=display">x_i := \dfrac{x_i - \mu_i}{s_i}</script><p>Where $\mu_i$ is the <strong>average</strong> of all the values for feature (i) and $s_i$ is the range of values <code>(max - min)</code>, or $s_i$ is the <code>standard deviation</code>.</p>
+<p>Note that dividing by the range, or dividing by the standard deviation, give different results. </p>
+<p>For example, if $x_i$ represents housing prices with a range of 100 to 2000 and a mean value of 1000, then, </p>
+<script type="math/tex; mode=display">x_i := \dfrac{price-1000}{1900}</script><p><br></p>
+<h3 id="4-GD-in-Practice-II-Learning-Rate"><a href="#4-GD-in-Practice-II-Learning-Rate" class="headerlink" title="4. GD in Practice II - Learning Rate"></a>4. GD in Practice II - Learning Rate</h3><p><strong>Debugging gradient descent.</strong> Make a plot with <em>number of iterations</em> on the x-axis. Now plot the cost function, $J(θ)$ over the number of iterations of gradient descent. If $J(θ)$ ever increases, then you probably need to decrease $α$.</p>
+<p><strong>Automatic convergence test.</strong> Declare convergence if $J(θ)$ decreases by less than $E$ in one iteration, where $E$ is some small value such as $10^{−3}$. However in practice it’s difficult to choose this threshold value.</p>
+<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/02/2.png" alt="img"></p>
+<p>It has been proven that if learning rate $α$ is sufficiently small, then $J(θ)$ will decrease on every iteration.</p>
+<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/02/3.png" alt="img"></p>
+<p>To summarize:</p>
+<ul>
+<li>If $α$ is too small: slow convergence.</li>
+<li>If $α$ is too large: ￼may not decrease on every iteration and thus may not converge.</li>
+</ul>
+<p><br></p>
+<h3 id="5-Features-and-Polynomial-Regression"><a href="#5-Features-and-Polynomial-Regression" class="headerlink" title="5. Features and Polynomial Regression"></a>5. Features and Polynomial Regression</h3><p>We can improve our features and the form of our hypothesis function in a couple different ways.</p>
+<p>We can <strong>combine</strong> multiple features into one. For example, we can combine $x_1$ and $x_2$ into a new feature $x_3$ by taking $x_1\cdot x_2$.</p>
+<p><strong>Polynomial Regression</strong></p>
+<p>Our hypothesis function need not be linear (a straight line) if that does not fit the data well.</p>
+<p>We can <strong>change the behavior or curve</strong> of our hypothesis function by making it a quadratic, cubic or square root function (or any other form).</p>
+<p>For example, if our hypothesis function is $h<em>\theta(x) = \theta_0 + \theta_1 x_1$, then we can create additional features based on $x_1$, to get the quadratic function $h</em>\theta(x) = \theta<em>0 + \theta_1 x_1 + \theta_2 x_1^2$ or the cubic function $h</em>\theta(x) = \theta_0 + \theta_1 x_1 + \theta_2 x_1^2 + \theta_3 x_1^3$.</p>
+<p>In the cubic version, we have created new features $x<em>2$ and $x_3$ where $x_2 = x</em>{1}^{2}$ and $x<em>3 = x</em>{1}^{3}$.</p>
+<p>To make it a square root function, we could do: $h_\theta(x) = \theta_0 + \theta_1 x_1 + \theta_2 \sqrt{x_1}$</p>
+<p>One important thing to keep in mind is, <strong>if you choose your features this way then feature scaling becomes very important.</strong></p>
+<p>eg. if $x<em>1$ has range $1 - 1000$ then range of $x</em>{1}^{2}$ becomes $1 - 1000000$ and that of $x_{1}^{3}$ becomes $1-1000000000$.</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/Machine-Learning/02_02_ComputingParametersAnalytically/" style="float: left;">
+        ← (Week2) 02 Computing Parameters Analytically
+    </a>
+    
+    
+    <a class="pull-right" href="/Machine-Learning/01_04_LinearAlgebraReview/">
+        (Week1) 04 Linear Algebra Review →
+    </a>
+    
+</nav>
+
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Machine-Learning/02_01_MultivariateLinearRegression/" data-title="(Week2) 01 Multivariate Linear Regression" data-url="http://louie.link/Machine-Learning/02_01_MultivariateLinearRegression/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2015<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 黄刘胤,Louie. All Rights Reserved.
+                </p>
+                <p>Theme By Kieran</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+<!-- post to baidu -->
+<!-- not using this
+    <script type="text/javascript">
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+--><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

@@ -125,27 +125,19 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/categories/AlgorithmPractice/" class="animsition-link">AlgorithmPractice<small>(19)</small></a></li>
-				    
-				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(1)</small></a></li>
-				    
-				    <li><a href="/categories/Blog/" class="animsition-link">Blog<small>(3)</small></a></li>
-				    
-				    <li><a href="/categories/Computer-Networks/" class="animsition-link">Computer Networks<small>(1)</small></a></li>
+				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Image-Processing/" class="animsition-link">Image Processing<small>(1)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(6)</small></a></li>
+				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Security/" class="animsition-link">Information Security<small>(1)</small></a></li>
+				    <li><a href="/categories/Miscellaneous/" class="animsition-link">Miscellaneous<small>(9)</small></a></li>
 				    
-				    <li><a href="/categories/OS/" class="animsition-link">OS<small>(1)</small></a></li>
+				    <li><a href="/categories/Project-Images/" class="animsition-link">Project Images<small>(9)</small></a></li>
 				    
-				    <li><a href="/categories/ProjectImages/" class="animsition-link">ProjectImages<small>(9)</small></a></li>
-				    
-				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(9)</small></a></li>
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(8)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -196,6 +188,8 @@
                             <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a></li>
                             
                             
+                            <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
                             
                             <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
                             
@@ -203,7 +197,6 @@
                             <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
                             
                             
-                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
                             
                             <li class="nolink"><span>Welcome!</span></li>
                         </ul>
@@ -230,8 +223,8 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2018-01-28T08:00:00.000Z" itemprop="datePublished">
-          2018-01-28
+      <time datetime="2018-01-24T08:00:00.000Z" itemprop="datePublished">
+          2018-01-24
       </time>
     
 </span>
@@ -239,7 +232,7 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<p>Lectrue in 01/28/2018</p>
+      		<p>Lectrue in 01/24/2018</p>
 <p>[TOC]</p>
 <p>In IR, deduplication means recognizing identical and nearly identical web pages and indexing only a single version.</p>
 <p>For duplicates, a kind of example is that different URLs point to the same page. Say, a html page is placed on different servers thus have different URLs (may be different in protocal / host name / path name / page name).</p>
@@ -278,7 +271,7 @@
 </ol>
 </blockquote>
 <h3 id="2-2-Solutions-1-Compute-Fingerprints"><a href="#2-2-Solutions-1-Compute-Fingerprints" class="headerlink" title="2.2 Solutions 1 - Compute Fingerprints"></a>2.2 Solutions 1 - Compute Fingerprints</h3><p>One way to detecte Near Duplicate Page is to calculate fingerprints and then test for similarity. </p>
-<p>Documents being treated as n-dimensional vectors are transformed into $f$-bit fingerprints by <code>Simhash</code> or <code>Hamming Distan</code>. Then compare these fingerprints with a difference in at most k bits.</p>
+<p>Documents being treated as n-dimensional vectors are transformed into $f$-bit fingerprints by <code>Simhash</code> or <code>Hamming Distance</code>. Then compare these fingerprints with a difference in at most k bits.</p>
 <h3 id="2-3-Solutions-2-Compute-Shingles"><a href="#2-3-Solutions-2-Compute-Shingles" class="headerlink" title="2.3 Solutions 2 - Compute Shingles"></a>2.3 Solutions 2 - Compute Shingles</h3><h4 id="2-3-1-Distance-Measurements"><a href="#2-3-1-Distance-Measurements" class="headerlink" title="2.3.1 Distance Measurements"></a>2.3.1 Distance Measurements</h4><p>Before diving into <strong>shingles</strong>, let’s first review different <code>Distance Measurements</code></p>
 <h5 id="1-Euclidean-Distance"><a href="#1-Euclidean-Distance" class="headerlink" title="(1) Euclidean Distance"></a>(1) Euclidean Distance</h5><script type="math/tex; mode=display">d(p,q) = d(q,p) = \sqrt{(q_1-p_1)^2 + (q_2-p_2)^2 + \cdots + (q_n-p_n)^2} = \sqrt{\sum_{i=1}^n (q_i-p_i)^2}</script><h5 id="2-Jaccard-Distance-Our-Importance-Here"><a href="#2-Jaccard-Distance-Our-Importance-Here" class="headerlink" title="(2) Jaccard Distance (Our Importance Here)"></a>(2) Jaccard Distance (Our Importance Here)</h5><script type="math/tex; mode=display">Jaccard \: Similarity: JS(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{|A \cap B|}{|A| + |B| - |A \cap B|}</script><script type="math/tex; mode=display">Jaccard \: Distance: JD(A,B) = 1 - J(A,B) = \frac{|A \cup B| - |A \cap B|}{|A \cup B|}</script><p>For example, Consider A = {0, 1, 2, 3, 6} and B = {0, 1, 3, 5, 7, 9}</p>
 <script type="math/tex; mode=display">JS(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{\{0,1,3\}}{\{0,1,2,3,5,6,7,9\}} = \frac{3}{8}</script><h5 id="3-Cosine-Distance"><a href="#3-Cosine-Distance" class="headerlink" title="(3) Cosine Distance"></a>(3) Cosine Distance</h5><script type="math/tex; mode=display">Cosine \: Similarity=\cos(\theta )=\frac{\vec{A} \cdot \vec{B}}{\|\vec{A} \|\|\vec{B}\|} = \frac{\sum\limits_{i=1}^{n}{A_{i}B_{i}}}{\sqrt{\sum\limits_{i=1}^{n}{A_{i}^{2}}}\sqrt{\sum\limits_{i=1}^{n}{B_{i}^{2}}}}</script><h5 id="4-Edit-Distance"><a href="#4-Edit-Distance" class="headerlink" title="(4) Edit Distance"></a>(4) Edit Distance</h5><p>The Edit Distance is a way of quantifying how dissimilar two strings (e.g., words) are to one another by <strong>counting the minimum number of operations required to transform one string into the other.</strong></p>
@@ -362,14 +355,14 @@ var duoshuoQuery = {short_name:"louiehuang"};
                     <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
                     
                     
+                    <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
                     
                     <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
                     
                     
                     <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
                     
-                    
-                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
                     
                 </ul>
             </div>

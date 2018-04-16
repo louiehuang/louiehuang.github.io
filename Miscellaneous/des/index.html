@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>DES Algorithm | Louie&#39;s Blog</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Louie's Blog">
+    <meta name="author" content="黄刘胤,Louie">
+    <meta name="description" content="黄刘胤的博客 Louie's blog" />
+    <meta name="keywords" content="黄刘胤,Louie,LouieHuang" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/logo.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Louie&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/xcode.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <!--     
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    -->
+    <!-- 改为云存储 -->
+    <!-- <link href='//gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/family%3DOpen%2BSans400%2C600.css' rel='stylesheet' type='text/css'> -->
+    <!-- 或者本地也可以 -->
+    <link href='/css/family=Open+Sans400,600.css' rel='stylesheet' type='text/css'>
+
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  <!-- Baidu -->
+  <!--
+  
+  -->
+
+  <!-- google统计 -->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-76175499-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+
+<body id="index" class="lightnav animsition">
+
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- header -->
+        <div style="text-align:center;margin-top:15px;margin-bottom:-30px;">
+            <img style="height:120px;weight:120px" src="/img/header.jpg" alt="Close"/>
+            <h4 style="margin-top:10px;color:#fff;">黄刘胤 | Louie</h4>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
+				    
+				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    
+				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
+				    
+				    <li><a href="/categories/Miscellaneous/" class="animsition-link">Miscellaneous<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Project-Images/" class="animsition-link">Project Images<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(8)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="/Resume.pdf" class="animsition-link">Resume</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About Me</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.ico" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Louie's Blog</a></li>
+                            <li class="nolink"><span>Always </span>Thinking</li>
+                            
+                            <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-05-02T07:00:00.000Z" itemprop="datePublished">
+          2016-05-02
+      </time>
+    
+</span>
+                <h1>DES Algorithm</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>算法实现按照《信息安全原理与技术》(郭亚军、宋建华、李莉、董慧慧编著)给出的过程，输入输出格式按照本书56页例3.8指定，即输入16个字符的16进制明文和密钥 (输入16个16进制char后自动处理成64位的2进制进行计算，也即DES分组大小和DES的密钥大小)，输出64位2进制密文（解密时输出64位2进制明文）和对应的16位16进制密文/明文，如下图：</p>
+<p><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/InformationSecurity/des/des1.png" alt=""></p>
+<p>源码丢在github上，有需要的可以下载查看，地址：<a href="https://github.com/louiehuang/DES" target="_blank" rel="external">https://github.com/louiehuang/DES</a></p>
+<h3 id="一、算法过程"><a href="#一、算法过程" class="headerlink" title="一、算法过程"></a>一、算法过程</h3><p>DES原理本身不难理解，只是实现起来比较麻烦，所以这里只是大概提一下算法过程，详细过程可以参考《信息安全原理与技术》或 <a href="http://www.hankcs.com/security/des-algorithm-illustrated.html" target="_blank" rel="external">DES算法实例详解</a>，讲得都比较清楚。</p>
+<p><strong>（1）处理密钥</strong></p>
+<blockquote>
+<ol>
+<li>输入64位密钥，经过置换选择1（56位）得到56位的实际密钥</li>
+<li>按28位1组分成前后C和D两个部分</li>
+<li>进行16轮循环，每轮循环中先对C和D循环左移，再将结果合并</li>
+<li>通过置换选择2（48位）选出当前轮的48位子密钥。</li>
+</ol>
+</blockquote>
+<p><strong>（2）处理明文</strong></p>
+<blockquote>
+<ol>
+<li>输入64位明文，初始置换</li>
+<li>按32位1组分成前后L和R两个部分</li>
+<li>进行16轮迭代，每轮迭代中，下一轮使用的L为本轮的R，下一轮使用的R需经过如下计算得到：<br> 先将32位的R经过扩展置换E扩展成48位，与当前轮使用的子密钥（加密时为顺序使用子密钥，解密时为逆序使用子密钥）进行异或，将得到的48位结果按6位1组分成8组，每组使用1个S盒进行置换，每组得到4位输出，即最后得到32位的输出，将此输出结果经置换P后得到的结果与本轮的L相异或，即为下一轮的R</li>
+<li>16轮迭代结束后，将最后得到的L和R交换，即（R，L）</li>
+<li>逆初始置换后得到64位密文</li>
+</ol>
+</blockquote>
+<h3 id="二、算法实现"><a href="#二、算法实现" class="headerlink" title="二、算法实现"></a>二、算法实现</h3><p>为了清晰理解DES算法的原理，希望将算法中所有的中间结果均能输出出来查看，基于这个目的，我选取的主要数据结构为char数组，不需要输出中间结果则可以使用bool类型，运算效率比char高… 嗯没管效率只是为了理解DES而已…</p>
+<p>我按课本56页例3.8制定输入格式，即输入的明文和密钥均为16位的16进制字符串，因此为了输出中间过程，需要将输入转换成64位的2进制字符数组，char类型数组最后一位需要放’\0’，因此所有的char数组的实际大小均为算法所需大小加1，主要的数据结构如下：</p>
+<p><strong>输入：</strong></p>
+<blockquote>
+<ul>
+<li>char HexMsg[17], char HexKey[17] //明文和密钥输入为16位的16进制字符串</li>
+</ul>
+</blockquote>
+<p><strong>预处理：</strong></p>
+<blockquote>
+<ul>
+<li>char HexMsg[17] → char BiMsg[65] //64位的2进制明文</li>
+<li>char HexKey[17] → char BiKey[65] //64位的2进制密钥</li>
+</ul>
+</blockquote>
+<p><strong>DES：<br>产生子密钥：</strong></p>
+<blockquote>
+<ul>
+<li>char realKey[57] //经置换选择1选出56位</li>
+<li>char C[29], D[29] //前后2部分，各28位</li>
+<li>char CDCombine[57] //循环左移后将C、D数组结合</li>
+<li>char subKey[16][49] //置换选择2后产生的子密钥</li>
+</ul>
+</blockquote>
+<p><strong>初始置换：</strong></p>
+<blockquote>
+<ul>
+<li>char BiMsgCopy[57] //复制一份原数组，否则在期间的改变会使得替换的元素发生改变</li>
+<li>char L[33], R[33] //前后2部分，各32位</li>
+</ul>
+</blockquote>
+<p><strong>16轮迭代：</strong></p>
+<blockquote>
+<ul>
+<li>char RCopy[29] //复制R，运算期间会改变R，而最后需要将本轮开始的R赋给下一轮的L</li>
+<li>char ExtendedR[49] //扩展48位，与子密钥的异或直接修改ExtendedR</li>
+<li>char group[7] //将48位的ExtendedR分层6位1组的group，对每组group按S盒查找替换，替换结果直接修改R</li>
+<li>char SR[33] //置换P时复制经S盒变化后的R</li>
+<li>L与R异或直接修改R，此时得到本轮的最终R，即下一轮输入的R</li>
+<li>将本轮开始时的R复制给L，即RCopy赋给L，此时得到本轮的最终L，即下一轮输入的L</li>
+</ul>
+</blockquote>
+<p><strong>32位互换：</strong></p>
+<blockquote>
+<ul>
+<li>char RLChange[65] //互换L16和R16位置，即（R16，L16）</li>
+</ul>
+</blockquote>
+<p><strong>逆初始置换：</strong></p>
+<blockquote>
+<ul>
+<li>char Cipher[65] //逆初始置换后的密文（解密时为明文）结果</li>
+</ul>
+</blockquote>
+<h3 id="三、部分代码解释"><a href="#三、部分代码解释" class="headerlink" title="三、部分代码解释"></a>三、部分代码解释</h3><p>预处理时将16位16进制char数组转成64位2进制数组，在S盒变换时，需要将S盒中行列对应的16进制元素（1位）转换成2进制（4位），在这两个地方使用16进制转2进制，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***16进制数组转2进制数组(16元素)，输入M和K时使用(64位)以及S盒变换时使用(4位)***/</span></span><br><span class="line"><span class="keyword">char</span> * HexToBi(<span class="keyword">char</span> *hexArray)</span><br><span class="line">&#123;</span><br><span class="line">	toUpper(hexArray); <span class="comment">//小写转大写</span></span><br><span class="line">	<span class="keyword">char</span> * biArray = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">65</span>];</span><br><span class="line">	<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">char</span> *p = hexArray;</span><br><span class="line">    	<span class="keyword">while</span>(*p)<span class="comment">//字符串不结束就循环</span></span><br><span class="line">   	 &#123;</span><br><span class="line">		string temp;</span><br><span class="line">		<span class="keyword">if</span>(*p&gt;=<span class="string">'0'</span> &amp;&amp; *p &lt;=<span class="string">'9'</span>) <span class="comment">//数字</span></span><br><span class="line">        	&#123;</span><br><span class="line">			temp = HexBiTable[*p - <span class="number">48</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(*p&gt;=<span class="string">'A'</span> &amp;&amp; *p &lt;=<span class="string">'F'</span>) <span class="comment">//A~F字符</span></span><br><span class="line">		&#123;</span><br><span class="line">			temp = HexBiTable[*p - <span class="number">65</span> + <span class="number">10</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++, index++)</span><br><span class="line">		&#123;</span><br><span class="line">			biArray[index] = temp[i];</span><br><span class="line">		&#125;</span><br><span class="line">        p++; <span class="comment">//指针后指，准备处理下一个字母</span></span><br><span class="line">    	&#125;</span><br><span class="line"></span><br><span class="line">	biArray[index] = <span class="string">'\0'</span>;</span><br><span class="line">	<span class="keyword">return</span> biArray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>考虑到这里的需求是16进制char数组转2进制char数组，而不是16进制整型转2进制，因此相比于类型转换后辗转相除，采用的是查表HexBiTable替换更为有效。</p>
+<p><br></p>
+<p><strong>产生子密钥：</strong><br><strong>置换选择1：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> * realKey = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">57</span>]; realKey[<span class="number">56</span>] = <span class="string">'\0'</span>; <span class="comment">//56位有效密钥	</span></span><br><span class="line"><span class="comment">/**置换选择1，64位中选择56位得到实际使用的56位密钥**/</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">56</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> index = PC1Table[i] - <span class="number">1</span>; <span class="comment">//-1后才是在数组中的实际下标 </span></span><br><span class="line">	realKey[i] = BiKey[index];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//cout&lt;&lt;realKey&lt;&lt;endl;</span></span><br></pre></td></tr></table></figure>
+<p>通过查表PC1Table，即置换选择1，得到应替换元素的位置，需要减1得到在数组中的下标，for循环56次，得到56位的置换选择后的56位密钥，每次置换选择在原64位密钥BiKey中查找。</p>
+<p><strong>循环左移：</strong><br>循环左移n位，通过3次逆序使时间复杂度降为O(n)，如循环左移2位10010011，则先逆序前2位得到01，再逆序后所有位得到110010，此时即为01110010，最后逆序所有位，得到01001110，即为最终结果。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***循环左移n位，复杂度0(n)，通过三次逆序实现***/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LeftShift</span><span class="params">(<span class="keyword">char</span> * arr, <span class="keyword">int</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	Reverse(arr, <span class="number">0</span>, n - <span class="number">1</span>); <span class="comment">//逆序前n位</span></span><br><span class="line">	Reverse(arr, n, <span class="number">28</span> - <span class="number">1</span>); <span class="comment">//逆序后所有位</span></span><br><span class="line">	Reverse(arr, <span class="number">0</span>, <span class="number">28</span> - <span class="number">1</span>); <span class="comment">//逆序所有位</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/***逆序排列***/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Reverse</span><span class="params">(<span class="keyword">char</span> *arr, <span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> temp;</span><br><span class="line">	<span class="keyword">for</span>( ; begin &lt; end; begin++, end--)</span><br><span class="line">	&#123;</span><br><span class="line">		temp = arr[end];</span><br><span class="line">		arr[end] = arr[begin];</span><br><span class="line">		arr[begin] = temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在对明文的处理中的置换基本类同与置换选择1的实现，得到48位的扩展R后进行S盒变换，实现为将扩展R分成8组，每组6位，进行8轮的循环，每个循环中对1个组使用S盒变换，循环中先获取当前轮进行变换的6位输入group，如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> group[<span class="number">7</span>]; group[<span class="number">6</span>] = <span class="string">'\0'</span>; <span class="comment">//1组</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">	group[i] = ExtendedR[s * <span class="number">6</span> + i]; <span class="comment">//6位1组</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>得到group后需据此获取在S盒中的行和列下标用来获取S盒对应的元素值，这里以group=”010001”为例，行即为01，列为1000，需要将2进制转成10进制以得到下标，为方便计算，将行表示为0001，这样仍通过查表HexBiTable来获取，这里仅仅就只是为了方便，其实并不好… 此时line=”0001”，column=”1000”，查表值0001对应的下标为1，1000对应的下标为8，所以在S盒中行下标x=1，列下标y=8，查S[i][x][y]得到对应的元素，以S1为例，即i=0，此时元素值为10，最后需要将整型的10转成4位的2进制数组，得到1010，代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//16进制字符串转10进制整型</span></span><br><span class="line"><span class="comment">//如一组为010001，则line="0001", colum="1000"，则x=1, y=8</span></span><br><span class="line"><span class="keyword">int</span> x, y; <span class="comment">//x为在S盒中的行下标，y为列下标</span></span><br><span class="line"><span class="keyword">char</span> *line = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">5</span>]; line[<span class="number">4</span>] = <span class="string">'\0'</span>;</span><br><span class="line"><span class="keyword">char</span> *column = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">5</span>]; column[<span class="number">4</span>] = <span class="string">'\0'</span>;</span><br><span class="line">line[<span class="number">0</span>] = <span class="string">'0'</span>; line[<span class="number">1</span>] = <span class="string">'0'</span>; line[<span class="number">2</span>] = group[<span class="number">0</span>]; line[<span class="number">3</span>] = group[<span class="number">5</span>]; <span class="comment">//01即为00 01</span></span><br><span class="line">column[<span class="number">0</span>] = group[<span class="number">1</span>]; column[<span class="number">1</span>] = group[<span class="number">2</span>]; column[<span class="number">2</span>] = group[<span class="number">3</span>]; column[<span class="number">3</span>] = group[<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过HexBiTable找到2进制对应的10进制（数组下标）</span></span><br><span class="line"><span class="keyword">bool</span> xflag = <span class="literal">true</span>, yflag = <span class="literal">true</span>; </span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">16</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">	xflag = <span class="literal">true</span>; yflag = <span class="literal">true</span>; </span><br><span class="line">	<span class="comment">//找行和列，比对HexBiTable[i]和column，若相等，则column所对应的列下标即为i（间接的2进制转10进制）</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(line[j] != HexBiTable[i][j]) <span class="comment">//不相等</span></span><br><span class="line">			xflag = <span class="literal">false</span>; </span><br><span class="line">		<span class="keyword">if</span>(column[j] != HexBiTable[i][j]) <span class="comment">//不相等</span></span><br><span class="line">			yflag = <span class="literal">false</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(xflag == <span class="literal">true</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		x = i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(yflag == <span class="literal">true</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		y = i;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//cout&lt;&lt;x&lt;&lt;", "&lt;&lt;y&lt;&lt;endl;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> target = SBox[s][x][y]; <span class="comment">//获取S盒对应行列的元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//target换成2进制char数组</span></span><br><span class="line"><span class="keyword">char</span> *biTarget = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">5</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>, index = <span class="number">0</span>; i &gt;= <span class="number">0</span>; i--, index++)</span><br><span class="line">&#123;  </span><br><span class="line">	<span class="keyword">if</span>(target &amp; (<span class="number">1</span> &lt;&lt; i))  </span><br><span class="line">		biTarget[index] =  <span class="string">'1'</span>;  </span><br><span class="line">	<span class="keyword">else</span>  </span><br><span class="line">		biTarget[index] =  <span class="string">'0'</span>;  </span><br><span class="line">&#125;</span><br><span class="line">biTarget[<span class="number">4</span>] = <span class="string">'\0'</span>;</span><br><span class="line"><span class="comment">//cout&lt;&lt;biTarget&lt;&lt;endl;</span></span><br></pre></td></tr></table></figure>
+<p>至此得到此轮的4位输出，按其修改R对应位置，8轮S盒变化后即得到32位的输出结果。</p>
+<h3 id="四、运行结果："><a href="#四、运行结果：" class="headerlink" title="四、运行结果："></a>四、运行结果：</h3><p>（1）不输出中间结果：</p>
+<p><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/InformationSecurity/des/des1.png" alt=""></p>
+<p>中间结果：<br>（2）16个子密钥：</p>
+<p><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/InformationSecurity/des/des2.png" alt=""></p>
+<p>（3）16轮L和R</p>
+<p><img src="http://gitimage-10031767.file.myqcloud.com/blog_image/InformationSecurity/des/des3.png" alt=""></p>
+<p>（4）其他<br>其他各个步骤的结果输出语句均在代码中，去掉注释即可输出查看。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/Project-Images/RealEstate/" style="float: left;">
+        ← Housing Website
+    </a>
+    
+    
+    <a class="pull-right" href="/Miscellaneous/subnetmask/">
+        子网掩码与子网号 →
+    </a>
+    
+</nav>
+
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Miscellaneous/des/" data-title="DES Algorithm" data-url="http://louie.link/Miscellaneous/des/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2015<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 黄刘胤,Louie. All Rights Reserved.
+                </p>
+                <p>Theme By Kieran</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+<!-- post to baidu -->
+<!-- not using this
+    <script type="text/javascript">
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+--><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

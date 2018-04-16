@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>HW4 Search Engine Using Solr | Louie&#39;s Blog</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Louie's Blog">
+    <meta name="author" content="黄刘胤,Louie">
+    <meta name="description" content="黄刘胤的博客 Louie's blog" />
+    <meta name="keywords" content="黄刘胤,Louie,LouieHuang" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/logo.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Louie&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/xcode.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <!--     
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    -->
+    <!-- 改为云存储 -->
+    <!-- <link href='//gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/family%3DOpen%2BSans400%2C600.css' rel='stylesheet' type='text/css'> -->
+    <!-- 或者本地也可以 -->
+    <link href='/css/family=Open+Sans400,600.css' rel='stylesheet' type='text/css'>
+
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  <!-- Baidu -->
+  <!--
+  
+  -->
+
+  <!-- google统计 -->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-76175499-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+
+<body id="index" class="lightnav animsition">
+
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- header -->
+        <div style="text-align:center;margin-top:15px;margin-bottom:-30px;">
+            <img style="height:120px;weight:120px" src="/img/header.jpg" alt="Close"/>
+            <h4 style="margin-top:10px;color:#fff;">黄刘胤 | Louie</h4>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
+				    
+				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    
+				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
+				    
+				    <li><a href="/categories/Miscellaneous/" class="animsition-link">Miscellaneous<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Project-Images/" class="animsition-link">Project Images<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(8)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="/Resume.pdf" class="animsition-link">Resume</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About Me</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.ico" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Louie's Blog</a></li>
+                            <li class="nolink"><span>Always </span>Thinking</li>
+                            
+                            <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-08T07:00:00.000Z" itemprop="datePublished">
+          2018-04-08
+      </time>
+    
+</span>
+                <h1>HW4 Search Engine Using Solr</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="Search-Engine-Using-Solr"><a href="#Search-Engine-Using-Solr" class="headerlink" title="Search Engine Using Solr"></a>Search Engine Using Solr</h2><p>This project implements a simple search engine which searches news in NBC. Tools used in this project are listed below:</p>
+<blockquote>
+<ol>
+<li>Crawler:    Crawler4j</li>
+<li>Extract Links: Jsoup</li>
+<li>PageRank: nextworkX</li>
+<li>Indexing: Solr (7.3.0)<br> . Web Server: php, solr-php-client    </li>
+</ol>
+</blockquote>
+<p><br></p>
+<p><strong>High Level Logic for Server:</strong></p>
+<blockquote>
+<ol>
+<li>A user enters a query $q$ in the browser and it will be sent to web server;</li>
+<li>Web Server processes this query $q$ - formats it and sends it to Solr;</li>
+<li>Solr processes this query $q$ and returns the results in JSON format;</li>
+<li>Web Server re-formats the results and sends them back to user (browser).</li>
+<li>Browser displays the results.</li>
+</ol>
+</blockquote>
+<h3 id="1-Crawling"><a href="#1-Crawling" class="headerlink" title="1. Crawling"></a>1. Crawling</h3><p>After crawling, we have html files (only crawled html) and a mapping csv file (each record is <code>fileName,url</code>, such as <code>8673b50f3b1166e8e71f86d6c3dc135a.html,https://www.nbcnews.com/widget/video-embed/1103931459686</code>). </p>
+<p><br><br></p>
+<h3 id="2-Extract-Links-and-Build-Graph"><a href="#2-Extract-Links-and-Build-Graph" class="headerlink" title="2. Extract Links and Build Graph"></a>2. Extract Links and Build Graph</h3><p>(1) Next step is to extract links from the downloaded pages in order to compute <code>pagerank</code>. Jsoup is used here. </p>
+<p>(2) After extracting the links, a directed graph can be construct for later pagerank computation. Each vertex is a web page. If page A has a link to page B, then there is a directed edge from vertex A to vertex B. <strong>Edge List</strong> is used here to represent a graph, this is one of the accepted format for nextworkX to compute pagerank. We can also use adjacency list.</p>
+<p>In this exercise, we only focus on the downloaded pages, so if a page A has a link to a page B that is not in the downloaded pages, we ignore page B. (This step is done by using the mapping file) Core code is:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> HashMap&lt;String, String&gt; urlFileMap = <span class="keyword">new</span> HashMap&lt;&gt;(); <span class="comment">// build &lt;url, docID&gt; map</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> HashMap&lt;String, String&gt; fileUrlMap = <span class="keyword">new</span> HashMap&lt;&gt;(); <span class="comment">// &lt;docID,, url&gt;</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Set&lt;String&gt; edges = <span class="keyword">new</span> HashSet&lt;&gt;(); <span class="comment">// each element is a string: "source target"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">// 1. build &lt;url, docID&gt; map (urlFileMap)</span></span><br><span class="line">    buildMap();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. construct edge list (as a set, each element is "sourcePage targetPage")</span></span><br><span class="line">    File dir = <span class="keyword">new</span> File(dirPath);</span><br><span class="line">    <span class="keyword">for</span> (File file : dir.listFiles()) &#123;</span><br><span class="line">        String fileName = file.getName();			</span><br><span class="line">        String baseURL = fileUrlMap.get(fileName); <span class="comment">//full url here</span></span><br><span class="line">        <span class="keyword">if</span>(baseURL != <span class="keyword">null</span>)&#123;</span><br><span class="line">            Document doc = Jsoup.parse(file, <span class="string">"utf-8"</span>, baseURL); </span><br><span class="line">            Elements links = doc.select(<span class="string">"a[href]"</span>); <span class="comment">// "a" with href</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//Note- provide absolute path for “edgeList.txt”</span></span><br><span class="line">            <span class="keyword">for</span> (Element link : links) &#123;</span><br><span class="line">                <span class="comment">//https://jsoup.org/cookbook/extracting-data/working-with-urls</span></span><br><span class="line">                String url = link.attr(<span class="string">"abs:href"</span>).trim(); <span class="comment">// get url of an outgoing link</span></span><br><span class="line">                <span class="keyword">if</span> (urlFileMap.containsKey(url)) <span class="comment">// constraint to NBC news domain</span></span><br><span class="line">                    edges.add(base + fileName + <span class="string">" "</span> + base + urlFileMap.get(url));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. write edge list to file "edgeList.txt"</span></span><br><span class="line">    writeToFile();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<p>Now we have <code>edgeList.txt</code>, each line represents an edge</p>
+<font color="red">Note- provide **absolute path** for “edgeList.txt”</font>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/c02f0bc016c4b43aa64f737f2a1ee922.html /Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/c50cfeb689e7081ce22308ce774aad79.html</span><br><span class="line">/Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/47ce74c5340fd1b3508c51a9a2010d36.html /Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/526e34baa0856a7074d1d43105adb2d1.html</span><br><span class="line">/Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/0d92753a6abf5cb808888c971199b873.html /Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/ff129bd5d9fe133519b39358657f57c5.html</span><br><span class="line">/Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/28f0e9d7fbfc88d577f31de8883ab142.html /Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/eb0a20c13e4bc86fda22e044913db937.html</span><br><span class="line">/Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/bdfb5bfd4fc13b396d616958e5400b59.html /Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/5b9e1885afc0f4122b7ae52f5a7433d1.html</span><br><span class="line">/Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/8428d5788f4b3083a54d9c9a2c6719e6.html /Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/ff129bd5d9fe133519b39358657f57c5.html</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<p><br></p>
+<h3 id="3-PageRank-networkX"><a href="#3-PageRank-networkX" class="headerlink" title="3. PageRank: networkX"></a>3. PageRank: networkX</h3><p><a href="https://networkx.github.io/documentation/networkx-1.10/reference/classes.digraph.html#networkx.DiGraph" target="_blank" rel="external">networkX</a></p>
+<p>Just use it directly and save the result to file `external_pageRankFile.txt``.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">G = nx.read_edgelist(<span class="string">"edgeList.txt"</span>, create_using = nx.DiGraph())</span><br><span class="line">pr = nx.pagerank(G, alpha=<span class="number">0.85</span>, personalization=<span class="keyword">None</span>, max_iter=<span class="number">30</span>, tol=<span class="number">1e-06</span>, nstart=<span class="keyword">None</span>, weight=<span class="string">'weight'</span>, dangling=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
+<p>In <code>external_pageRankFile.txt</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/e024f5262e4324dc42e1549f9705f605.html=3.06515045359e-05</span><br><span class="line">/Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/f87acfb530a008feddaab05f54e387fd.html=1.96306446485e-05</span><br><span class="line">/Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/d2507dc940e085fff41b5f43c728ec48.html=1.37585332474e-05</span><br><span class="line">/Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/866db8e7ebfc9a95cb70d48454b293a4.html=1.37585332474e-05</span><br><span class="line">/Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/abd3e3e2164bb595bcadb641dee73ac3.html=3.69594941493e-05</span><br><span class="line">/Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/8c36c0b2b956f310b664f0fe78986368.html=1.37585332474e-05</span><br><span class="line">/Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles/6e8d9ef2948afa495337dca89f6de3bb.html=1.37585332474e-05</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<p><br></p>
+<h3 id="4-Indexing-using-Solr"><a href="#4-Indexing-using-Solr" class="headerlink" title="4. Indexing using Solr"></a>4. Indexing using Solr</h3><p>Solr can index html files using the built-in post tool, which leverages <a href="https://www.tutorialspoint.com/tika/tika_overview.htm" target="_blank" rel="external"><strong>Apache Tika</strong></a> and auto extracts content from html files. Tika is included with the Solr installation.</p>
+<p><br></p>
+<h4 id="4-1-Apache-Tika"><a href="#4-1-Apache-Tika" class="headerlink" title="4.1 Apache Tika"></a>4.1 Apache Tika</h4><p>Apache Tika is a library that is used for document type detection and content extraction from various file formats. </p>
+<p>Internally, Tika uses various existing document parsers and document type detection techniques to detect and extract data. For example, in case of HTML pages, Tika uses its HTMLParser to strip out all html tags and only stores the content from the html pages. </p>
+<p><br></p>
+<h4 id="4-2-Solr-Configuration"><a href="#4-2-Solr-Configuration" class="headerlink" title="4.2 Solr Configuration"></a>4.2 Solr Configuration</h4><p>We use standalone mode in this project, to start solr, use <code>bin/solr start</code>, and we can visit the admin page at <code>http://localhost:8983/</code></p>
+<p><br></p>
+<h5 id="1-Create-a-new-core"><a href="#1-Create-a-new-core" class="headerlink" title="(1) Create a new core"></a>(1) Create a new core</h5><p>Create a new core name <code>myexample</code>, we use <code>bin/solr create –c myexample</code>. This creates a core under <code>solr-7.3.0/server/solr/myexample</code>.</p>
+<p><br></p>
+<h5 id="2-Modify-managed-schema-for-indexing"><a href="#2-Modify-managed-schema-for-indexing" class="headerlink" title="(2) Modify managed-schema for indexing"></a>(2) Modify <code>managed-schema</code> for indexing</h5><p>Solr inherently uses Tika for extracting content from the documents that will be indexed. Tika uses the TagSoup library to support virtually any kind of HTML found on the web. The output from the HtmlParser class is used as the streamed content for indexing into Solr. </p>
+<p>Before indexing html files, we have to edit the schema file to make sure that <strong>all the text content from the html pages extracted by Tika are mapped correctly.</strong> </p>
+<p><code>managed-schema</code> file is under<code>solr-7.3.0/server/solr/myexample/conf</code> folder. By default <code>&lt;copyField source=&quot;*&quot; dest=&quot;_text_&quot;/&gt;</code> is disabled, we enable it.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">type</span>=<span class="string">"string"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span> <span class="attr">required</span>=<span class="string">"true"</span> <span class="attr">multiValued</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- docValues are enabled by default for long type so we don't need to index the version field  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"_version_"</span> <span class="attr">type</span>=<span class="string">"plong"</span> <span class="attr">indexed</span>=<span class="string">"false"</span> <span class="attr">stored</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"_root_"</span> <span class="attr">type</span>=<span class="string">"string"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"false"</span> <span class="attr">docValues</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"_text_"</span> <span class="attr">type</span>=<span class="string">"text_general"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"false"</span> <span class="attr">multiValued</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- This can be enabled, in case the client does not know what fields may be searched. It isn't enabled by default because it's very expensive to index everything twice. --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">copyField</span> <span class="attr">source</span>=<span class="string">"*"</span> <span class="attr">dest</span>=<span class="string">"_text_"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>Some explanation:</strong></p>
+<blockquote>
+<ol>
+<li>“indexed”: if true, then the content in this field will be indexed.</li>
+<li>“stored”: if true, then the content of this field is stored in Solr and we can retrieve this from the query responses.</li>
+<li>“required”: if true, then this field is mandatory in a document for indexing.</li>
+<li>“multivalued”: if true, then this field can appear multiple times in a document . </li>
+</ol>
+</blockquote>
+<p>In the above example, an “id” field, “<em>version”</em> and “<em>root”</em> fields are auto generated while indexing. These may not necessarily be part of original documents.</p>
+<h5 id="3-Index-html-pages"><a href="#3-Index-html-pages" class="headerlink" title="(3) Index html pages"></a>(3) Index html pages</h5><p>For indexing, we use<code>bin/post -c &lt;core_name&gt; -filetypes html &lt;path_to_crawl_folder&gt;/</code></p>
+<p><code>-filetypes html</code>  means we index html file only.  If we are going to index various document types, then use: <code>bin/post -c &lt;core_name&gt; &lt;path_to_crawl_folder&gt;/</code>.</p>
+<p>Here my html files are located at <code>/Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles</code> and my core is <code>myexample</code>. So I use:</p>
+<p><code>bin/post -c myexample -filetypes html /Users/hlyin/Documents/IR/HW4_Solr/NBC_News/HTMLFiles</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">POSTing file ffe4ec42193bf764564d5ba339bbd298.html (text/html) to [base]/extract</span><br><span class="line">POSTing file ffe7e9ffd3483bafc6d7e208c76c370f.html (text/html) to [base]/extract</span><br><span class="line">POSTing file ffe85c534d9402e82cb4a8efe91b8196.html (text/html) to [base]/extract</span><br><span class="line">POSTing file ffeb53fc0338e5f5a8475b92044c06a8.html (text/html) to [base]/extract</span><br><span class="line">POSTing file ffebd0ff85d0beeeb8dfbf778a695061.html (text/html) to [base]/extract</span><br><span class="line">POSTing file ffee4995055b2b85d3534749531a5eb0.html (text/html) to [base]/extract</span><br><span class="line">POSTing file fff2925f294aff6a17d2169bf5abca16.html (text/html) to [base]/extract</span><br><span class="line">POSTing file fff7859edecde64a1b6528cebded6f84.html (text/html) to [base]/extract</span><br><span class="line">POSTing file fff836fcf958e5ea6896302dea4967fe.html (text/html) to [base]/extract</span><br><span class="line">POSTing file fffabb06635ef9a84be0fe0a3811632d.html (text/html) to [base]/extract</span><br><span class="line">15727 files indexed.</span><br><span class="line">COMMITting Solr index changes to http://localhost:8983/solr/myexample/update...</span><br><span class="line">Time spent: 0:04:50.096</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<p>After solr finishes indexing, we can go to <code>http://localhost:8983/solr/</code> to try some queries. We can type query in <code>q</code> , and right part is the return result in JSON. </p>
+<p><img src="http://gitimage-10031767.file.myqcloud.com/project_image/se_572/solr_admin.png" alt=""></p>
+<h5 id="4-Modify-managed-schema-for-pagerank"><a href="#4-Modify-managed-schema-for-pagerank" class="headerlink" title="(4) Modify managed-schema for pagerank"></a>(4) Modify <code>managed-schema</code> for pagerank</h5><p>In step 3, we have computed pagerank for downloaded pages and stored the results in<code>external_pageRankFile.txt</code>. Now we are going to use this pagerank file for query.</p>
+<p><br></p>
+<p>Firstly, place this page rank result <code>external_pageRankFile.txt</code> to <code>solr-7.x.x/server/solr/core_name/data</code>. <font color="red">It should be put in the data folder.</font></p>
+<p>Secondly, add the field in the <code>managed-schema</code> which refers to this score. We’ll add two record into this file:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fieldType</span> <span class="attr">name</span>=<span class="string">"external"</span> <span class="attr">keyField</span>=<span class="string">"id"</span> <span class="attr">defVal</span>=<span class="string">"0"</span> <span class="attr">class</span>=<span class="string">"solr.ExternalFileField"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"pageRankFile"</span> <span class="attr">type</span>=<span class="string">"external"</span> <span class="attr">stored</span>=<span class="string">"false"</span> <span class="attr">indexed</span>=<span class="string">"false"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>In the second record, its name is <code>pageRankFile</code>, this is because our pagerank file is named as <code>external_pageRankFile.txt</code>, we use the suffix after <code>external_</code>. Be careful about the file name, <code>pageRankFile</code>, it’s <strong>case-sensitive</strong>!</p>
+<p><code>defVal</code> defines a default value that will be used if there is no entry in the external file for a particular document. (Here is when no page rank file)</p>
+<h5 id="5-Modify-solrconfig-xml"><a href="#5-Modify-solrconfig-xml" class="headerlink" title="(5) Modify solrconfig.xml"></a>(5) Modify <code>solrconfig.xml</code></h5><p>Once the field has been defined, we need to <strong>make sure that when the index is reloaded, it is able to access the rank file.</strong> In order to do that, there are some modifications required in the <code>solrconfig.xml</code> file. We will add two event listener for this task:</p>
+<pre><code>&lt;listener event=&quot;newSearcher&quot; class=&quot;org.apache.solr.schema.ExternalFileFieldReloader&quot;/&gt;
+&lt;listener event=&quot;firstSearcher&quot; class=&quot;org.apache.solr.schema.ExternalFileFieldReloader&quot;/&gt;
+</code></pre><p>Now in solr UI -&gt; core admin, reload.</p>
+<p><br></p>
+<p><br></p>
+<h3 id="5-Web-Server"><a href="#5-Web-Server" class="headerlink" title="5. Web Server"></a>5. Web Server</h3><p>So far we’ve done most of this project, next we’re going to build a UI for users. Solr has many client APIs, refer <a href="https://wiki.apache.org/solr/IntegratingSolr" target="_blank" rel="external">this page</a>.</p>
+<p>Here we will use <a href="https://github.com/PTCInc/solr-php-client" target="_blank" rel="external">solr-php-client</a>. </p>
+<p>For pagination, my code is:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fetch_docs_pagerank</span><span class="params">($solr, $query, $page_number, $rows_per_page)</span> </span>&#123;</span><br><span class="line">    $additionalParameters = <span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'sort'</span> =&gt; <span class="string">'pageRankFile desc'</span></span><br><span class="line">    );</span><br><span class="line">    $start = ($page_number - <span class="number">1</span>) * $rows_per_page; <span class="comment">//$start starts from 0</span></span><br><span class="line">    <span class="keyword">return</span> $solr-&gt;search($query, $start, $rows_per_page, $additionalParameters);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>One thing to notice is that using pagerank does not mean the search result could be better.</strong>  High pagerank score does not guarantee high relevance.</p>
+<p>Everything else is just to get the query from front-end, sent it to solr, parse the response and send to user. </p>
+<p><img src="http://gitimage-10031767.file.myqcloud.com/project_image/se_572/homepage.gif" alt=""></p>
+<p><br></p>
+<p><img src="http://gitimage-10031767.file.myqcloud.com/project_image/se_572/result.jpeg" alt=""></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/Machine-Learning/07_01_LargeMarginClassification/" style="float: left;">
+        ← (Week7) 01 Large Margin Classification
+    </a>
+    
+    
+    <a class="pull-right" href="/Algorithm-Practice/24_VerifyPostOrderSquenceOfBST/">
+        24 Verify Post-order Squence Of BST →
+    </a>
+    
+</nav>
+
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Information-Retrieval/Solr Steps/" data-title="HW4 Search Engine Using Solr" data-url="http://louie.link/Information-Retrieval/Solr Steps/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2015<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 黄刘胤,Louie. All Rights Reserved.
+                </p>
+                <p>Theme By Kieran</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+<!-- post to baidu -->
+<!-- not using this
+    <script type="text/javascript">
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+--><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>(Week8) 02 Dimensionality Reduction | Louie&#39;s Blog</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Louie's Blog">
+    <meta name="author" content="黄刘胤,Louie">
+    <meta name="description" content="黄刘胤的博客 Louie's blog" />
+    <meta name="keywords" content="黄刘胤,Louie,LouieHuang" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/logo.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Louie&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/xcode.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <!--     
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    -->
+    <!-- 改为云存储 -->
+    <!-- <link href='//gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/family%3DOpen%2BSans400%2C600.css' rel='stylesheet' type='text/css'> -->
+    <!-- 或者本地也可以 -->
+    <link href='/css/family=Open+Sans400,600.css' rel='stylesheet' type='text/css'>
+
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  <!-- Baidu -->
+  <!--
+  
+  -->
+
+  <!-- google统计 -->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-76175499-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+
+<body id="index" class="lightnav animsition">
+
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- header -->
+        <div style="text-align:center;margin-top:15px;margin-bottom:-30px;">
+            <img style="height:120px;weight:120px" src="/img/header.jpg" alt="Close"/>
+            <h4 style="margin-top:10px;color:#fff;">黄刘胤 | Louie</h4>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
+				    
+				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    
+				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
+				    
+				    <li><a href="/categories/Miscellaneous/" class="animsition-link">Miscellaneous<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Project-Images/" class="animsition-link">Project Images<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(8)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="/Resume.pdf" class="animsition-link">Resume</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About Me</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.ico" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Louie's Blog</a></li>
+                            <li class="nolink"><span>Always </span>Thinking</li>
+                            
+                            <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-11T07:00:00.000Z" itemprop="datePublished">
+          2018-04-11
+      </time>
+    
+</span>
+                <h1>(Week8) 02 Dimensionality Reduction</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="Dimensionality-Reduction"><a href="#Dimensionality-Reduction" class="headerlink" title="Dimensionality Reduction"></a>Dimensionality Reduction</h2><p>Materials are from <a href="https://www.coursera.org/learn/machine-learning/resources/kGWsY" target="_blank" rel="external">Coursera Machine Learning by Andrew Ng</a>. </p>
+<h3 id="1-Motivation"><a href="#1-Motivation" class="headerlink" title="1. Motivation"></a>1. Motivation</h3><p><strong>Motivation I: Data Compression</strong></p>
+<ul>
+<li>We may want to reduce the dimension of our features if we have a lot of redundant data.</li>
+<li>To do this, we find two highly correlated features, plot them, and make a new line that seems to describe both features accurately. We place all the new features on this single line.</li>
+</ul>
+<p>Doing dimensionality reduction will reduce the total data we have to store in computer memory and will speed up our learning algorithm.</p>
+<p><strong>Note:</strong> in dimensionality reduction, we are reducing our features rather than our number of examples. Our variable $m$ will stay the same size; $n$, the number of features each example from $x^{(1)}$ to $x^{(m)}$ carries, will be reduced.</p>
+<p><strong>Motivation II: Visualization</strong></p>
+<p>It is not easy to visualize data that is more than three dimensions. We can reduce the dimensions of our data to 3 or less in order to plot it.</p>
+<p>We need to find new features, $z1$, $z2$ (and perhaps $z3$) that can effectively <strong>summarize</strong> all the other features.</p>
+<p><strong>Example:</strong> hundreds of features related to a country’s economic system may all be combined into one feature that you call “Economic Activity.”</p>
+<p><br></p>
+<h3 id="2-Principal-Component-Analysis"><a href="#2-Principal-Component-Analysis" class="headerlink" title="2. Principal Component Analysis"></a>2. Principal Component Analysis</h3><h4 id="2-1-PCA-Problem-Formulation"><a href="#2-1-PCA-Problem-Formulation" class="headerlink" title="2.1 PCA Problem Formulation"></a>2.1 PCA Problem Formulation</h4><p>The most popular dimensionality reduction algorithm is <em>Principal Component Analysis</em> (PCA)</p>
+<p><strong>Problem formulation</strong></p>
+<p>Given two features, $x_1$ and $x_2$, we want to find a single line that effectively describes both features at once. We then map our old features onto this new line to get a new single feature.</p>
+<p>The same can be done with three features, where we map them to a plane.</p>
+<p>The <strong>goal of PCA</strong> is to <strong>reduce</strong> the average of all the distances of every feature to the projection line. This is the <strong>projection error</strong>.</p>
+<p>Reduce from 2d to 1d: find a direction (a vector $u^{(1)} \in \mathbb{R}^n$) onto which to project the data so as to minimize the projection error.</p>
+<p>The more general case is as follows:</p>
+<p>Reduce from n-dimension to k-dimension: Find k vectors $u^{(1)}, u^{(2)}, \dots, u^{(k)}$ onto which to project the data so as to minimize the projection error.</p>
+<p>If we are converting from 3d to 2d, we will project our data onto two directions (a plane), so k will be 2.</p>
+<p><strong>PCA is not linear regression</strong></p>
+<ul>
+<li>In linear regression, we are minimizing the <strong>squared error</strong> from every point to our predictor line ($(\hat{y} - y)^2$). These are vertical distances.</li>
+<li>In PCA, we are minimizing the <strong>shortest distance</strong>, or shortest <em>orthogonal</em> distances, to our data points.</li>
+</ul>
+<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/08/PCA.png" alt=""></p>
+<p>More generally, in linear regression we are taking all our examples in $x$ and applying the parameters in $Θ$ to predict $y$.</p>
+<p><strong>In PCA, we are taking a number of features $x_1, x_2, \dots, x_n$, and finding a closest common dataset among them. We aren’t trying to predict any result and we aren’t applying any theta weights to the features.</strong></p>
+<h4 id="2-2-Principal-Component-Analysis-Algorithm"><a href="#2-2-Principal-Component-Analysis-Algorithm" class="headerlink" title="2.2 Principal Component Analysis Algorithm"></a>2.2 Principal Component Analysis Algorithm</h4><p>Before we can apply PCA, there is a data pre-processing step we must perform:</p>
+<p><strong>Data preprocessing</strong></p>
+<ul>
+<li>Given training set: $x^{(1)}, x^{(2)}, \dots, x^{(m)}$</li>
+<li>Preprocess (feature scaling / mean normalization): $\mu<em>j = \dfrac{1}{m}\sum^m</em>{i=1}x_j^{(i)}$</li>
+</ul>
+<ul>
+<li>Replace each $x_j^{(i)}$ with $x_j^{(i)} - \mu_j$</li>
+<li>If different features on different scales (e.g., $x_1$ = size of house, $x_2$ = number of bedrooms), scale features to have comparable range of values.</li>
+</ul>
+<p>Above, we first subtract the mean of each feature from the original feature. Then we scale all the features $x_j^{(i)} = \dfrac{x_j^{(i)} - \mu_j}{s_j}$</p>
+<p>We can define specifically what it means to reduce from 2d to 1d data as follows:</p>
+<script type="math/tex; mode=display">\Sigma = \dfrac{1}{m}\sum^m_{i=1}(x^{(i)})(x^{(i)})^T</script><p>The $z$ values are all real numbers and are the projections of our features onto $u^{(1)}$.</p>
+<p>So, PCA has two tasks: figure out $u^{(1)},\dots,u^{(k)}$ and also to find $z_1, z_2, \dots, z_m$.</p>
+<p><strong>1. Compute “covariance matrix”</strong></p>
+<script type="math/tex; mode=display">\Sigma = \dfrac{1}{m}\sum^m_{i=1}(x^{(i)})(x^{(i)})^T</script><p>This can be vectorized in Matlab as:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sigma = (<span class="number">1</span>/m) * X' * X; <span class="comment">% This Sigma is covariance matrix</span></span><br></pre></td></tr></table></figure>
+<p>We denote the <strong>covariance matrix</strong> with a capital sigma (which happens to be the same symbol for summation, confusingly—-they represent entirely different things).</p>
+<p>Note that $x^{(i)}$ is an $n×1$ vector, $(x^{(i)})^T$ is an $1×n$ vector and $X$ is a $m×n$ matrix (row-wise stored examples). The product of those will be an $n×n$ matrix, which are the dimensions of $Σ$.</p>
+<p><strong>2. Compute “eigenvectors” of covariance matrix Σ</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[U,S,V] = svd(Sigma);</span><br></pre></td></tr></table></figure>
+<p>What we actually want out of svd() is the ‘U’ matrix of the Sigma covariance matrix: $U \in \mathbb{R}^{n \times n}$. U contains $u^{(1)},\dots,u^{(n)}$, which is exactly what we want.</p>
+<p><strong>3. Take the first k columns of the U matrix and compute z</strong></p>
+<p>We’ll assign the first $k$ columns of $U$ to a variable called $U_{reduce}$. This will be an $n×k$ matrix. We compute z with:</p>
+<script type="math/tex; mode=display">z^{(i)} = U_{reduce}^T \cdot x^{(i)}</script><p>$U<em>{reduce}^T$ will have dimensions $k×n$ while $x^{(i)}$ will have dimensions $n×1$. The product $U</em>{reduce}^T \cdot x^{(i)}$ will have dimensions $k×1$.</p>
+<p>To summarize, the whole algorithm in octave is roughly:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Sigma = (<span class="number">1</span>/m) * X' * X; <span class="comment">% compute the covariance matrix</span></span><br><span class="line">[U,S,V] = svd(Sigma);   <span class="comment">% compute our projected directions</span></span><br><span class="line">Ureduce = U(:,<span class="number">1</span>:k);     <span class="comment">% take the first k directions</span></span><br><span class="line">Z = X * Ureduce;        <span class="comment">% compute the projected data points</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="3-Applying-PCA"><a href="#3-Applying-PCA" class="headerlink" title="3. Applying PCA"></a>3. Applying PCA</h3><h4 id="3-1-Reconstruction-from-Compressed-Representation"><a href="#3-1-Reconstruction-from-Compressed-Representation" class="headerlink" title="3.1 Reconstruction from Compressed Representation"></a>3.1 Reconstruction from Compressed Representation</h4><p>If we use PCA to compress our data, how can we uncompress our data, or go back to our original number of features?</p>
+<p>To go from 1-dimension back to 2d we do: $z \in \mathbb{R} \rightarrow x \in \mathbb{R}^2$.</p>
+<p>We can do this with the equation: $x<em>{approx}^{(1)} = U</em>{reduce} \cdot z^{(1)}$.</p>
+<p>Note that we can only get approximations of our original data.</p>
+<p>Note: It turns out that the $U$ matrix has the special property that it is a Unitary Matrix. One of the special properties of a Unitary Matrix is:</p>
+<p>$U^{-1} = U^∗$ where the “*” means “conjugate transpose”.</p>
+<p>Since we are dealing with real numbers here, this is equivalent to:</p>
+<p>$U^{-1} = U^T$ So we could compute the inverse and use that, but it would be a waste of energy and compute cycles.</p>
+<h4 id="3-2-Choosing-the-Number-of-Principal-Components"><a href="#3-2-Choosing-the-Number-of-Principal-Components" class="headerlink" title="3.2 Choosing the Number of Principal Components"></a>3.2 Choosing the Number of Principal Components</h4><p>How do we choose k, also called the <em>number of principal components</em>? Recall that k is the dimension we are reducing to.</p>
+<p>One way to choose k is by using the following formula:</p>
+<ul>
+<li>Given the average squared projection error: $\dfrac{1}{m}\sum^m<em>{i=1}||x^{(i)} - x</em>{approx}^{(i)}||^2$</li>
+<li>Also given the total variation in the data: $\dfrac{1}{m}\sum^m_{i=1}||x^{(i)}||^2$</li>
+<li>Choose k to be the smallest value such that: $\dfrac{\dfrac{1}{m}\sum^m<em>{i=1}||x^{(i)} - x</em>{approx}^{(i)}||^2}{\dfrac{1}{m}\sum^m_{i=1}||x^{(i)}||^2} \leq 0.01$</li>
+</ul>
+<p>In other words, the squared projection error divided by the total variation should be less than one percent, so that <strong>99% of the variance is retained</strong>.</p>
+<p><strong>Algorithm for choosing k</strong></p>
+<ol>
+<li>Try PCA with k=1,2,…</li>
+<li>Compute $U_{reduce}$, $z$, $x$</li>
+<li>Check the formula given above that 99% of the variance is retained. If not, go to step 1 and increase k.</li>
+</ol>
+<p>This procedure would actually be horribly inefficient. In Matlab, we will call svd:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[U,S,V] = svd(Sigma)</span><br></pre></td></tr></table></figure>
+<p>Which gives us a matrix S. We can actually check for 99% of retained variance using the $S$ matrix as follows:</p>
+<script type="math/tex; mode=display">\dfrac{\sum_{i=1}^kS_{ii}}{\sum_{i=1}^nS_{ii}} \geq 0.99</script><h4 id="3-3-Advice-for-Applying-PCA"><a href="#3-3-Advice-for-Applying-PCA" class="headerlink" title="3.3 Advice for Applying PCA"></a>3.3 Advice for Applying PCA</h4><p><strong>The most common use of PCA is to speed up supervised learning.</strong></p>
+<p>Given a training set with a large number of features (e.g. $x^{(1)},\dots,x^{(m)} \in \mathbb{R}^{10000}$ ) we can use PCA to reduce the number of features in each example of the training set (e.g. $z^{(1)},\dots,z^{(m)} \in \mathbb{R}^{1000}$).</p>
+<p><strong>Note that we should define the PCA reduction from $x^{(i)}$ to $z^{(i)}$ only on the <font color="red">training set</font> and not on the cross-validation or test sets.</strong> You can apply the mapping $z^{(i)}$ to your cross-validation and test sets after it is defined on the training set.</p>
+<p>Applications</p>
+<ul>
+<li>Compressions <ul>
+<li>Reduce space of data</li>
+<li>Speed up algorithm</li>
+</ul>
+</li>
+<li>Visualization of data (Choose k = 2 or k = 3)</li>
+</ul>
+<p><strong>Bad use of PCA</strong>: trying to prevent overfitting. We might think that reducing the features with PCA would be an effective way to address overfitting. It might work, but is not recommended because <strong>it does not consider the values of our results y.</strong> Using just regularization will be at least as effective.</p>
+<p>Don’t assume you need to do PCA. <strong>Try your full machine learning algorithm without PCA first.</strong> Then use PCA if you find that you need it.</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/Machine-Learning/08_01_UnsupervisedLearning/" style="float: left;">
+        ← (Week8) 01 Unsupervised Learning
+    </a>
+    
+    
+    <a class="pull-right" href="/Machine-Learning/07_03_SVMsinPractice/">
+        (Week7) 03 SVMs in Practice →
+    </a>
+    
+</nav>
+
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Machine-Learning/08_02_DimensionalityReduction/" data-title="(Week8) 02 Dimensionality Reduction" data-url="http://louie.link/Machine-Learning/08_02_DimensionalityReduction/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2015<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 黄刘胤,Louie. All Rights Reserved.
+                </p>
+                <p>Theme By Kieran</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+<!-- post to baidu -->
+<!-- not using this
+    <script type="text/javascript">
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+--><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>
