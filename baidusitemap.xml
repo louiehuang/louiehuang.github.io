@@ -4,12 +4,12 @@
 
     
   <url>
-    <loc>http://louie.link/Algorithm/9%20NetworkFlowBasics%20II/</loc>
-    <lastmod>2018-04-17T01:48:30.000Z</lastmod>
+    <loc>http://louie.link/Algorithm/8%20NetworkFlowBasics%20I/</loc>
+    <lastmod>2018-04-17T04:39:58.000Z</lastmod>
     <data>
         <display>
-        <title>9 Network Flow II</title>
-        <pubTime>2018-03-24T07:00:00.000Z</pubTime>
+        <title>8 Network Flow I</title>
+        <pubTime>2018-03-09T08:00:00.000Z</pubTime>
         
          
            
@@ -22,12 +22,12 @@
 
     
   <url>
-    <loc>http://louie.link/Algorithm/8%20NetworkFlowBasics%20I/</loc>
-    <lastmod>2018-04-17T01:46:01.000Z</lastmod>
+    <loc>http://louie.link/Algorithm/9%20NetworkFlowBasics%20II/</loc>
+    <lastmod>2018-04-17T01:48:30.000Z</lastmod>
     <data>
         <display>
-        <title>8 Network Flow I</title>
-        <pubTime>2018-03-09T08:00:00.000Z</pubTime>
+        <title>9 Network Flow II</title>
+        <pubTime>2018-03-24T07:00:00.000Z</pubTime>
         
          
            
@@ -123,6 +123,24 @@
            
              
               <breadCrumb title="Algorithm" url="http://louie.link/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Machine-Learning/09_01_AnomalyDetection/</loc>
+    <lastmod>2018-04-16T22:14:45.000Z</lastmod>
+    <data>
+        <display>
+        <title>(Week9) 01 Anomaly Detection</title>
+        <pubTime>2018-04-12T07:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://louie.link/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -418,6 +436,24 @@
 
     
   <url>
+    <loc>http://louie.link/Machine-Learning/01_04_LinearAlgebraReview/</loc>
+    <lastmod>2018-04-16T22:12:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>(Week1) 04 Linear Algebra Review</title>
+        <pubTime>2018-02-04T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://louie.link/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://louie.link/Machine-Learning/01_03_ParameterLearning/</loc>
     <lastmod>2018-04-16T22:12:17.000Z</lastmod>
     <data>
@@ -487,24 +523,6 @@
 
     
   <url>
-    <loc>http://louie.link/Machine-Learning/09_01_AnomalyDetection/</loc>
-    <lastmod>2018-04-16T01:43:07.000Z</lastmod>
-    <data>
-        <display>
-        <title>(Week9) 01 Anomaly Detection</title>
-        <pubTime>2018-04-12T07:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://louie.link/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://louie.link/Machine-Learning/06_01_EvaluatingLearningAlgorithm/</loc>
     <lastmod>2018-04-16T01:41:52.000Z</lastmod>
     <data>
@@ -529,24 +547,6 @@
         <display>
         <title>(Week1) 01 Introduction</title>
         <pubTime>2018-02-01T08:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://louie.link/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://louie.link/Machine-Learning/01_04_LinearAlgebraReview/</loc>
-    <lastmod>2018-04-16T01:37:02.000Z</lastmod>
-    <data>
-        <display>
-        <title>(Week1) 04 Linear Algebra Review</title>
-        <pubTime>2018-02-04T08:00:00.000Z</pubTime>
         
          
            

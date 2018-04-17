@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://louie.link/Algorithm/9%20NetworkFlowBasics%20II/</loc>
+    <loc>http://louie.link/Algorithm/8%20NetworkFlowBasics%20I/</loc>
     
-    <lastmod>2018-04-17T01:48:30.000Z</lastmod>
+    <lastmod>2018-04-17T04:39:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://louie.link/Algorithm/8%20NetworkFlowBasics%20I/</loc>
+    <loc>http://louie.link/Algorithm/9%20NetworkFlowBasics%20II/</loc>
     
-    <lastmod>2018-04-17T01:46:01.000Z</lastmod>
+    <lastmod>2018-04-17T01:48:30.000Z</lastmod>
     
   </url>
   
@@ -47,6 +47,13 @@
     <loc>http://louie.link/Algorithm/4.1%20Greedy%20-%20Interval%20Scheduling/</loc>
     
     <lastmod>2018-04-17T01:01:45.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://louie.link/Machine-Learning/09_01_AnomalyDetection/</loc>
+    
+    <lastmod>2018-04-16T22:14:45.000Z</lastmod>
     
   </url>
   
@@ -163,6 +170,13 @@
   </url>
   
   <url>
+    <loc>http://louie.link/Machine-Learning/01_04_LinearAlgebraReview/</loc>
+    
+    <lastmod>2018-04-16T22:12:28.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://louie.link/Machine-Learning/01_03_ParameterLearning/</loc>
     
     <lastmod>2018-04-16T22:12:17.000Z</lastmod>
@@ -191,13 +205,6 @@
   </url>
   
   <url>
-    <loc>http://louie.link/Machine-Learning/09_01_AnomalyDetection/</loc>
-    
-    <lastmod>2018-04-16T01:43:07.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://louie.link/Machine-Learning/06_01_EvaluatingLearningAlgorithm/</loc>
     
     <lastmod>2018-04-16T01:41:52.000Z</lastmod>
@@ -208,13 +215,6 @@
     <loc>http://louie.link/Machine-Learning/01_01_Introduction/</loc>
     
     <lastmod>2018-04-16T01:37:05.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://louie.link/Machine-Learning/01_04_LinearAlgebraReview/</loc>
-    
-    <lastmod>2018-04-16T01:37:02.000Z</lastmod>
     
   </url>
   
