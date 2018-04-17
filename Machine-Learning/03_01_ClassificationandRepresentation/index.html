@@ -125,11 +125,13 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(7)</small></a></li>
+				    
 				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(9)</small></a></li>
 				    
 				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
@@ -242,7 +244,7 @@
 <p>Intuitively, it also doesn’t make sense for $h<em>θ(x)$ to take values larger than $1$ or smaller than $0$ when we know that $y ∈ {0, 1}$. To fix this, let’s change the form for our hypotheses $h</em>θ(x)$ to satisfy $0 \le h_θ(x) \le 1$. This is accomplished by plugging $θ^Tx$ into the Logistic Function.</p>
 <p>Our new form uses the <strong>“Sigmoid Function”</strong>, also called the “Logistic Function”:</p>
 <script type="math/tex; mode=display">\begin{align*}& h_\theta (x) = g ( \theta^T x ) \newline \newline& z = \theta^T x \newline& g(z) = \dfrac{1}{1 + e^{-z}}\end{align*}</script><p>following image shows us what the sigmoid function looks like:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/03/1.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/03/1.png" alt="img"></p>
 <p>The function $g(z)$, shown here, maps any real number to the $(0, 1)$ interval, making it useful for transforming an arbitrary-valued function into a function better suited for classification.</p>
 <p>$h<em>θ(x)$ will give us the <strong>probability</strong> that our output is <code>1</code>. For example, $h</em>θ(x)=0.7$ gives us a probability of 70% that our output is <code>1</code>. Our probability that our prediction is <code>0</code> is just the complement of our probability that it is <code>1</code> (e.g. if probability that it is 1 is 70%, then the probability that it is 0 is 30%).</p>
 <script type="math/tex; mode=display">\begin{align*}& h_\theta(x) = P(y=1 | x ; \theta) = 1 - P(y=0 | x ; \theta) \newline& P(y = 0 | x;\theta) + P(y = 1 | x ; \theta) = 1\end{align*}</script><p><br></p>
@@ -261,13 +263,13 @@
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/Machine-Learning/03_02_LogisticRegressionModel/" style="float: left;">
-        ← (Week3) 02 Logistic Regression Model
+    <a class="pull-left" href="/Information-Retrieval/(10)Inverted Index/" style="float: left;">
+        ← (10) Inverted Index
     </a>
     
     
-    <a class="pull-right" href="/Information-Retrieval/(10)Inverted Index/">
-        (10) Inverted Index →
+    <a class="pull-right" href="/Machine-Learning/02_02_ComputingParametersAnalytically/">
+        (Week2) 02 Computing Parameters Analytically →
     </a>
     
 </nav>

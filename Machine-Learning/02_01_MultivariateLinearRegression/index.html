@@ -125,11 +125,13 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(7)</small></a></li>
+				    
 				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(9)</small></a></li>
 				    
 				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
@@ -244,7 +246,7 @@
 <h3 id="2-GD-For-Multiple-Variables"><a href="#2-GD-For-Multiple-Variables" class="headerlink" title="2. GD For Multiple Variables"></a>2. GD For Multiple Variables</h3><p>The gradient descent equation itself is generally the same form; we just have to repeat it for our <code>n</code> features:</p>
 <script type="math/tex; mode=display">\begin{align*} & \text{repeat until convergence:} \; \lbrace \newline \; & \theta_0 := \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_0^{(i)}\newline \; & \theta_1 := \theta_1 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_1^{(i)} \newline \; & \theta_2 := \theta_2 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_2^{(i)} \newline & \cdots \newline \rbrace \end{align*}</script><p>In other words:</p>
 <script type="math/tex; mode=display">\begin{align*}& \text{repeat until convergence:} \; \lbrace \newline \; & \theta_j := \theta_j - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)} \; & \text{for j := 0...n}\newline \rbrace\end{align*}</script><p>The following image compares gradient descent with one variable to gradient descent with multiple variables:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/02/1.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/02/1.png" alt="img"></p>
 <p><br></p>
 <h3 id="3-GD-in-Practice-I-Feature-Scaling"><a href="#3-GD-in-Practice-I-Feature-Scaling" class="headerlink" title="3. GD in Practice I - Feature Scaling"></a>3. GD in Practice I - Feature Scaling</h3><p>We can speed up gradient descent by <strong>having each of our input values in roughly the same range</strong>. This is because <strong>$θ$ will descend quickly on small ranges and slowly on large ranges</strong>, and so will <strong>oscillate</strong> inefficiently down to the optimum when the variables are very uneven.</p>
 <p>The way to prevent this is to modify the ranges of our input variables so that they are all roughly the same. Ideally:</p>
@@ -261,9 +263,9 @@
 <script type="math/tex; mode=display">x_i := \dfrac{price-1000}{1900}</script><p><br></p>
 <h3 id="4-GD-in-Practice-II-Learning-Rate"><a href="#4-GD-in-Practice-II-Learning-Rate" class="headerlink" title="4. GD in Practice II - Learning Rate"></a>4. GD in Practice II - Learning Rate</h3><p><strong>Debugging gradient descent.</strong> Make a plot with <em>number of iterations</em> on the x-axis. Now plot the cost function, $J(θ)$ over the number of iterations of gradient descent. If $J(θ)$ ever increases, then you probably need to decrease $α$.</p>
 <p><strong>Automatic convergence test.</strong> Declare convergence if $J(θ)$ decreases by less than $E$ in one iteration, where $E$ is some small value such as $10^{−3}$. However in practice it’s difficult to choose this threshold value.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/02/2.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/02/2.png" alt="img"></p>
 <p>It has been proven that if learning rate $α$ is sufficiently small, then $J(θ)$ will decrease on every iteration.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/02/3.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/02/3.png" alt="img"></p>
 <p>To summarize:</p>
 <ul>
 <li>If $α$ is too small: slow convergence.</li>

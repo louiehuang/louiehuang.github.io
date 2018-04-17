@@ -125,11 +125,13 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(7)</small></a></li>
+				    
 				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(9)</small></a></li>
 				    
 				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
@@ -241,9 +243,9 @@
 </ul>
 <p>Recall the cost function for (unregularized) logistic regression:</p>
 <script type="math/tex; mode=display">\begin{align*}J(\theta) & = \frac{1}{m}\sum_{i=1}^m -y^{(i)} \log(h_\theta(x^{(i)})) - (1 - y^{(i)})\log(1 - h_\theta(x^{(i)}))\\ & = \frac{1}{m}\sum_{i=1}^m -y^{(i)} \log\Big(\dfrac{1}{1 + e^{-\theta^Tx^{(i)}}}\Big) - (1 - y^{(i)})\log\Big(1 - \dfrac{1}{1 + e^{-\theta^Tx^{(i)}}}\Big)\end{align*}</script><p>To make a support vector machine, we will modify the first term of the cost function $-\log(h_{\theta}(x)) = -\log\Big(\dfrac{1}{1 + e^{-\theta^Tx}}\Big)$ so that when $θ^Tx$ (from now on, we shall refer to this as <strong>z</strong>) is <strong>greater than</strong> 1, it outputs 0. Furthermore, for values of z less than 1, we shall use a straight decreasing line instead of the sigmoid curve.(In the literature, this is called a hinge loss (<a href="https://en.wikipedia.org/wiki/Hinge_loss)" target="_blank" rel="external">https://en.wikipedia.org/wiki/Hinge_loss)</a> function.)</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/07/1.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/07/1.png" alt="img"></p>
 <p>Similarly, we modify the second term of the cost function $-\log(1 - h_{\theta(x)}) = -\log\Big(1 - \dfrac{1}{1 + e^{-\theta^Tx}}\Big)$ so that when z is <strong>less than</strong> -1, it outputs 0. We also modify it so that for values of z greater than -1, we use a straight increasing line instead of the sigmoid curve.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/07/2.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/07/2.png" alt="img"></p>
 <p>We shall denote these as $cost_1(z)$ and $cost_0(z)$ (respectively, note that $cost_1(z)$ is the cost for classifying when y=1, and $cost_0(z)$ is the cost for classifying when y=0), and we may define them as follows (where k is an arbitrary constant defining the magnitude of the slope of the line):</p>
 <script type="math/tex; mode=display">z = \theta^Tx</script><script type="math/tex; mode=display">\text{cost}_0(z) = \max(0, k(1+z))</script><script type="math/tex; mode=display">\text{cost}_1(z) = \max(0, k(1-z))</script><p>Recall the full cost function from (regularized) logistic regression:</p>
 <script type="math/tex; mode=display">J(\theta) = \frac{1}{m} \sum_{i=1}^m y^{(i)}(-\log(h_\theta(x^{(i)}))) + (1 - y^{(i)})(-\log(1 - h_\theta(x^{(i)}))) + \dfrac{\lambda}{2m}\sum_{j=1}^n \Theta^2_j</script><p>Note that the negative sign has been distributed into the sum in the above equation.</p>
@@ -255,7 +257,7 @@
 <li>Regularize more (<strong>reduce overfitting</strong>), we (increase $\lambda$, so $\theta$ is smaller, thus model is simpler) <em>decrease</em> C;</li>
 <li>Regularize less (<strong>reduce underfitting</strong>), we (decrease $\lambda$) <em>increase</em> C.</li>
 </ul>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/07/C_Theta.png" alt=""></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/07/C_Theta.png" alt=""></p>
 <font color="red">Finally, note that the hypothesis of the Support Vector Machine is ***not*** interpreted as the probability of y being 1 or 0 (as it is for the hypothesis of logistic regression). Instead, it outputs either 1 or 0. (In technical terms, it is a discriminant function.)</font>
 
 <script type="math/tex; mode=display">h_\theta(x) =\begin{cases}    1 & \text{if} \ \Theta^Tx \geq 0 \\    0 & \text{otherwise}\end{cases}</script><p><br></p>
@@ -269,7 +271,7 @@
 <p>If $C$ is very large, we must choose $Θ$ parameters such that:</p>
 <script type="math/tex; mode=display">\sum_{i=1}^m y^{(i)}\text{cost}_1(\Theta^Tx) + (1 - y^{(i)})\text{cost}_0(\Theta^Tx) = 0</script><p>This reduces our cost function to:</p>
 <script type="math/tex; mode=display">\begin{align*} J(\theta) = C \cdot 0 + \dfrac{1}{2}\sum_{j=1}^n \Theta^2_j \newline = \dfrac{1}{2}\sum_{j=1}^n \Theta^2_j\end{align*}</script><p>Recall the decision boundary from logistic regression (the line separating the positive and negative examples). In SVMs, the decision boundary has the special property that it is <strong>as far away as possible</strong> from both the positive and the negative examples.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/07/margin.png" alt=""></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/07/margin.png" alt=""></p>
 <p>The distance of the decision boundary <strong>to the nearest example</strong> is called the <strong>margin</strong>. Since SVMs maximize this margin, it is often called a <strong><em>Large Margin Classifier</em>.</strong></p>
 <p>The SVM will separate the negative and positive examples by a <strong>large margin</strong>.</p>
 <p>=&gt; This large margin is only achieved when <strong>C is very large</strong>.</p>
@@ -308,8 +310,8 @@
     </a>
     
     
-    <a class="pull-right" href="/Information-Retrieval/Solr Steps/">
-        HW4 Search Engine Using Solr →
+    <a class="pull-right" href="/uncategorized/Solr Steps/">
+         →
     </a>
     
 </nav>

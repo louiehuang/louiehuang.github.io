@@ -125,11 +125,13 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(7)</small></a></li>
+				    
 				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(9)</small></a></li>
 				    
 				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
@@ -236,7 +238,7 @@
 <h3 id="1-Gradient-Descent"><a href="#1-Gradient-Descent" class="headerlink" title="1. Gradient Descent"></a>1. Gradient Descent</h3><p>So we have our hypothesis function and we have a way of measuring how well it fits into the data. Now we need to estimate the parameters in the hypothesis function. That’s where gradient descent comes in.</p>
 <p>Imagine that we graph our hypothesis function based on its fields $θ_0$ and $θ_1$ (actually we are graphing the cost function as a function of the parameter estimates). We are not graphing $x$ and $y$ itself, but the <strong>parameter range</strong> of our hypothesis function and <strong>the cost resulting</strong> from selecting a particular set of parameters.</p>
 <p>We put $θ_0$ on the $x$ axis and $θ_1$ on the y axis, with the cost function on the vertical $z$ axis. The points on our graph will be the result of the cost function using our hypothesis with those specific theta parameters. The graph below depicts such a setup.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/9.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/9.png" alt="img"></p>
 <p>We will know that we have succeeded when our cost function is at the very bottom of the pits in our graph, i.e. when its value is the minimum. The red arrows show the minimum points in the graph.</p>
 <p>The way we do this is by taking the <strong>derivative</strong> (the tangential line to a function) of our cost function. The slope of the tangent is the derivative at that point and it will give us a direction to move towards. <strong>We make steps down the cost function in the direction with the steepest descent.</strong> The size of each step is determined by the parameter $\alpha$, which is called the <strong>learning rate</strong>.</p>
 <p>For example, the distance between each ‘star’ in the graph above represents a step determined by our parameter $\alpha$. A smaller $α$ would result in a smaller step and a larger $α$ results in a larger step. The direction in which the step is taken is determined by the partial derivative of $J(θ_0,θ_1)$. Depending on where one starts on the graph, one could end up at different points. The image above shows us two different starting points that end up in two different places.</p>
@@ -247,7 +249,7 @@
 <p>where $j=0,1$ represents the feature index number.</p>
 <p><br></p>
 <p>At each iteration j, one should <font color="red"><strong>simultaneously update</strong></font> the parameters $θ_1,θ_2,…,θ_n$ (Not updating paratemeters simultaneously is not gradient descent). Updating a specific parameter prior to calculating another one on the $j^{(th)}$ iteration would yield to a wrong implementation.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/10.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/10.png" alt="img"></p>
 <p><br></p>
 <h3 id="2-Gradient-Descent-Intuition"><a href="#2-Gradient-Descent-Intuition" class="headerlink" title="2. Gradient Descent Intuition"></a>2. Gradient Descent Intuition</h3><p>In the video we explored the scenario where we used one parameter $θ_1$ and plotted its cost function to implement a gradient descent. Our formula for a single parameter was :</p>
 <p>Repeat until convergence:</p>
@@ -259,20 +261,20 @@
 <ul>
 <li>when the slope is negative, the value of $θ_1$ increases</li>
 </ul>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/11.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/11.png" alt="img"></p>
 <p>On a side note, we should adjust our parameter $α$ to ensure that the gradient descent algorithm converges in a reasonable time. Failure to converge or too much time to obtain the minimum value imply that our step size is wrong.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/12.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/12.png" alt="img"></p>
 <h4 id="How-does-gradient-descent-converge-with-a-fixed-step-size-α"><a href="#How-does-gradient-descent-converge-with-a-fixed-step-size-α" class="headerlink" title="How does gradient descent converge with a fixed step size α?"></a>How does gradient descent converge with a fixed step size α?</h4><p>The intuition behind the convergence is that $\frac{d}{d\theta_1} J(\theta_1)$ approaches 0 as we approach the bottom of our convex function. At the minimum, the derivative will always be 0 and thus we get:</p>
-<script type="math/tex; mode=display">\theta_1:=\theta_1-\alpha * 0</script><p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/13.png" alt="img"></p>
+<script type="math/tex; mode=display">\theta_1:=\theta_1-\alpha * 0</script><p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/13.png" alt="img"></p>
 <p><br></p>
 <h3 id="3-Gradient-Descent-For-Linear-Regression"><a href="#3-Gradient-Descent-For-Linear-Regression" class="headerlink" title="3. Gradient Descent For Linear Regression"></a>3. Gradient Descent For Linear Regression</h3><p>When specifically applied to the case of linear regression, a new form of the gradient descent equation can be derived. We can substitute our actual cost function and our actual hypothesis function and modify the equation to :</p>
 <script type="math/tex; mode=display">\begin{align*} \text{repeat until convergence: } \lbrace & \newline \theta_0 := & \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x_{i}) - y_{i}) \newline \theta_1 := & \theta_1 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}\left((h_\theta(x_{i}) - y_{i}) x_{i}\right) \newline \rbrace& \end{align*}</script><p>where $m$ is the size of the training set, $θ_0$ a constant that will be changing simultaneously with $θ_1$ and $x_i$, $y_i$ are values of the given training set (data).</p>
 <p>Note that we have separated out the two cases for $θ_j$ into separate equations for $θ_0$ and $θ_1$; and that for $θ_1$ we are multiplying $x_i$ at the end due to the derivative. The following is a derivation of $\frac {\partial}{\partial \theta_j}J(\theta)$ for a single example :</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/15.png" alt=""></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/15.png" alt=""></p>
 <p>The point of all this is that if we start with a guess for our hypothesis and then repeatedly apply these gradient descent equations, our hypothesis will become more and more accurate.</p>
 <p>So, this is simply gradient descent on the original cost function $J$. This method <strong>looks at every example* in the entire training set on every step</strong>, and is called <strong>batch gradient descent</strong>. </p>
 <p>Note that, while <strong>gradient descent can be susceptible to local minima in general</strong>, the optimization problem we have posed here for <strong>linear regression has only one global, and no other local, optima;</strong> thus gradient descent always converges (assuming the learning rate $α$ is not too large) to the global minimum. Indeed, $J$ is a convex quadratic function. Here is an example of gradient descent as it is run to minimize a quadratic function.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/14.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/14.png" alt="img"></p>
 <p>The ellipses shown above are the contours of a quadratic function. Also shown is the trajectory taken by gradient descent, which was initialized at $(48,30)$. The x’s in the figure (joined by straight lines) mark the successive values of $θ$ that gradient descent went through as it converged to its minimum.</p>
 
             <div class="clearfix"></div>
@@ -280,8 +282,8 @@
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/Machine-Learning/01_04_LinearAlgebraReview/" style="float: left;">
-        ← (Week1) 04 Linear Algebra Review
+    <a class="pull-left" href="/Algorithm/4.1 Greedy - Interval Scheduling/" style="float: left;">
+        ← 4.1 Greedy - Interval Scheduling and Lateness
     </a>
     
     

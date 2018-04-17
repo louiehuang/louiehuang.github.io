@@ -125,11 +125,13 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(7)</small></a></li>
+				    
 				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(9)</small></a></li>
 				    
 				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
@@ -245,32 +247,32 @@
 <p>Note that the superscript “(i)” in the notation is simply an <strong>index</strong> into the training set, and has nothing to do with exponentiation. We will also use $X$ to denote the space of input values, and $Y$ to denote the space of output values. In this example, $X = Y = \R$.</p>
 <p>To describe the supervised learning problem slightly more formally, our goal is:</p>
 <p>Given a training set, to learn a function $h : X \rightarrow Y$ so that $h(x)$ is a “good” predictor for the corresponding value of $y$. For historical reasons, this function $h$ is called a <strong>hypothesis</strong>. </p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/1.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/1.png" alt="img"></p>
 <p>When the target variable $y$ that we’re trying to predict is continuous, such as in our housing example, we call the learning problem a <strong>regression</strong> problem. </p>
 <p>When $y$ can take on only a small number of discrete values (such as if, given the living area, we wanted to predict if a dwelling is a house or an apartment, say), we call it a <strong>classification</strong> problem.</p>
 <p><br></p>
 <h3 id="2-Cost-Function"><a href="#2-Cost-Function" class="headerlink" title="2. Cost Function"></a>2. Cost Function</h3><p>We can <strong>measure the accuracy</strong> of our hypothesis function by using a <strong>cost function</strong>. This takes an average difference (actually a fancier version of an average) of all the results of the hypothesis with inputs from x’s and the actual output y’s.</p>
 <script type="math/tex; mode=display">J(\theta_0, \theta_1) = \dfrac {1}{2m} \displaystyle \sum _{i=1}^m \left ( \hat{y}_{i}- y_{i} \right)^2 = \dfrac {1}{2m} \displaystyle \sum _{i=1}^m \left (h_\theta (x_{i}) - y_{i} \right)^2</script><p>To break it apart, it is $\frac{1}{2}\bar{x}$ where $\bar{x}$ is the <strong>mean</strong> of $ (h<em>\theta (x</em>{i}) - y_{i})^2$ , or the <strong>difference between the predicted value and the actual value.</strong></p>
 <p>This function is otherwise called the <strong>“Mean squared error”</strong> (MSE). The mean is halved $\frac{1}{2}$ as a <strong>convenience</strong> (and just for convenience) for the computation of the gradient descent, as the derivative term of the square function will cancel out the $\frac{1}{2}$ term. The following image summarizes what the cost function does:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/2.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/2.png" alt="img"></p>
 <p><br></p>
 <h3 id="3-Cost-Function-Intuition-I"><a href="#3-Cost-Function-Intuition-I" class="headerlink" title="3. Cost Function - Intuition I"></a>3. Cost Function - Intuition I</h3><script type="math/tex; mode=display">h_{\theta}(x^{(i)}) = \theta_0 + \theta_1x^{(i)}</script><p>If we try to think of it in visual terms, our training data set is scattered on the x-y plane. We are trying to make a straight line (defined by $h_θ(x))$ which passes through these scattered data points.</p>
 <p>Our objective is to get the best possible line. The best possible line will be such so that <strong>the average squared vertical (since y) distances</strong> of the scattered points from the line will be the <strong>least</strong>. Ideally, the line should pass through all the points of our training data set. In such a case, the value of $J(θ_0,θ_1)$ will be 0. The following example shows the ideal situation where we have a cost function of $0$.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/3.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/3.png" alt="img"></p>
 <p>When $θ_1=1$, we get a slope of 1 which goes through every single data point in our model. Conversely, when $θ_1=0.5$, we see the vertical distance from our fit to the data points increase.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/4.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/4.png" alt="img"></p>
 <p>This increases our cost function to 0.58. Plotting several other points yields to the following graph:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/5.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/5.png" alt="img"></p>
 <p>Thus as a goal, we should try to <strong>minimize</strong> the cost function. In this case, $θ_1=1$ is our global minimum.</p>
 <p><br></p>
 <h3 id="4-Cost-Function-Intuition-II"><a href="#4-Cost-Function-Intuition-II" class="headerlink" title="4. Cost Function - Intuition II"></a>4. Cost Function - Intuition II</h3><p>A contour plot is a graph that contains many contour lines. A contour line of a two variable function has a constant value at all points of the same line. An example of such a graph is the one to the right below.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/6.png" alt="img">)</p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/6.png" alt="img">)</p>
 <p><strong>Taking any color and going along the ‘circle’, one would expect to get the same value of the cost function.</strong> (Points on the same contour have the same cost value) For example, the three green points found on the green line above have the same value for $J(θ_0,θ_1)$ and as a result, they are found along the same line. The circled $x$ displays the value of the cost function for the graph on the left when $θ_0 = 800$ and $θ_1= -0.15$. </p>
 <p>Taking another $h(x)$ and plotting its contour plot, one gets the following graphs:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/7.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/7.png" alt="img"></p>
 <p>When $θ_0 = 360$ and $θ_1 = 0$, the value of $J(θ_0,θ_1)$ in the contour plot <strong>gets closer to the center thus reducing the cost function error.</strong> </p>
 <p>Now giving our hypothesis function a slightly positive slope results in a better fit of the data.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/01/8.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/01/8.png" alt="img"></p>
 <p>The graph above minimizes the cost function as much as possible and consequently, the result of $θ_1$ and $θ_0$ tend to be around 0.12 and 250 respectively. Plotting those values on our graph to the right seems to put our point in the center of the inner most ‘circle’.</p>
 
             <div class="clearfix"></div>

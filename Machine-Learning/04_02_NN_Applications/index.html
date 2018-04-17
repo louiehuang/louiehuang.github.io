@@ -125,11 +125,13 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(7)</small></a></li>
+				    
 				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(9)</small></a></li>
 				    
 				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
@@ -239,9 +241,9 @@
 <p>Let’s set our first theta matrix as:</p>
 <script type="math/tex; mode=display">\Theta^{(1)} =\begin{bmatrix}-30 & 20 & 20\end{bmatrix}</script><p>This will cause the output of our hypothesis to only be positive if both $x_1$ and $x_2$ are 1. In other words:</p>
 <script type="math/tex; mode=display">\begin{align*}& h_\Theta(x) = g(-30 + 20x_1 + 20x_2) \newline \newline & x_1 = 0 \ \ and \ \ x_2 = 0 \ \ then \ \ g(-30) \approx 0 \newline & x_1 = 0 \ \ and \ \ x_2 = 1 \ \ then \ \ g(-10) \approx 0 \newline & x_1 = 1 \ \ and \ \ x_2 = 0 \ \ then \ \ g(-10) \approx 0 \newline & x_1 = 1 \ \ and \ \ x_2 = 1 \ \ then \ \ g(10) \approx 1\end{align*}</script><p>So we have constructed one of the fundamental operations in computers by using a small neural network rather than using an actual AND gate. Neural networks can also be used to simulate all the other logical gates. The following is an example of the logical operator <code>OR</code>, meaning either $x_1$ is true or $x_2$ is true, or both:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/04/Or.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/04/Or.png" alt="img"></p>
 <p>Where g(z) is the following:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/04/GZ.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/04/GZ.png" alt="img"></p>
 <p><br></p>
 <h3 id="2-Examples-and-Intuitions-II"><a href="#2-Examples-and-Intuitions-II" class="headerlink" title="2. Examples and Intuitions II"></a>2. Examples and Intuitions II</h3><p>The $Θ^{(1)}$ matrices for <code>AND</code>, <code>NOR</code>, and <code>OR</code> are:</p>
 <script type="math/tex; mode=display">\begin{align*}AND:\newline\Theta^{(1)} &=\begin{bmatrix}-30 & 20 & 20\end{bmatrix} \newline NOR:\newline\Theta^{(1)} &= \begin{bmatrix}10 & -20 & -20\end{bmatrix} \newline OR:\newline\Theta^{(1)} &= \begin{bmatrix}-10 & 20 & 20\end{bmatrix} \newline\end{align*}</script><p>We can combine these to get the <code>XNOR</code> logical operator (which gives 1 if $x_1$ and $x_2$ are both 0 or both 1).</p>
@@ -249,14 +251,14 @@
 <script type="math/tex; mode=display">\Theta^{(1)} =\begin{bmatrix}-30 & 20 & 20 \newline 10 & -20 & -20\end{bmatrix}</script><p>For the transition between the second and third layer, we’ll use a $Θ^{(2)}$ matrix that uses the value for OR:</p>
 <script type="math/tex; mode=display">\Theta^{(2)} =\begin{bmatrix}-10 & 20 & 20\end{bmatrix}</script><p>Let’s write out the values for all our nodes:</p>
 <script type="math/tex; mode=display">\begin{align*}& a^{(2)} = g(\Theta^{(1)} \cdot x) \newline& a^{(3)} = g(\Theta^{(2)} \cdot a^{(2)}) \newline& h_\Theta(x) = a^{(3)}\end{align*}</script><p>And there we have the <code>XNOR</code> operator using a hidden layer with two nodes! The following summarizes the above algorithm:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/04/XNOR.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/04/XNOR.png" alt="img"></p>
 <p><br></p>
 <h3 id="3-Multiclass-Classification"><a href="#3-Multiclass-Classification" class="headerlink" title="3. Multiclass Classification"></a>3. Multiclass Classification</h3><p>To classify data into multiple classes, we let our hypothesis function return a vector of values. Say we wanted to classify our data into one of four categories. We will use the following example to see how this classification is done. This algorithm takes as input an image and classifies it accordingly:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/04/OneVSAll.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/04/OneVSAll.png" alt="img"></p>
 <p>We can define our set of resulting classes as y:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/04/matrix1.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/04/matrix1.png" alt="img"></p>
 <p>Each $y^{(i)}$ represents a different image corresponding to either a car, pedestrian, truck, or motorcycle. The inner layers, each provide us with some new information which leads to our final hypothesis function. The setup looks like:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/04/matrix2.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/04/matrix2.png" alt="img"></p>
 <p>Our resulting hypothesis for one set of inputs may look like:</p>
 <p>In which case our resulting class is the third one down, or $h_Θ(x)_3$, which represents the motorcycle.</p>
 

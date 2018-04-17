@@ -125,11 +125,13 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(7)</small></a></li>
+				    
 				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(9)</small></a></li>
 				    
 				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
@@ -302,7 +304,7 @@
 <h3 id="5-Choosing-the-Number-of-Clusters"><a href="#5-Choosing-the-Number-of-Clusters" class="headerlink" title="5. Choosing the Number of Clusters"></a>5. Choosing the Number of Clusters</h3><p>Choosing $K$ can be quite arbitrary and ambiguous.</p>
 <p><strong>The elbow method</strong>: plot the cost $J$ and the number of clusters $K$. The cost function should reduce as we increase the number of clusters, and then flatten out. Choose K at the point where the cost function starts to flatten out.</p>
 <p>However, fairly often, the curve is <strong>very gradual</strong>, so there’s no clear elbow. (see following right graph)</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/08/1.png" alt=""></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/08/1.png" alt=""></p>
 <p><strong>Note:</strong> $J$ will <strong>always</strong> decrease as K is increased. The one exception is if k-means gets stuck at a bad local optimum.</p>
 <p>Another way to choose $K$ is to observe how well k-means performs on a <strong>downstream purpose</strong>. In other words, you choose $K$ that proves to be most useful for some goal you’re trying to achieve from using these clusters.</p>
 <p><br></p>

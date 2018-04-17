@@ -125,11 +125,13 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(7)</small></a></li>
+				    
 				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(9)</small></a></li>
 				    
 				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
@@ -234,7 +236,7 @@
         <div class="col-md-8 col-md-offset-2">
       		<h2 id="Overfitting"><a href="#Overfitting" class="headerlink" title="Overfitting"></a>Overfitting</h2><p>Materials are from <a href="https://www.coursera.org/learn/machine-learning/home/week/3" target="_blank" rel="external">Coursera Machine Learning by Andrew Ng</a>. </p>
 <h3 id="1-The-Problem-of-Overfitting"><a href="#1-The-Problem-of-Overfitting" class="headerlink" title="1. The Problem of Overfitting"></a>1. The Problem of Overfitting</h3><p>Consider the problem of predicting $y$ from $x ∈ R$. The leftmost figure below shows the result of fitting a $y = θ_0+θ_1x$ to a dataset. We see that the data doesn’t really lie on straight line, and so the fit is not very good.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/03/5.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/03/5.png" alt="img"></p>
 <p>Instead, if we had added an extra feature $x^2$ , and fit $y=θ<em>0+θ_1x+θ_2x^2$ , then we obtain a slightly better fit to the data (See middle figure). Naively, it might seem that the more features we add, the better. However, there is also a danger in adding too many features: The rightmost figure is the result of fitting a $5^{th}$ order polynomial $y = \sum</em>{j=0} ^5 \theta_j x^j$. We see that even though the fitted curve passes through the data perfectly, we would not expect this to be a very good predictor of, say, housing prices $(y)$ for different living areas $(x)$. </p>
 <p>Without formally defining what these terms mean, we’ll say the figure on the left shows an instance of <strong>underfitting</strong>—in which the data clearly shows structure not captured by the model; and the figure on the right is an example of <strong>overfitting</strong>.</p>
 <ul>
@@ -257,7 +259,7 @@
 <p>Say we wanted to make the following function more quadratic:</p>
 <script type="math/tex; mode=display">\theta_0 + \theta_1x + \theta_2x^2 + \theta_3x^3 + \theta_4x^4</script><p>We’ll want to eliminate the influence of $θ_3x^3$ and $θ_4x^4$ . Without actually getting rid of these features or changing the form of our hypothesis, we can instead modify our <strong>cost function</strong>:</p>
 <script type="math/tex; mode=display">min_\theta\ \dfrac{1}{2m}\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + (1000\cdot\theta_3^2 + 1000\cdot\theta_4^2)</script><p>We’ve added two extra terms at the end to inflate the cost of $θ_3$ and $θ_4$. Now, <strong>in order for the cost function to get close to zero, we will have to reduce the values of $θ_3$ and $θ_4$ to near zero.</strong> This will in turn greatly reduce the values of $θ_3x^3$ and $θ_4x^4$ in our hypothesis function. As a result, we see that the new hypothesis (depicted by the pink curve) looks like a quadratic function but fits the data better due to the extra small terms $θ_3x^3$ and $θ_4x^4$.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/03/6.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/03/6.png" alt="img"></p>
 <p>We could also regularize all of our theta parameters in a single summation as:</p>
 <script type="math/tex; mode=display">min_\theta\ \dfrac{1}{2m}\  \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + \lambda\ \sum_{j=1}^n \theta_j^2</script><p>The $λ$, or lambda, is the <strong>regularization parameter</strong>. It determines how much the costs of our theta parameters are inflated.</p>
 <p>[Note that here, in $\lambda\ \sum_{j=1}^n \theta_j^2$ we started j from 1, so we are not penalizing $\theta_0$ being large. But in practice, starting from 1 or starting from 0 makes very little difference -  whether you include $\theta_0$ or not, in practice, make very little difference to the results. But <strong>by convention</strong>, usually, we regularize only theta through $\theta_1$.]</p>
@@ -283,19 +285,19 @@
 <p>Recall that if <code>m &lt; n</code>, then $X^TX$ is non-invertible (Too many features, see Week2 02 Computing Parameters Analytically). However, when we add the term $λ \cdot L$, then $X^TX + λ \cdot L$ becomes invertible.</p>
 <p><br></p>
 <h3 id="4-Regularized-Logistic-Regression"><a href="#4-Regularized-Logistic-Regression" class="headerlink" title="4. Regularized Logistic Regression"></a>4. Regularized Logistic Regression</h3><p>We can regularize logistic regression in a similar way that we regularize linear regression. As a result, we can avoid overfitting. The following image shows how the regularized function, displayed by the pink line, is less likely to overfit than the non-regularized function represented by the blue line:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/03/7.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/03/7.png" alt="img"></p>
 <h4 id="Cost-Function"><a href="#Cost-Function" class="headerlink" title="Cost Function"></a>Cost Function</h4><p>Recall that our cost function for logistic regression was:</p>
 <script type="math/tex; mode=display">J(\theta) = - \frac{1}{m} \sum_{i=1}^m \large[ y^{(i)}\ \log (h_\theta (x^{(i)})) + (1 - y^{(i)})\ \log (1 - h_\theta(x^{(i)})) \large]</script><p>We can regularize this equation by adding a term to the end:</p>
 <script type="math/tex; mode=display">J(\theta) = - \frac{1}{m} \sum_{i=1}^m \large[ y^{(i)}\ \log (h_\theta (x^{(i)})) + (1 - y^{(i)})\ \log (1 - h_\theta(x^{(i)}))\large] + \frac{\lambda}{2m}\sum_{j=1}^n \theta_j^2</script><p>The second sum, $\sum_{j=1}^n \theta_j^2$ <strong>means to explicitly exclude</strong> the bias term, $θ_0$. I.e. the $θ$ vector is indexed from $0$ to $n$ (holding $n+1$ values, $θ_0$ through $θ_n$), and this sum explicitly skips $θ_0$, by running from $1$ to $n$, skipping $0$. Thus, when computing the equation, we should continuously update the two following equations:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/03/8.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/03/8.png" alt="img"></p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/Machine-Learning/03_03_MulticlassClassification/" style="float: left;">
-        ← (Week3) 03 Multiclass Classification
+    <a class="pull-left" href="/Algorithm/4.2 Greedy - Dijkstra/" style="float: left;">
+        ← 4.2 Greedy - Shortest Path (Dijkstra)
     </a>
     
     

@@ -125,11 +125,13 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(7)</small></a></li>
+				    
 				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(9)</small></a></li>
 				    
 				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
@@ -236,9 +238,9 @@
 <h3 id="1-Cost-Function"><a href="#1-Cost-Function" class="headerlink" title="1. Cost Function"></a>1. Cost Function</h3><p><strong>We cannot use the same cost function that we use for linear regression because the Logistic Function will cause the output to be wavy, causing many local optima.</strong> In other words, <strong>it will not be a convex function.</strong></p>
 <p>Instead, our cost function for logistic regression looks like:</p>
 <script type="math/tex; mode=display">\begin{align*}& J(\theta) = \dfrac{1}{m} \sum_{i=1}^m \mathrm{Cost}(h_\theta(x^{(i)}),y^{(i)}) \newline & \mathrm{Cost}(h_\theta(x),y) = -\log(h_\theta(x)) \; & \text{if y = 1} \newline & \mathrm{Cost}(h_\theta(x),y) = -\log(1-h_\theta(x)) \; & \text{if y = 0}\end{align*}</script><p>When $y = 1$, we get the following plot for $J(θ)$ vs $h_θ(x)$:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/03/2.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/03/2.png" alt="img"></p>
 <p>Similarly, when $y = 0$, we get the following plot for $J(θ)$ vs $h_θ(x)$:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/03/3.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/03/3.png" alt="img"></p>
 <script type="math/tex; mode=display">\begin{align*}& \mathrm{Cost}(h_\theta(x),y) = 0 \text{ if } h_\theta(x) = y \newline & \mathrm{Cost}(h_\theta(x),y) \rightarrow \infty \text{ if } y = 1 \; \mathrm{and} \; h_\theta(x) \rightarrow 0 \newline & \mathrm{Cost}(h_\theta(x),y) \rightarrow \infty \text{ if } y = 0 \; \mathrm{and} \; h_\theta(x) \rightarrow 1 \newline \end{align*}</script><p>If our correct answer <code>y</code> is <code>0</code>, then the cost function will be <code>0</code> if our hypothesis function also outputs <code>0</code>. If our hypothesis approaches <code>1</code>, then the cost function will approach infinity. (more penalty)</p>
 <p>If our correct answer <code>y</code> is <code>1</code>, then the cost function will be<code>`0 if our hypothesis function outputs</code>1<code>. If our hypothesis approaches</code>0`, then the cost function will approach infinity.</p>
 <p>Note that writing the cost function in this way guarantees that $J(θ)$ is convex for logistic regression.</p>
@@ -270,8 +272,8 @@
     </a>
     
     
-    <a class="pull-right" href="/Machine-Learning/03_01_ClassificationandRepresentation/">
-        (Week3) 01 Classification and Representation →
+    <a class="pull-right" href="/Information-Retrieval/(10)Inverted Index/">
+        (10) Inverted Index →
     </a>
     
 </nav>

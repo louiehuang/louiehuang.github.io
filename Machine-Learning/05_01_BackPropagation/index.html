@@ -125,11 +125,13 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(7)</small></a></li>
+				    
 				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(9)</small></a></li>
 				    
 				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
@@ -253,7 +255,7 @@
 <h3 id="2-Backpropagation-Algorithm"><a href="#2-Backpropagation-Algorithm" class="headerlink" title="2. Backpropagation Algorithm"></a>2. Backpropagation Algorithm</h3><p>“Backpropagation” is neural-network terminology for minimizing our cost function, just like what we were doing with gradient descent in logistic and linear regression. Our goal is to compute:</p>
 <script type="math/tex; mode=display">\min_\Theta J(\Theta)</script><p>That is, we want to minimize our cost function $J$ using an optimal set of parameters in theta. In this section we’ll look at the equations we use to compute the partial derivative of $J(Θ)$:</p>
 <script type="math/tex; mode=display">\dfrac{\partial}{\partial \Theta_{i,j}^{(l)}}J(\Theta)</script><p>To do so, we use the following algorithm:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/05/BackpropagationAlgorithm.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/05/BackpropagationAlgorithm.png" alt="img"></p>
 <p><strong>Back propagation Algorithm</strong></p>
 <p>Given training set $\lbrace (x^{(1)}, y^{(1)}) \cdots (x^{(m)}, y^{(m)})\rbrace$</p>
 <ul>
@@ -264,7 +266,7 @@
 <li>Set $a^{(1)} := x^{(t)}$</li>
 <li>Perform forward propagation to compute $a^{(l)}$ for $l=2,3,…,L$</li>
 </ol>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/05/Gradient.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/05/Gradient.png" alt="img"></p>
 <ol>
 <li>Using $y^{(t)}$, compute $\delta^{(L)} = a^{(L)} - y^{(t)}$</li>
 </ol>
@@ -289,7 +291,7 @@
 <script type="math/tex; mode=display">\begin{gather*}J(\Theta) = - \frac{1}{m} \sum_{t=1}^m\sum_{k=1}^K \left[ y^{(t)}_k \ \log (h_\Theta (x^{(t)}))_k + (1 - y^{(t)}_k)\ \log (1 - h_\Theta(x^{(t)})_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_l+1} ( \Theta_{j,i}^{(l)})^2\end{gather*}</script><p>If we consider simple non-multiclass classification (k = 1) and disregard regularization, the cost is computed with:</p>
 <script type="math/tex; mode=display">cost(t) =y^{(t)} \ \log (h_\Theta (x^{(t)})) + (1 - y^{(t)})\ \log (1 - h_\Theta(x^{(t)}))</script><p>Intuitively, $\delta_j^{(l)}$ is the “error” for $a_j^{(l)}$ (unit j in layer l). More formally, the delta values are actually the derivative of the cost function:</p>
 <script type="math/tex; mode=display">\delta_j^{(l)} = \dfrac{\partial}{\partial z_j^{(l)}} cost(t)</script><p>Recall that <strong>our derivative is the slope of a line tangent to the cost function, so the steeper the slope the more incorrect we are.</strong> Let us consider the following neural network below and see how we could calculate some $\delta_j^{(l)}$:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/05/Forward.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/05/Forward.png" alt="img"></p>
 <p>In the image above, to calculate $\delta<em>2^{(2)}$, we multiply the weights $\Theta</em>{12}^{(2)}$ and $\Theta<em>{22}^{(2)}$ by their respective $\delta$ values found to the right of each edge. So we get $\delta_2^{(2)} = \Theta</em>{12}^{(2)} \cdot \delta<em>1^{(3)} + \Theta</em>{22}^{(2)} \cdot \delta_2^{(3)}$. </p>
 <p>To calculate every single possible $\delta<em>j^{(l)}$, we could start from the right of our diagram. We can think of our edges as our $\Theta</em>{ij}$. Going from right to left, to calculate the value of $\delta<em>j^{(l)}$, you can just take the over all sum of each weight times the $\delta$ it is coming from. Hence, another example would be $\delta_2^{(3)} = \Theta</em>{12}^{(3)} \cdot \delta_1^{(4)}$.</p>
 <p><br></p>

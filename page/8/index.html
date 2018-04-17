@@ -125,11 +125,13 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(7)</small></a></li>
+				    
 				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(9)</small></a></li>
 				    
 				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
@@ -261,6 +263,239 @@
 
 <section id="intro">
     <div class="container">
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Miscellaneous/baidu_analytics/">添加google统计或百度统计</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-04-08T07:00:00.000Z" itemprop="datePublished">
+          2016-04-08
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        一、google统计&nbsp;&nbsp;&nbsp;&nbsp; 先在 google统计 注册账号，在管理-&gt;跟踪信息-&gt;跟踪代码中获取跟踪ID和跟踪代码，形式如下：ID：UA-76175499-1
+代码：
+123456789101112&lt;script&gt;    	(function(i,s,o,g,r,a,m)&#123;  	i['GoogleAnalyticsObject']=r;i[r]=i[r]||f
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Miscellaneous/baidu_analytics/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Miscellaneous/Android_ListView_opt/">Android ListView优化</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-03-19T07:00:00.000Z" itemprop="datePublished">
+          2016-03-19
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        ListView的优化1.存在问题
+
+ 在每次调用getView方法中都要执行两个很耗时的操作
+
+inflate方法 (获取布局对象)
+findViewById
+
+
+12345678910111213141516171819@Overridepublic View getView(int position, View convertView, ViewGroup parent) &#123;    View view = inflate
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Miscellaneous/Android_ListView_opt/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Miscellaneous/PolygonCentroid/">多边形质心计算</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-02-03T08:00:00.000Z" itemprop="datePublished">
+          2016-02-03
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        先需要知道几个公式
+一、对于n个离散的有质量数据点（或者假设一个多边形的质量集中在其顶点上）假定顶点的坐标为(xi, yi)，质量为mi，则质心为：
+X = \frac{\sum_{i=1}^n ( x_i \cdot m_i )} {\sum_{i=1}^n m_i}，Y = \frac{\sum_{i=1}^n ( y_i \cdot m_i )} {\sum_{i=1}^n m_i}...(1)二、对于质量均匀分布的三角形 $△P
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Miscellaneous/PolygonCentroid/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Miscellaneous/OS_review/">操作系统复习</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-01-05T08:00:00.000Z" itemprop="datePublished">
+          2016-01-05
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        第一章、操作系统概述1、    OS的概念、特性操作系统：是计算机系统中的一个系统软件，是一些程序模块的集合——它们能以尽量有效地（系统运行效率和资源利用率）组织和管理计算机的软硬件资源，合理（公平，不发生死锁和饥饿）地组织计算机的工作流程，控制程序的执行，并向用户提供各种服务功能，使得用户能够灵活、方便（人机界面—-包括用户使用界面和程序设计接口的易用性、易维护性）、有效的使用计算机，并使整个计算机系统能高效地运行；
+OS特性：
+
+
+
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Miscellaneous/OS_review/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Project-Images/WPCopybook/">Copybook for Calligraphy (WP)</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2015-12-20T08:00:00.000Z" itemprop="datePublished">
+          2015-12-20
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. DescriptionThis is a WP project aiming at helping beginners to learn Chinese calligraphy better through mimicing works done by famous calligraphers like Wang xizhi, Yan zhenqing and so on. 
+The reason we choose WP is 
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Project-Images/WPCopybook/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Project-Images/MineSweeping/">Mine Sweeping Using GDI+</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2015-12-19T08:00:00.000Z" itemprop="datePublished">
+          2015-12-19
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        GDI+
+1. Functions:
+
+Selece Difficulty: Users could change difficulty of the game: beginner, normal, hard
+Play: The rule and UI are exactly the same as Mine Sweeping on Windows XP
+Timing and showing number of remaining mi
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Project-Images/MineSweeping/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/Project-Images/CommnicationTool/">Instant Messenger (Imitation QQ)</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2015-12-15T08:00:00.000Z" itemprop="datePublished">
+          2015-12-15
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        This is a C/S Model Instant Messenger Based on TCP. I led a 4-people team developing a windows chatting program using C#, SQL Server and CSkin. Private chat, group chat and offline message were implemented.
+1. Logininput
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/Project-Images/CommnicationTool/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">

@@ -125,11 +125,13 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(7)</small></a></li>
+				    
 				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(9)</small></a></li>
 				    
 				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
@@ -247,9 +249,9 @@
 <p><strong>High bias (underfitting)</strong>: both $J<em>{train}(\Theta)$ and $J</em>{CV}(\Theta)$ will be high. Also, $J<em>{train}(\Theta) \approx J</em>{CV}(\Theta)$.</p>
 <p><strong>High variance (overfitting)</strong>: $J<em>{train}(\Theta)$ will be low and $J</em>{CV}(\Theta)$ will be much greater than $J_{train}(\Theta)$.</p>
 <p>The is summarized in the figure below:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/06/1.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/06/1.png" alt="img"></p>
 <p><br></p>
-<h3 id="2-Regularization-and-Bias-Variance"><a href="#2-Regularization-and-Bias-Variance" class="headerlink" title="2. Regularization and Bias/Variance"></a>2. Regularization and Bias/Variance</h3><p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/06/2.png" alt="img"></p>
+<h3 id="2-Regularization-and-Bias-Variance"><a href="#2-Regularization-and-Bias-Variance" class="headerlink" title="2. Regularization and Bias/Variance"></a>2. Regularization and Bias/Variance</h3><p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/06/2.png" alt="img"></p>
 <p>In the figure above, we see that as $λ$ increases, our fit becomes more rigid. On the other hand, as $λ$ approaches 0, we tend to over overfit the data. So how do we choose our parameter $λ$ to get it ‘just right’ ? In order to choose the model and the regularization term $λ$, we need to:</p>
 <ol>
 <li>Create a list of lambdas (i.e. $λ \in {0,0.01,0.02,0.04,0.08,0.16,0.32,0.64,1.28,2.56,5.12,10.24}$);</li>
@@ -269,12 +271,12 @@
 <p><strong>Low training set size</strong>: causes $J<em>{train}(\Theta)$ to be low and $J</em>{CV}(\Theta)$  to be high.</p>
 <p><strong>Large training set size</strong>: causes both $J<em>{train}(\Theta)$ and $J</em>{CV}(\Theta)$ to be high with  $J<em>{train}(\Theta) \approx J</em>{CV}(\Theta)$.</p>
 <p>If a learning algorithm is suffering from <strong>high bias</strong>, getting more training data will not <strong>(by itself)</strong> help much.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/06/3.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/06/3.png" alt="img"></p>
 <p><strong>Experiencing high variance (overfitting):</strong></p>
 <p><strong>Low training set size</strong>: $J<em>{train}(\Theta)$ will be low and $J</em>{CV}(\Theta)$ will be high.</p>
 <p><strong>Large training set size</strong>: $J<em>{train}(\Theta)​$ increases with training set size and $J</em>{CV}(\Theta)​$ continues to decrease without leveling off. Also, $J<em>{train}(\Theta)​$ &lt; $J</em>{CV}(\Theta)​$, but the difference between them remains significant.</p>
 <p>If a learning algorithm is suffering from <strong>high variance</strong>, getting more training data is likely to help.</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/06/4.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/06/4.png" alt="img"></p>
 <p><br></p>
 <h3 id="4-Deciding-What-to-Do-Next-Revisited"><a href="#4-Deciding-What-to-Do-Next-Revisited" class="headerlink" title="4. Deciding What to Do Next Revisited"></a>4. Deciding What to Do Next Revisited</h3><p>Our decision process can be broken down as follows:</p>
 <ul>
@@ -313,8 +315,8 @@
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/Dynamic-Programming/01_DynamicProgrammingBasics/" style="float: left;">
-        ← Dynamic Programming Basics
+    <a class="pull-left" href="/Dynamic-Programming/02_CoinChange/" style="float: left;">
+        ← Coin Change
     </a>
     
     

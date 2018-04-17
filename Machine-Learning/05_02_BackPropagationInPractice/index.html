@@ -125,11 +125,13 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(7)</small></a></li>
+				    
 				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(9)</small></a></li>
 				    
 				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
@@ -239,7 +241,7 @@
 <p>If the dimensions of Theta1 is 10x11, Theta2 is 10x11 and Theta3 is 1x11, then we can get back our original matrices from the “unrolled” versions as follows:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Theta1 = reshape(thetaVector(1:110),10,11)</span><br><span class="line">Theta2 = reshape(thetaVector(111:220),10,11)</span><br><span class="line">Theta3 = reshape(thetaVector(221:231),1,11)</span><br></pre></td></tr></table></figure>
 <p>To summarize:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/05/4.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/05/4.png" alt="img"></p>
 <p><br></p>
 <h3 id="2-Gradient-Checking"><a href="#2-Gradient-Checking" class="headerlink" title="2. Gradient Checking"></a>2. Gradient Checking</h3><p>Gradient checking will assure that our backpropagation works as intended. We can approximate the derivative of our cost function with:</p>
 <script type="math/tex; mode=display">\dfrac{\partial}{\partial\Theta}J(\Theta) \approx \dfrac{J(\Theta + \epsilon) - J(\Theta - \epsilon)}{2\epsilon}</script><p>With multiple theta matrices, we can approximate the derivative <strong>with respect to</strong> $Θ_j$ as follows:</p>
@@ -250,7 +252,7 @@
 <p>Once you have verified <strong>once</strong> that your backpropagation algorithm is correct, you don’t need to compute gradApprox again. The code to compute gradApprox can be very slow.</p>
 <p><br></p>
 <h3 id="3-Random-Initialization"><a href="#3-Random-Initialization" class="headerlink" title="3. Random Initialization"></a>3. Random Initialization</h3><p>Initializing all theta weights to zero does not work with neural networks. When we backpropagate, all nodes will update to the same value repeatedly. Instead we can randomly initialize our weights for our Θ matrices using the following method:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/05/5.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/05/5.png" alt="img"></p>
 <p>Hence, we initialize each $\Theta^{(l)}_{ij}$ to a random value between $[−ϵ,ϵ]$. Using the above formula guarantees that we get the desired bound. The same procedure applies to all the $Θ$’s. Below is some working code:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">If the dimensions of Theta1 is 10x11, Theta2 is 10x11 and Theta3 is 1x11.</span><br><span class="line"></span><br><span class="line">Theta1 = rand(10,11) * (2 * INIT_EPSILON) - INIT_EPSILON;</span><br><span class="line">Theta2 = rand(10,11) * (2 * INIT_EPSILON) - INIT_EPSILON;</span><br><span class="line">Theta3 = rand(1,11) * (2 * INIT_EPSILON) - INIT_EPSILON;</span><br></pre></td></tr></table></figure>
 <p>rand(x,y) is just a function in matlab that will initialize a matrix of random real numbers between 0 and 1.</p>
@@ -275,7 +277,7 @@
 <p>When we perform forward and back propagation, we loop on every training example:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i = 1:m,</span><br><span class="line">   Perform forward propagation and backpropagation using example (x(i),y(i))</span><br><span class="line">   (Get activations a(l) and delta terms d(l) for l = 2,...,L</span><br></pre></td></tr></table></figure>
 <p>The following image gives us an intuition of what is happening as we are implementing our neural network:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/05/6.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/05/6.png" alt="img"></p>
 <p>Ideally, you want $h_\Theta(x^{(i)}) \approx y^{(i)}$. This will minimize our cost function. However, <strong>keep in mind that $J(\Theta)$ is not convex and thus we can end up in a local minimum instead.</strong></p>
 
             <div class="clearfix"></div>

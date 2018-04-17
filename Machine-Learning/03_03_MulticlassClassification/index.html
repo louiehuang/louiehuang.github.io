@@ -125,11 +125,13 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(7)</small></a></li>
+				    
 				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(19)</small></a></li>
 				    
 				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
 				    
-				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(10)</small></a></li>
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(9)</small></a></li>
 				    
 				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
 				    
@@ -237,7 +239,7 @@
 <p>Since $y = {0,1…n}$, we divide our problem into $n+1$ (+1 because the index starts at 0) binary classification problems; in each one, we predict the probability that <code>y</code> is a member of one of our classes.</p>
 <script type="math/tex; mode=display">\begin{align*}& y \in \lbrace0, 1 ... n\rbrace \newline& h_\theta^{(0)}(x) = P(y = 0 | x ; \theta) \newline& h_\theta^{(1)}(x) = P(y = 1 | x ; \theta) \newline& \cdots \newline& h_\theta^{(n)}(x) = P(y = n | x ; \theta) \newline& \mathrm{prediction} = \max_i( h_\theta ^{(i)}(x) )\newline\end{align*}</script><p>We are basically <strong>choosing one class and then lumping all the others into a single second class.</strong> <strong>We do this repeatedly, applying binary logistic regression to each case</strong>, and then use the hypothesis that returned the highest value as our prediction.</p>
 <p>The following image shows how one could classify 3 classes:</p>
-<p><img src="http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/03/4.png" alt="img"></p>
+<p><img src="http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/03/4.png" alt="img"></p>
 <p><strong>To summarize:</strong></p>
 <p>Train a logistic regression classifier $h_θ(x)$ for each class￼ to predict the probability that ￼ ￼$y = i$￼ ￼.</p>
 <p>To make a prediction on a new $x$, pick the class ￼that maximizes $h_θ(x)$.</p>
@@ -247,13 +249,13 @@
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/Machine-Learning/04_01_NeuralNetwork/" style="float: left;">
-        ← (Week4) 01 Neural Network
+    <a class="pull-left" href="/Algorithm/4.3 Greedy - MST/" style="float: left;">
+        ← 4.3 Greedy - MST (Kruskal, Prim and Reverse Delete)
     </a>
     
     
-    <a class="pull-right" href="/Machine-Learning/03_04_Overfitting/">
-        (Week3) 04 Overfitting →
+    <a class="pull-right" href="/Algorithm/4.2 Greedy - Dijkstra/">
+        4.2 Greedy - Shortest Path (Dijkstra) →
     </a>
     
 </nav>

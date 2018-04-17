@@ -135,7 +135,7 @@
     <link href="http://louie.link/Machine-Learning/08_01_UnsupervisedLearning/"/>
     <id>http://louie.link/Machine-Learning/08_01_UnsupervisedLearning/</id>
     <published>2018-04-11T07:00:00.000Z</published>
-    <updated>2018-04-16T01:42:54.000Z</updated>
+    <updated>2018-04-16T22:14:33.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;Unsupervised-Learning&quot;&gt;&lt;a href=&quot;#Unsupervised-Learning&quot; class=&quot;headerlink&quot; title=&quot;Unsupervised Learning&quot;&gt;&lt;/a&gt;Unsupervised Learning&lt;/h2&gt;&lt;p&gt;Materials are from &lt;a href=&quot;https://www.coursera.org/learn/machine-learning/resources/kGWsY&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Coursera Machine Learning by Andrew Ng&lt;/a&gt;. &lt;/p&gt;
 &lt;h3 id=&quot;1-Unsupervised-Learning-Introduction&quot;&gt;&lt;a href=&quot;#1-Unsupervised-Learning-Introduction&quot; class=&quot;headerlink&quot; title=&quot;1. Unsupervised Learning: Introduction&quot;&gt;&lt;/a&gt;1. Unsupervised Learning: Introduction&lt;/h3&gt;&lt;p&gt;Unsupervised learning is contrasted from supervised learning because it uses an &lt;strong&gt;unlabeled&lt;/strong&gt; training set rather than a labeled one. In other words, we don’t have the vector $y$ of expected results, we only have a dataset of features where we can find structure.&lt;/p&gt;
@@ -207,7 +207,7 @@
 &lt;h3 id=&quot;5-Choosing-the-Number-of-Clusters&quot;&gt;&lt;a href=&quot;#5-Choosing-the-Number-of-Clusters&quot; class=&quot;headerlink&quot; title=&quot;5. Choosing the Number of Clusters&quot;&gt;&lt;/a&gt;5. Choosing the Number of Clusters&lt;/h3&gt;&lt;p&gt;Choosing $K$ can be quite arbitrary and ambiguous.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;The elbow method&lt;/strong&gt;: plot the cost $J$ and the number of clusters $K$. The cost function should reduce as we increase the number of clusters, and then flatten out. Choose K at the point where the cost function starts to flatten out.&lt;/p&gt;
 &lt;p&gt;However, fairly often, the curve is &lt;strong&gt;very gradual&lt;/strong&gt;, so there’s no clear elbow. (see following right graph)&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/08/1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/08/1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; $J$ will &lt;strong&gt;always&lt;/strong&gt; decrease as K is increased. The one exception is if k-means gets stuck at a bad local optimum.&lt;/p&gt;
 &lt;p&gt;Another way to choose $K$ is to observe how well k-means performs on a &lt;strong&gt;downstream purpose&lt;/strong&gt;. In other words, you choose $K$ that proves to be most useful for some goal you’re trying to achieve from using these clusters.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
@@ -230,7 +230,7 @@
     <link href="http://louie.link/Machine-Learning/08_02_DimensionalityReduction/"/>
     <id>http://louie.link/Machine-Learning/08_02_DimensionalityReduction/</id>
     <published>2018-04-11T07:00:00.000Z</published>
-    <updated>2018-04-16T01:43:01.000Z</updated>
+    <updated>2018-04-16T22:14:38.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;Dimensionality-Reduction&quot;&gt;&lt;a href=&quot;#Dimensionality-Reduction&quot; class=&quot;headerlink&quot; title=&quot;Dimensionality Reduction&quot;&gt;&lt;/a&gt;Dimensionality Reduction&lt;/h2&gt;&lt;p&gt;Materials are from &lt;a href=&quot;https://www.coursera.org/learn/machine-learning/resources/kGWsY&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Coursera Machine Learning by Andrew Ng&lt;/a&gt;. &lt;/p&gt;
 &lt;h3 id=&quot;1-Motivation&quot;&gt;&lt;a href=&quot;#1-Motivation&quot; class=&quot;headerlink&quot; title=&quot;1. Motivation&quot;&gt;&lt;/a&gt;1. Motivation&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Motivation I: Data Compression&lt;/strong&gt;&lt;/p&gt;
@@ -259,7 +259,7 @@
 &lt;li&gt;In linear regression, we are minimizing the &lt;strong&gt;squared error&lt;/strong&gt; from every point to our predictor line ($(\hat{y} - y)^2$). These are vertical distances.&lt;/li&gt;
 &lt;li&gt;In PCA, we are minimizing the &lt;strong&gt;shortest distance&lt;/strong&gt;, or shortest &lt;em&gt;orthogonal&lt;/em&gt; distances, to our data points.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/08/PCA.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/08/PCA.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;More generally, in linear regression we are taking all our examples in $x$ and applying the parameters in $Θ$ to predict $y$.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;In PCA, we are taking a number of features $x_1, x_2, \dots, x_n$, and finding a closest common dataset among them. We aren’t trying to predict any result and we aren’t applying any theta weights to the features.&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&quot;2-2-Principal-Component-Analysis-Algorithm&quot;&gt;&lt;a href=&quot;#2-2-Principal-Component-Analysis-Algorithm&quot; class=&quot;headerlink&quot; title=&quot;2.2 Principal Component Analysis Algorithm&quot;&gt;&lt;/a&gt;2.2 Principal Component Analysis Algorithm&lt;/h4&gt;&lt;p&gt;Before we can apply PCA, there is a data pre-processing step we must perform:&lt;/p&gt;
@@ -347,7 +347,7 @@
     <link href="http://louie.link/Machine-Learning/07_03_SVMsinPractice/"/>
     <id>http://louie.link/Machine-Learning/07_03_SVMsinPractice/</id>
     <published>2018-04-10T07:00:00.000Z</published>
-    <updated>2018-04-16T01:42:46.000Z</updated>
+    <updated>2018-04-16T22:14:28.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;SVMs-in-Practice&quot;&gt;&lt;a href=&quot;#SVMs-in-Practice&quot; class=&quot;headerlink&quot; title=&quot;SVMs in Practice&quot;&gt;&lt;/a&gt;SVMs in Practice&lt;/h2&gt;&lt;p&gt;Materials are from &lt;a href=&quot;https://www.coursera.org/learn/machine-learning/resources/Es9Qo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Coursera Machine Learning by Andrew Ng&lt;/a&gt;. &lt;/p&gt;
 &lt;h3 id=&quot;1-Using-An-SVM&quot;&gt;&lt;a href=&quot;#1-Using-An-SVM&quot; class=&quot;headerlink&quot; title=&quot;1. Using An SVM&quot;&gt;&lt;/a&gt;1. Using An SVM&lt;/h3&gt;&lt;p&gt;There are lots of good SVM libraries already written. A. Ng often uses ‘liblinear’ and ‘libsvm’. &lt;/p&gt;
@@ -378,7 +378,7 @@
 &lt;p&gt;In the second example, we have enough examples that we may need a complex non-linear hypothesis. &lt;/p&gt;
 &lt;p&gt;In the last case, we want to increase our features so that logistic regression becomes applicable.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: a neural network is likely to work well for any of these situations, but may be slower to train.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/07/LR_SVM.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/07/LR_SVM.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Additional references&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;“An Idiot’s Guide to Support Vector Machines”: &lt;a href=&quot;http://web.mit.edu/6.034/wwwbob/svm-notes-long-08.pdf&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://web.mit.edu/6.034/wwwbob/svm-notes-long-08.pdf&lt;/a&gt;&lt;/p&gt;
 </content>
@@ -399,7 +399,7 @@
     <link href="http://louie.link/Machine-Learning/07_02_Kernels/"/>
     <id>http://louie.link/Machine-Learning/07_02_Kernels/</id>
     <published>2018-04-09T07:00:00.000Z</published>
-    <updated>2018-04-16T01:42:39.000Z</updated>
+    <updated>2018-04-16T22:14:21.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;Kernels&quot;&gt;&lt;a href=&quot;#Kernels&quot; class=&quot;headerlink&quot; title=&quot;Kernels&quot;&gt;&lt;/a&gt;Kernels&lt;/h2&gt;&lt;p&gt;Materials are from &lt;a href=&quot;https://www.coursera.org/learn/machine-learning/resources/Es9Qo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Coursera Machine Learning by Andrew Ng&lt;/a&gt;. &lt;/p&gt;
 &lt;h3 id=&quot;1-Kernels-I&quot;&gt;&lt;a href=&quot;#1-Kernels-I&quot; class=&quot;headerlink&quot; title=&quot;1. Kernels I&quot;&gt;&lt;/a&gt;1. Kernels I&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Kernels&lt;/strong&gt; allow us to make complex, non-linear classifiers using Support Vector Machines.&lt;/p&gt;
@@ -433,7 +433,7 @@
 &lt;p&gt;The other parameter we must choose is $σ_2$ from the Gaussian Kernel function:&lt;/p&gt;
 &lt;p&gt;With a large $σ_2$, the features fi vary more smoothly, causing higher bias and lower variance.&lt;/p&gt;
 &lt;p&gt;With a small $σ_2$, the features fi vary less smoothly, causing lower bias and higher variance.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/07/C_Theta.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/07/C_Theta.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -452,7 +452,7 @@
     <link href="http://louie.link/Machine-Learning/07_01_LargeMarginClassification/"/>
     <id>http://louie.link/Machine-Learning/07_01_LargeMarginClassification/</id>
     <published>2018-04-08T07:00:00.000Z</published>
-    <updated>2018-04-16T01:42:31.000Z</updated>
+    <updated>2018-04-16T22:14:15.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;Large-Margin-Classification&quot;&gt;&lt;a href=&quot;#Large-Margin-Classification&quot; class=&quot;headerlink&quot; title=&quot;Large Margin Classification&quot;&gt;&lt;/a&gt;Large Margin Classification&lt;/h2&gt;&lt;p&gt;Materials are from &lt;a href=&quot;https://www.coursera.org/learn/machine-learning/resources/Es9Qo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Coursera Machine Learning by Andrew Ng&lt;/a&gt;. &lt;/p&gt;
 &lt;h3 id=&quot;1-Optimization-Objective&quot;&gt;&lt;a href=&quot;#1-Optimization-Objective&quot; class=&quot;headerlink&quot; title=&quot;1. Optimization Objective&quot;&gt;&lt;/a&gt;1. Optimization Objective&lt;/h3&gt;&lt;p&gt;The &lt;strong&gt;Support Vector Machine&lt;/strong&gt; (SVM) is another type of &lt;strong&gt;&lt;em&gt;supervised&lt;/em&gt;&lt;/strong&gt; machine learning algorithm. It is sometimes cleaner and more powerful.&lt;/p&gt;
@@ -463,9 +463,9 @@
 &lt;/ul&gt;
 &lt;p&gt;Recall the cost function for (unregularized) logistic regression:&lt;/p&gt;
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{align*}J(\theta) &amp; = \frac{1}{m}\sum_{i=1}^m -y^{(i)} \log(h_\theta(x^{(i)})) - (1 - y^{(i)})\log(1 - h_\theta(x^{(i)}))\\ &amp; = \frac{1}{m}\sum_{i=1}^m -y^{(i)} \log\Big(\dfrac{1}{1 + e^{-\theta^Tx^{(i)}}}\Big) - (1 - y^{(i)})\log\Big(1 - \dfrac{1}{1 + e^{-\theta^Tx^{(i)}}}\Big)\end{align*}&lt;/script&gt;&lt;p&gt;To make a support vector machine, we will modify the first term of the cost function $-\log(h_{\theta}(x)) = -\log\Big(\dfrac{1}{1 + e^{-\theta^Tx}}\Big)$ so that when $θ^Tx$ (from now on, we shall refer to this as &lt;strong&gt;z&lt;/strong&gt;) is &lt;strong&gt;greater than&lt;/strong&gt; 1, it outputs 0. Furthermore, for values of z less than 1, we shall use a straight decreasing line instead of the sigmoid curve.(In the literature, this is called a hinge loss (&lt;a href=&quot;https://en.wikipedia.org/wiki/Hinge_loss)&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://en.wikipedia.org/wiki/Hinge_loss)&lt;/a&gt; function.)&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/07/1.png&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/07/1.png&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;
 &lt;p&gt;Similarly, we modify the second term of the cost function $-\log(1 - h_{\theta(x)}) = -\log\Big(1 - \dfrac{1}{1 + e^{-\theta^Tx}}\Big)$ so that when z is &lt;strong&gt;less than&lt;/strong&gt; -1, it outputs 0. We also modify it so that for values of z greater than -1, we use a straight increasing line instead of the sigmoid curve.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/07/2.png&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/07/2.png&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;
 &lt;p&gt;We shall denote these as $cost_1(z)$ and $cost_0(z)$ (respectively, note that $cost_1(z)$ is the cost for classifying when y=1, and $cost_0(z)$ is the cost for classifying when y=0), and we may define them as follows (where k is an arbitrary constant defining the magnitude of the slope of the line):&lt;/p&gt;
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;z = \theta^Tx&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{cost}_0(z) = \max(0, k(1+z))&lt;/script&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{cost}_1(z) = \max(0, k(1-z))&lt;/script&gt;&lt;p&gt;Recall the full cost function from (regularized) logistic regression:&lt;/p&gt;
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;J(\theta) = \frac{1}{m} \sum_{i=1}^m y^{(i)}(-\log(h_\theta(x^{(i)}))) + (1 - y^{(i)})(-\log(1 - h_\theta(x^{(i)}))) + \dfrac{\lambda}{2m}\sum_{j=1}^n \Theta^2_j&lt;/script&gt;&lt;p&gt;Note that the negative sign has been distributed into the sum in the above equation.&lt;/p&gt;
@@ -477,7 +477,7 @@
 &lt;li&gt;Regularize more (&lt;strong&gt;reduce overfitting&lt;/strong&gt;), we (increase $\lambda$, so $\theta$ is smaller, thus model is simpler) &lt;em&gt;decrease&lt;/em&gt; C;&lt;/li&gt;
 &lt;li&gt;Regularize less (&lt;strong&gt;reduce underfitting&lt;/strong&gt;), we (decrease $\lambda$) &lt;em&gt;increase&lt;/em&gt; C.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/07/C_Theta.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/07/C_Theta.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;font color=&quot;red&quot;&gt;Finally, note that the hypothesis of the Support Vector Machine is ***not*** interpreted as the probability of y being 1 or 0 (as it is for the hypothesis of logistic regression). Instead, it outputs either 1 or 0. (In technical terms, it is a discriminant function.)&lt;/font&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;h_\theta(x) =\begin{cases}    1 &amp; \text{if} \ \Theta^Tx \geq 0 \\    0 &amp; \text{otherwise}\end{cases}&lt;/script&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;
@@ -491,7 +491,7 @@
 &lt;p&gt;If $C$ is very large, we must choose $Θ$ parameters such that:&lt;/p&gt;
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\sum_{i=1}^m y^{(i)}\text{cost}_1(\Theta^Tx) + (1 - y^{(i)})\text{cost}_0(\Theta^Tx) = 0&lt;/script&gt;&lt;p&gt;This reduces our cost function to:&lt;/p&gt;
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{align*} J(\theta) = C \cdot 0 + \dfrac{1}{2}\sum_{j=1}^n \Theta^2_j \newline = \dfrac{1}{2}\sum_{j=1}^n \Theta^2_j\end{align*}&lt;/script&gt;&lt;p&gt;Recall the decision boundary from logistic regression (the line separating the positive and negative examples). In SVMs, the decision boundary has the special property that it is &lt;strong&gt;as far away as possible&lt;/strong&gt; from both the positive and the negative examples.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.cossh.myqcloud.com/MachineLearning/Images/07/margin.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://coursera-1251949857.file.myqcloud.com/MachineLearning/Images/07/margin.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;The distance of the decision boundary &lt;strong&gt;to the nearest example&lt;/strong&gt; is called the &lt;strong&gt;margin&lt;/strong&gt;. Since SVMs maximize this margin, it is often called a &lt;strong&gt;&lt;em&gt;Large Margin Classifier&lt;/em&gt;.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;The SVM will separate the negative and positive examples by a &lt;strong&gt;large margin&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;=&amp;gt; This large margin is only achieved when &lt;strong&gt;C is very large&lt;/strong&gt;.&lt;/p&gt;
@@ -533,11 +533,11 @@
   </entry>
   
   <entry>
-    <title>HW4 Search Engine Using Solr</title>
-    <link href="http://louie.link/Information-Retrieval/Solr%20Steps/"/>
-    <id>http://louie.link/Information-Retrieval/Solr Steps/</id>
-    <published>2018-04-08T07:00:00.000Z</published>
-    <updated>2018-04-16T01:25:34.000Z</updated>
+    <title></title>
+    <link href="http://louie.link/uncategorized/Solr%20Steps/"/>
+    <id>http://louie.link/uncategorized/Solr Steps/</id>
+    <published>2018-04-06T20:50:36.000Z</published>
+    <updated>2018-04-16T17:53:40.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;Search-Engine-Using-Solr&quot;&gt;&lt;a href=&quot;#Search-Engine-Using-Solr&quot; class=&quot;headerlink&quot; title=&quot;Search Engine Using Solr&quot;&gt;&lt;/a&gt;Search Engine Using Solr&lt;/h2&gt;&lt;p&gt;This project implements a simple search engine which searches news in NBC. Tools used in this project are listed below:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -545,7 +545,8 @@
 &lt;li&gt;Crawler:    Crawler4j&lt;/li&gt;
 &lt;li&gt;Extract Links: Jsoup&lt;/li&gt;
 &lt;li&gt;PageRank: nextworkX&lt;/li&gt;
-&lt;li&gt;Indexing: Solr (7.3.0)&lt;br&gt; . Web Server: php, solr-php-client    &lt;/li&gt;
+&lt;li&gt;Indexing: Solr (7.3.0)&lt;/li&gt;
+&lt;li&gt;Web Server: php, solr-php-client    &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
@@ -639,8 +640,6 @@
       &lt;h2 id=&quot;Search-Engine-Using-Solr&quot;&gt;&lt;a href=&quot;#Search-Engine-Using-Solr&quot; class=&quot;headerlink&quot; title=&quot;Search Engine Using Solr&quot;&gt;&lt;/a&gt;Search Engine 
     
     </summary>
-    
-      <category term="Information Retrieval" scheme="http://louie.link/categories/Information-Retrieval/"/>
     
     
   </entry>
@@ -878,38 +877,32 @@
   </entry>
   
   <entry>
-    <title>05_PrintListReversely</title>
-    <link href="http://louie.link/Algorithm-Practice/05_PrintListReversely/"/>
-    <id>http://louie.link/Algorithm-Practice/05_PrintListReversely/</id>
+    <title>10 Number Of One</title>
+    <link href="http://louie.link/Algorithm-Practice/10_NumberOfOne/"/>
+    <id>http://louie.link/Algorithm-Practice/10_NumberOfOne/</id>
     <published>2018-04-03T07:00:00.000Z</published>
-    <updated>2018-04-16T01:12:29.000Z</updated>
+    <updated>2018-04-16T01:12:44.000Z</updated>
     
     <content type="html">&lt;p&gt;&lt;strong&gt;Problem Statement:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;输入一个链表，从尾到头打印链表每个节点的值。&lt;/p&gt;
+&lt;p&gt;输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Problem Statement:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Print a linked list from its tail to its head.&lt;/p&gt;
+&lt;p&gt;Given a number, output the number of 1s in its binary representation. Negative number should be represented as its complemental code.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Solution 1 (Recursion):&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;We can solve this problem recursively. We process the rest of the list first, after this is done, print the node, so the first node to be printed is the tail, the second is the one before tail…&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ArrayList&amp;lt;Integer&amp;gt; res = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ArrayList&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; ArrayList&amp;lt;Integer&amp;gt; &lt;span class=&quot;title&quot;&gt;printListFromTailToHead&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(ListNode listNode)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(listNode == &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; res;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    printListFromTailToHead(listNode.next); &lt;span class=&quot;comment&quot;&gt;//process the rest of the list first&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    res.add(listNode.val); &lt;span class=&quot;comment&quot;&gt;//then print the node (the first node to be printed is the tail)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; res;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Solution 2 (Stack):&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Now that the problem can be solved recursively, it can also be solved using a stack. We just push all nodes onto a stack, then pop them out.&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ArrayList&amp;lt;Integer&amp;gt; res = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ArrayList&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; ArrayList&amp;lt;Integer&amp;gt; &lt;span class=&quot;title&quot;&gt;printListFromTailToHead&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(ListNode head)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ArrayList&amp;lt;Integer&amp;gt; res = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ArrayList&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Stack&amp;lt;ListNode&amp;gt; stack = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Stack&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ListNode cur = head;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt;(cur != &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        stack.push(cur);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        cur = cur.next;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt;(!stack.isEmpty())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        res.add(stack.pop().val);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; res;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Solution 3:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;If we can modify the list itself (usually we are now allowed to do so and we should not since this is just a print operation), then we just reverse this list and print.&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; ListNode &lt;span class=&quot;title&quot;&gt;reverseList&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(ListNode head)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(head == &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt; || head.next == &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; head;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ListNode last = reverseList(head.next); &lt;span class=&quot;comment&quot;&gt;//treat head.next as a whole&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    head.next.next = head; &lt;span class=&quot;comment&quot;&gt;//reverse link: B-&amp;gt;C  ---&amp;gt;   B&amp;lt;-C&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    head.next = &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; last;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;NumberOf1&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; cnt = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt;(n != &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        cnt++;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        n = (n-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) &amp;amp; n;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; cnt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;(n-1) &amp;amp; n&lt;/code&gt; actually means removing the last &lt;code&gt;1&lt;/code&gt; in n each time.&lt;/strong&gt; Concretely:&lt;/p&gt;
+&lt;p&gt;(1) If &lt;code&gt;n&lt;/code&gt; is an odd number, its binary representation is &lt;code&gt;xx...x1&lt;/code&gt;, &lt;code&gt;n-1&lt;/code&gt; is &lt;code&gt;xx...x0&lt;/code&gt;, so the result of &lt;code&gt;n&amp;amp;(n-1)&lt;/code&gt; is &lt;code&gt;xx...x0&lt;/code&gt;, we removed the last &lt;code&gt;1&lt;/code&gt; in n.&lt;/p&gt;
+&lt;p&gt;(2) If &lt;code&gt;n&lt;/code&gt; is an even number, its binary representation is &lt;code&gt;xx...x10...0&lt;/code&gt;, &lt;code&gt;n-1&lt;/code&gt; is &lt;code&gt;xx...x01...0&lt;/code&gt;, so the result of &lt;code&gt;n&amp;amp;(n-1)&lt;/code&gt; is &lt;code&gt;xx...x00...0&lt;/code&gt;, we also removed the last &lt;code&gt;1&lt;/code&gt; in n.&lt;/p&gt;
 </content>
     
     <summary type="html">
     
       &lt;p&gt;&lt;strong&gt;Problem Statement:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;输入一个链表，从尾到头打印链表每个节点的值。&lt;/p&gt;
+&lt;p&gt;输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Problem Statement:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Print a l
+&lt;p
     
     </summary>
     
@@ -965,6 +958,38 @@
 &lt;p&gt;2 跳台阶，一次可以跳1级或2级，求跳上n级台阶有多少种跳法&lt;/p&gt;
 &lt;p&gt;3 跳台阶，一次可以跳1到n级，求跳上n级台阶有多少种跳法&lt;/p&gt;
 &lt;p&gt;4
+    
+    </summary>
+    
+      <category term="Algorithm Practice" scheme="http://louie.link/categories/Algorithm-Practice/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>11 Power(x,y)</title>
+    <link href="http://louie.link/Algorithm-Practice/11_Power(x,y)/"/>
+    <id>http://louie.link/Algorithm-Practice/11_Power(x,y)/</id>
+    <published>2018-04-03T07:00:00.000Z</published>
+    <updated>2018-04-16T01:12:47.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;strong&gt;Problem Statement:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Problem Statement:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Given &lt;code&gt;base&lt;/code&gt; in double and &lt;code&gt;exponent&lt;/code&gt; in int, calculate $base^{exponent}$.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Just a divide and conquer problem, but &lt;strong&gt;be careful that n could be a negative number&lt;/strong&gt;.&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Power&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt; x, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; n)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (n == &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt; tmp = Power(x, n / &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (n % &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt; == &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; tmp * tmp;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (n &amp;gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; tmp * tmp * x;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; tmp * tmp / x;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;Problem Statement:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Problem Sta
     
     </summary>
     
@@ -1073,40 +1098,6 @@
 &lt;p&gt;输入两个单调递增的链表，输出两个链表合成后的链表，合成后的链表仍满足单调不减规则。&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Problem Statement:&lt;/stron
-    
-    </summary>
-    
-      <category term="Algorithm Practice" scheme="http://louie.link/categories/Algorithm-Practice/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>07 Implement a Queue with two Stacks</title>
-    <link href="http://louie.link/Algorithm-Practice/07_ImplementQueueWithTwoStacks/"/>
-    <id>http://louie.link/Algorithm-Practice/07_ImplementQueueWithTwoStacks/</id>
-    <published>2018-04-03T07:00:00.000Z</published>
-    <updated>2018-04-16T01:12:36.000Z</updated>
-    
-    <content type="html">&lt;p&gt;&lt;strong&gt;Problem Statement:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Problem Statement:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Implement a Queue with two Stacks, elements are integers.&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Queues are FIFO, and Stacks are FILO. &lt;/p&gt;
-&lt;p&gt;For &lt;code&gt;push()&lt;/code&gt;, just push the new element onto stack1.&lt;/p&gt;
-&lt;p&gt;For &lt;code&gt;pop()&lt;/code&gt;, if stack2 is not empty, pop one element of stack2; if it is empty, pop all elements of stack1 and push them onto stack2, finally, pop one element of stack2. &lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;FakeQueue&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Stack&amp;lt;Integer&amp;gt; stack1 = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Stack&amp;lt;Integer&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Stack&amp;lt;Integer&amp;gt; stack2 = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Stack&amp;lt;Integer&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;FakeQueue&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; node)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        stack1.push(node);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; res = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(!stack2.isEmpty())&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            res = stack2.pop();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt;(!stack1.isEmpty())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                stack2.push(stack1.pop());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            res = stack2.pop(); &lt;span class=&quot;comment&quot;&gt;//may want to check if it is still empty (stack1 is empty)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; res;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;Problem Statement:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Problem Statement:&lt;/stro
     
     </summary>
     
