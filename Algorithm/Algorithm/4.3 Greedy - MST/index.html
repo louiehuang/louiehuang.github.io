@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>4.3 Greedy - MST (Kruskal, Prim and Reverse Delete) | Louie&#39;s Blog</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Louie's Blog">
+    <meta name="author" content="黄刘胤,Louie">
+    <meta name="description" content="黄刘胤的博客 Louie's blog" />
+    <meta name="keywords" content="黄刘胤,Louie,LouieHuang" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/logo.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Louie&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/xcode.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <!--     
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    -->
+    <!-- 改为云存储 -->
+    <!-- <link href='//gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/family%3DOpen%2BSans400%2C600.css' rel='stylesheet' type='text/css'> -->
+    <!-- 或者本地也可以 -->
+    <link href='/css/family=Open+Sans400,600.css' rel='stylesheet' type='text/css'>
+
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  <!-- Baidu -->
+  <!--
+  
+  -->
+
+  <!-- google统计 -->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-76175499-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+
+<body id="index" class="lightnav animsition">
+
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- header -->
+        <div style="text-align:center;margin-top:15px;margin-bottom:-30px;">
+            <img style="height:120px;weight:120px" src="/img/header.jpg" alt="Close"/>
+            <h4 style="margin-top:10px;color:#fff;">黄刘胤 | Louie</h4>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(10)</small></a></li>
+				    
+				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(20)</small></a></li>
+				    
+				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
+				    
+				    <li><a href="/categories/Miscellaneous/" class="animsition-link">Miscellaneous<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Project-Images/" class="animsition-link">Project Images<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(8)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="/Resume.pdf" class="animsition-link">Resume</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About Me</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.ico" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Louie's Blog</a></li>
+                            <li class="nolink"><span>Always </span>Thinking</li>
+                            
+                            <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-02-10T08:00:00.000Z" itemprop="datePublished">
+          2018-02-10
+      </time>
+    
+</span>
+                <h1>4.3 Greedy - MST (Kruskal, Prim and Reverse Delete)</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="Minimum-Spanning-Tree-Exchange-Argument"><a href="#Minimum-Spanning-Tree-Exchange-Argument" class="headerlink" title="Minimum Spanning Tree (Exchange Argument)"></a>Minimum Spanning Tree (Exchange Argument)</h2><h3 id="1-Problem-Statement"><a href="#1-Problem-Statement" class="headerlink" title="1 Problem Statement"></a>1 Problem Statement</h3><p><strong>Find minimum cost network that connects all nodes in graph $G$.</strong></p>
+<p><strong>Formal Statement:</strong></p>
+<p>“For certain pairs $(v_i, v_j)$, we may build a direct link between $v_i$ and $v_j$ for a certain cost $c(v_i, v_j) &gt; 0$. Thus we can represent the set of possible links that may be built using a graph $G = (V , E)$, with a <strong>positive cost</strong> $c_e$ associated with each edge $e = (v_i, v_j)$. </p>
+<p>The problem is to find a subset of the edges $T ⊆ E$ so that the graph $(V, T)$ is connected, and the total cost $\sum\limits_{e∈T}{c_e}$ is as small as possible. (We will assume that the full graph $G$ is connected; otherwise, no solution is possible.)”</p>
+<p><strong>Definition:</strong> Any tree that covers all nodes of a graph is called a spanning tree.</p>
+<p><strong>Definition:</strong> A spanning tree with minimum total egde cost is a MST.</p>
+<p>So our Problem Statement becomes: <strong>Find a MST in an undirected graph.</strong></p>
+<p><img src="http://algorithms-1251949857.file.myqcloud.com/csci570/Images/greedy/mst.jpg" alt=""></p>
+<h3 id="2-Kruskal’s"><a href="#2-Kruskal’s" class="headerlink" title="2. Kruskal’s"></a>2. Kruskal’s</h3><p>Sort all edges in order of increasing cost. Insert each <strong>edge</strong> $e$ to $T$ in this order as long as it does not create a cycle with edges we’ve already added. If it does, simply discard this edge and continue.</p>
+<p>So Kruskal’s algorithm will select edges ${(h,g), (c,i), (g,f), (c,f), (a,b), (c,d), (b,c), (d,e)}$.</p>
+<p><br></p>
+<h3 id="3-Prim’s"><a href="#3-Prim’s" class="headerlink" title="3. Prim’s"></a>3. Prim’s</h3><p>Start with a node set $S$ (initially the root node) on which a MST has been constructed so far. At each step, try to greedily grow $S$ outward by one node - adding the node $v$ that minimizing the <strong>attachment cost</strong> (not the path cost from s to v). </p>
+<p>This process is similar to Dijkstra’s Algorithm. (Prim is even simpler)</p>
+<p>So Prim’s algorithm will select edges ${(a,b), (a,h), (h,g), (g,f), (f,c), (c,i), (c,d), (d,e)}$.</p>
+<p><br></p>
+<h3 id="4-Reverse-Delete"><a href="#4-Reverse-Delete" class="headerlink" title="4. Reverse Delete"></a>4. Reverse Delete</h3><p>This is a backward version of Kruskal’s.</p>
+<p>Start with a full graph, $(V,E)$ and begin <strong>deleting</strong> edges in order of decreasing cost as long as deleting it does not disconnect the graph. </p>
+<p>So Reverse Delete algorithm will <strong>delete</strong> edges ${(d,f), (b,h), (e,f), (b,c), (i,h), (i,g)}$.</p>
+<p><br></p>
+<h3 id="5-Cut-Property"><a href="#5-Cut-Property" class="headerlink" title="5. Cut Property"></a>5. Cut Property</h3><p><strong>Cut Property:</strong> Assume that all edge costs are <strong>distinct</strong>. Let $S$ be any subset of nodes that is neither empty nor equal to all of $V$, and let edge $e = (v, w)$ be the <strong>minimum</strong> cost edge with one end in $S$ and the other in $V − S$. <strong>Then every minimum spanning tree contains the edge $e$.</strong></p>
+<p><img src="http://algorithms-1251949857.file.myqcloud.com/csci570/Images/greedy/cut_property.png" alt=""></p>
+<p>Say, edge $(v,w)$ is the lowest cost edge that crosses the boundary between $S$ and $V-S$, we want to show that this edge belongs to every MST. Prove this by <strong>contradiction</strong>.</p>
+<p>Assume that there is a MST $T$ that does not use edge $(v,w)$. Since MST is a network that connects all the nodes in the graph, there must be a way from v to w. Follow the edges on $T$ that go from w to v. Since this path goes from v to w, and $v \in S$ and $w \in V-S$, there has to be an edge that crosses the boundary between $S$ and $V-S$, name it $(w’, v’)$.</p>
+<p>Remember we assume $(v,w)$ is not a part of MST, so adding this edge will create a cycle. The nodes on this cycle could be connected to one another either through $(v’,w’)$ or $(v,w)$. But $(v,w)$ has a lower cost, so if we replace $(v’,w’)$ with $(v,w)$, we reduce the cost of $T$, and doing so we still have a spanning tree since the nodes that are previously connected to each other through $(v’, w’)$ is still connected through $(v,w)$. Thus $T$ is not a MST, a contradiction.</p>
+<h4 id="5-1-Proof-for-Kruskal’s"><a href="#5-1-Proof-for-Kruskal’s" class="headerlink" title="5.1 Proof for Kruskal’s"></a>5.1 Proof for Kruskal’s</h4><p><img src="http://algorithms-1251949857.file.myqcloud.com/csci570/Images/greedy/cut_kruskal.png" alt=""></p>
+<p>Note: In the intermediate step, what Kruskal creates is a <strong>forest</strong>. </p>
+<p>At each step, Kruskal’s algorithm picks an edge $(v,w)$ with <strong>minimum cost</strong> connecting $S$ to $V-S$. ($w$ does not belong to $S$, otherwise, adding this edge (from $S$ to $w$) will create a cycle. So $w \in V-S$, since $v \in S$, this edge connects $S$ to $V-S$.</p>
+<p>And this edge must belong to a MST (by Cut Property). So in summary, at every step, Kruskal’s algorithm picks an egde that must belong to the MST, so at the end, the tree must be a MST.</p>
+<h4 id="5-2-Proof-for-Prim’s"><a href="#5-2-Proof-for-Prim’s" class="headerlink" title="5.2 Proof for Prim’s"></a>5.2 Proof for Prim’s</h4><p>Similar to proof for Kruskal’s, using Cut Property to show that edges Prim’s algorithm chooses at each step belong to a MST. </p>
+<h4 id="5-3-Proof-for-Reverse-Delete"><a href="#5-3-Proof-for-Reverse-Delete" class="headerlink" title="5.3 Proof for Reverse Delete"></a>5.3 Proof for Reverse Delete</h4><p>Cut property will <strong>not</strong> help us prove reverse delete since reverse delete focuses on the <strong>highest cost</strong> edges (Kruskal’s and Prim’s focus on lowest cost edges).</p>
+<p>We need to prove “Highest cost edge in a cycle cannot belong to a MST”. (by contradiction)</p>
+<p>For reverse delete, we are deleting the highest cost edge that does not disconnect the graph, meaning this edge must be the highest cost edge in a cycle. So Reverse Delete removes all the egdes that cannot be in the MST, the remaining part will be a MST.</p>
+<p><br></p>
+<h3 id="6-Implementation"><a href="#6-Implementation" class="headerlink" title="6. Implementation"></a>6. Implementation</h3><h4 id="6-1-Kruskal’s"><a href="#6-1-Kruskal’s" class="headerlink" title="6.1 Kruskal’s"></a>6.1 Kruskal’s</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Create an empty set <span class="keyword">for</span> each node;</span><br><span class="line">A = Null;</span><br><span class="line">Sort edges in non-decreasing order of weight;</span><br><span class="line"><span class="function"><span class="keyword">for</span> each <span class="title">egde</span> <span class="params">(u,v)</span> ∈ E taken in <span class="keyword">this</span> order:</span><br><span class="line">    <span class="keyword">if</span> u and v are not in the same set, then:</span><br><span class="line">        A </span>= A ∪ &#123;(u,v)&#125;;</span><br><span class="line">        merge the two sets;</span><br><span class="line">    endif</span><br><span class="line">endfor</span><br></pre></td></tr></table></figure>
+<p>We need to find whether two nodes are in the same set quickly, and if they are not, we also want to merge them together quickly, these can be done using <strong>Union Find</strong>. </p>
+<p><strong>Union Find</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Array Implementation</th>
+<th>Pointer Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Make set</td>
+<td>$O(1)$</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>Find set</td>
+<td>$O(1)$</td>
+<td>$O(lgn)$</td>
+</tr>
+<tr>
+<td>Union</td>
+<td>$O(lgn)$</td>
+<td>$O(1)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">A = Null;</span><br><span class="line"><span class="comment">//O(n)</span></span><br><span class="line"><span class="keyword">for</span> each vertex v ∈ V:</span><br><span class="line">    MakeSet(v);</span><br><span class="line">endfor</span><br><span class="line"></span><br><span class="line"><span class="comment">//O(mlgm)</span></span><br><span class="line">Sort the edges of E in non-decreasing order of cost</span><br><span class="line"></span><br><span class="line"><span class="comment">//O(mlgn)</span></span><br><span class="line"><span class="function"><span class="keyword">for</span> each <span class="title">egde</span> <span class="params">(u,v)</span> ∈ E in <span class="keyword">this</span> order: <span class="comment">//O(m) times</span></span><br><span class="line">    <span class="keyword">if</span> <span class="title">FindSet</span><span class="params">(u)</span> ≠ <span class="title">FindSet</span><span class="params">(v)</span>, then: <span class="comment">//O(lgn)</span></span><br><span class="line">        A </span>= A ∪ &#123;(u,v)&#125;;</span><br><span class="line">        Union(u, v);</span><br><span class="line">    endif</span><br><span class="line">endfor</span><br></pre></td></tr></table></figure>
+<p>So overall time complexity is $O(mlgm)$.</p>
+<h4 id="6-2-Prim’s"><a href="#6-2-Prim’s" class="headerlink" title="6.2 Prim’s"></a>6.2 Prim’s</h4><p>Just like Dijkstra’s algorithm.</p>
+<p>Now we are not checking the distance from the source node $s$, we are only interested in finding the node in $V-S$ that has the shortest distance to the <strong>set</strong> $S$ (not source node $s$, but some node in the set $S$). </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">S = <span class="keyword">null</span>;</span><br><span class="line">Initially, <span class="function">Priority Queue Q with all nodes v where <span class="title">d</span><span class="params">(v)</span> is the value. <span class="params">(d(v)</span> </span>= ∞, d(s)=<span class="number">0</span>);</span><br><span class="line">While S != V:</span><br><span class="line">	v = extractMin(Q);</span><br><span class="line">	S = S ∪ &#123;v&#125;;</span><br><span class="line">	<span class="keyword">for</span> each vertex u ∈ Adj(v): <span class="comment">//Extend v to its adjacent nodes &#123;u&#125;</span></span><br><span class="line">		<span class="function"><span class="keyword">if</span> <span class="title">w</span><span class="params">(u,v)</span> &lt; <span class="title">d</span><span class="params">(u)</span>: <span class="comment">//In Dijkstra's, is d(v) + w(u,v) &lt; d(u), now we do not care about d(v).</span></span><br><span class="line">			<span class="title">DecreaseKey</span><span class="params">(Q, u, w(u,v)</span>)</span>; <span class="comment">//Update distance.</span></span><br><span class="line">	endFor</span><br><span class="line">endWhile</span><br></pre></td></tr></table></figure>
+<p>So overall time complexity is $O(mlgn)$.</p>
+<h4 id="6-3-Reverse-Delete"><a href="#6-3-Reverse-Delete" class="headerlink" title="6.3 Reverse Delete"></a>6.3 Reverse Delete</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Sort the edges of E in non-increasing order of cost; <span class="comment">//O(mlgm)</span></span><br><span class="line"><span class="function"><span class="keyword">for</span> each <span class="title">egde</span> <span class="params">(u,v)</span> ∈ E in <span class="keyword">this</span> order: <span class="comment">//O(m) times</span></span><br><span class="line">    See whether <span class="keyword">this</span> deleting <span class="keyword">this</span> edge will disconnect the graph</span>; <span class="comment">//BFS/DFS, O(m+n)</span></span><br><span class="line">endfor</span><br></pre></td></tr></table></figure>
+<p>So overall time complexity is $O(m^2)$.</p>
+<p><br></p>
+<p><strong>Reference:</strong></p>
+<p>[1]  J. Kleinberg and E. Tardos. Algorithm Design. Pearson Studium, Boston, 2006.</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/Machine-Learning/Machine Learning/04_01_NeuralNetwork/" style="float: left;">
+        ← (Week4) 01 Neural Network
+    </a>
+    
+    
+    <a class="pull-right" href="/Algorithm/Algorithm/4.2 Greedy - Dijkstra/">
+        4.2 Greedy - Shortest Path (Dijkstra) →
+    </a>
+    
+</nav>
+
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Algorithm/Algorithm/4.3 Greedy - MST/" data-title="4.3 Greedy - MST (Kruskal, Prim and Reverse Delete)" data-url="http://louie.link/Algorithm/Algorithm/4.3 Greedy - MST/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2015<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 黄刘胤,Louie. All Rights Reserved.
+                </p>
+                <p>Theme By Kieran</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+<!-- post to baidu -->
+<!-- not using this
+    <script type="text/javascript">
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+--><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>(Week1) 04 Linear Algebra Review | Louie&#39;s Blog</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Louie's Blog">
+    <meta name="author" content="黄刘胤,Louie">
+    <meta name="description" content="黄刘胤的博客 Louie's blog" />
+    <meta name="keywords" content="黄刘胤,Louie,LouieHuang" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/logo.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Louie&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/xcode.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <!--     
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    -->
+    <!-- 改为云存储 -->
+    <!-- <link href='//gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/family%3DOpen%2BSans400%2C600.css' rel='stylesheet' type='text/css'> -->
+    <!-- 或者本地也可以 -->
+    <link href='/css/family=Open+Sans400,600.css' rel='stylesheet' type='text/css'>
+
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  <!-- Baidu -->
+  <!--
+  
+  -->
+
+  <!-- google统计 -->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-76175499-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+
+<body id="index" class="lightnav animsition">
+
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- header -->
+        <div style="text-align:center;margin-top:15px;margin-bottom:-30px;">
+            <img style="height:120px;weight:120px" src="/img/header.jpg" alt="Close"/>
+            <h4 style="margin-top:10px;color:#fff;">黄刘胤 | Louie</h4>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(10)</small></a></li>
+				    
+				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(20)</small></a></li>
+				    
+				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
+				    
+				    <li><a href="/categories/Miscellaneous/" class="animsition-link">Miscellaneous<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Project-Images/" class="animsition-link">Project Images<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(8)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="/Resume.pdf" class="animsition-link">Resume</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About Me</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.ico" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Louie's Blog</a></li>
+                            <li class="nolink"><span>Always </span>Thinking</li>
+                            
+                            <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-02-04T08:00:00.000Z" itemprop="datePublished">
+          2018-02-04
+      </time>
+    
+</span>
+                <h1>(Week1) 04 Linear Algebra Review</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="Linear-Algebra-Review"><a href="#Linear-Algebra-Review" class="headerlink" title="Linear Algebra Review"></a>Linear Algebra Review</h2><p>Materials are from <a href="https://www.coursera.org/learn/machine-learning/home/week/1" target="_blank" rel="external">Coursera Machine Learning by Andrew Ng</a>. </p>
+<h3 id="1-Matrices-and-Vectors"><a href="#1-Matrices-and-Vectors" class="headerlink" title="1. Matrices and Vectors"></a>1. Matrices and Vectors</h3><p>Matrices are 2-dimensional arrays:</p>
+<script type="math/tex; mode=display">\begin{bmatrix} a & b & c \newline d & e & f \newline g & h & i \newline j & k & l\end{bmatrix}</script><p>The above matrix has four rows and three columns, so it is a <code>4 x 3</code> matrix.</p>
+<p><br></p>
+<p>A vector is a matrix with one column and many rows:</p>
+<script type="math/tex; mode=display">\begin{bmatrix} w \newline x \newline y \newline z \end{bmatrix}</script><p>So vectors are a subset of matrices. The above vector is a <code>4 x 1</code> matrix.</p>
+<p><br></p>
+<p><strong>Notation and terms</strong>:</p>
+<ul>
+<li>$A_{ij}$ refers to the element in the ith row and jth column of matrix A.</li>
+<li>A vector with <code>n</code> rows is referred to as an <code>n-dimensional</code> vector.</li>
+<li>$v_i$ refers to the element in the ith row of the vector.</li>
+<li>In general, all our vectors and matrices will be <strong>1-indexed</strong> (in Matlab). Note that for some programming languages, the arrays are 0-indexed.</li>
+<li>Matrices are usually denoted by uppercase names while vectors are lowercase.</li>
+<li>“Scalar” means that an object is a single value, not a vector or matrix.</li>
+<li>$\R$ refers to the set of scalar real numbers.</li>
+<li>$\R^{n}$ refers to the set of n-dimensional vectors of real numbers.</li>
+</ul>
+<p><br></p>
+<p>Run the cell below to get familiar with the commands in Matlab.</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% The ; denotes we are going back to a new row.</span></span><br><span class="line">A = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>; <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>; <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>; <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">% Initialize a vector </span></span><br><span class="line">v = [<span class="number">1</span>;<span class="number">2</span>;<span class="number">3</span>] </span><br><span class="line"></span><br><span class="line"><span class="comment">% Get the dimension of the matrix A where m = rows and n = columns</span></span><br><span class="line">[m,n] = <span class="built_in">size</span>(A)</span><br><span class="line"></span><br><span class="line"><span class="comment">% You could also store it this way</span></span><br><span class="line">dim_A = <span class="built_in">size</span>(A)</span><br><span class="line"></span><br><span class="line"><span class="comment">% Get the dimension of the vector v </span></span><br><span class="line">dim_v = <span class="built_in">size</span>(v)</span><br><span class="line"></span><br><span class="line"><span class="comment">% Now let's index into the 2nd row 3rd column of matrix A</span></span><br><span class="line">A_23 = A(<span class="number">2</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>Results are:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">A =</span><br><span class="line"></span><br><span class="line">    <span class="number">1</span>    <span class="number">2</span>    <span class="number">3</span></span><br><span class="line">    <span class="number">4</span>    <span class="number">5</span>    <span class="number">6</span></span><br><span class="line">    <span class="number">7</span>    <span class="number">8</span>    <span class="number">9</span></span><br><span class="line">   <span class="number">10</span>   <span class="number">11</span>   <span class="number">12</span></span><br><span class="line"></span><br><span class="line">v =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span></span><br><span class="line">   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span></span><br><span class="line"></span><br><span class="line">m =  <span class="number">4</span></span><br><span class="line">n =  <span class="number">3</span></span><br><span class="line">dim_A =</span><br><span class="line"></span><br><span class="line">   <span class="number">4</span>   <span class="number">3</span></span><br><span class="line"></span><br><span class="line">dim_v =</span><br><span class="line"></span><br><span class="line">   <span class="number">3</span>   <span class="number">1</span></span><br><span class="line"></span><br><span class="line">A_23 =  <span class="number">6</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="2-Addition-and-Scalar-Multiplication"><a href="#2-Addition-and-Scalar-Multiplication" class="headerlink" title="2. Addition and Scalar Multiplication"></a>2. Addition and Scalar Multiplication</h3><p>Addition and subtraction are <strong>element-wise</strong>, so you simply add or subtract each corresponding element:</p>
+<script type="math/tex; mode=display">\begin{bmatrix} a & b \newline c & d \newline \end{bmatrix} +\begin{bmatrix} w & x \newline y & z \newline \end{bmatrix} =\begin{bmatrix} a+w & b+x \newline c+y & d+z \newline \end{bmatrix}</script><p>Subtracting Matrices:</p>
+<script type="math/tex; mode=display">\begin{bmatrix} a & b \newline c & d \newline \end{bmatrix} - \begin{bmatrix} w & x \newline y & z \newline \end{bmatrix} =\begin{bmatrix} a-w & b-x \newline c-y & d-z \newline \end{bmatrix}</script><p>To add or subtract two matrices, their dimensions must be <strong>the same</strong>.</p>
+<p><br></p>
+<p>In scalar multiplication, we simply multiply every element by the scalar value:</p>
+<script type="math/tex; mode=display">\begin{bmatrix} a & b \newline c & d \newline \end{bmatrix} * x =\begin{bmatrix} a*x & b*x \newline c*x & d*x \newline \end{bmatrix}</script><p>In scalar division, we simply divide every element by the scalar value:</p>
+<script type="math/tex; mode=display">\begin{bmatrix} a & b \newline c & d \newline \end{bmatrix} / x =\begin{bmatrix} a /x & b/x \newline c /x & d /x \newline \end{bmatrix}</script><p><br></p>
+<p>Experiment below with the Matlab commands for matrix addition and scalar multiplication.</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% Initialize matrix A and B </span></span><br><span class="line">A = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>; <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>]</span><br><span class="line">B = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>; <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">% Initialize constant s </span></span><br><span class="line">s = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% See how element-wise addition works</span></span><br><span class="line">add_AB = A + B </span><br><span class="line"></span><br><span class="line"><span class="comment">% See how element-wise subtraction works</span></span><br><span class="line">sub_AB = A - B</span><br><span class="line"></span><br><span class="line"><span class="comment">% See how scalar multiplication works</span></span><br><span class="line">mult_As = A * s</span><br><span class="line"></span><br><span class="line"><span class="comment">% Divide A by s</span></span><br><span class="line">div_As = A / s</span><br><span class="line"></span><br><span class="line"><span class="comment">% What happens if we have a Matrix + scalar?</span></span><br><span class="line">add_As = A + s</span><br></pre></td></tr></table></figure>
+<p>Results are:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">A =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span>   <span class="number">4</span></span><br><span class="line">   <span class="number">5</span>   <span class="number">3</span>   <span class="number">2</span></span><br><span class="line"></span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line">   <span class="number">1</span>   <span class="number">1</span>   <span class="number">1</span></span><br><span class="line"></span><br><span class="line">s =  <span class="number">2</span></span><br><span class="line">add_AB =</span><br><span class="line"></span><br><span class="line">   <span class="number">2</span>   <span class="number">5</span>   <span class="number">8</span></span><br><span class="line">   <span class="number">6</span>   <span class="number">4</span>   <span class="number">3</span></span><br><span class="line"></span><br><span class="line">sub_AB =</span><br><span class="line"></span><br><span class="line">   <span class="number">0</span>  <span class="number">-1</span>   <span class="number">0</span></span><br><span class="line">   <span class="number">4</span>   <span class="number">2</span>   <span class="number">1</span></span><br><span class="line"></span><br><span class="line">mult_As =</span><br><span class="line"></span><br><span class="line">    <span class="number">2</span>    <span class="number">4</span>    <span class="number">8</span></span><br><span class="line">   <span class="number">10</span>    <span class="number">6</span>    <span class="number">4</span></span><br><span class="line"></span><br><span class="line">div_As =</span><br><span class="line"></span><br><span class="line">   <span class="number">0.50000</span>   <span class="number">1.00000</span>   <span class="number">2.00000</span></span><br><span class="line">   <span class="number">2.50000</span>   <span class="number">1.50000</span>   <span class="number">1.00000</span></span><br><span class="line"></span><br><span class="line">add_As =</span><br><span class="line"></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span>   <span class="number">6</span></span><br><span class="line">   <span class="number">7</span>   <span class="number">5</span>   <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="3-Matrix-Vector-Multiplication"><a href="#3-Matrix-Vector-Multiplication" class="headerlink" title="3. Matrix-Vector Multiplication"></a>3. Matrix-Vector Multiplication</h3><p>We map the column of the vector onto each row of the matrix, multiplying each element and summing the result.</p>
+<script type="math/tex; mode=display">\begin{bmatrix} a & b \newline c & d \newline e & f \end{bmatrix} *\begin{bmatrix} x \newline y \newline \end{bmatrix} =\begin{bmatrix} a*x + b*y \newline c*x + d*y \newline e*x + f*y\end{bmatrix}</script><p>The result is a <strong>vector</strong>. The number of <strong>columns</strong> of the matrix must equal the number of <strong>rows</strong> of the vector.</p>
+<p>An <strong>m x n matrix</strong> multiplied by an <strong>n x 1 vector</strong> results in an <strong>m x 1 vector</strong>.</p>
+<p>Below is an example of a matrix-vector multiplication. Make sure you understand how the multiplication works. Feel free to try different matrix-vector multiplications.</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% Initialize matrix A </span></span><br><span class="line">A = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>; <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>;<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>] </span><br><span class="line"></span><br><span class="line"><span class="comment">% Initialize vector v </span></span><br><span class="line">v = [<span class="number">1</span>; <span class="number">1</span>; <span class="number">1</span>] </span><br><span class="line"></span><br><span class="line"><span class="comment">% Multiply A * v</span></span><br><span class="line">Av = A * v</span><br></pre></td></tr></table></figure>
+<p>Result:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">A =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line">   <span class="number">4</span>   <span class="number">5</span>   <span class="number">6</span></span><br><span class="line">   <span class="number">7</span>   <span class="number">8</span>   <span class="number">9</span></span><br><span class="line"></span><br><span class="line">v =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span></span><br><span class="line">   <span class="number">1</span></span><br><span class="line">   <span class="number">1</span></span><br><span class="line"></span><br><span class="line">Av =</span><br><span class="line"></span><br><span class="line">    <span class="number">6</span></span><br><span class="line">   <span class="number">15</span></span><br><span class="line">   <span class="number">24</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="4-Matrix-Matrix-Multiplication"><a href="#4-Matrix-Matrix-Multiplication" class="headerlink" title="4. Matrix-Matrix Multiplication"></a>4. Matrix-Matrix Multiplication</h3><p>We multiply two matrices by breaking it into several vector multiplications and concatenating the result.</p>
+<script type="math/tex; mode=display">\begin{bmatrix} a & b \newline c & d \newline e & f \end{bmatrix} *\begin{bmatrix} w & x \newline y & z \newline \end{bmatrix} =\begin{bmatrix} a*w + b*y & a*x + b*z \newline c*w + d*y & c*x + d*z \newline e*w + f*y & e*x + f*z\end{bmatrix}</script><p>An <strong>m x n matrix</strong> multiplied by an <strong>n x o matrix</strong> results in an <strong>m x o</strong> matrix. In the above example, a 3 x 2 matrix times a 2 x 2 matrix resulted in a 3 x 2 matrix.</p>
+<p>To multiply two matrices, the number of <strong>columns</strong> of the first matrix must equal the number of <strong>rows</strong> of the second matrix.</p>
+<p>For example:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% Initialize a 3 by 2 matrix </span></span><br><span class="line">A = [<span class="number">1</span>, <span class="number">2</span>; <span class="number">3</span>, <span class="number">4</span>;<span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">% Initialize a 2 by 1 matrix </span></span><br><span class="line">B = [<span class="number">1</span>; <span class="number">3</span>] </span><br><span class="line"></span><br><span class="line"><span class="comment">% We expect a resulting matrix of (3 by 2)*(2 by 1) = (3 by 1) </span></span><br><span class="line">mult_AB = A*B</span><br></pre></td></tr></table></figure>
+<p>Result:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">A =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line">   <span class="number">5</span>   <span class="number">6</span></span><br><span class="line"></span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span></span><br><span class="line">   <span class="number">3</span></span><br><span class="line"></span><br><span class="line">mult_AB =</span><br><span class="line"></span><br><span class="line">    <span class="number">7</span></span><br><span class="line">   <span class="number">15</span></span><br><span class="line">   <span class="number">23</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="5-Matrix-Multiplication-Properties"><a href="#5-Matrix-Multiplication-Properties" class="headerlink" title="5. Matrix Multiplication Properties"></a>5. Matrix Multiplication Properties</h3><ul>
+<li>Matrices are not commutative: <script type="math/tex">A∗B \neq B∗A</script></li>
+<li>Matrices are associative: <script type="math/tex">(A∗B)∗C =  A∗(B∗C)</script></li>
+</ul>
+<p>The <strong>identity matrix</strong>, when multiplied by any matrix of the same dimensions, results in the original matrix. It’s just like multiplying numbers by 1. The identity matrix simply has 1’s on the diagonal (upper left to lower right diagonal) and 0’s elsewhere.</p>
+<script type="math/tex; mode=display">\begin{bmatrix} 1 & 0 & 0 \newline 0 & 1 & 0 \newline 0 & 0 & 1 \newline \end{bmatrix}</script><p>When multiplying the identity matrix after some matrix $(A∗I)$, the square identity matrix’s dimension should match the other matrix’s <strong>columns</strong>. When multiplying the identity matrix before some other matrix $(I∗A)$, the square identity matrix’s dimension should match the other matrix’s <strong>rows</strong>.</p>
+<p><br></p>
+<h3 id="6-Inverse-and-Transpose"><a href="#6-Inverse-and-Transpose" class="headerlink" title="6. Inverse and Transpose"></a>6. Inverse and Transpose</h3><p>The <strong>inverse</strong> of a matrix $A$ is denoted $A^{−1}$. <strong>Multiplying by the inverse results in the identity matrix.</strong></p>
+<p><strong>A non square matrix does not have an inverse matrix.</strong> We can compute inverses of matrices in octave with the $pinv(A)$ function and in Matlab with the $inv(A)$ function (also has $pinv(A)$). Matrices that don’t have an inverse are <em>singular</em> or <em>degenerate</em>.</p>
+<p>The <strong>transposition</strong> of a matrix is like rotating the matrix 90<strong>°</strong> in clockwise direction and then reversing it. We can compute transposition of matrices in matlab with the transpose(A) function or $A’$:</p>
+<script type="math/tex; mode=display">A = \begin{bmatrix} a & b \newline c & d \newline e & f \end{bmatrix}</script><script type="math/tex; mode=display">A^T = \begin{bmatrix} a & c & e \newline b & d & f \newline \end{bmatrix}</script><p>In other words:</p>
+<script type="math/tex; mode=display">A_{ij} = A^T_{ji}</script><p><br></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% Initialize matrix A </span></span><br><span class="line">A = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>;<span class="number">0</span>,<span class="number">5</span>,<span class="number">6</span>;<span class="number">7</span>,<span class="number">0</span>,<span class="number">9</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">% Transpose A </span></span><br><span class="line">A_trans = A' </span><br><span class="line"></span><br><span class="line"><span class="comment">% Take the inverse of A </span></span><br><span class="line">A_inv = inv(A)</span><br><span class="line"></span><br><span class="line"><span class="comment">% What is A^(-1)*A? </span></span><br><span class="line">A_invA = inv(A)*A</span><br></pre></td></tr></table></figure>
+<p>Result:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">A =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span>   <span class="number">0</span></span><br><span class="line">   <span class="number">0</span>   <span class="number">5</span>   <span class="number">6</span></span><br><span class="line">   <span class="number">7</span>   <span class="number">0</span>   <span class="number">9</span></span><br><span class="line"></span><br><span class="line">A_trans =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">0</span>   <span class="number">7</span></span><br><span class="line">   <span class="number">2</span>   <span class="number">5</span>   <span class="number">0</span></span><br><span class="line">   <span class="number">0</span>   <span class="number">6</span>   <span class="number">9</span></span><br><span class="line"></span><br><span class="line">A_inv =</span><br><span class="line"></span><br><span class="line">   <span class="number">0.348837</span>  <span class="number">-0.139535</span>   <span class="number">0.093023</span></span><br><span class="line">   <span class="number">0.325581</span>   <span class="number">0.069767</span>  <span class="number">-0.046512</span></span><br><span class="line">  <span class="number">-0.271318</span>   <span class="number">0.108527</span>   <span class="number">0.038760</span></span><br><span class="line"></span><br><span class="line">A_invA =</span><br><span class="line"></span><br><span class="line">   <span class="number">1.00000</span>  <span class="number">-0.00000</span>   <span class="number">0.00000</span></span><br><span class="line">   <span class="number">0.00000</span>   <span class="number">1.00000</span>  <span class="number">-0.00000</span></span><br><span class="line">  <span class="number">-0.00000</span>   <span class="number">0.00000</span>   <span class="number">1.00000</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/Machine-Learning/Machine Learning/02_01_MultivariateLinearRegression/" style="float: left;">
+        ← (Week2) 01 Multivariate Linear Regression
+    </a>
+    
+    
+    <a class="pull-right" href="/Algorithm/Algorithm/4.1 Greedy - Interval Scheduling/">
+        4.1 Greedy - Interval Scheduling and Lateness →
+    </a>
+    
+</nav>
+
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Machine-Learning/Machine Learning/01_04_LinearAlgebraReview/" data-title="(Week1) 04 Linear Algebra Review" data-url="http://louie.link/Machine-Learning/Machine Learning/01_04_LinearAlgebraReview/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2015<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 黄刘胤,Louie. All Rights Reserved.
+                </p>
+                <p>Theme By Kieran</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+<!-- post to baidu -->
+<!-- not using this
+    <script type="text/javascript">
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+--><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

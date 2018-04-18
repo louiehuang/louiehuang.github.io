@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>5.3 DC - Closest Pair of Points | Louie&#39;s Blog</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Louie's Blog">
+    <meta name="author" content="黄刘胤,Louie">
+    <meta name="description" content="黄刘胤的博客 Louie's blog" />
+    <meta name="keywords" content="黄刘胤,Louie,LouieHuang" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/logo.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Louie&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/xcode.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <!--     
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    -->
+    <!-- 改为云存储 -->
+    <!-- <link href='//gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/family%3DOpen%2BSans400%2C600.css' rel='stylesheet' type='text/css'> -->
+    <!-- 或者本地也可以 -->
+    <link href='/css/family=Open+Sans400,600.css' rel='stylesheet' type='text/css'>
+
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  <!-- Baidu -->
+  <!--
+  
+  -->
+
+  <!-- google统计 -->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-76175499-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+
+<body id="index" class="lightnav animsition">
+
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- header -->
+        <div style="text-align:center;margin-top:15px;margin-bottom:-30px;">
+            <img style="height:120px;weight:120px" src="/img/header.jpg" alt="Close"/>
+            <h4 style="margin-top:10px;color:#fff;">黄刘胤 | Louie</h4>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(10)</small></a></li>
+				    
+				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(20)</small></a></li>
+				    
+				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
+				    
+				    <li><a href="/categories/Miscellaneous/" class="animsition-link">Miscellaneous<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Project-Images/" class="animsition-link">Project Images<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(8)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="/Resume.pdf" class="animsition-link">Resume</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About Me</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.ico" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Louie's Blog</a></li>
+                            <li class="nolink"><span>Always </span>Thinking</li>
+                            
+                            <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-02-15T08:00:00.000Z" itemprop="datePublished">
+          2018-02-15
+      </time>
+    
+</span>
+                <h1>5.3 DC - Closest Pair of Points</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="Finding-the-Closest-Pair-of-Points"><a href="#Finding-the-Closest-Pair-of-Points" class="headerlink" title="Finding the Closest Pair of Points"></a>Finding the Closest Pair of Points</h2><h3 id="1-Problem-Statement"><a href="#1-Problem-Statement" class="headerlink" title="1 Problem Statement"></a>1 Problem Statement</h3><p>Given n points in the plane, find the pair that is closest together.</p>
+<p><br></p>
+<h3 id="2-Analysis"><a href="#2-Analysis" class="headerlink" title="2 Analysis"></a>2 Analysis</h3><p>It is clear that there is an $O(n^2)$ solution—compute the distance between each pair of points and take the minimum. But we can achieve $O(nlgn)$ by divide and conquer.</p>
+<p>Denote the set of points by $P = {p_1, . . . , p_n}$, where $p_i$ has coordinates $(x_i, y_i)$; and for two points $p_i, p_j \in P$, we use $d(p_i, p_j)$ to denote the standard Euclidean distance between them. Our goal is to find a pair of points $p_i$, $p_j$ that minimizes $d(p_i, p_j)$.</p>
+<h4 id="2-1-High-Level-Thinking"><a href="#2-1-High-Level-Thinking" class="headerlink" title="2.1 High Level Thinking"></a>2.1 High Level Thinking</h4><p>We can divide the plane $P$ into two halves. And we find the closest pair among the points in the “left half” of $P$ and the closest pair among the points in the “right half” of P; and then we use this information to get the overall solution in linear time. This will give us an $O(n lg n)$ running time.</p>
+<p>We can divide the plane $P$ into two halves, and call the “left half” $Q$ and the “right half” $R$. Then the closest pair could only be in the following 3 cases:</p>
+<ul>
+<li>Both the 2 points of the closest pair are in $Q$;</li>
+<li>Both the 2 points of the closest pair are in $R$;</li>
+<li>One point is in $Q$ and the other is in $R$.</li>
+</ul>
+<p><img src="http://algorithms-1251949857.file.myqcloud.com/csci570/Images/dc/closest_pair1.png" alt=""></p>
+<p>The first two cases are easy to be processed, we can simply call the recursive function to solve them. But the <strong>combining phase</strong> for the third case is a little tricky: there could be $O(n^2)$ distances since we have n points, but we want to find the smallest one in $O(n)$ time to that we can have $O(nlgn)$ overall running time.</p>
+<h4 id="2-2-Details"><a href="#2-2-Details" class="headerlink" title="2.2 Details"></a>2.2 Details</h4><p><strong>Setting Up the Recursion</strong></p>
+<p>First, before recursion begins, we <strong>sort</strong> all the points in $P$ by x- coordinate and again by y-coordinate, producing lists $P_x$ and $P_y$. </p>
+<p>We define $Q$ to be the set of points in the first $⌈n/2⌉$ positions of the list $P_x$ (the “left half”) and $R$ to be the set of points in the final $⌊n/2⌋$ positions of the list $P_x$ (the “right half”).</p>
+<p>By a single pass through each of $P_x$ and $P_y$, in $O(n)$ time, we can create the following four lists: $Q_x$, consisting of the points in $Q$ sorted by increasing x- coordinate; $Q_y$, consisting of the points in $Q$ sorted by increasing y-coordinate; and analogous lists $R_x$ and $R_y$.</p>
+<p>We now recursively determine a closest pair of points in $Q$ (with access to the lists $Q_x$ and $Q_y$). Suppose that $q_0^∗$ and $q_1^∗$ are (correctly) returned as a closest pair of points in $Q$. Similarly, we determine a closest pair of points in $R$, obtaining $r_0^∗$ and $r_1^∗$.</p>
+<p><strong>Combining the Solutions</strong></p>
+<p>Let $δ$ be the minimum of $d(q_0^∗,q_1^∗$) and $d(r_0^∗,r_1^∗$).  Now our question is: Are there points $q ∈ Q$ and $r ∈ R$ for which $d(q, r) &lt; δ$? (The third case)</p>
+<p>Let $x^∗$ be the maximum x-coordinate of a point in set $Q$, and let $L$ denote the vertical line described by the equation $x = x^∗$. Apparently, if there exists $q∈Q$ and $r∈R$ for which $d(q,r)&lt;δ$, then each of $q$ and $r$ lies within a distance $δ$ of $L$. (prove by contradiction)</p>
+<p><strong>Set S</strong>. So if we want to find a close $q$ and $r$, we can restrict our search to the narrow band consisting only of points in $P$ within $δ$ of $L$. Let $S ⊆ P$ denote this set, and let $S_y$ denote the list consisting of the points in $S$ sorted by increasing y-coordinate. (By a single pass through the list $P_y$, we can construct $S_y$ in $O(n)$ time.)</p>
+<p>=&gt; There exist $q∈Q$ and $r∈R$ for which $d(q,r)&lt;δ$ if and only if there exist $s,s′∈S$ for which $d(s,s′)&lt;δ$.</p>
+<p>We partition <strong>S</strong> into boxes: squares with horizontal and vertical sides of length $\frac{δ}{2}$ as following.</p>
+<p><img src="http://algorithms-1251949857.file.myqcloud.com/csci570/Images/dc/closest_pair2.png" alt=""></p>
+<p><strong>Then each grid can contain at most 1 point of S.</strong> Prove by contradiction. Suppose there is a grid that has 2 points in it. Since we know the maximum distance in a grid is $\frac{\sqrt{2}}{2}\delta$ (the diagonal), which is smaller than $\delta$. But $\delta$ is the minimum distance in $Q$ and $R$, and a grid is either in $Q$ or $R$ since this is how we divide it, so this means that we find a pair in $Q$ or $R$  which has distance smaller than the minimum distance, which is a contradiction.</p>
+<p>Since we have sorted list $S_y$, for points is $S$, we can check them bottom up, in this way, for the point that we’re currently checking, we do not have to check the points below it but just the ones that are above it or in the same row. Consider the grid with a red cycle in it in the above picture, since we are only interested in the distance which is smaller than $\delta$, we only need check 11 grids. This means, the time we need for each point is <strong>constant time</strong> $O(1)$. Thus for n points, we need $O(n)$. This is for <strong>combining</strong>.</p>
+<h4 id="2-3-Time-Complexity-Analysis"><a href="#2-3-Time-Complexity-Analysis" class="headerlink" title="2.3 Time Complexity Analysis"></a>2.3 Time Complexity Analysis</h4><ul>
+<li>Preprocess: Sort, takes $O(nlgn)$.</li>
+<li>Divide: Takes $O(1)$.</li>
+<li>Conquer: If the original problem takes $T(n)$ time, the two subproblems take $2 T(\frac{n}{2})$ time.</li>
+<li>Combine: Takes $O(n)$ on array size $n$.</li>
+</ul>
+<script type="math/tex; mode=display">T(n) =\begin{cases}    \Theta(1) & \text{if} \ n=1 \\ 2T(\frac{n}{2}) + O(n) + O(1) & \text{if} \ n \ge 2 \end{cases}</script><p>Using master theorem, time complexity is $O(nlgn)$. </p>
+<p><br></p>
+<h3 id="3-Pseudo-code"><a href="#3-Pseudo-code" class="headerlink" title="3. Pseudo code"></a>3. Pseudo code</h3><p>$ClosestPair(P)$:<br>    Construct $P_x$ and $P_y$ ($O(n log n)$ time)<br>    ($p_0^∗$, $p_1^∗$) = ClosestPairRec($P_x,P_y$)</p>
+<p>$ClosestPairRec(P_x, P_y)$:<br>    If $|P| ≤ 3$ then:<br>        find closest pair by measuring all pairwise distances;<br>    Endif</p>
+<p>​    Construct $Q_x, Q_y, R_x, R_y$ ($O(n)$ time)<br>    $(q_0^∗,q_1^∗$) = ClosestPairRec($Q_x, Q_y$)<br>    $(r_0^∗,r_1^∗$) = ClosestPairRec($R_x, R_y$)</p>
+<p>​    $δ = min{d(q_0^∗,q_1^∗), d(r_0^∗,r_1^∗)}$<br>    $x^∗$ = maximum x-coordinate of a point in set $Q$<br>    $L = {(x,y) : x = x^∗}$<br>    $S$ = points in $P$ within distance $δ$ of $L$.</p>
+<p>​    Construct $S_y$ (O(n) time)<br>    For each point $s \in S_y$, compute distance from $s$ to each of next 11 points in $S_y$<br>        Let $s, s′$ be pair achieving minimum of these distances ($O(n)$ time)</p>
+<p>​    If $d(s,s′) &lt; δ$ then<br>        Return $(s,s′)$<br>    Else if $d(q_0^∗,q_1^∗) &lt; d(r_0^∗,r_1^∗)$ then<br>        Return $(q_0^∗,q_1^∗)$<br>    Else<br>        Return $(r_0^∗,r_1^∗)$<br>    Endif</p>
+<p><br></p>
+<p><strong>Reference:</strong></p>
+<p>[1]  J. Kleinberg and E. Tardos. Algorithm Design. Pearson Studium, Boston, 2006.</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/Dynamic-Programming/Dynamic Programming/01_DynamicProgrammingBasics/" style="float: left;">
+        ← Dynamic Programming Basics
+    </a>
+    
+    
+    <a class="pull-right" href="/Machine-Learning/Machine Learning/06_02_BiasVariance/">
+        (Week6) 02 Bias and Variance →
+    </a>
+    
+</nav>
+
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Algorithm/Algorithm/5.3 DC - Closest Pair/" data-title="5.3 DC - Closest Pair of Points" data-url="http://louie.link/Algorithm/Algorithm/5.3 DC - Closest Pair/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2015<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 黄刘胤,Louie. All Rights Reserved.
+                </p>
+                <p>Theme By Kieran</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+<!-- post to baidu -->
+<!-- not using this
+    <script type="text/javascript">
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+--><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

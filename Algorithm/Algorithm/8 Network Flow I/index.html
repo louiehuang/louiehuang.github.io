@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>8 Network Flow I | Louie&#39;s Blog</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Louie's Blog">
+    <meta name="author" content="黄刘胤,Louie">
+    <meta name="description" content="黄刘胤的博客 Louie's blog" />
+    <meta name="keywords" content="黄刘胤,Louie,LouieHuang" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/logo.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Louie&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/xcode.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <!--     
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    -->
+    <!-- 改为云存储 -->
+    <!-- <link href='//gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/family%3DOpen%2BSans400%2C600.css' rel='stylesheet' type='text/css'> -->
+    <!-- 或者本地也可以 -->
+    <link href='/css/family=Open+Sans400,600.css' rel='stylesheet' type='text/css'>
+
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  <!-- Baidu -->
+  <!--
+  
+  -->
+
+  <!-- google统计 -->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-76175499-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+
+<body id="index" class="lightnav animsition">
+
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- header -->
+        <div style="text-align:center;margin-top:15px;margin-bottom:-30px;">
+            <img style="height:120px;weight:120px" src="/img/header.jpg" alt="Close"/>
+            <h4 style="margin-top:10px;color:#fff;">黄刘胤 | Louie</h4>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(10)</small></a></li>
+				    
+				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(20)</small></a></li>
+				    
+				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
+				    
+				    <li><a href="/categories/Miscellaneous/" class="animsition-link">Miscellaneous<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Project-Images/" class="animsition-link">Project Images<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(8)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="/Resume.pdf" class="animsition-link">Resume</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About Me</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.ico" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Louie's Blog</a></li>
+                            <li class="nolink"><span>Always </span>Thinking</li>
+                            
+                            <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-03-09T08:00:00.000Z" itemprop="datePublished">
+          2018-03-09
+      </time>
+    
+</span>
+                <h1>8 Network Flow I</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>Learning note for <em>Algorithm Design</em> (J. Kleinberg and E. Tardos).</p>
+<h2 id="Network-Flow-I"><a href="#Network-Flow-I" class="headerlink" title="Network Flow I"></a>Network Flow I</h2><h3 id="1-Flow-Network"><a href="#1-Flow-Network" class="headerlink" title="1. Flow Network"></a>1. Flow Network</h3><p>We’ll be considering graphs of this form, and we refer to the traffic as flow — an abstract entity that is generated at source nodes, transmitted across edges, and absorbed at sink nodes. Formally, we’ll say that a <strong>flow network</strong> is a <strong>directed graph G = (V , E)</strong> with the following features:</p>
+<blockquote>
+<ol>
+<li>Associated with each edge $e$ is a capacity, which is a nonnegative number that we denote $c_e$.</li>
+<li>There is a single source node $s \in V$.</li>
+<li>There is a single sink node $t \in V$.</li>
+</ol>
+</blockquote>
+<p>We will make two assumptions about the flow networks we deal with: </p>
+<ul>
+<li><strong>First, no edge enters the source $s$ and no edge leaves the sink $t$;</strong> </li>
+<li><strong>Second, there is at least one edge incident to each node;</strong> </li>
+<li>(and third, that all capacities are integers). This assumption is <strong>for ford-fulkerson</strong> algorithm that we’re going to discuss. There exist other algorithms that do not need  all capacities to be integers.</li>
+</ul>
+<p>These assumptions make things cleaner to think about, and while they eliminate a few pathologies, they preserve essentially all the issues we want to think about.</p>
+<p><br></p>
+<h3 id="2-Flow"><a href="#2-Flow" class="headerlink" title="2. Flow"></a>2. Flow</h3><p><strong>Flow</strong>: An $s-t$ flow is a function $f$ that maps each edge $e$ to a nonnegative real number, $f : E → R^+$; the value $f(e)$ intuitively represents the amount of flow carried by edge $e$. A flow f must satisfy the following two properties:</p>
+<blockquote>
+<ol>
+<li><strong>(Capacity conditions)</strong> For each $e \in E$, we have $0 \le f(e) \le c_e$.</li>
+<li><strong>(Conservation conditions)</strong> For each node $v$ other than $s$ and $t$, we have $\sum\limits<em>{e \;into \; v}{f(e)} = \sum\limits</em>{e \;out \; of \; v}{f(e)}$.</li>
+</ol>
+</blockquote>
+<p>Here $\sum\limits<em>{e \;into \; v}{f(e)}$ sums the flow value $f(e)$ over all edges entering node $v$, while $\sum\limits</em>{e \;out \; of \; v}{f(e)}$ is the sum of flow values over all edges leaving node $v$.</p>
+<p><strong>The value of a flow $f$</strong>, denoted $ ν(f)$, is defined to be <strong>the amount of flow generated at the source</strong>:</p>
+<script type="math/tex; mode=display">v(f) = \sum\limits_{e \; out \; of \; s}{f(e)}</script><p><br></p>
+<h3 id="3-The-Maximum-Flow-Problem"><a href="#3-The-Maximum-Flow-Problem" class="headerlink" title="3. The Maximum-Flow Problem"></a>3. The Maximum-Flow Problem</h3><p>A general way of pushing flow: We can <strong>push forward on edges with leftover capacity</strong>, and we can <strong>push backward on edges that are already carrying flow (undo)</strong>, to divert it in a different direction. We now define the <strong>residual graph</strong>, which provides a systematic way to search for forward - backward operations such as this.</p>
+<h4 id="3-1-The-Residual-Graph"><a href="#3-1-The-Residual-Graph" class="headerlink" title="3.1 The Residual Graph"></a>3.1 The Residual Graph</h4><p>Given a flow network $G$, and a flow $f$ on $G$, we define the <strong>residual graph</strong> $G_f$ of $G$ with respect to $f$ as follows:</p>
+<blockquote>
+<ol>
+<li>The node set of $G_f$ is the same as that of $G$.</li>
+<li>For each edge $e=(u,v)$ of $G$ on which $f(e)&lt;c_e$, there are $c_e − f(e)$ <strong>“leftover”</strong> units of capacity on which we could try pushing flow <strong>forward</strong>. So we include the edge $e=(u,v)$ in $G_f$,with a capacity of $c_e −f(e)$. We will call edges included this way <strong>forward edges.</strong></li>
+<li>For each edge $e=(u,v)$ of $G$ on which $f(e)&gt;0$, there are $f(e)$ units of flow that we can <strong>“undo”</strong> if we want to, by pushing flow <strong>backward</strong>. So we include the edge $e’ = (v, u)$ in $G_f$ , with a capacity of $f(e)$. Note that $e′$ has the same ends as $e$, but its <strong>direction is reversed</strong>; we will call edges included this way <strong>backward edges.</strong></li>
+</ol>
+</blockquote>
+<h4 id="3-2-Augmenting-Paths-in-a-Residual-Graph"><a href="#3-2-Augmenting-Paths-in-a-Residual-Graph" class="headerlink" title="3.2 Augmenting Paths in a Residual Graph"></a>3.2 Augmenting Paths in a Residual Graph</h4><p>Now we want to make precise the way in which we push flow from $s$ to $t$ in $G_f$ . Let $P$ be a simple $s \rightarrow t$ path in $G_f$, i.e. <strong>$P$ does not visit any node more than once</strong>. </p>
+<p>We define <strong>bottleneck(P , f )</strong> to be the minimum residual capacity of any edge on $P$, with respect to the flow $f$ . We now define the following operation <strong>augment(f, P)</strong>, which yields a new flow $f’$ in $G$.</p>
+<p>Bottleneck could contain both forward and backward edges. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">augment(f, P)</span><br><span class="line">    let b=bottleneck(P,f)</span><br><span class="line">    <span class="function"><span class="keyword">for</span> each <span class="title">edge</span> <span class="params">(u,v)</span> ∈ P</span><br><span class="line">    	<span class="keyword">if</span> e</span>=(u,v) is a forward edge then <span class="comment">//forward, same direction as the original flow, add b</span></span><br><span class="line">    		<span class="function">increase <span class="title">f</span><span class="params">(e)</span> in G by b</span><br><span class="line">    	<span class="title">else</span> <span class="params">((u, v)</span> is a backward edge, and let e </span>= (v, u)) <span class="comment">//(v,u) is the original edge, (u,v) is in opposite direction, it un-does b for the original edge, so minus b</span></span><br><span class="line">    		<span class="function">decrease <span class="title">f</span><span class="params">(e)</span> in G by b</span><br><span class="line">		endif</span><br><span class="line">	endfor</span><br><span class="line"><span class="title">return</span><span class="params">(f)</span></span></span><br></pre></td></tr></table></figure>
+<p>It was purely to be able to perform this operation that we defined the residual graph; to reflect the importance of augment, <strong>one often refers to any $s \rightarrow t$ path in the residual graph as an <font color="red">augmenting path.</font></strong></p>
+<h5 id="Statement-1-f’-is-a-flow-in-G"><a href="#Statement-1-f’-is-a-flow-in-G" class="headerlink" title="Statement 1: $f’$ is a flow in $G$"></a>Statement 1: $f’$ is a flow in $G$</h5><p>Proof. We must verify the <strong>capacity</strong> and <strong>conservation</strong> conditions.</p>
+<p><strong>Prove capacity condition</strong></p>
+<p>Since $f′$ differs from $f$ only on edges of P, we need to check the capacity conditions only on these edges. Thus, let $(u, v)$ be an edge of P. Informally, the capacity condition continues to hold because if $e = (u, v)$ is a forward edge, we specifically avoided increasing the flow on $e$ above $c_e$; and if $e = (u, v)$ is a backward edge arising from edge $e = (v, u) ∈ E$, we specifically avoided decreasing the flow on $e$ below 0. </p>
+<p>More concretely, note that $bottleneck(P, f)$ is no larger than the residual capacity of $(u, v)$. </p>
+<p>(a) If $e = (u, v)$ is a forward edge, then its residual capacity is $c_e − f (e)$; thus we have: </p>
+<script type="math/tex; mode=display">0 \le f(e) \le f′(e) = f(e) + bottleneck(P, f) \le f(e) + (ce − f(e)) = c_e</script><p>so the capacity condition holds. </p>
+<p>(b) If (u, v) is a backward edge arising from edge $e = (v, u) ∈ E$, then its residual capacity is $f(e)$, so we have:</p>
+<script type="math/tex; mode=display">c_e \ge f(e) \ge f′(e) = f(e) − bottleneck(P, f) \ge f(e) − f(e) = 0</script><p>and again the capacity condition holds.</p>
+<p><strong>Prove conservation condition</strong></p>
+<p>We need to check the conservation condition at each internal node that lies on the path P. Let $v$ be such a node; we can verify that the change in the amount of flow entering $v$ is the same as the change in the amount of flow exiting $v$; since $f$ satisfied the conservation condition at $v$, so must $f′$. </p>
+<p>Technically, there are four cases to check, depending on whether the edge of P that enters $v$ is a forward or backward edge, and whether the edge of P that exits $v$ is a forward or backward edge. However, each of these cases is easily worked out.</p>
+<h4 id="3-3-Ford-Fulkerson-Algorithm"><a href="#3-3-Ford-Fulkerson-Algorithm" class="headerlink" title="3.3 Ford-Fulkerson Algorithm"></a>3.3 Ford-Fulkerson Algorithm</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//runs in O(Cm)</span></span><br><span class="line"><span class="comment">//1. find a s-t path</span></span><br><span class="line"><span class="comment">//2. find the bottleneck for this path</span></span><br><span class="line"><span class="comment">//3. augment: push flow through this path with value equal to bottleneck value</span></span><br><span class="line"><span class="comment">//4. repeat 1-3</span></span><br><span class="line">Max-<span class="function">Flow</span><br><span class="line">	Initially <span class="title">f</span><span class="params">(e)</span> </span>= <span class="number">0</span> <span class="keyword">for</span> all e in G</span><br><span class="line">	While there is an s-t path in the residual graph Gf <span class="comment">//while loop takes at most C iterations</span></span><br><span class="line">		Let P be a simple s-t path in Gf <span class="comment">//takes O(m+n) = O(m), since m &gt;= n/2</span></span><br><span class="line">		f′ = augment(f , P)  <span class="comment">//takes O(n) since path P has at most (n-1) edges</span></span><br><span class="line">		Update f to be f′ </span><br><span class="line">		Update the residual graph Gf to be Gf′ <span class="comment">//takes O(m), consider each edge</span></span><br><span class="line">	Endwhile</span><br><span class="line">Return f</span><br></pre></td></tr></table></figure>
+<h5 id="1-Proove-the-while-loop-terminates"><a href="#1-Proove-the-while-loop-terminates" class="headerlink" title="(1) Proove the while loop terminates"></a>(1) Proove the while loop terminates</h5><h5 id="Statement-2-f-e-and-residual-capacities-are-integers"><a href="#Statement-2-f-e-and-residual-capacities-are-integers" class="headerlink" title="Statement 2:  ${f(e)}$ and residual capacities are integers."></a>Statement 2:  ${f(e)}$ and residual capacities are integers.</h5><p>At every intermediate stage of the Ford-Fulkerson Algorithm, the flow values ${f(e)}$ and the residual capacities in $G_f$ are integers.</p>
+<h5 id="Statement-3-ν-f′-gt-ν-f"><a href="#Statement-3-ν-f′-gt-ν-f" class="headerlink" title="Statement 3: $ν(f′)&gt;ν(f)$"></a>Statement 3: $ν(f′)&gt;ν(f)$</h5><p>Let $f$ be a $flow$ in $G$, and let $P$ be a simple $s-t$ path in $G_f$. Then $ν(f′) = ν(f) + bottleneck(P, f)$; and since $bottleneck(P, f) &gt; 0$, we have $ν(f′)&gt;ν(f)$.</p>
+<p><strong>Proof.</strong> The first edge $e$ of $P$ must be an edge out of $s$ in the residual graph $G_f$; and since <strong>the path is simple</strong>, it does not visit $s$ again. <strong>Since $G$ has no edges entering $s$, the edge $e$ must be a forward edge.</strong> We increase the flow on this edge by $bottleneck(P, f)$, and we do not change the flow on any other edge incident to $s$. Therefore the value of $f′$ exceeds the value of $f$ by $bottleneck(P, f)$.</p>
+<h5 id="Statement-4-Ford-Fulkerson-terminates-in-at-most-C-iters"><a href="#Statement-4-Ford-Fulkerson-terminates-in-at-most-C-iters" class="headerlink" title="Statement 4: Ford-Fulkerson terminates in at most C iters"></a>Statement 4: Ford-Fulkerson terminates in at most C iters</h5><p>Suppose, as above, that all capacities in the flow network G are integers. Then the Ford-Fulkerson Algorithm terminates in at most C iterations of the While loop.</p>
+<script type="math/tex; mode=display">C = \sum\limits_{e \;out \; of \; s}{c(e)} \ge v(f)</script><p><strong>Proof</strong>. We noted above that no flow in G can have value greater than C, due to the capacity condition on the edges leaving s. Now, by Statement 3, the value of the flow maintained by the Ford-Fulkerson Algorithm increases in each iteration; so by Statement 2, it increases by at least 1 in each iteration. Since it starts with the value 0, and cannot go higher than C, the While loop in the Ford-Fulkerson Algorithm can run for at most C iterations.</p>
+<h4 id="3-4-Ford-Fulkerson’s-Running-Time"><a href="#3-4-Ford-Fulkerson’s-Running-Time" class="headerlink" title="3.4 Ford-Fulkerson’s Running Time"></a>3.4 Ford-Fulkerson’s Running Time</h4><p>Next we consider the running time of the Ford-Fulkerson Algorithm. </p>
+<p>Let $n$ denote the number of nodes in $G$, and $m$ denote the number of edges in $G$. We have assumed that all nodes have at least one incident edge, hence $m ≥ n/2$ (<strong>Every node is adjacent to some edge</strong>, $m = n/2$ when $G$ is a perfect mathing), and so we can use $O(m + n) = O(m)$ to simplify the bounds.</p>
+<h5 id="Statement-5-Ford-Fulkerson-runs-in-O-mC"><a href="#Statement-5-Ford-Fulkerson-runs-in-O-mC" class="headerlink" title="Statement 5: Ford-Fulkerson runs in O(mC)"></a>Statement 5: Ford-Fulkerson runs in O(mC)</h5><p>Suppose, as above, that all capacities in the flow network G are integers. Then the Ford-Fulkerson Algorithm can be implemented to run in $O(mC)$ time.</p>
+<p><strong>Proof.</strong> We know the algorithm terminates in <strong>at most C iterations</strong> of the While loop. We therefore consider the amount of work involved in one iteration when the current flow is $f$ .The residual graph $G_f$ has at most $2m$ edges, since each edge of $G$ gives rise to at most two edges in the residual graph. We will maintain $G_f$ using an adjacency list representation; we will have two linked lists for each node $v$, one containing the edges entering v, and one containing the edges leaving v. </p>
+<p>To <strong>find an $s-t$ path</strong> in $G_f$ , we can use breadth-first search or depth-first search, which run in $O(m + n)$ time; by our assumption that $m ≥ n/2$, $O(m + n)$ is the same as $O(m)$. The <strong>procedure $augment(f, P)$</strong> takes time $O(n)$, as the path P has at most $n − 1$ edges. Given the new flow $f′$, we can <strong>build the new residual graph</strong> in $O(m)$ time: For each edge $e$ of $G$, we construct the correct forward and backward edges in $G_f′$. So O(m + m + n) = O(m).</p>
+<p>Notice, $O(mC)$ is not polynomial but <strong>pseudo polynomial</strong> time because of <strong>C</strong>. (For example, there is only one edge going out of s with large capacity C, the bits required to represent C is $logC$, so C is exponential wrt the size of input, we could write $(Cm)$ as $O(2^{logC}m)$.) </p>
+<p><br></p>
+<h3 id="4-Maximum-Flows-and-Minimum-Cuts-in-a-Network"><a href="#4-Maximum-Flows-and-Minimum-Cuts-in-a-Network" class="headerlink" title="4. Maximum Flows and Minimum Cuts in a Network"></a>4. Maximum Flows and Minimum Cuts in a Network</h3><h5 id="Statement-6"><a href="#Statement-6" class="headerlink" title="Statement 6"></a>Statement 6</h5><p>Let $f$ be any $s-t$ flow, and $(A, B)$ any $s-t$ cut. Then $ν(f) = f^{out}(A) − f^{in}(A)$.</p>
+<h5 id="Statement-7"><a href="#Statement-7" class="headerlink" title="Statement 7"></a>Statement 7</h5><p>Let $f$ be any $s-t$ flow, and $(A, B)$ any $s-t$ cut. Then $ν(f) = f^{in}(B) − f^{out}(B)$.</p>
+<h5 id="Statement-8"><a href="#Statement-8" class="headerlink" title="Statement 8"></a>Statement 8</h5><p>Let $f$ be any $s-t$ flow, and $(A,B)$ any $s-t$ cut. Then $ν(f) \le c(A,B)$.</p>
+<p><strong>Proof</strong>. $v(f) = f^{out}(A) - f^{in}(A) \le f^{out}(A) \le \sum\limits_{e \; out \; of \; A}{c_e} = C(A, B)$</p>
+<p>So, <strong>the value of Max-flow is bounded by the capacity of every s-t cut.</strong></p>
+<p>Ford-Fulkerson terminates when the flow has no $s-t$ path in $G_f$.</p>
+<p><strong>Claim</strong>: If there is no $s-t$ path in $G_f$, then there is an $s-t$ cut $(A^<em>, B^</em>)$ where $v(f) = C(A^<em>, B^</em>)$.</p>
+<p>If we can proove this claim (Statement 9), then: <strong>since we know $v(f) \le C(A, B)$, if the value of flow is exactly equal to the capacity of some cut, it means that’s it, the flow cannot be going higher than that.</strong> Thus we know that the flow that ford-fulkerson (ends when no $s-t$ path) returns has the maximum possible value of any flow in G. </p>
+<h5 id="Statement-9"><a href="#Statement-9" class="headerlink" title="Statement 9"></a>Statement 9</h5><p><strong>If $f$ is an $ s-t$ flow such that there is no $s-t$ path in the residual graph $G_f$ , then there is an $s-t$ cut $(A^∗,B^∗)$ in $G$ for which $ν(f)=C(A^∗,B^∗)$. Consequently, $f$ has the maximum value of any flow in $G$, and $(A^∗, B^∗)$ has the minimum capacity of any $s-t$ cut in $G$.</strong></p>
+<p><strong>Proof.</strong> The statement claims the existence of a cut satisfying a certain desirable property; thus we must now identify such a cut. To this end, <strong>let $A^*$ denote the set of all nodes $v$ in G for which there is an $s-v$ path in $G_f$.</strong> Let $B^<em>$ denote the set of all other nodes: $B^</em> = V − A^*$.</p>
+<p><img src="http://algorithms-1251949857.file.myqcloud.com/csci570/Images/networkflow/flow_cut.png" alt=""></p>
+<p>First we establish that $(A^<em>, B^</em>)$ is indeed an $s-t$ cut. It is clearly a partition of V. The source $s$ belongs to A∗ since there is always a path from s to s. Moreover, $t  \notin A^*$ by the assumption that there is no s-t path in the residual graph; hence $t \in B^∗$ as desired.</p>
+<p>Next, <strong>for edges go out of $A^*$</strong>, suppose that $e=(u,v)$ is an edge in $G_f$ or which $u \in A^∗$ and $v \in B^∗$, as shown in Figure 7.5 (<strong>u can be reached from s while v cannot</strong>, so in $G_f$, there is no way to go from u to v, meaning there’s no forward edge). We claim that $f(e) = c_e$. For if not, $e$ would be a forward edge in the residual graph $G_f$, and since $u \in A^∗$, there is an $s-u$ path in $G_f$; appending $e$ to this path, we would obtain an $s-v$ path in $G_f$ , contradicting our assumption that $v ∈ B^∗$.</p>
+<p>Now <strong>for edges go into $A^*$</strong>, suppose that $e′ = (u′, v′)$ is an edge in $G$ for which $u′ \in B^∗$ and $v′ \in A^∗$ (<strong>v’ can be reached from s while u’ cannot</strong>, so in $G_f$, there is no way to go back from v’ to u’, meaning there’s no backward edge). We claim that $f(e′) = 0$. For if not, $e′$ would give rise to a backward edge $e′′ = (v′ , u′)$ in the residual graph $G_f$ , and since $v′ ∈ A^∗$, there is an $s-v′$ path in $G_f$; appending $e′′$ to this path, we would obtain an $s-u′$ path in $G_f$ , contradicting our assumption that $u′ ∈ B^∗$.</p>
+<p>So all edges out of $A^∗$ are completely saturated with flow, while all edges into $A^∗$ are completely unused. We can now use statement 6 to reach the desired conclusion:</p>
+<script type="math/tex; mode=display">v(f) = f^{out}(A^*) - f^{in}(A^*) = \sum\limits_{e \; out \; of \; A^*}{f(e)} - \sum\limits_{e \; into \; A^*}{f(e)} =  \sum\limits_{e \; out \; of \; A^*}{c_e} - 0 = C(A^*, B^*)</script><p>Hence, we prooved that if $f$ is an $ s-t$ flow such that there is no $s-t$ path in the residual graph $G_f$ , then there is an $s-t$ cut $(A^∗,B^∗)$ in $G$ for which $ν(f)=C(A^∗,B^∗)$. </p>
+<p>Since we know $v(f) \le C(A, B)$ (any s-t cut in G),  we can know:</p>
+<ul>
+<li>(1) $v(f)$ = Max value of any flow in $G$. </li>
+<li>(2) $C(A^∗,B^∗)$ has the minimm capacity of any cut in G because if there were a lower capacity cut between s and t, then that would determine what the max flow should be. (we know the flow cannot be greater than any cut.)</li>
+</ul>
+<h3 id="5-Choosing-Good-Augmenting-Paths-Scaling-Max-Flow"><a href="#5-Choosing-Good-Augmenting-Paths-Scaling-Max-Flow" class="headerlink" title="5. Choosing Good Augmenting Paths (Scaling Max-Flow)"></a>5. Choosing Good Augmenting Paths (Scaling Max-Flow)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Scaling Max-<span class="function">Flow</span><br><span class="line">	Initially <span class="title">f</span><span class="params">(e)</span> </span>= <span class="number">0</span> <span class="keyword">for</span> all e in G</span><br><span class="line">	Initially set delta to be the largest power of <span class="number">2</span> that is no larger </span><br><span class="line">			than the maximum capacity out of s: delta ≤ max_&#123;e out of s&#125;&#123;ce&#125;</span><br><span class="line">	 <span class="comment">//outer loop takes logC times</span></span><br><span class="line">     While delta ≥<span class="number">1</span> <span class="comment">//threshold, delta scaling phase, each augmentation increases the flow value by at least delta</span></span><br><span class="line">     	While there is an s-<span class="function">t path in the graph <span class="title">Gf</span><span class="params">(delta)</span> <span class="comment">//O(2m)</span></span><br><span class="line">        	Let P be a simple s-t path in <span class="title">Gf</span><span class="params">(delta)</span> <span class="comment">//takes O(m+n) = O(m), since m &gt;= n/2	</span></span><br><span class="line">        	f′ </span>= augment(f, P) <span class="comment">//O(m)</span></span><br><span class="line">        	Update f to be f′ <span class="function">and update <span class="title">Gf</span><span class="params">(delta)</span> <span class="comment">//O(m)</span></span><br><span class="line">        Endwhile</span><br><span class="line">        delta </span>= delta /<span class="number">2</span> </span><br><span class="line">     Endwhile</span><br><span class="line">Return f</span><br></pre></td></tr></table></figure>
+<p>Overall complexity, $O(m^2log_{2}{C})$</p>
+<h5 id="Statement-18-C-A-B-≤-ν-f-m-Delta"><a href="#Statement-18-C-A-B-≤-ν-f-m-Delta" class="headerlink" title="Statement 18  $C(A, B) ≤ ν(f ) + m\Delta$"></a>Statement 18  $C(A, B) ≤ ν(f ) + m\Delta$</h5><p>Let f be the flow at the end of the $\Delta$-scaling phase. There is an $s-t$ cut $(A, B)$ in $G$ for which $C(A, B) ≤ ν(f ) + m\Delta$, where $m$ is the number of edges in the graph $G$. Consequently, the maximum flow in the network has value at most $ν(f) + m$.</p>
+<p>We still use following graph to proove: </p>
+<p><img src="http://algorithms-1251949857.file.myqcloud.com/csci570/Images/networkflow/flow_cut.png" alt=""></p>
+<p>(1) For edges going out of $A^<em>$, consider an edge $e = (u, v)$ in $G$ for which $u ∈ A^</em>$ and $v ∈ B^*$. Since v is not reachable, we know if there exists a forward edge from u to v (it could exist due to $\Delta$), its capacity $c_e - f(e)$ (residual capacity, “leftover”) must be less than $\Delta$ (for this edge to be filtered out in $G_f{(\Delta)}$, meaning a forward edge (u,v) could exist, as long as its capacity &lt; $\Delta$). So we have $c_e - f(e) &lt; \Delta$</p>
+<p>(2) For edges going into $A^<em>$, consider an edge $e’ = (u’, v’)$ in $G$ for which $v’ ∈ A^</em>$ and $u’ ∈ B^*$. Since u’ is not reachable, we know if there exists a backward edge from v’ to u’ (it could exist due to $\Delta$), its capacity $f(e’)$ (opposite direction) must be less than $\Delta$ (for this edge to be filtered out in $G_f{(\Delta)}$, meaning a backward edge (v’,u’) could exist, as long as its capacity &lt; $\Delta$). So we have $f(e’) &lt; \Delta$</p>
+<p> So all edges $e$ out of $A$ are almost saturated — they satisfy $c_e &lt; f(e) + \Delta$; and all edges into A are almost empty — they satisfy $f(e) &lt; \Delta$ . We can now use Statement 6 to reach the desired conclusion: at the end of $\Delta$ scaling phase (current iteration), say we have flow f and we established that there is a cut $(A^<em>, B^</em>)$, then:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+v(f)  &= \sum\limits_{e \; out \; of \; A^*}{f(e)} - \sum\limits_{e \; into \; A^*}{f(e)} \\ 
+&\ge  \sum\limits_{e \; out \; of \; A^*}{(c_e - \Delta)} - \sum\limits_{e \; into \; A^*}{\Delta} \\ 
+&= \sum\limits_{e \; out \; of \; A^*}{c_e} - \sum\limits_{e \; out \; of \; A^*}{\Delta} - \sum\limits_{e \; into \; A^*}{\Delta} \\
+&\ge C(A^*, B^*) - m\Delta
+\end{aligned}
+\end{equation}</script><p>We also know that value of max flow $v(f^<em>) \le C(A,B)$ (any cut). So for max flow $f^</em>$:</p>
+<p><script type="math/tex">v(f^*) \le v(f) + m\Delta</script>.</p>
+<p>So in the next scaling phase, where $\Delta’ = \Delta / 2$, we have at most $2m$ iterations. (to get to $m\Delta$)</p>
+<p><br></p>
+<p><strong>Reference:</strong></p>
+<p>[1]  J. Kleinberg and E. Tardos. Algorithm Design. Pearson Studium, Boston, 2006.</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/Information-Retrieval/Information Retrieval/GCP Hadoop/" style="float: left;">
+        ← HW3 GCP Hadoop - InvertedIndex
+    </a>
+    
+    
+    <a class="pull-right" href="/Algorithm-Practice/Algorithm Practice/Sqrt (Newton's Method and Binary Search)/">
+        Sqrt (Newton's Method and Binary Search) →
+    </a>
+    
+</nav>
+
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Algorithm/Algorithm/8 Network Flow I/" data-title="8 Network Flow I" data-url="http://louie.link/Algorithm/Algorithm/8 Network Flow I/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2015<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 黄刘胤,Louie. All Rights Reserved.
+                </p>
+                <p>Theme By Kieran</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+<!-- post to baidu -->
+<!-- not using this
+    <script type="text/javascript">
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+--><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

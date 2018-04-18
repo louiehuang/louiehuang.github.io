@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>4.1 Greedy - Interval Scheduling and Lateness | Louie&#39;s Blog</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Louie's Blog">
+    <meta name="author" content="黄刘胤,Louie">
+    <meta name="description" content="黄刘胤的博客 Louie's blog" />
+    <meta name="keywords" content="黄刘胤,Louie,LouieHuang" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/logo.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Louie&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/xcode.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <!--     
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    -->
+    <!-- 改为云存储 -->
+    <!-- <link href='//gitimage-10031767.file.myqcloud.com/blog_image/Theme_Image/family%3DOpen%2BSans400%2C600.css' rel='stylesheet' type='text/css'> -->
+    <!-- 或者本地也可以 -->
+    <link href='/css/family=Open+Sans400,600.css' rel='stylesheet' type='text/css'>
+
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  <!-- Baidu -->
+  <!--
+  
+  -->
+
+  <!-- google统计 -->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-76175499-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+
+<body id="index" class="lightnav animsition">
+
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- header -->
+        <div style="text-align:center;margin-top:15px;margin-bottom:-30px;">
+            <img style="height:120px;weight:120px" src="/img/header.jpg" alt="Close"/>
+            <h4 style="margin-top:10px;color:#fff;">黄刘胤 | Louie</h4>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Algorithm/" class="animsition-link">Algorithm<small>(10)</small></a></li>
+				    
+				    <li><a href="/categories/Algorithm-Practice/" class="animsition-link">Algorithm Practice<small>(20)</small></a></li>
+				    
+				    <li><a href="/categories/Dynamic-Programming/" class="animsition-link">Dynamic Programming<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Information-Retrieval/" class="animsition-link">Information Retrieval<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/Machine-Learning/" class="animsition-link">Machine Learning<small>(23)</small></a></li>
+				    
+				    <li><a href="/categories/Miscellaneous/" class="animsition-link">Miscellaneous<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Project-Images/" class="animsition-link">Project Images<small>(9)</small></a></li>
+				    
+				    <li><a href="/categories/Recommender-System/" class="animsition-link">Recommender System<small>(8)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="/Resume.pdf" class="animsition-link">Resume</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About Me</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.ico" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Louie's Blog</a></li>
+                            <li class="nolink"><span>Always </span>Thinking</li>
+                            
+                            <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-02-03T08:00:00.000Z" itemprop="datePublished">
+          2018-02-03
+      </time>
+    
+</span>
+                <h1>4.1 Greedy - Interval Scheduling and Lateness</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="Greedy-Interval-Scheduling-and-Lateness"><a href="#Greedy-Interval-Scheduling-and-Lateness" class="headerlink" title="Greedy - Interval Scheduling and Lateness"></a>Greedy - Interval Scheduling and Lateness</h2><p>An algorithm is greedy if it builds up a solution in small steps, choosing a decision at each step myopically to optimize some underlying criterion.</p>
+<p>Two basic methods for proving that a greedy algorithm produces an optimal solution to a problem.</p>
+<blockquote>
+<ol>
+<li>Stays Ahead.</li>
+<li>Exchange Argument</li>
+</ol>
+</blockquote>
+<p><br></p>
+<h3 id="1-Interval-Scheduling-Stays-Ahead"><a href="#1-Interval-Scheduling-Stays-Ahead" class="headerlink" title="1. Interval Scheduling (Stays Ahead)"></a>1. Interval Scheduling (Stays Ahead)</h3><p><strong>Input:</strong> a set of requests, each request contains <code>start</code> s(i) and <code>finish</code> f(i) information.</p>
+<p><strong>Objective:</strong> find the largest compatible subset of these requests.</p>
+<p><strong>Output:</strong> Such subset.</p>
+<h4 id="1-1-Solution"><a href="#1-1-Solution" class="headerlink" title="1.1 Solution"></a>1.1 Solution</h4><p> <strong>Earliest finish time first (smallest f(i))</strong> is a correct condition to pick request to get optimal solution. (Before this, we may want to try <code>smallest s(i)</code>, <code>smallest f(i)-s(i)</code>, but we can find counter examples for these strategies.)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//One way of implementating smallest f(i).</span></span><br><span class="line">Initially R is the complete set of requests &amp; A is empty</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> R is not empty</span><br><span class="line">	Choose a request i in R that has the smallest finish time <span class="comment">// need to traverse</span></span><br><span class="line">	Add request i to A</span><br><span class="line">	Delete all requests that are not compatible with i from R <span class="comment">// need to traverse</span></span><br><span class="line">end <span class="keyword">while</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> A</span><br></pre></td></tr></table></figure>
+<p>This implementation is not a good way, in the for-loop, choose i and delete in-compatible requests will traverse all the requests. </p>
+<p>So we could <strong>sort</strong> the requests first. Implement in the following way:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. Sort requests in order of finish time: f(i) &lt;= f(j) where i &lt;= j.</span><br><span class="line"><span class="number">2</span>. <span class="function">Select requests in order of increasing <span class="title">f</span><span class="params">(i)</span>, always selecting the first. </span><br><span class="line">3. Then iterate through the intervals in <span class="keyword">this</span> order until reaching the first request <span class="keyword">for</span> which <span class="title">s</span><span class="params">(j)</span> &gt;</span>= f(i).</span><br></pre></td></tr></table></figure>
+<p>This takes $O(nlgn) + O(n)$.</p>
+<p><br></p>
+<h4 id="1-2-Proof-of-Correctness"><a href="#1-2-Proof-of-Correctness" class="headerlink" title="1.2 Proof of Correctness"></a>1.2 Proof of Correctness</h4><p>Two steps:</p>
+<blockquote>
+<ol>
+<li>Show that A is a <strong>compatible</strong> set.</li>
+<li>Show that A is an <strong>optimal</strong> set.</li>
+</ol>
+</blockquote>
+<h5 id="1-Prove-A-is-a-compatible-set"><a href="#1-Prove-A-is-a-compatible-set" class="headerlink" title="(1) Prove A is a compatible set"></a>(1) Prove A is a compatible set</h5><p>Every time this algorithm picks a request, it goes through all the rest of requests and delete any other request that is not compatible with the one it picks, so there is no possible way of picking request that are not compatible with each other. </p>
+<h5 id="2-Prove-A-is-an-optimal-set"><a href="#2-Prove-A-is-an-optimal-set" class="headerlink" title="(2) Prove A is an optimal set"></a>(2) Prove A is an optimal set</h5><blockquote>
+<p>A:  $i_1, i_2, …, i_k$<br>O: $j_1, j_2, …, j_m$</p>
+</blockquote>
+<p>If $A$ is optimal, suppose there is an optimal set $O$, then the size of $A$ must be equal to the size of $O$, i.e. $|A| = |O|$. (If $|A| &lt; |O|$, then apparently, A is not optimal; if $|A| &gt; |O|$, this is not possible, otherwise $O$ is not optimal, but we assume that $O$ is.)</p>
+<p>=&gt; So to prove $A$ is optimal, we are essentially proving that $|A| = |O|$.</p>
+<p>=&gt; We can prove this by <strong>contraction</strong>, If $|A| \ne |O|$, then $O$ must contain at least one more request than $A$, suppose $O$ has one more request, name it $j_{k+1}$.</p>
+<blockquote>
+<p>A: …, $_{i<em>{k}}\</em>$<br>O: ….., $_{j<em>{k}}\</em>_$ ,  $_{j<em>{k+1}}\</em>$</p>
+</blockquote>
+<p>Now let’s try to find a contradiction. Since O has one more request $j<em>{k+1}$, if we can prove that A also has $j</em>{k+1}$, (thus their sizes are equal), then we find a contradiction. </p>
+<p>So, in what cases that A will have $j_{k+1}$?</p>
+<p>Notice that in $O$, $j<em>k$ is compatible with $j</em>{k+1}$. So <font color="red"><strong>if</strong></font> finish time $f(i<em>k) \le f(j</em>{k})$, this means $i<em>{k}$ will also be compatible with $j</em>{k+1}$, thus A will choose $j_{k+1}$, so will have equal size as $O$.</p>
+<p>=&gt; Now the question is: can we prove that $f(i<em>k) &lt;= f(j</em>{k})$? Let’s formalize this statement that we’re going to prove: <strong>For all $n \le k$, we have $f(i_n) \le f(j_n)$</strong></p>
+<p>=&gt; A general way could be used to prove this kind of statment is through <strong>Mathematical Induction</strong>.</p>
+<p><strong>1) General Statement P(n):</strong><br>For all $n &lt;= k$, we have $f(i_n) \le f(j_n)$ where k is the size of $A$.</p>
+<p><strong>2) Base Case Statement:</strong><br>We prove $P(1)$ which says $f(i_1) \le f(j_1)$, this is apparently true since our algorithm chooses request with the earliest finish time at each step.</p>
+<p><strong>3) Induction Hypothesis:</strong><br>Assume $P(N)$ is true, i.e. $f(i_N) \le f(j_N)$</p>
+<p><strong>4) Induction Step:</strong><br>Prove that $P(N+1)$ is true, i.e. prove that $f(i<em>{N+1}) \le f(j</em>{N+1})$ is true:</p>
+<blockquote>
+<p>A: …, $__i<em>{N}\</em>_$ ,  $__{i<em>{N+1}}\</em>__$<br>O: ……, $__j<em>{N}\</em>_$ ,  $_{j<em>{N+1}}\</em>__$ </p>
+</blockquote>
+<p>Since $j<em>{N}$ is compatible with $j</em>{N+1}$ and the fact that $f(i<em>N) \le f(j_N)$, we can infer that $i</em>{N}$ is compatible with $j_{N+1}$. </p>
+<p>Since we also know that $i<em>{N}$ is compatible with $i</em>{N+1}$ and the algorithm only choose the request with the earliest finish time, we could infer that $f(i<em>{N+1}) \le f(j</em>{N+1})$, otherwise, we will choose $j_{N+1}$.</p>
+<p>Thus We have proved $P(N+1)$ under the assumption of $P(N)$. </p>
+<p>Since the biggest number that n could be is k, <strong>by the Principal of Mathematical Induction, we conclude that P(n) is true for all n &lt;= k.</strong></p>
+<p>=&gt; Now we’ve proved that for all $n \le k$, we have $f(i_n) \le f(j_n)$. </p>
+<p>Go back to the contradiction part, we know $|A|$ must be equal to $|O|$, thus $A$ is optimal.</p>
+<p><br></p>
+<h3 id="2-Scheduling-to-Minimize-Lateness-Exchange-Argument"><a href="#2-Scheduling-to-Minimize-Lateness-Exchange-Argument" class="headerlink" title="2. Scheduling to Minimize Lateness (Exchange Argument)"></a>2. Scheduling to Minimize Lateness (Exchange Argument)</h3><p>“In contrast to the interval scheduling problem, however, each request in this problem is more flexible. Instead of a start time and finish time, the request $i$ has a deadline $d_i$, and it requires a contiguous time interval of length $t_i$, but it is willing to be scheduled at any time before the deadline. Each accepted request must be assigned an interval of time of length $t_i$, and different requests must be assigned nonoverlapping intervals.”</p>
+<p>Suppose that we plan to satisfy each request, but we are allowed to let certain requests run late. Following is what we have in summary:</p>
+<ul>
+<li>Requests can be scheduled at any time (we do not have <code>start</code> and <code>finish</code> time, but just <code>length</code>).</li>
+<li>Each request $i$ has a deadline $d_i$.</li>
+<li>Notation: $L_i = f(i) - d_i$, $L_i$ is the lateness for request $i$, $f(i)$ is the finish time, but we do not know it (it is determined by our assignment). We will say that $L_i = 0$ if request i is not late.</li>
+<li>Goal: <strong>minimize</strong> the max Lateness $L = max_i{L_i}$, =&gt; $min{L}$</li>
+</ul>
+<p><strong>Greedy: Earliest deadline first</strong></p>
+<p><strong>Solution:</strong> Schedule jobs in order of their deadlines without any gaps between jobs.</p>
+<p><strong>Def:</strong> Inversion: job $i$ is scheduled before job $j$, but $d_i \ge d_j$.</p>
+<p>Proof steps:</p>
+<blockquote>
+<ol>
+<li>There is an optimal schedule that has no inversion and no idle time (gaps).</li>
+<li>All schedules with no inversions and no idle time have the same max Lateness.</li>
+<li>Schedule produced by our algorithm has no inverstions and no idle time. Thus it is optimal.</li>
+</ol>
+</blockquote>
+<p>We can prove this by proving following facts:</p>
+<p><strong>Fact 1</strong>: There is an optimal solution with no gaps. (idle times)</p>
+<p>This is obviously true, if there are gaps in an optimal solution, we can simply remove those gaps without increase max Lateness.</p>
+<p><strong>Fact 2</strong>: Jobs with identical deadlines can be scheduled in any order without affecting the max Lateness.</p>
+<p><strong>Fact 3</strong>: All schedules with no inversions and no idle time have the same max Lateness.</p>
+<p><strong>Fact 4</strong>: There is an optimal schedule that has no inversion and no idle time.</p>
+<p>So we starting with an optimal solution, and by removing its gaps and inversions (if there are any) one by one, showing each step will not affect this solution’s optimality. This will finally lead to a same kind of solution that our algorithm produces (no gaps and no inversions), prove fact 3 to show our solution is also optimal.</p>
+<p>“Our plan here is to gradually modify $O$, preserving its optimality at each step, but eventually transforming it into a schedule that is identical to the schedule $A$ found by the greedy algorithm. We refer to this type of analysis as an <strong>exchange argument</strong>.”</p>
+<p><br></p>
+<p><strong>Reference:</strong></p>
+<p>[1]  J. Kleinberg and E. Tardos. Algorithm Design. Pearson Studium, Boston, 2006.</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/Machine-Learning/Machine Learning/01_04_LinearAlgebraReview/" style="float: left;">
+        ← (Week1) 04 Linear Algebra Review
+    </a>
+    
+    
+    <a class="pull-right" href="/Machine-Learning/Machine Learning/01_03_ParameterLearning/">
+        (Week1) 03 Linear Regression - Parameter Learning →
+    </a>
+    
+</nav>
+
+        <!-- not using this
+            <div class="duoshuo">
+<div class="ds-thread" data-thread-key="Algorithm/Algorithm/4.1 Greedy - Interval Scheduling/" data-title="4.1 Greedy - Interval Scheduling and Lateness" data-url="http://louie.link/Algorithm/Algorithm/4.1 Greedy - Interval Scheduling/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"louiehuang"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+        -->
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2015<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 黄刘胤,Louie. All Rights Reserved.
+                </p>
+                <p>Theme By Kieran</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/louiehuang" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+<!-- post to baidu -->
+<!-- not using this
+    <script type="text/javascript">
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+--><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>
