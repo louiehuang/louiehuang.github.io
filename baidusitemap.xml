@@ -4,6 +4,168 @@
 
     
   <url>
+    <loc>http://louie.link/Algorithm/Algorithm/6.4%20DP%20-%20Optimal%20BST/</loc>
+    <lastmod>2018-04-20T20:35:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>6.4 DP - Optimal BST</title>
+        <pubTime>2018-03-03T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://louie.link/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Algorithm/Algorithm/7.2%20DP%20-%20FloydWarshall/</loc>
+    <lastmod>2018-04-20T18:55:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>7.2 DP - Floyd-Warshall</title>
+        <pubTime>2018-03-07T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://louie.link/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Algorithm/Algorithm/7.1%20DP%20-%20BellmanFord/</loc>
+    <lastmod>2018-04-20T18:07:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>7.1 DP - Bellman-Ford</title>
+        <pubTime>2018-03-06T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://louie.link/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Algorithm/Algorithm/6.5%20DP%20-%20LCS/</loc>
+    <lastmod>2018-04-20T04:31:03.000Z</lastmod>
+    <data>
+        <display>
+        <title>6.5 DP - LCS</title>
+        <pubTime>2018-03-04T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://louie.link/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Algorithm/Algorithm/6.3%20DP%20-%20Knapsack/</loc>
+    <lastmod>2018-04-20T03:48:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>6.3 DP - Knapsack</title>
+        <pubTime>2018-03-02T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://louie.link/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Algorithm/Algorithm/6.2%20DP%20-%20Coin%20Change/</loc>
+    <lastmod>2018-04-20T03:48:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>6.1 DP - Coin Change</title>
+        <pubTime>2018-03-01T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://louie.link/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Algorithm/Algorithm/6.1%20DP%20-%20Concepts/</loc>
+    <lastmod>2018-04-20T03:48:15.000Z</lastmod>
+    <data>
+        <display>
+        <title>6.1 DP - Concepts</title>
+        <pubTime>2018-02-28T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://louie.link/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Dynamic-Programming/Dynamic%20Programming/07_KnapSack(1)-01Knapsack/</loc>
+    <lastmod>2018-04-20T03:19:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>0-1 Knapsack Problem</title>
+        <pubTime>2018-03-05T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Dynamic Programming" url="http://louie.link/categories/Dynamic-Programming/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://louie.link/Dynamic-Programming/Dynamic%20Programming/02_CoinChange/</loc>
+    <lastmod>2018-04-20T02:26:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>Coin Change</title>
+        <pubTime>2018-02-28T08:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Dynamic Programming" url="http://louie.link/categories/Dynamic-Programming/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://louie.link/Information-Retrieval/Information%20Retrieval/Solr%20Steps/</loc>
     <lastmod>2018-04-18T04:52:52.000Z</lastmod>
     <data>
@@ -1336,24 +1498,6 @@
 
     
   <url>
-    <loc>http://louie.link/Dynamic-Programming/Dynamic%20Programming/02_CoinChange/</loc>
-    <lastmod>2018-03-28T02:27:41.000Z</lastmod>
-    <data>
-        <display>
-        <title>Coin Change</title>
-        <pubTime>2018-02-28T08:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Dynamic Programming" url="http://louie.link/categories/Dynamic-Programming/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://louie.link/Information-Retrieval/Information%20Retrieval/(05)Crawlers%20and%20Crawling/</loc>
     <lastmod>2018-03-08T01:57:38.000Z</lastmod>
     <data>
@@ -1378,24 +1522,6 @@
         <display>
         <title>Unbounded Knapsack Problem</title>
         <pubTime>2018-03-06T08:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Dynamic Programming" url="http://louie.link/categories/Dynamic-Programming/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://louie.link/Dynamic-Programming/Dynamic%20Programming/07_KnapSack(1)-01Knapsack/</loc>
-    <lastmod>2018-03-07T09:02:04.000Z</lastmod>
-    <data>
-        <display>
-        <title>0-1 Knapsack Problem</title>
-        <pubTime>2018-03-05T08:00:00.000Z</pubTime>
         
          
            
